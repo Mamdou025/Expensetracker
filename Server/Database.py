@@ -18,6 +18,8 @@ cursor.execute("""
         full_email TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
+""")
+
 conn.commit()
 conn.close()
 
