@@ -1,3 +1,4 @@
+import json
 from extracteur import fetch_email_text
 from traitement import extract_transaction_data
 
@@ -8,12 +9,12 @@ def main():
     2. Extract transaction details.
     3. Display or store the extracted data.
     """
-    email_text, email_datetime = fetch_email_text()
+    email_text, email_datetime, subject, sender= fetch_email_text()
 
     if email_text:
-        transaction_data = extract_transaction_data(email_text, email_datetime)
-        print("✅ Extracted Transaction Data:")
-        print(transaction_data)
+        ordered_data = extract_transaction_data(email_text, sender, email_datetime)  # ✅ Includes sender
+        print("✅ Email text :")
+        print(json.dumps(ordered_data, indent=4))
     else:
         print("❌ No transaction email found.")
 

@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState([
-        { date: "2024-02-01", payee: "Maxi ", amount: 45.67, category: "Food" },
+        { date: "2024-02-01", payee: "Maxi Supercentre ", amount: 45.67, category: "Food" },
         { date: "2024-02-02", payee: "Electric Company", amount: 120.50, category: "Utilities" },
         { date: "2024-02-03", payee: "Restaurant", amount: 30.5, category: "Dining" },
         { date: "2024-02-04", payee: "Gas Station", amount: 50.00, category: "Transport" },
