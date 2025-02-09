@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 def manual_insert():
     """
@@ -14,7 +15,10 @@ def manual_insert():
     full_email = input("Enter additional notes (or leave empty): ")
 
     # ✅ Connect to the database
-    conn = sqlite3.connect("transactions.db")
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_path = os.path.join(base_dir, "transactions.db")
+
+    conn = sqlite3.connect(db_path)  # Always creates/opens 'transactions.db' in the correct location
     cursor = conn.cursor()
 
     # ✅ Insert the data

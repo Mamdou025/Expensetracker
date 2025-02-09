@@ -1,12 +1,17 @@
 import sqlite3
+import os
 
 def fetch_all_transactions():
     """
     Fetches all transactions stored in the SQLite database.
     """
-    conn = sqlite3.connect("transactions.db")  # Connect to the database
-    cursor = conn.cursor()
+    #conn = sqlite3.connect("transactions.db")  # Connect to the database
+    #cursor = conn.cursor()
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_path = os.path.join(base_dir, "transactions.db")
 
+    conn = sqlite3.connect(db_path)  # Always creates/opens 'transactions.db' in the correct location
+    cursor = conn.cursor()
     # ✅ Select all transactions
     cursor.execute("SELECT * FROM transactions")
     transactions = cursor.fetchall()
