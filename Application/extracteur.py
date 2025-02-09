@@ -3,7 +3,7 @@ import email
 import yaml
 import os
 from bs4 import BeautifulSoup  # For stripping HTML
-#problem Resolved
+#problem not resolved yet 
 # ✅ Define allowed senders and required subject keywords
 ALLOWED_SENDERS = {
     "CIBC": "mailbox.noreply@cibc.com",
