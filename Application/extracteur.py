@@ -1,6 +1,7 @@
 import imaplib
 import email
 import yaml
+import os
 from bs4 import BeautifulSoup  # For stripping HTML
 
 # ✅ Define allowed senders and required subject keywords
@@ -40,7 +41,15 @@ def fetch_email_text():
     my_mail = imaplib.IMAP4_SSL(imap_url)
 
     # Load credentials from YAML
-    with open("credentials.yml") as f:
+    #with open("credentials.yml") as f:
+
+    # TEST CODE 
+    # ✅ Get the absolute path to 'credentials.yml' (Located in Expensetracker/)
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    credentials_path = os.path.join(base_dir, "credentials.yml")
+    with open(credentials_path) as f:
+    # Test code fin 
+    
         my_credentials = yaml.load(f, Loader=yaml.FullLoader)
     user, password = my_credentials["user"], my_credentials["password"]
 
