@@ -3,7 +3,7 @@ import email
 import yaml
 import os
 from bs4 import BeautifulSoup  # For stripping HTML
-
+#problem with the main branch test 
 # ✅ Define allowed senders and required subject keywords
 ALLOWED_SENDERS = {
     "CIBC": "mailbox.noreply@cibc.com",
@@ -49,7 +49,7 @@ def fetch_email_text():
     credentials_path = os.path.join(base_dir, "credentials.yml")
     with open(credentials_path) as f:
     # Test code fin 
-    
+
         my_credentials = yaml.load(f, Loader=yaml.FullLoader)
     user, password = my_credentials["user"], my_credentials["password"]
 
@@ -67,7 +67,7 @@ def fetch_email_text():
 
         # ✅ Process the most recent email from the sender
         if mail_id_list:
-            last_email_id = mail_id_list[-1]  # Get the last email ID
+            last_email_id = mail_id_list[-2]  # Get the last email ID
             _, data = my_mail.fetch(last_email_id, '(RFC822)')
 
             for response_part in data:
