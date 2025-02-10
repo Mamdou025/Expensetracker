@@ -2,19 +2,12 @@ import imaplib
 import email
 import yaml
 import os
-from bs4 import BeautifulSoup  # For stripping HTML
-#ISSUE RESOLVED NOW 
-# ✅ Define allowed senders and required subject keywords
-ALLOWED_SENDERS = {
-    "CIBC": "mailbox.noreply@cibc.com",
-}
+from bs4 import BeautifulSoup
+from email.header import decode_header
 
-REQUIRED_SUBJECT_KEYWORDS = {
-    "MBNA": ["Transaction Alert", "Purchase Notification"],
-    "CIBC": ["Visa Purchase", "Transaction Notification","Nouvel achat" , "Achat en point de vente"],
-    "CapitalOne": ["Transaction Alert", "Capital One Purchase"],
-    "Neo": ["Card Transaction", "Neo Purchase"],
-}
+# ✅ Définissez ici l'expéditeur et la position de l'e-mail à extraire
+SENDER_EMAIL = "info@neofinancial.com"  # Modifiez cette valeur selon l'expéditeur souhaité
+EMAIL_POSITION = -2  # -1 pour le dernier email, -2 pour l'avant-dernier, etc.
 
 def extract_email_body(my_msg):
     """Extracts clean text from an email body (either plain text or HTML)."""
@@ -29,68 +22,68 @@ def extract_email_body(my_msg):
 
         if content_type == "text/plain":
             body = part.get_payload(decode=True).decode("utf-8", errors="ignore")
-        elif content_type == "text/html" and not body:  # Use HTML if no plain text
+        elif content_type == "text/html" and not body:
             html_content = part.get_payload(decode=True).decode("utf-8", errors="ignore")
             body = BeautifulSoup(html_content, "html.parser").get_text(separator="\n")
 
     return body if body else "No body content found"
 
 def fetch_email_text():
-    """Fetches the most recent email from allowed senders and validates subject."""
+    """Fetches a specific email from a predefined sender based on position."""
     imap_url = 'imap.gmail.com'
     my_mail = imaplib.IMAP4_SSL(imap_url)
 
-    # Load credentials from YAML
-    #with open("credentials.yml") as f:
-
-    # TEST CODE 
-    # ✅ Get the absolute path to 'credentials.yml' (Located in Expensetracker/)
+    # ✅ Get the absolute path to 'credentials.yml'
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     credentials_path = os.path.join(base_dir, "credentials.yml")
     with open(credentials_path) as f:
-    # Test code fin 
-
         my_credentials = yaml.load(f, Loader=yaml.FullLoader)
+    
     user, password = my_credentials["user"], my_credentials["password"]
 
-    # Login & Select Inbox
+    # ✅ Login & Select Inbox
     my_mail.login(user, password)
     my_mail.select('Inbox')
 
-    # ✅ Loop through allowed senders and check their emails
-    for bank, sender in ALLOWED_SENDERS.items():
-        key = 'FROM'
-        value = sender
-        _, data = my_mail.search(None, key, value)
+    print(f"🔍 Searching for email at position {EMAIL_POSITION} from: {SENDER_EMAIL}")
+    _, data = my_mail.search(None, 'FROM', SENDER_EMAIL)
+    mail_id_list = data[0].split()
 
-        mail_id_list = data[0].split()
+    if not mail_id_list:
+        print(f"⚠️ No emails found from {SENDER_EMAIL}")
+        return None
 
-        # ✅ Process the most recent email from the sender
-        if mail_id_list:
-            last_email_id = mail_id_list[-2]  # Get the last email ID
-            _, data = my_mail.fetch(last_email_id, '(RFC822)')
+    # ✅ Fetch the email at the chosen position
+    if abs(EMAIL_POSITION) > len(mail_id_list):
+        print(f"⚠️ Not enough emails available. Using the oldest email instead.")
+        email_id = mail_id_list[0]  # Fallback to the oldest email
+    else:
+        email_id = mail_id_list[EMAIL_POSITION]  # Fetch the specified email
 
-            for response_part in data:
-                if isinstance(response_part, tuple):
-                    my_msg = email.message_from_bytes(response_part[1])
+    _, data = my_mail.fetch(email_id, '(RFC822)')
 
-                    # ✅ Extract subject and check if it contains required keywords
-                    subject = my_msg["Subject"]
-                    print("Sujet : "+ subject)
-                    if not any(keyword in subject for keyword in REQUIRED_SUBJECT_KEYWORDS[bank]):
-                        print(f"❌ Rejected email from {sender}: Subject '{subject}' does not match required keywords.")
-                        continue  # Skip this email
+    for response_part in data:
+        if isinstance(response_part, tuple):
+            my_msg = email.message_from_bytes(response_part[1])
+            # Decode the subject if it's MIME-encoded
+            raw_subject = my_msg["Subject"]
+            decoded_subject, encoding = decode_header(raw_subject)[0]
+            subject = decoded_subject.decode(encoding) if isinstance(decoded_subject, bytes) else decoded_subject
+            email_text = extract_email_body(my_msg)
+            email_datetime = my_msg["Date"]
+            
+            # ✅ Return extracted details
+            return email_text, email_datetime, subject, SENDER_EMAIL
 
-                    # ✅ Extract email body and date-time
-                    email_text = extract_email_body(my_msg)
-                    email_datetime = my_msg["Date"]
-                    print(email_text)
+    return None
 
-                    # ✅ Return all valid extracted data
-                    return email_text, email_datetime, subject, sender
-
-    return None, None, None, None  # If no valid email found
-
-
-
-
+if __name__ == "__main__":
+    email_data = fetch_email_text()
+    if email_data:
+        print("\n================== Extracted Email ==================")
+        print(f"Date: {email_data[1]}")
+        print(f"Subject: {email_data[2]}")
+        print(f"Sender: {email_data[3]}")
+        print("Content:")
+        print(email_data[0])
+        print("===================================================\n")

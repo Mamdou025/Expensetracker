@@ -1,0 +1,35 @@
+banks:
+  cibc_debit:
+    sender: "mailbox.noreply@cibc.com"
+    keywords: ["Achat en point de vente", "achat international"]
+    regex: 
+      amount: "Montant de l'achat\\s*:\\s*(\\d+[,.]\\d{2})\\$"
+      description: "Lieu de l'achat\\s*:\\s*(.*?)\\r?\\n"
+
+  cibc_credit:
+    sender: "mailbox.noreply@cibc.com"
+    keywords: ["Nouvel achat avec votre carte de"]
+    regex:
+      amount: "achat de\\s*\\$?([0-9]+[,.][0-9]{2})\\$?"   # ✅ Extracts numeric amount, removes $ before/after
+      description: "achat de\\s*\\$?[0-9]+[,.][0-9]{2}\\$?\\s*(.*?)\\s+avec votre"
+
+  capital_one_credit:
+    sender: "capitalone@notification.capitalone.com"
+    keywords: ["A transaction was charged to your account", "International transaction alert"]
+    regex:
+      amount: "\\$?([0-9]+[,.][0-9]{2})\\$?"  # ✅ Extracts only numeric value, removes `$`
+      description: "([A-Z0-9#&\\- ]+)(?=\\s*\\$?[0-9]+[,.][0-9]{2}\\$?)"  # ✅ Captures merchant name
+
+  mbna_amazon_credit:
+    sender: "noreply@mbna.ca"
+    keywords: ["Transaction Alert", "Purchase Notification","MBNA - Transaction Alert"]
+    regex:
+      amount: "\\$([0-9]+\\.[0-9]{2})"  # ✅ Extracts only numeric value (removes `$`)
+      description: "from ([A-Z0-9/& ]+)"  # ✅ Extracts merchant name
+
+  neo_credit:
+    sender: "info@neofinancial.com"
+    keywords: ["Votre achat chez"]
+    regex:
+       amount: "\\b([0-9]+,[0-9]{2})\\s?\\$"  # ✅ Extrait le montant sans le $
+       description: "Votre achat chez (.*?)\\*"  # ✅ Extrait uniquement le nom du commerçant

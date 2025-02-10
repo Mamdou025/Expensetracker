@@ -19,7 +19,7 @@ def main():
     email_text, email_datetime, subject, sender = fetch_email_text()
 
     if email_text:
-        ordered_data = extract_transaction_data(email_text, sender, email_datetime)  # ✅ Extract data
+        ordered_data = extract_transaction_data(email_text, sender, subject, email_datetime)
         print("✅ Extracted Data:")
         print(json.dumps(ordered_data, indent=4))
 
