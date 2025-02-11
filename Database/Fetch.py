@@ -1,21 +1,26 @@
 import sqlite3
 import os
 
-def fetch_all_transactions():
+def fetch_transactions(category=None):
     """
-    Fetches all transactions stored in the SQLite database.
+    Fetches transactions stored in the SQLite database.
+    If a category is provided, it fetches only transactions for that category.
     """
-    #conn = sqlite3.connect("transactions.db")  # Connect to the database
-    #cursor = conn.cursor()
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
+    # ✅ Ensure the correct database path
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    db_path = os.path.join(base_dir, "Database", "transactions.db")
 
-    conn = sqlite3.connect(db_path)  # Always creates/opens 'transactions.db' in the correct location
+    # ✅ Connect to the database
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    # ✅ Select all transactions
-    cursor.execute("SELECT * FROM transactions")
-    transactions = cursor.fetchall()
 
+    # ✅ Select transactions, filtered by category if provided
+    if category:
+        cursor.execute("SELECT * FROM transactions WHERE category = ?", (category,))
+    else:
+        cursor.execute("SELECT * FROM transactions")
+
+    transactions = cursor.fetchall()
     conn.close()  # Close the connection
 
     print("\n🔹 Stored Transactions 🔹")
@@ -33,8 +38,10 @@ def fetch_all_transactions():
         Date: {tx[4]}
         Time: {tx[5]}
         Bank: {tx[6]}
+        Category: {tx[8]}
         ------------------------
         """)
 
 if __name__ == "__main__":
-    fetch_all_transactions()
+    category_filter = input("Enter category to filter by (leave empty for all transactions): ")
+    fetch_transactions(category_filter if category_filter else None)
