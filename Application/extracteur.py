@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from email.header import decode_header
 
 # ✅ Définissez ici l'expéditeur et la position de l'e-mail à extraire
-SENDER_EMAIL = "info@neofinancial.com"  # Modifiez cette valeur selon l'expéditeur souhaité
-EMAIL_POSITION = -2  # -1 pour le dernier email, -2 pour l'avant-dernier, etc.
+SENDER_EMAIL = "mailbox.noreply@cibc.com"  # Modifiez cette valeur selon l'expéditeur souhaité
+EMAIL_POSITION = -3  # -1 pour le dernier email, -2 pour l'avant-dernier, etc.
 
 def extract_email_body(my_msg):
     """Extracts clean text from an email body (either plain text or HTML)."""

@@ -28,14 +28,20 @@ def create_database():
             time TEXT NOT NULL,
             bank TEXT NOT NULL,
             full_email TEXT NOT NULL,
+            category TEXT DEFAULT 'Uncategorized',  -- ✅ New category field
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
 
+    # ✅ Create a unique index to prevent duplicate transactions
+    cursor.execute("""
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_transaction 
+        ON transactions (amount, date, time, bank);
+    """)
+
     conn.commit()
     conn.close()
-    print("✅ SQLite database and 'transactions' table created successfully!")
+    print("✅ SQLite database and 'transactions' table created successfully with category field!")
 
-# Run the function to create the database
+# Run the function to create/update the database schema
 create_database()
-

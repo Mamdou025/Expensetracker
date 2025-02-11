@@ -13,24 +13,46 @@ def manual_insert():
     time = input("Enter transaction time (HH:MM:SS): ")
     bank = input("Enter bank name: ")
     full_email = input("Enter additional notes (or leave empty): ")
+    category = input("Enter transaction category (or leave empty for 'Uncategorized'): ") or "Uncategorized"
 
-    # ✅ Connect to the database
+    # ✅ Ensure correct database path
     base_dir = os.path.abspath(os.path.dirname(__file__))
     db_path = os.path.join(base_dir, "transactions.db")
 
     conn = sqlite3.connect(db_path)  # Always creates/opens 'transactions.db' in the correct location
     cursor = conn.cursor()
 
-    # ✅ Insert the data
-    cursor.execute("""
-        INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    """, (amount, description, card_type, date, time, bank, full_email))
+    try:
+        # ✅ Convert amount to float
+        amount = float(amount)
 
-    conn.commit()
-    conn.close()
+        # ✅ Check if a transaction with the same details already exists
+        cursor.execute("""
+            SELECT COUNT(*) FROM transactions 
+            WHERE amount = ? AND date = ? AND time = ? AND bank = ?
+        """, (amount, date, time, bank))
+        
+        duplicate_count = cursor.fetchone()[0]
 
-    print("\n✅ Transaction successfully added to the database!")
+        if duplicate_count > 0:
+            print(f"⚠️ Duplicate transaction detected, skipping: {description} - {amount} ({date})")
+            return  # Stop execution if a duplicate exists
+
+        # ✅ Insert the new transaction
+        cursor.execute("""
+            INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email, category)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (amount, description, card_type, date, time, bank, full_email, category))
+
+        conn.commit()
+        print("\n✅ Transaction successfully added to the database!")
+
+    except ValueError:
+        print("❌ Error: Invalid amount entered. Please enter a numeric value.")
+
+    finally:
+        conn.close()
 
 if __name__ == "__main__":
     manual_insert()
+

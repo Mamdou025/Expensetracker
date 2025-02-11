@@ -20,7 +20,7 @@ banks:
       amount: "\\$?([0-9]+[,.][0-9]{2})\\$?"  # ✅ Extracts only numeric value, removes `$`
       description: "([A-Z0-9#&\\- ]+)(?=\\s*\\$?[0-9]+[,.][0-9]{2}\\$?)"  # ✅ Captures merchant name
 
-  mbna_amazon_credit:
+  mbna_credit:
     sender: "noreply@mbna.ca"
     keywords: ["Transaction Alert", "Purchase Notification","MBNA - Transaction Alert"]
     regex:
