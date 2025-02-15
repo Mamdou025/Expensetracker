@@ -1,0 +1,1327 @@
+{
+    "decembre23": [
+        {
+            "amount": 55.74,
+            "description": "AMZN Mktp CA*TKSAB7BX3 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-08",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 40.92,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 18.5,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 10.54,
+            "description": "AMAZON PRIME FR PARIS FRA",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 46.87,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 22.97,
+            "description": "AMZN Mktp CA*D42901ZT3 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 20.56,
+            "description": "AMZN Mktp CA*3L4L43BD3 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 11.49,
+            "description": "Amazon.ca Prime Member amazon.ca/priBC",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-12",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 21.68,
+            "description": "MCCAFE ADM DORVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-13",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 46.14,
+            "description": "DISLA SHOP LA ROMANA DOM",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-18",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 31.33,
+            "description": "DANIEL REYES REYNOSO SAN RAFAEL DE DOM",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-18",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Miscellaneous",
+            "created_at": null,
+            "tags": [
+                "Miscellaneous"
+            ]
+        },
+        {
+            "amount": 47.58,
+            "description": "CUNI TOURS 2 HIGUEY DOM",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-18",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Travel",
+            "created_at": null,
+            "tags": [
+                "Travel",
+                "Transport"
+            ]
+        },
+        {
+            "amount": 49.5,
+            "description": "GUACAMOLES RESTAURANTE SALVALEON DEL DOM",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-18",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 41.12,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-20",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 104.23,
+            "description": "MAXI & CIE LAVAL #8384 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-23",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Groceries",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Groceries"
+            ]
+        },
+        {
+            "amount": 52.31,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-25",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 38.38,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-27",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 16.21,
+            "description": "COUCHE-TARD #1319 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-29",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Convenience Store",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Convenience"
+            ]
+        },
+        {
+            "amount": 28.69,
+            "description": "VIRTUA VR LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-30",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Entertainment",
+            "created_at": null,
+            "tags": [
+                "Entertainment",
+                "Leisure"
+            ]
+        },
+        {
+            "amount": 28.69,
+            "description": "VIRTUA VR LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-30",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": "second transaction",
+            "category": "Entertainment",
+            "created_at": null,
+            "tags": [
+                "Entertainment",
+                "Leisure"
+            ]
+        },
+        {
+            "amount": 96.56,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2023-12-30",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 11.39,
+            "description": "DOMINOS PIZZA 10708 VIMONT QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-02",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 748.02,
+            "description": "BEST BUY #681 STJEAN SUR RIQC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-02",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Electronics",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Electronics"
+            ]
+        },
+        {
+            "amount": 12.41,
+            "description": "MCDONALD'S #29085 SAINT-JEAN-SUQC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-02",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 27.53,
+            "description": "WAL-MART #3090 SAINT-JEAN-SUQC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-03",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 16.09,
+            "description": "Oculus 4LVLYWB2B2 Menlo Park CA",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-02",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Electronics",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Electronics"
+            ]
+        },
+        {
+            "amount": 47.59,
+            "description": "MAXI #8634 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-03",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Groceries",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Groceries"
+            ]
+        }
+    ],
+    "janvier24": [
+        {
+            "amount": 461.24,
+            "description": "CLINIQUE VETERINAIRE L LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Health",
+            "created_at": null,
+            "tags": [
+                "vet"
+            ]
+        },
+        {
+            "amount": 13.79,
+            "description": "Oculus H8ESWVT2B2 Menlo Park CA",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-08",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Electronics",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Electronics"
+            ]
+        },
+        {
+            "amount": 6.66,
+            "description": "Oculus N3XV6XB2B2 Menlo Park CA",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-08",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Electronics",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Electronics"
+            ]
+        },
+        {
+            "amount": 49.54,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-08",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 46.01,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-09",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 46.01,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-09",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": "second transaction",
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 10.52,
+            "description": "AMAZON PRIME FR PARIS FRA",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-11",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 11.49,
+            "description": "Amazon.ca Prime Member amazon.ca/priBC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-12",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 33.33,
+            "description": "Oculus XBPA4UVF2B2 Menlo Park CA",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-12",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Electronics",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Electronics"
+            ]
+        },
+        {
+            "amount": 33.46,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-15",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 74.21,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-15",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 38.43,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-15",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 48.34,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-15",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 252.0,
+            "description": "TELUQ 888-843-4333 QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-16",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Education",
+            "created_at": null,
+            "tags": [
+                "Education",
+                "Tuition"
+            ]
+        },
+        {
+            "amount": 175.45,
+            "description": "AMZN Mktp CA*R807Z85Q0 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-18",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 195.45,
+            "description": "AMZN Mktp CA*R81NAQSCO WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-18",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 33.46,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-15",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": "second transaction",
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 19.1,
+            "description": "SPICE BROS LAVAL LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-19",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 41.13,
+            "description": "MAXI #8634 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-19",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Groceries",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Groceries"
+            ]
+        },
+        {
+            "amount": 9.65,
+            "description": "AMZN Mktp CA*R&58HOOJ1 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-19",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 29.99,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 4.35,
+            "description": "COUCHE-TARD #1156 MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-29",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Convenience Store",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Convenience"
+            ]
+        },
+        {
+            "amount": 25.44,
+            "description": "KORYO KOREAN BARBEQUE LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-29",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 4.51,
+            "description": "TIM HORTONS #1189 MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-29",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 44.11,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-29",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 33.28,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-01-30",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 42.07,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-01",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 48.31,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-05",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        }
+    ],
+    "fevrier": [
+        {
+            "amount": 6.66,
+            "description": "Oculus Q3ZR6YP2B2 Menlo Park CA",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-07",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Electronics",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Electronics"
+            ]
+        },
+        {
+            "amount": 33.28,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-08",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 49.18,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-12",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 10.41,
+            "description": "AMAZON PRIME FR PARIS FRA",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-12",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 11.49,
+            "description": "Amazon.ca Prime Member amazon.ca/priBC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-12",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 33.28,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-13",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 21.38,
+            "description": "AMZN Mktp CA*RI7CI9112 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-15",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 22.98,
+            "description": "AMZN Mktp CA*RI28X3UX0 WWW.AMAZON.CAON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-16",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 25.66,
+            "description": "KORYO KOREAN BARBEQUE LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-20",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 36.54,
+            "description": "UBER* EATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-20",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 16.09,
+            "description": "MCDONALD'S #41226 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-20",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 17.19,
+            "description": "Audible CA*RI1OC5TQ1 Amzn.com/billNJ",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-20",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Subscription",
+            "created_at": null,
+            "tags": [
+                "Subscription",
+                "Recurring"
+            ]
+        },
+        {
+            "amount": 62.56,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-20",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 15.97,
+            "description": "MCDONALD'S #41226 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-23",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 11.49,
+            "description": "UBER CANADA/UBERONE TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-23",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 50.92,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-23",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 12.61,
+            "description": "COUCHE-TARD #1248 MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Convenience Store",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Convenience"
+            ]
+        },
+        {
+            "amount": 75.0,
+            "description": "ESSO COUCHE-TARD 1248 MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Gas Station",
+            "created_at": null,
+            "tags": [
+                "Transport",
+                "Gas"
+            ]
+        },
+        {
+            "amount": 55.33,
+            "description": "ALLO MON COCO QUEBEC QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 7.46,
+            "description": "SHELL C03131 QUEBEC QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Gas Station",
+            "created_at": null,
+            "tags": [
+                "Transport",
+                "Gas"
+            ]
+        },
+        {
+            "amount": 18.42,
+            "description": "SHELL C03131 QUEBEC QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Gas Station",
+            "created_at": null,
+            "tags": [
+                "Transport",
+                "Gas"
+            ]
+        },
+        {
+            "amount": 51.05,
+            "description": "SHELL C03131 STE FOY QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-26",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Gas Station",
+            "created_at": null,
+            "tags": [
+                "Transport",
+                "Gas"
+            ]
+        },
+        {
+            "amount": 34.18,
+            "description": "JUGO JUICE GALERIES DE QUEBEC QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-27",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 50.05,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-27",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 29.85,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-02-28",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 31.47,
+            "description": "MAXI #8634 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-01",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Groceries",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Groceries"
+            ]
+        },
+        {
+            "amount": 50.11,
+            "description": "UBER CANADA/UBEREATS TORONTO ON",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Food Delivery",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Food Ordering"
+            ]
+        },
+        {
+            "amount": 10.85,
+            "description": "JOE'S PANINI MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 16.0,
+            "description": "JOE'S PANINI MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 2.9,
+            "description": "JOE'S PANINI MONTREAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        },
+        {
+            "amount": 22.96,
+            "description": "WAL-MART #3047 LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Shopping",
+            "created_at": null,
+            "tags": [
+                "Shopping",
+                "Retail"
+            ]
+        },
+        {
+            "amount": 81.89,
+            "description": "LA BELLE ET LA BOEUF LAVAL QC",
+            "card_type": "MBNA Credit",
+            "date": "2024-03-04",
+            "time": null,
+            "bank": "MBNA",
+            "full_email": null,
+            "category": "Restaurant",
+            "created_at": null,
+            "tags": [
+                "Food",
+                "Dining",
+                "Restaurant"
+            ]
+        }
+    ]
+}

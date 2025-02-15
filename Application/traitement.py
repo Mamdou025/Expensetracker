@@ -59,5 +59,6 @@ def extract_transaction_data(email_text, email_sender, email_subject, email_date
         "bank": bank_name,
         "full_email": email_text,
     }
+    print("ordered data ✅✅✅✅✅ " + extracted_data.get("description"))
 
     return ordered_data

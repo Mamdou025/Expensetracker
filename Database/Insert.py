@@ -2,11 +2,14 @@ import sqlite3
 import os
 
 def insert_transaction(ordered_data):
-    # ✅ Ensure the correct database path
+    """
+    Inserts a transaction into the database and associates it with relevant tags.
+    """
+    # ✅ Ensure correct database path
     base_dir = os.path.abspath(os.path.dirname(__file__))
     db_path = os.path.join(base_dir, "transactions.db")
 
-    conn = sqlite3.connect(db_path)  # Always creates/opens 'transactions.db' in the correct location
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     try:
@@ -16,19 +19,7 @@ def insert_transaction(ordered_data):
         # ✅ Assign a category (if not provided, default to 'Uncategorized')
         category = ordered_data.get("category", "Uncategorized")
 
-        # ✅ Check if a transaction with the same details already exists
-        cursor.execute("""
-            SELECT COUNT(*) FROM transactions 
-            WHERE amount = ? AND date = ? AND time = ? AND bank = ?
-        """, (amount, ordered_data["date"], ordered_data["time"], ordered_data["bank"]))
-        
-        duplicate_count = cursor.fetchone()[0]
-
-        if duplicate_count > 0:
-            print(f"⚠️ Duplicate transaction detected, skipping: {ordered_data}")
-            return  # Stop execution if a duplicate exists
-
-        # ✅ Insert the transaction if it's unique
+        # ✅ Get or create transaction entry
         cursor.execute("""
             INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email, category)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -37,11 +28,27 @@ def insert_transaction(ordered_data):
             ordered_data["description"],
             ordered_data["card type"],
             ordered_data["date"],
-            ordered_data["time"],
+            ordered_data.get("time", None),  # ✅ Allow NULL time
             ordered_data["bank"],
-            ordered_data["full_email"],
-            category  # ✅ New field for category
+            ordered_data.get("full_email", "No email content"),
+            category
         ))
+
+        # ✅ Get the inserted transaction ID
+        transaction_id = cursor.lastrowid
+
+        # ✅ Insert tags and associate them with the transaction
+        tags = ordered_data.get("tags", [])  # Retrieve tags if present
+
+        for tag in tags:
+            cursor.execute("INSERT OR IGNORE INTO tags (tag_name) VALUES (?)", (tag,))  # Ensure tag exists
+
+            # Retrieve tag ID
+            cursor.execute("SELECT id FROM tags WHERE tag_name = ?", (tag,))
+            tag_id = cursor.fetchone()[0]
+
+            # Link transaction to tag
+            cursor.execute("INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)", (transaction_id, tag_id))
 
         conn.commit()
         print(f"✅ Transaction saved: {ordered_data}")
@@ -52,3 +59,18 @@ def insert_transaction(ordered_data):
     finally:
         conn.close()
 
+# ✅ Example usage:
+if __name__ == "__main__":
+    sample_transaction = {
+        "amount": 74.99,
+        "description": "Uber Eats",
+        "card_type": "Credit Card",
+        "date": "2025-02-13",
+        "time": "10:40:00",
+        "bank": "MBNA",
+        "full_email": None,
+        "category": "Food",
+        "tags": ["Food", "Food Ordering"]
+    }
+
+    insert_transaction(sample_transaction)
