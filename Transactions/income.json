@@ -1,0 +1,128 @@
+{
+
+"janvier":[
+    {"amount": 1153.28, "description": "PROVINCIAL PARENTAL INSURANCE (GOUV. QUEBEC)", "card_type": "Unknown", "date": "2025-01-03", "time": null, "bank": "Unknown", "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 230.00, "description": "E-TRANSFER Saphietou Ndiaye", "card_type": "Unknown", "date": "2025-01-05", "time": null, "bank": "Unknown", "full_email": null, "category": "Transfers", "created_at": null},
+    {"amount": 1336.64, "description": "PROVINCIAL PARENTAL INSURANCE (GOUV. QUEBEC)", "card_type": "Unknown", "date": "2025-01-10", "time": null, "bank": "Unknown", "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 968.13, "description": "PROVINCIAL PARENTAL INSURANCE (GOUV. QUEBEC)", "card_type": "Unknown", "date": "2025-01-17", "time": null, "bank": "Unknown", "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 1646.43, "description": "PAY PEOPLE2.0", "card_type": "Unknown", "date": "2025-01-26", "time": null, "bank": "Unknown", "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 1285.49, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": "Unknown", "date": "2025-01-26", "time": null, "bank": "Unknown", "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 88.10, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": "Unknown", "date": "2025-01-26", "time": null, "bank": "Unknown", "full_email": null, "category": "Salary", "created_at": null}
+
+    
+],
+"fevrier":[
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-02-02", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.02, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-02-02", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-02-09", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.01, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-02-09", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 109.00, "description": "E-TRANSFER 010929054893 Hillside (Interna)", "card_type": null, "date": "2025-02-12", "time": null, "bank": null, "full_email": null, "category": "Transfers", "created_at": null},
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-02-16", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.01, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-02-16", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-02-23", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+     {"amount": 735.01, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-02-23", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+],
+"mars":[
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-03-01", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.02, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-03-01", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 1000.00, "description": "INTERNET TRANSFER 000000208232", "card_type": null, "date": "2025-03-04", "time": null, "bank": null, "full_email": null, "category": "Bank Transfer", "created_at": null},
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-03-08", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.02, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-03-08", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 820.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-03-15", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.02, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-03-15", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+],
+"avril":[
+    {"amount": 1473.37, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-04-05", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 607.47, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-04-05", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.01, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-04-05", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 679.56, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-04-12", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 1965.73, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-04-26", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 731.03, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-04-26", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+
+],
+"mai":[
+{"amount": 820.53, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-05-03", "time": null, "bank": null, "full_email": null, "category": "Payroll", "created_at": null},
+{"amount": 735.02, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-05-03", "time": null, "bank": null, "full_email": null, "category": "Payroll", "created_at": null},
+{"amount": 820.53, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-05-10", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+{"amount": 735.00, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-05-10", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 820.53, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-05-17", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 735.00, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-05-17", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 944.94, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-05-24", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+    {"amount": 703.12, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-05-24", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+        {"amount": 820.57, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2025-05-31", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+        {"amount": 607.46, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-05-31", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null},
+        {"amount": 174.03, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2025-05-31", "time": null, "bank": null, "full_email": null, "category": "Income", "created_at": null}
+      
+      
+
+],
+"juin":[
+    {"amount": 820.57, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-06-07", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 735.01, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2024-06-07", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 843.31, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-06-14", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 5.00, "description": "INTERNET TRANSFER 000000107583", "card_type": null, "date": "2024-06-10", "time": null, "bank": null, "full_email": null, "category": "Transfers", "created_at": null},
+    {"amount": 634.02, "description": "PAY MANPOWER SERVICES CANADA LTD", "card_type": null, "date": "2024-06-14", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 861.35, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-06-21", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 820.58, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-06-28", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 680.32, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-07-05", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+
+
+      ],
+      "juillet":[
+        {"amount": 953.20, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-07-12", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 898.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-07-19", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 820.61, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-07-26", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+
+      ],
+      "aout":[
+        {"amount": 795.89, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-08-02", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 553.51, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-08-22", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 680.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-08-30", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null} ],
+
+
+
+"septembre":[
+    {"amount": 680.21, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-09-06", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 740.70, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-09-13", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 671.33, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-09-20", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 811.80, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-09-27", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+
+],
+
+"octobre":[
+    {"amount": 818.19, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-10-04", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 760.10, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-10-15", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+    {"amount": 322.85, "description": "E-TRANSFER 105184635094 MAMADOUKASSE", "card_type": null, "date": "2024-10-16", "time": null, "bank": null, "full_email": null, "category": "Transfers", "created_at": null},
+    {"amount": 816.71, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-10-18", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 1000.00, "description": "E-TRANSFER 105188997993 BIRAHIM AHMET FALL", "card_type": null, "date": "2024-10-21", "time": null, "bank": null, "full_email": null, "category": "Transfers", "created_at": null},
+{"amount": 917.29, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-10-25", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+
+
+],
+"novembre":[
+    {"amount": 662.65, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-11-01", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 943.59, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-11-08", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 1952.40, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-11-15", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 760.69, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-11-22", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 787.31, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-11-29", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null}
+
+
+],
+
+
+
+
+
+"decembre":[
+    {"amount": 928.22, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-12-06", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 6000.00, "description": "DEPOSIT Fairstone Financial EFT", "card_type": null, "date": "2024-12-10", "time": null, "bank": null, "full_email": null, "category": "Loan", "created_at": null},
+    {"amount": 202.85, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-12-13", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 820.22, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-12-20", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 751.77, "description": "PAY PEOPLE2.0", "card_type": null, "date": "2024-12-27", "time": null, "bank": null, "full_email": null, "category": "Salary", "created_at": null},
+{"amount": 500.00, "description": "E-TRANSFER 105277512356 SAPIETOU NDIAYE", "card_type": null, "date": "2024-12-27", "time": null, "bank": null, "full_email": null, "category": "Transfers", "created_at": null},
+{"amount": 800.00, "description": "E-TRANSFER 105280290368 SAPIETOU NDIAYE", "card_type": null, "date": "2024-12-30", "time": null, "bank": null, "full_email": null, "category": "Transfers", "created_at": null}
+
+
+]
+
+}

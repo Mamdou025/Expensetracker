@@ -1,0 +1,115 @@
+ {
+
+"juin":[
+    {"amount": 31.31, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-05-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 114.95, "description": "AMZN Mktp CA*DR5DV2143 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-05-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 8.04, "description": "AMZN Mktp CA*R586V2VM3 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-05-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 634.62, "description": "CANADIAN TIRE #231 VIMONT LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-06-03", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Home Improvement", "created_at": null},
+    {"amount": 5.98, "description": "AMZN Mktp CA*F96GA3YY3 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-06-07", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Home Improvement", "created_at": null},
+    {"amount": 17.43, "description": "AMZN Mktp CA*3U57X94M3 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-06-07", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null}
+],
+"juillet":[
+    {"amount": 19.04, "description": "BOULANGERIE PATISSERIE Laval QC", "card_type": "CIBC-CC Credit", "date": "2024-06-10", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 5.00, "description": "FS AV ESP/VIR SOL/CHQ PR/VERS", "card_type": "CIBC-CC Credit", "date": "2024-06-11", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Financial Services", "created_at": null},
+    {"amount": 74.58, "description": "AMZN Mktp CA*IZ9UQ3M63 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-06-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 11.49, "description": "Amazon.ca Prime Member amazon.ca/priBC", "card_type": "CIBC-CC Credit", "date": "2024-06-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 320.00, "description": "CENTRE DE SANTE DENTAIRE LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-06-17", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Healthcare", "created_at": null},
+    {"amount": 30.00, "description": "PARC INDIGO - NO CMO010 MONTREAL QC", "card_type": "CIBC-CC Credit", "date": "2024-06-17", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 20.00, "description": "SHELL C81580 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-06-19", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 34.77, "description": "AMZN Mktp CA*RG7NC6W31 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-06-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 33.50, "description": "AMZN Mktp CA*RC69J4ZA1 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-06-27", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 4.59, "description": "APPLE.COM/BILL TORONTO ON", "card_type": "CIBC-CC Credit", "date": "2024-07-02", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Entertainment", "created_at": null},
+    {"amount": 29.13, "description": "BOULANGERIE PATISSERIE Laval QC", "card_type": "CIBC-CC Credit", "date": "2024-07-02", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 15.28, "description": "MCDONALD'S #41226 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-04", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 1.14, "description": "APPLE.COM/BILL 866-712-7753 ON", "card_type": "CIBC-CC Credit", "date": "2024-07-05", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null}
+    
+    
+],
+"aout":[
+    {"amount": 30.00, "description": "PARC INDIGO - NO CMO010 MONTREAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-08", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 46.13, "description": "PIZZERIA JACQUES CARTIER MONTREAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-08", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 10.44, "description": "MCDONALD'S #41226 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-08", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 37.68, "description": "Concept TOM Montreal MONTREAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-08", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 1.14, "description": "APPLE.COM/BILL 866-712-7753 ON", "card_type": "CIBC-CC Credit", "date": "2024-07-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 27.59, "description": "ADONIS 21944 LAVAL EST LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 11.49, "description": "Amazon.ca Prime Member amazon.ca/priBC", "card_type": "CIBC-CC Credit", "date": "2024-07-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 18.00, "description": "JOE'S PANINI MONTREAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-15", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 23.00, "description": "AMZN Mktp CA*RY57U3Y92 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-07-15", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 39.18, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-16", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 42.92, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-16", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 42.01, "description": "AMZN Mktp CA*RS25Y28U2 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-07-19", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 57.48, "description": "APPLE.COM/BILL 866-712-7753 ON", "card_type": "CIBC-CC Credit", "date": "2024-07-22", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 132.16, "description": "ADONIS 21944 LAVAL EST LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-07-22", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 17.23, "description": "AMZN Mktp CA*RJ34B7UB1 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-07-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 27.58, "description": "AMZN Mktp CA*RV7DM3TY2 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-07-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 38.83, "description": "AMZN Mktp CA*RV4EY9MW2 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-07-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null}
+],
+"septembre":[
+    {"amount": 39.08, "description": "L'IMAGINAIRE QUEBEC QC", "card_type": "CIBC-CC Credit", "date": "2024-09-09", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 11.04, "description": "KORYO KOREAN BARBEQUE LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-09-09", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 11.49, "description": "Amazon.ca Prime Member amazon.ca/priBC", "card_type": "CIBC-CC Credit", "date": "2024-09-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Financial Services", "created_at": null},
+    {"amount": 5.98, "description": "AMZN Mktp CA*P206K8IU3 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-09-16", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 57.48, "description": "APPLE.COM/BILL TORONTO ON", "card_type": "CIBC-CC Credit", "date": "2024-09-20", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 16.71, "description": "VAN HOUTTE LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-09-23", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 160.05, "description": "Amazon.ca*A70EI4ZJ3 AMAZON.CA ON", "card_type": "CIBC-CC Credit", "date": "2024-09-24", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 18.70, "description": "MCDONALD'S #41226 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-09-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 33.77, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-10-02", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 25.98, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-10-03", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null}
+]
+,
+"octobre":[
+    {"amount": 66.11, "description": "TOM-Americas BBQ Montreal QC", "card_type": "CIBC-CC Credit", "date": "2024-10-15", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 11.49, "description": "Amazon.ca Prime Member amazon.ca/priBC", "card_type": "CIBC-CC Credit", "date": "2024-10-15", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Financial Services", "created_at": null},
+    {"amount": 27.80, "description": "MCDONALD'S #41226 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-10-17", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 17.19, "description": "Audible CA*2741L5503 Amzn.com/billNJ", "card_type": "CIBC-CC Credit", "date": "2024-10-21", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Financial Services", "created_at": null},
+    {"amount": 57.48, "description": "APPLE.COM/BILL 866-712-7753 ON", "card_type": "CIBC-CC Credit", "date": "2024-10-21", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 10.00, "description": "COLLEGE MONTMORENCY LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-10-22", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Education", "created_at": null},
+    {"amount": 10.20, "description": "COUCHE-TARD #1214 BROSSARD QC", "card_type": "CIBC-CC Credit", "date": "2024-10-22", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 40.00, "description": "COUCHE-TARD #1214 BROSSARD QC", "card_type": "CIBC-CC Credit", "date": "2024-10-23", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 57.48, "description": "AMZN Mktp CA*JN68X9EJ3 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-10-24", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 43.82, "description": "Amazon.ca*U83W475P3 AMAZON.CA ON", "card_type": "CIBC-CC Credit", "date": "2024-10-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 86.42, "description": "WAL-MART SUPERCENTER#3047 LAVAL", "card_type": "CIBC-CC Credit", "date": "2024-10-27", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 9.19, "description": "STEAMGAMES.COM 4259522985912-1844160 WA", "card_type": "CIBC-CC Credit", "date": "2024-10-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 22.98, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-10-31", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 34.47, "description": "AMZN Mktp CA*8D75C9V33 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-11-01", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 7.00, "description": "COLLEGE MONTMORENCY LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-11-04", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Education", "created_at": null}
+    
+]
+,
+"novembre":[
+    {"amount": 98.32, "description": "AMAZON MKTPL*GD7N530Z3 Amzn.com/billON", "card_type": "CIBC-CC Credit", "date": "2024-11-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 146.11, "description": "Amazon.ca*B17AO3B13 AMAZON.CA ON", "card_type": "CIBC-CC Credit", "date": "2024-11-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 22.98, "description": "AMZN Mktp CA*Z9R754B3 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-11-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 11.49, "description": "Amazon.ca Prime Member amazon.ca/priBC", "card_type": "CIBC-CC Credit", "date": "2024-11-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 95.79, "description": "WAL-MART SUPERCENTER#3656MONTREAL-NORDQC", "card_type": "CIBC-CC Credit", "date": "2024-11-15", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 17.19, "description": "Audible CA*XM2RH5I53 Amzn.com/billNJ", "card_type": "CIBC-CC Credit", "date": "2024-11-19", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 57.48, "description": "APPLE.COM/BILL 866-712-7753 ON", "card_type": "CIBC-CC Credit", "date": "2024-11-19", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 30.00, "description": "H GREGOIRE ST LEONARD SAINT-LEONARDQC", "card_type": "CIBC-CC Credit", "date": "2024-11-25", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 28.12, "description": "MCDONALD'S #40327 SAINT-LEONARDQC", "card_type": "CIBC-CC Credit", "date": "2024-11-25", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 8.07, "description": "DEPANNEUR ULTRA LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-11-25", "time": null, "bank": "CIBC-CC", "full_email": null, "category": " Convenience", "created_at": null},
+    {"amount": 28.71, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-11-25", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 40.00, "description": "PETRO CANADA12739 DORVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-11-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 194.31, "description": "AMZN Mktp CA*Z38M130T0 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-11-27", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 79.33, "description": "AMZN Mktp CA*Z34Z370R0 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-11-27", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 9.93, "description": "STEAM PURCHASE SEATTLE", "card_type": "CIBC-CC Credit", "date": "2024-11-29", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Entertainement", "created_at": null},
+    {"amount": 48.84, "description": "AMZN Mktp CA*Z35Q736O1 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-12-01", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null}
+]
+,
+"decembre":[
+    {"amount": 11.49, "description": "Amazon.ca Prime Member amazon.ca/priBC", "card_type": "CIBC-CC Credit", "date": "2024-12-12", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 17.19, "description": "Audible CA*Z15YE5970 Amzn.com/billNJ", "card_type": "CIBC-CC Credit", "date": "2024-12-19", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 42.05, "description": "AMZN Mktp CA*ZE7916762 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2024-12-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 9.19, "description": "STEAM PURCHASE SEATTLE", "card_type": "CIBC-CC Credit", "date": "2024-12-26", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Entertainement", "created_at": null},
+    {"amount": 32.98, "description": "FAMOUS PLAYER 9401QPS MONTREAL QC", "card_type": "CIBC-CC Credit", "date": "2024-12-30", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Entertainment", "created_at": null},
+    {"amount": 17.50, "description": "TIM HORTONS #0133 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-12-30", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 19.55, "description": "DEPANNEUR ANGI LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-12-28", "time": null, "bank": "CIBC-CC", "full_email": null, "category": " Convenience", "created_at": null},
+    {"amount": 23.21, "description": "SPICE BROS PLACEBELL LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-12-30", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 15.70, "description": "MAXI #8634 LAVAL QC", "card_type": "CIBC-CC Credit", "date": "2024-12-31", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 26.43, "description": "AMZN Mktp CA*ZD8W586F2 WWW.AMAZON.CAON", "card_type": "CIBC-CC Credit", "date": "2025-01-06", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 8.24, "description": "Amazon.ca*ZP5GI1B11 AMAZON.CA ON", "card_type": "CIBC-CC Credit", "date": "2025-01-07", "time": null, "bank": "CIBC-CC", "full_email": null, "category": "Shopping", "created_at": null}
+]
+
+
+}
+
+

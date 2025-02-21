@@ -1,0 +1,48 @@
+{
+    "septembre23" :[
+        {"amount": 122.96, "description": "WAL-MART #3149 MASCOUCHE CAN", "card_type": "Neo_Elite Credit", "date": "2024-09-25", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Shopping", "created_at": null},
+        {"amount": 20.16, "description": "JUGO JUICE JUG256 MONT-ROYAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-09-23", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 19.80, "description": "VAN HOUTTE LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-09-15", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 16.00, "description": "CRECCAL INVESTMENTS MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-09-14", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Transport", "created_at": null},
+        {"amount": 18.94, "description": "OSMOW'S MONTREAL MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-09-14", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 40.00, "description": "CENTRE DE SERVICE LEVE LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-09-08", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Transport", "created_at": null},
+        {"amount": 149.00, "description": "Membership Fee", "card_type": "Neo_Elite Credit", "date": "2024-08-31", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Services", "created_at": null}
+    ],
+    
+    "octobre":[
+        {"amount": 19.12, "description": "BURGER KING #14326 MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-24", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 2.50, "description": "ROYALMOUNT Montreal CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-16", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Miscellaneous", "created_at": null},
+        {"amount": 7.50, "description": "STM PL DES ARTS DIE101 MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-16", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Transport", "created_at": null},
+        {"amount": 32.86, "description": "Subway 23371 Montreal CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-14", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 6.00, "description": "NAYAX CANADA INC MASTE FREDERICTON CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-13", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Miscellaneous", "created_at": null}
+    ],
+    "novembre":[
+        {"amount": 10.10, "description": "TIM HORTONS #1830 LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-24", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 11.82, "description": "TIM HORTONS #1830 LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-24", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 19.65, "description": "MAXI #8634 LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-19", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Groceries", "created_at": null},
+        {"amount": 40.69, "description": "PIZZERIA ALLO TERREBONNE CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-19", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 14.02, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-15", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 206.94, "description": "AUBAINERIE LAVAL LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-14", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Shopping", "created_at": null},
+        {"amount": 16.71, "description": "VAN HOUTTE LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-04", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 16.32, "description": "MAXI #8634 LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-04", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Groceries", "created_at": null},
+        {"amount": 25.00, "description": "ADMINISTRATION PORTUAI MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-03", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Transport", "created_at": null},
+        {"amount": 333.40, "description": "CROISIERES AML (TJ) QUEBEC CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-01", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Entertainment", "created_at": null},
+        {"amount": 38.84, "description": "JEAN COUTU 100 LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-29", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Groceries", "created_at": null},
+        {"amount": 203.86, "description": "Aliexpress Vancouver CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-28", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Shopping", "created_at": null},
+        {"amount": 7.00, "description": "COLLEGE MONTMORENCY LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-28", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Education", "created_at": null},
+        {"amount": 7.00, "description": "COLLEGE MONTMORENCY LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-10-27", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Education", "created_at": null}
+    ],
+    "decembre":[
+        {"amount": 179.58, "description": "MAXI #8662 VERDUN CAN", "card_type": "Neo_Elite Credit", "date": "2024-12-27", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Groceries", "created_at": null},
+        {"amount": 106.89, "description": "CHOMEDEY HYUNDAI LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-12-18", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Transport", "created_at": null},
+        {"amount": 21.44, "description": "KORYO KOREAN BARBEQUE LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-12-16", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 29.64, "description": "WENDY'S RESTAURANTS LAVAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-12-07", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Fast Food", "created_at": null},
+        {"amount": 12.00, "description": "DIMA SHOP MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-12-06", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Shopping", "created_at": null},
+        {"amount": 31.00, "description": "TRANSPORTS ILO MONTREAL CAN", "card_type": "Neo_Elite Credit", "date": "2024-12-06", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Transport", "created_at": null},
+        {"amount": 79.71, "description": "STH #206 Valleyfield SALABERRY-DE CAN", "card_type": "Neo_Elite Credit", "date": "2024-11-29", "time": null, "bank": "Neo_Elite", "full_email": null, "category": "Shopping", "created_at": null}
+    ]
+
+    
+    }
+    
+    

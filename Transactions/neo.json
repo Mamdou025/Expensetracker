@@ -1,0 +1,134 @@
+ {
+
+"janvier24":[
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-01-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 243.65, "description": "THE HOME DEPOT #7224 ST-JN-SR-RICH CAN", "card_type": "NEO Credit", "date": "2024-01-01", "time": null, "bank": "NEO", "full_email": null, "category": "Home Improvement", "created_at": null},
+    {"amount": 36.35, "description": "THE HOME DEPOT #7124 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-12-31", "time": null, "bank": "NEO", "full_email": null, "category": "Home Improvement", "created_at": null},
+    {"amount": 102.23, "description": "WAL-MART #3047 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-12-30", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-12-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null}
+],
+"fevrier":[
+    {"amount": 73.94, "description": "asos.com London GBR", "card_type": "NEO Credit", "date": "2024-02-22", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 82.99, "description": "HTTP://WWW.BOOHOO.COM/ ONLINE GBR", "card_type": "NEO Credit", "date": "2024-02-21", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-02-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 34.31, "description": "HM Carrefour Laval Laval CAN", "card_type": "NEO Credit", "date": "2024-02-17", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 376.11, "description": "CLINIQUE VETERINAIRE L LAVAL CAN", "card_type": "NEO Credit", "date": "2024-02-15", "time": null, "bank": "NEO", "full_email": null, "category": "Vet", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-01-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null}
+]
+,
+"mars":[
+    {"amount": 320.00, "description": "CLINIQUE VETERINAIRE L LAVAL CAN", "card_type": "NEO Credit", "date": "2024-03-19", "time": null, "bank": "NEO", "full_email": null, "category": "Vet", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-03-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-02-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null}
+],
+"avril":[
+    {"amount": 55.95, "description": "ASOS.COM 02077561000 GBR", "card_type": "NEO Credit", "date": "2024-04-18", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-04-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 91.01, "description": "CLINIQUE VETERINAIRE L LAVAL CAN", "card_type": "NEO Credit", "date": "2024-04-16", "time": null, "bank": "NEO", "full_email": null, "category": "Vet", "created_at": null},
+    {"amount": 156.29, "description": "WWW.OXKNIT.COM 8618620445771 HKG (USD -113.46)", "card_type": "NEO Credit", "date": "2024-04-14", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 8.29, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-04-12", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-03-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null}
+],
+
+"mai":[
+    {"amount": 28.01, "description": "SHELL FORT LEE USA (USD -20.48)", "card_type": "NEO Credit", "date": "2024-05-21", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 54.24, "description": "SUNOCO 0267542900 CATSKILL USA (USD -39.75)", "card_type": "NEO Credit", "date": "2024-05-19", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-05-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 186.26, "description": "LULULEMON #00517 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-05-11", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 961.59, "description": "Amazon.ca AMAZON.CA CAN", "card_type": "NEO Credit", "date": "2024-05-05", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-04-28", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null}
+],
+"juin":[
+    {"amount": 24.23, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-20", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-06-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 19.69, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-16", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 12.48, "description": "BOULANGERIE PATISSERIE Laval CAN", "card_type": "NEO Credit", "date": "2024-06-16", "time": null, "bank": "NEO", "full_email": null, "category": "Food", "created_at": null},
+    {"amount": 13.43, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-12", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 27.74, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-11", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 22.13, "description": "DOLLARAMA # 65 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-09", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-05-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 179.36, "description": "BRILLIANT.ORG - EDU +16504682966 USA", "card_type": "NEO Credit", "date": "2024-05-25", "time": null, "bank": "NEO", "full_email": null, "category": "Education", "created_at": null}
+],
+"juillet":[
+    {"amount": 20.31, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-07-22", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 6.19, "description": "SHELL C81580 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-07-21", "time": null, "bank": "NEO", "full_email": null, "category": "Convenience", "created_at": null},
+    {"amount": 21.53, "description": "KORYO KOREAN BARBEQUE LAVAL CAN", "card_type": "NEO Credit", "date": "2024-07-20", "time": null, "bank": "NEO", "full_email": null, "category": "Restaurant", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-07-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 30.11, "description": "ESSO COUCHE-TARD MONTREAL CAN", "card_type": "NEO Credit", "date": "2024-07-08", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-06-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 112.66, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-27", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 16.76, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-27", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 21.53, "description": "DEPANNEUR ULTRA LAVAL CAN", "card_type": "NEO Credit", "date": "2024-06-25", "time": null, "bank": "NEO", "full_email": null, "category": "Convenience", "created_at": null}
+],
+"aout":[
+    {"amount": 1264.00, "description": "CENTRE DE SANTE DENTAI LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-22", "time": null, "bank": "NEO", "full_email": null, "category": "Healthcare", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-08-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 10.80, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-17", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 14.00, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-16", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 11.26, "description": "JEAN COUTU 100 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-13", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 7.46, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-13", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 17.70, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-13", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 2.29, "description": "DEPANNEUR ULTRA LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-12", "time": null, "bank": "NEO", "full_email": null, "category": "Convenience", "created_at": null},
+    {"amount": 674.67, "description": "CENTRE VETERINAIRE LAV LAVAL CAN", "card_type": "NEO Credit", "date": "2024-08-10", "time": null, "bank": "NEO", "full_email": null, "category": "Vet", "created_at": null},
+    {"amount": 19.91, "description": "BOULANGERIE PATISSERIE Laval CAN", "card_type": "NEO Credit", "date": "2024-08-08", "time": null, "bank": "NEO", "full_email": null, "category": "Food", "created_at": null},
+    {"amount": 89.19, "description": "STH #263 Express HAWKESBURY CAN", "card_type": "NEO Credit", "date": "2024-08-04", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 13.33, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-07-28", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-07-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 18.40, "description": "JEAN COUTU 100 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-07-25", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 50.55, "description": "BOUCHERIE ET GRILLADES LAVAL CAN", "card_type": "NEO Credit", "date": "2024-07-25", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null}
+],
+"septembre":[
+    {"amount": 10.00, "description": "ROYALMOUNT Montreal CAN", "card_type": "NEO Credit", "date": "2024-09-24", "time": null, "bank": "NEO", "full_email": null, "category": "Entertainment", "created_at": null},
+    {"amount": 14.02, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-09-24", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 3.88, "description": "BOUTIK MONTMORENCY LAVAL CAN", "card_type": "NEO Credit", "date": "2024-09-22", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 5.00, "description": "ROYALMOUNT Montreal CAN", "card_type": "NEO Credit", "date": "2024-09-22", "time": null, "bank": "NEO", "full_email": null, "category": "Entertainment", "created_at": null},
+    {"amount": 13.79, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-09-22", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 7.00, "description": "COLLEGE MONTMORENCY LAVAL CAN", "card_type": "NEO Credit", "date": "2024-09-21", "time": null, "bank": "NEO", "full_email": null, "category": "Education", "created_at": null},
+    {"amount": 14.48, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-09-21", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 16.36, "description": "Subway 45491 Dorval CAN", "card_type": "NEO Credit", "date": "2024-09-18", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-09-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 22.28, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-09-16", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 72.34, "description": "JEAN COUTU 225 MONTREAL-NORD CAN", "card_type": "NEO Credit", "date": "2024-09-02", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-08-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 23.50, "description": "Interest Charged", "card_type": "NEO Credit", "date": "2024-09-24", "time": null, "bank": "NEO", "full_email": null, "category": "Services", "created_at": null}
+],
+"octobre":[
+    {"amount": 137.96, "description": "CANADIAN TIRE STORES BROSSARD CAN", "card_type": "NEO Credit", "date": "2024-10-23", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 28.69, "description": "EQUIFAX CANADA CO. 855-233-9226 CAN", "card_type": "NEO Credit", "date": "2024-10-17", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 8.77, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-10-16", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 40.13, "description": "ESSO COUCHE-TARD VILLE MONT-RO CAN", "card_type": "NEO Credit", "date": "2024-10-13", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 7.00, "description": "COLLEGE MONTMORENCY LAVAL CAN", "card_type": "NEO Credit", "date": "2024-10-13", "time": null, "bank": "NEO", "full_email": null, "category": "Education", "created_at": null},
+    {"amount": 10.31, "description": "COUCHE-TARD #1298 MONT-ROYAL CAN", "card_type": "NEO Credit", "date": "2024-10-12", "time": null, "bank": "NEO", "full_email": null, "category": "Convenience", "created_at": null},
+    {"amount": 7.00, "description": "COLLEGE MONTMORENCY LAVAL CAN", "card_type": "NEO Credit", "date": "2024-10-07", "time": null, "bank": "NEO", "full_email": null, "category": "Education", "created_at": null},
+    {"amount": 3.49, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-10-05", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 61.79, "description": "AMAZON MKTPLACE PMTS Amzn.com/bill CAN", "card_type": "NEO Credit", "date": "2024-10-04", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 16.74, "description": "GOFULLPAGE.COM +18605544264 USA (USD -12.36)", "card_type": "NEO Credit", "date": "2024-10-02", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-09-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 12.31, "description": "BOULANGERIE PATISSERIE Laval CAN", "card_type": "NEO Credit", "date": "2024-09-25", "time": null, "bank": "NEO", "full_email": null, "category": "Food", "created_at": null}
+],
+"novembre":[
+    {"amount": 15.86, "description": "MCDONALD'S #41226 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-11-17", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 881.68, "description": "CENTRE VETERINAIRE LAV LAVAL CAN", "card_type": "NEO Credit", "date": "2024-11-17", "time": null, "bank": "NEO", "full_email": null, "category": "Vet", "created_at": null},
+    {"amount": 209.51, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-11-11", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 36.78, "description": "Microsoft*Xbox Mississauga CAN", "card_type": "NEO Credit", "date": "2024-10-30", "time": null, "bank": "NEO", "full_email": null, "category": "Entertainment", "created_at": null},
+    {"amount": 19.50, "description": "REQ/020100054613394 QUEBEC CAN", "card_type": "NEO Credit", "date": "2024-10-29", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 13.25, "description": "Store Laval CAN", "card_type": "NEO Credit", "date": "2024-10-27", "time": null, "bank": "NEO", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-10-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null}
+],
+"decembre":[
+    {"amount": 18.52, "description": "A&W #5526 BOISBRIAND BOISBRIAND CAN", "card_type": "NEO Credit", "date": "2024-12-01", "time": null, "bank": "NEO", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 29.75, "description": "PETRO-CANADA 13057 BOISBRIAND CAN", "card_type": "NEO Credit", "date": "2024-11-30", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 3.90, "description": "A30 EXPRESS SALABERRY-DE- CAN", "card_type": "NEO Credit", "date": "2024-11-29", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 3.90, "description": "A30 EXPRESS SALABERRY-DE- CAN", "card_type": "NEO Credit", "date": "2024-11-29", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "NEO Credit", "date": "2024-11-27", "time": null, "bank": "NEO", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 3.90, "description": "A30 EXPRESS SALABERRY-DE- CAN", "card_type": "NEO Credit", "date": "2024-11-26", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 4.11, "description": "PETRO CANADA12739 DORVAL CAN", "card_type": "NEO Credit", "date": "2024-11-26", "time": null, "bank": "NEO", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 94.37, "description": "MAXI #8634 LAVAL CAN", "card_type": "NEO Credit", "date": "2024-11-25", "time": null, "bank": "NEO", "full_email": null, "category": "Groceries", "created_at": null}
+],
+"Janvier25":   [ {"amount": 14.94, "description": "GOOGLE *YouTubePremium 650-253-0000 CAN", "card_type": "MBNA Credit", "date": "2024-12-27", "time": null, "bank": "MBNA", "full_email": null, "category": "Subscription", "created_at": null}]
+
+
+
+}
+
+

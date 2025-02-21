@@ -1,43 +1,67 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
+
 // Define custom colors for each category
 const categoryColors = {
-    "Groceries": "#067F00",
-    "Shopping":"#F100FA",
+    "Groceries": "#098903",
+    "Shopping": "#E5BA0B",
     "Rent": "#33ff57",
     "Utilities": "#3357ff",
-    "Transportation": "#ff33a6",
+    "Transport": "#E4080A",
     "Dining Out": "#0BA504",
     "Entertainment": "#F7CA15",
-    "Food Delivery" :"#089B00",
-    "Restaurant":"#0BA603",
-    "Gas Station":"#842401",
-    "Travel":"#9D2B01",
-    "Convenience Store":"#9F2C02",
-    "Subscription":"#00FADD",
-    "Education":"#001AFA",
+    "Food Delivery": "#089B00",
+    "Food": "#098403",
+    "Restaurant": "#0BA603",
+    "Fast Food":"#09B601",
+    "Gas Station": "#842401",
+    "Travel": "#E4080A",
+    "Convenience": "#E4080A",
+    "Subscription": "#00FADD",
+    "Services": "#00E3C9",
+    "Education": "#001AFA",
+    "Healthcare": "#EC69E4",
+    "Miscellaneous": "#EF8419",
+    "Home Improvement":"#9110DB",
+    "Vet": "#E981E1",
+    "Telecommunications":"#11DFC7",
+        "Transfer":"#F94AAA",
     "Other": "#888888" // Default color for unlisted categories
 };
+const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+        const { name, value, percentage } = payload[0].payload;
+        return (
+            <div style={{ backgroundColor: "white", padding: "10px", border: "1px solid #ddd" }}>
+                <p><strong>{name}</strong></p>
+                <p>Amount: ${value.toFixed(2)}</p>  {/* 🔥 Rounded amount */}
+                <p>Percentage: {percentage}</p>  {/* 🔥 Show percentage */}
+            </div>
+        );
+    }
+    return null;
+};
+
 
 // Define reusable CategoryPieChart component
 const CategoryPieChart = ({ data }) => (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={350}>
         <PieChart>
             <Pie
                 data={data}
-                cx="50%"
-                cy="50%"
+                cx="50%"    
+                cy="40%"
                 outerRadius={100}
                 dataKey="value"
-                label={({ name, percentage }) => `${name} (${percentage})`}
+                label={false} // 🔥 Removed labels
             >
                 {data.map((entry) => (
                     <Cell key={entry.name} fill={categoryColors[entry.name] || categoryColors["Other"]} />
                 ))}
             </Pie>
-            <Tooltip />
-            <Legend />
+            <Tooltip content={<CustomTooltip />} /> {/* 🔥 Custom Tooltip */}
+            <Legend layout="horizontal" align="center" verticalAlign="bottom" />
         </PieChart>
     </ResponsiveContainer>
 );
@@ -45,7 +69,7 @@ const CategoryPieChart = ({ data }) => (
 // Define reusable CategoryBarChart component
 const CategoryBarChart = ({ data, categories, stackId }) => (
     <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
+        <BarChart data={data} barSize={30}> {/* 🔥 Increased bar size */}
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey={stackId ? "month" : "date"} />
             <YAxis />
@@ -62,6 +86,7 @@ const CategoryBarChart = ({ data, categories, stackId }) => (
         </BarChart>
     </ResponsiveContainer>
 );
+
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState([]);
@@ -113,11 +138,19 @@ const TransactionsPage = () => {
 
         const totalSpending = Object.values(categoryTotals).reduce((sum, value) => sum + value, 0);
 
-        return Object.keys(categoryTotals).map(category => ({
+        const spendingData = Object.keys(categoryTotals).map(category => ({
             name: category,
             value: categoryTotals[category],
             percentage: ((categoryTotals[category] / totalSpending) * 100).toFixed(2) + "%"
         }));
+
+        // Define custom category order
+        const customOrder = ["Food Delivery", "Groceries", "Restaurant","Fast Food","Food", "Travel", "Transport","Convenience" ,"Convinience", "Entertainment","Shopping", "Other","Healthcare","Vet","Services","Subscription","Telecommunications"];
+
+        // Sort categories according to custom order
+        spendingData.sort((a, b) => customOrder.indexOf(a.name) - customOrder.indexOf(b.name));
+
+        return spendingData;
     };
 
     const spendingByCategory = useMemo(() => aggregateSpendingByCategory(), [filteredTransactions]);
@@ -180,29 +213,34 @@ const TransactionsPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredTransactions.map((txn, index) => (
-                            <tr key={index}>
-                                <td>{txn.id}</td>
-                                <td>${txn.amount.toFixed(2)}</td>
-                                <td>{txn.description}</td>
-                                <td>{txn.date}</td>
-                                <td>{txn.time}</td>
-                                <td>{txn.bank}</td>
-                                <td>{txn.category || "Uncategorized"}</td>
-                            </tr>
-                        ))}
-                    </tbody>
+    {filteredTransactions.map((txn, index) => {
+        const categoryColor = categoryColors[txn.category] || categoryColors["Other"];
+
+        return (
+            <tr key={index}>
+                <td>{txn.id}</td>
+                <td>${txn.amount.toFixed(2)}</td>
+                <td>{txn.description}</td>
+                <td>{txn.date}</td>
+                <td>{txn.time}</td>
+                <td>{txn.bank}</td>
+                {/* Apply category color only to this column */}
+                <td 
+                    style={{
+                        backgroundColor: categoryColor,
+                        color: "#fff",
+                        padding: "5px 3px",
+                        textAlign: "center"
+                    }}
+                >
+                    {txn.category || "Uncategorized"}
+                </td>
+            </tr>
+        );
+    })}
+</tbody>
+
                 </table>
-            </div>
-            <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "20px" }}>
-                <label>
-                    Start Date:
-                    <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                </label>
-                <label>
-                    End Date:
-                    <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                </label>
             </div>
             <h2 style={{ textAlign: "center", fontSize: "1.9em", marginBottom: "30px" }}>Spending by Category</h2>
             <CategoryPieChart data={spendingByCategory} />
