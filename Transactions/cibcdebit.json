@@ -150,9 +150,7 @@
                 {"amount": 16.95, "description": "SERVICE CHARGE CAPPED MONTHLY FEES RECORD-KEEPING", "card_type" : "CIBC", "date": "2024-04-30", "time": null, "bank":"CIBC", "full_email": null, "category": "Services", "created_at": null},
                 {"amount": 500.00, "description": "E-Transfers 104974498783 Brahim rembourse 1000", "card_type" : "CIBC", "date": "2024-04-29", "time": null, "bank":"CIBC", "full_email": null, "category": "Miscellaneous", "created_at": null}
 
-
-    ]
-    ,
+    ],
     
     "mai":[
         {"amount": 3.21, "description": "VISA DEBIT RETAIL PURCHASE GOOGLE *Google 412317165753", "card_type": "Visa Debit", "date": "2024-05-02", "time": null, "bank":"CIBC", "full_email": null, "category": "Subscription", "created_at": null},
@@ -259,7 +257,6 @@
 {"amount": 3.49, "description": "RETAIL PURCHASE 000001972172 COUCHETARD #186", "card_type": "Visa Debit", "date": "2024-08-08", "time": null, "bank": "CIBC", "full_email": null, "category": "Convenience", "created_at": null},
 {"amount": 9.30, "description": "RETAIL PURCHASE 422107313269 MCDONALD'S #412", "card_type": "Visa Debit", "date": "2024-08-08", "time": null, "bank": "CIBC", "full_email": null, "category": "Fast Food", "created_at": null},
 {"amount": 6.91, "description": "INTL VISA DEB RETAIL PURCHASE EXTENSION MOBIL 422223517810", "card_type": "Visa Debit", "date": "2024-08-12", "time": null, "bank": "CIBC", "full_email": null, "category": "Services", "created_at": null},
-{"amount": 500.00, "description": "INTL VISA DEB RETAIL PURCHASE BET 365 422400528073", "card_type": "Visa Debit", "date": "2024-08-12", "time": null, "bank": "CIBC", "full_email": null, "category": "Entertainment", "created_at": null},
 {"amount": 10.80, "description": "RETAIL PURCHASE 422409266669 MCDONALD'S #412", "card_type": "Visa Debit", "date": "2024-08-12", "time": null, "bank": "CIBC", "full_email": null, "category": "Fast Food", "created_at": null},
 {"amount": 7.04, "description": "RETAIL PURCHASE 000001001010 DEPANNEUR HARRY", "card_type": "Visa Debit", "date": "2024-08-12", "time": null, "bank": "CIBC", "full_email": null, "category": "Convenience", "created_at": null},
 {"amount": 9.01, "description": "RETAIL PURCHASE 001001001829 MAXI #8634", "card_type": "Visa Debit", "date": "2024-08-15", "time": null, "bank": "CIBC", "full_email": null, "category": "Groceries", "created_at": null},

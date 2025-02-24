@@ -27,6 +27,7 @@ const categoryColors = {
     "Vet": "#E981E1",
     "Telecommunications":"#11DFC7",
         "Transfer":"#F94AAA",
+        "Remove":"#000000",
     "Other": "#888888" // Default color for unlisted categories
 };
 const CustomTooltip = ({ active, payload }) => {

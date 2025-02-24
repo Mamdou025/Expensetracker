@@ -7,6 +7,8 @@ import MonthlySpendingPage from "./Monthlyspending";
 import CategorySpendingPage from "./CategorySpending";
 import TransactionsListPage from "./TransactionsListPage";
 import TransactionCategoryEditor from "./TransactionCategoryEditor";
+import TagDeletionPage from "./TagDeletionPage";
+import BudgetPlanner from "./Budgetplanner";
 
 function App() {
     return (
@@ -14,9 +16,13 @@ function App() {
             <TransactionCategoryEditor/>
             <CategorySpendingPage/>
             <MonthlySpendingPage/>
+            <BudgetPlanner/>
+
             <TagManagementPage/>
+            <TagDeletionPage/>
             <TagsPage/>
             <TagsSpendingPage/>
+
         </div>
     );
 }

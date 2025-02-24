@@ -1,0 +1,2945 @@
+[
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": null,
+      "debit": 1000,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                World Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": null,
+      "debit": 209.3,
+      "description": "Virement Interac à / Rose-May",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": null,
+      "debit": 166,
+      "description": "Paiement facture - AccèsD Internet / FAIRSTONE CREDIT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": 238.5,
+      "debit": null,
+      "description": "Virement-remboursement / à PR 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": 440.75,
+      "debit": null,
+      "description": "Virement-remboursement / à MC 2",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-02",
+      "credit": 290.76,
+      "debit": null,
+      "description": "Dépôt direct / Allocation famille - QC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-02",
+      "credit": null,
+      "debit": 18.08,
+      "description": "Paiement / DESJARDINS FIN. SECUR. PASMC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-02",
+      "credit": null,
+      "debit": 32.7,
+      "description": "Assurance / DESJARDINS ASS. GENERALES",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-05",
+      "credit": null,
+      "debit": 39.49,
+      "description": "Achat / WENDY'S RESTUARANTS",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-05",
+      "credit": null,
+      "debit": 79.34,
+      "description": "Achat / KAZOKU SUSHI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-05",
+      "credit": null,
+      "debit": 100,
+      "description": "Virement Interac à / koho joint",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-08",
+      "credit": null,
+      "debit": 30.98,
+      "description": "Achat / Concept TOM Mon",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-08",
+      "credit": null,
+      "debit": 60.07,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-08",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-08",
+      "credit": 49.36,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-10",
+      "credit": null,
+      "debit": 146.47,
+      "description": "Paiement / BENEVA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-10",
+      "credit": 146.47,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-11",
+      "credit": null,
+      "debit": 9.37,
+      "description": "Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-11",
+      "credit": null,
+      "debit": 2.58,
+      "description": "Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-11",
+      "credit": null,
+      "debit": 19.83,
+      "description": "Achat / LE WOK",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-11",
+      "credit": 31.78,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-12",
+      "credit": null,
+      "debit": 23.35,
+      "description": "Achat / BARISTELLO OUTR",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-12",
+      "credit": 23.35,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-15",
+      "credit": 2130.96,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-15",
+      "credit": null,
+      "debit": 1547.1,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                World Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-16",
+      "credit": null,
+      "debit": 50,
+      "description": "Achat / CENTRE DE SERVI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-17",
+      "credit": null,
+      "debit": 41.19,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-17",
+      "credit": null,
+      "debit": 4.59,
+      "description": "Paiement / PAYPAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-17",
+      "credit": null,
+      "debit": 63.3,
+      "description": "Achat / LA PIZZERIA ALL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-19",
+      "credit": 187.03,
+      "debit": null,
+      "description": "Allocation Canadienne pour enfants / CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-19",
+      "credit": null,
+      "debit": 132.79,
+      "description": "Achat / TRAN ONGLES",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-22",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-25",
+      "credit": null,
+      "debit": 52.8,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-26",
+      "credit": null,
+      "debit": 39.79,
+      "description": "Achat / COQ-O-BEC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": null,
+      "debit": 170,
+      "description": "Virement Interac à / koho",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": null,
+      "debit": 60,
+      "description": "Virement Interac à / brunch box",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": 60,
+      "debit": null,
+      "description": "Annulation - Virement Interac à / NDIAYE SAPHIE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": null,
+      "debit": 57.84,
+      "description": "Paiement / AFFIRM CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": null,
+      "debit": 166,
+      "description": "Paiement facture - AccèsD Internet / FAIRSTONE CREDIT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": 213.7,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-30",
+      "credit": null,
+      "debit": 48.45,
+      "description": "Achat / MCDONALD'S #412",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-30",
+      "credit": 48.45,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-31",
+      "credit": 2130.98,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-31",
+      "credit": null,
+      "debit": 83.66,
+      "description": "Achat / WALMART STORE #",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-31",
+      "credit": null,
+      "debit": 125.61,
+      "description": "Achat / REGAL NAILS",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-31",
+      "credit": 0.02,
+      "debit": null,
+      "description": "Intérêt sur EOP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": null,
+      "debit": 440.75,
+      "description": "Remboursement automatique / de EOP: 440.75 $",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-08",
+      "credit": null,
+      "debit": 49.36,
+      "description": "Avance au compte EOP",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-10",
+      "credit": null,
+      "debit": 146.47,
+      "description": "Avance au compte EOP",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-11",
+      "credit": null,
+      "debit": 31.78,
+      "description": "Avance au compte EOP",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-12",
+      "credit": null,
+      "debit": 23.35,
+      "description": "Avance au compte EOP",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-29",
+      "credit": null,
+      "debit": 213.7,
+      "description": "Avance au compte EOP",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-30",
+      "credit": null,
+      "debit": 48.45,
+      "description": "Avance au compte EOP",
+      "reference": "MC 2"
+    },
+    {
+      "StatementDate": "du 1er juillet au 31 juillet 2024",
+      "Received": "2025-02-23T18:30:23.045991+00:00",
+      "date": "2025-07-01",
+      "credit": 238.5,
+      "debit": null,
+      "description": "Remboursement automatique / de EOP: 238.50 $",
+      "reference": "PR 1"
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "1 AOU",
+      "credit": null,
+      "debit": 200,
+      "description": "Virement - AccèsD Internet / à ET 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "1 AOU",
+      "credit": null,
+      "debit": 32.7,
+      "description": "Assurance / DESJARDINS ASS. GENERALES",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "1 AOU",
+      "credit": 238.5,
+      "debit": null,
+      "description": "Virement-remboursement / à PR 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "1 AOU",
+      "credit": 472.84,
+      "debit": null,
+      "description": "Virement-remboursement / à MC 2",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "2 AOU",
+      "credit": null,
+      "debit": 200.2,
+      "description": "Virement Interac à / Rose-May      /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "2 AOU",
+      "credit": null,
+      "debit": 18.08,
+      "description": "Paiement / DESJARDINS FIN. SECUR. PASMC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "2 AOU",
+      "credit": null,
+      "debit": 60.71,
+      "description": "Achat / MUSTANG SALLY'S",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "5 AOU",
+      "credit": null,
+      "debit": 15.76,
+      "description": "Achat / CALYPSO PARK",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "5 AOU",
+      "credit": null,
+      "debit": 65,
+      "description": "Virement Interac à / brunch box /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "5 AOU",
+      "credit": null,
+      "debit": 50,
+      "description": "Virement Interac à / Husband     /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "5 AOU",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "6 AOU",
+      "credit": null,
+      "debit": 40.24,
+      "description": "Achat / ROGERS 5265",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "6 AOU",
+      "credit": null,
+      "debit": 13.21,
+      "description": "Achat / MANGO BICHE MIA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "7 AOU",
+      "credit": null,
+      "debit": 80,
+      "description": "Virement Interac à / koho joint /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "8 AOU",
+      "credit": 556,
+      "debit": null,
+      "description": "Dépôt direct / SUN LIFE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "8 AOU",
+      "credit": null,
+      "debit": 556,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash BackWorld Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "8 AOU",
+      "credit": null,
+      "debit": 200,
+      "description": "Virement - AccèsD Internet / de ET 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "8 AOU",
+      "credit": null,
+      "debit": 30,
+      "description": "Virement Interac à / Sokhna     /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "9 AOU",
+      "credit": null,
+      "debit": 18.99,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "12 AOU",
+      "credit": null,
+      "debit": 146.47,
+      "description": "Paiement / BENEVA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "13 AOU",
+      "credit": null,
+      "debit": 23.24,
+      "description": "Achat / TABAGIE DU MOUL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "15 AOU",
+      "credit": 2130.96,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "15 AOU",
+      "credit": null,
+      "debit": 1500,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash BackWorld Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "15 AOU",
+      "credit": null,
+      "debit": 45.25,
+      "description": "Achat / STM LOGE CARTIE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "15 AOU",
+      "credit": null,
+      "debit": 8.05,
+      "description": "Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "15 AOU",
+      "credit": null,
+      "debit": 17.47,
+      "description": "Achat / LE WOK",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "16 AOU",
+      "credit": null,
+      "debit": 27.52,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "16 AOU",
+      "credit": null,
+      "debit": 35.28,
+      "description": "Achat / PETINOS",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "16 AOU",
+      "credit": null,
+      "debit": 45.99,
+      "description": "Achat / KIDS FOOT LOCKE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "16 AOU",
+      "credit": null,
+      "debit": 12.56,
+      "description": "Achat / TIM HORTONS #36",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "16 AOU",
+      "credit": 1000,
+      "debit": null,
+      "description": "Virement Interac de / SAPHIETOUNDIAY/",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "16 AOU",
+      "credit": null,
+      "debit": 1000,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash BackWorld Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "19 AOU",
+      "credit": null,
+      "debit": 6.85,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "19 AOU",
+      "credit": null,
+      "debit": 84.21,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "19 AOU",
+      "credit": null,
+      "debit": 50,
+      "description": "Achat / CENTRE DE SERVICE LEVE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "19 AOU",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "19 AOU",
+      "credit": null,
+      "debit": 4.59,
+      "description": "Paiement / PAYPAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "20 AOU",
+      "credit": 187.03,
+      "debit": null,
+      "description": "Allocation Canadienne pour enfants / CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "22 AOU",
+      "credit": null,
+      "debit": 27.37,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "26 AOU",
+      "credit": null,
+      "debit": 11.96,
+      "description": "Achat / DEPANNEUR HARRY",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "26 AOU",
+      "credit": null,
+      "debit": 50,
+      "description": "Virement Interac à / Husband    /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "27 AOU",
+      "credit": null,
+      "debit": 6.31,
+      "description": "Achat / LOT PIZZERIA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "27 AOU",
+      "credit": null,
+      "debit": 11.65,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "29 AOU",
+      "credit": null,
+      "debit": 13.57,
+      "description": "Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "29 AOU",
+      "credit": null,
+      "debit": 16.96,
+      "description": "Achat / LE WOK",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "29 AOU",
+      "credit": null,
+      "debit": 57.84,
+      "description": "Paiement / AFFIRM CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "29 AOU",
+      "credit": null,
+      "debit": 43.47,
+      "description": "Achat / EPICERIE AFRICA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "29 AOU",
+      "credit": null,
+      "debit": 36.51,
+      "description": "Achat / MCDONALD'S #412",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "29 AOU",
+      "credit": null,
+      "debit": 166,
+      "description": "Paiement facture - AccèsD Internet / FAIRSTONE CREDIT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "30 AOU",
+      "credit": 2130.98,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "30 AOU",
+      "credit": null,
+      "debit": 27.74,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "30 AOU",
+      "credit": null,
+      "debit": 50,
+      "description": "Achat / CENTRE DE SERVICE LEVE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "30 AOU",
+      "credit": null,
+      "debit": 23.37,
+      "description": "Achat / SQ *CREPINOS (C",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er août au 31 août 2024",
+      "Received": "2025-02-23T18:30:23.822550+00:00",
+      "date": "30 AOU",
+      "credit": 0.03,
+      "debit": null,
+      "description": "Intérêt sur EOP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 1000,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                World Mas",
+      "reference": "PWW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 235.62,
+      "description": "Achat / MARSHALLS 753",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 33.05,
+      "description": "Achat / ROASTERS BBQ GR",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 299.32,
+      "description": "Paiement facture - AccèsD Internet / Immatriculation",
+      "reference": "PWW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 191.1,
+      "description": "Virement Interac à / Rose-May     /",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 18.08,
+      "description": "Paiement / DESJARDINS FIN. SECUR. PASMC",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 32.7,
+      "description": "Assurance / DESJARDINS ASS. GENERALES",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 238.5,
+      "description": "Virement-remboursement / à PR 1",
+      "reference": "VAP"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": null,
+      "debit": 473.02,
+      "description": "Virement-remboursement / à MC 2",
+      "reference": "VAP"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-02",
+      "credit": 329.7,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": "DCV"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-03",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-03",
+      "credit": 191.1,
+      "debit": null,
+      "description": "Annulation - Virement Interac à / NDIAYE SAPHIE/",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-03",
+      "credit": null,
+      "debit": 192,
+      "description": "Virement Interac à / Rose-May     /",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-03",
+      "credit": null,
+      "debit": 2.3,
+      "description": "Achat / DEPANNEUR ULTRA",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-03",
+      "credit": 149.49,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": "DCV"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-04",
+      "credit": null,
+      "debit": 188,
+      "description": "Virement Interac à / koho joint /",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-04",
+      "credit": null,
+      "debit": 4.5,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-04",
+      "credit": 192.5,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": "DCV"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-05",
+      "credit": 577,
+      "debit": null,
+      "description": "Dépôt direct / SUN LIFE",
+      "reference": "DI"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-05",
+      "credit": null,
+      "debit": 58.33,
+      "description": "Achat / MAXI #8634",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-05",
+      "credit": null,
+      "debit": 14.61,
+      "description": "Achat / CREMERIE NANO I",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-06",
+      "credit": null,
+      "debit": 63.24,
+      "description": "Achat / FLEURISTE ST FR",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-09",
+      "credit": null,
+      "debit": 91.91,
+      "description": "Achat / WINNERS 401",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-10",
+      "credit": null,
+      "debit": 143.63,
+      "description": "Achat / MAXI #8634",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-10",
+      "credit": null,
+      "debit": 40.66,
+      "description": "Achat / JEAN COUTU 100",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-10",
+      "credit": null,
+      "debit": 146.47,
+      "description": "Paiement / BENEVA",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-11",
+      "credit": 2000,
+      "debit": null,
+      "description": "Virement Interac de / SAPHIETOUNDIAY/",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-11",
+      "credit": null,
+      "debit": 1500,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                World Mas",
+      "reference": "PWW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-12",
+      "credit": null,
+      "debit": 10.29,
+      "description": "Achat / CAFE DEPOT",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-12",
+      "credit": null,
+      "debit": 17.83,
+      "description": "Achat / LE WOK",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-12",
+      "credit": null,
+      "debit": 148.75,
+      "description": "Achat / PARTY EXPERT LA",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-12",
+      "credit": null,
+      "debit": 25.03,
+      "description": "Achat / WENDY'S RESTUAR",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-13",
+      "credit": 2130.97,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": "DI"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-13",
+      "credit": null,
+      "debit": 1000,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                World Mas",
+      "reference": "PWW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-13",
+      "credit": null,
+      "debit": 350,
+      "description": "Virement Interac à / Amina        /",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-13",
+      "credit": null,
+      "debit": 114,
+      "description": "Achat / CENTRE DE SERVI",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-13",
+      "credit": null,
+      "debit": 103.73,
+      "description": "Achat / MAXI #8634",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-16",
+      "credit": null,
+      "debit": 233.91,
+      "description": "Achat / PIZZERIA ALLO",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-16",
+      "credit": null,
+      "debit": 96.6,
+      "description": "Achat / SQ *SMITHAIRX",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-16",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-17",
+      "credit": null,
+      "debit": 16.94,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-17",
+      "credit": 1700,
+      "debit": null,
+      "description": "Virement Interac de / SAPHIETOUNDIAY/",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-17",
+      "credit": null,
+      "debit": 2088.13,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                 World Mas",
+      "reference": "PWW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-17",
+      "credit": null,
+      "debit": 4.59,
+      "description": "Paiement / PAYPAL",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-17",
+      "credit": 6.97,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": "DCV"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-18",
+      "credit": 150,
+      "debit": null,
+      "description": "Virement Interac de / SAPHIETOUNDIAY/",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-20",
+      "credit": 187.03,
+      "debit": null,
+      "description": "Allocation Canadienne pour enfants / CANADA",
+      "reference": "DI"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-20",
+      "credit": null,
+      "debit": 25.37,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-20",
+      "credit": null,
+      "debit": 53.21,
+      "description": "Achat / L'AVENUE LAVAL",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-23",
+      "credit": null,
+      "debit": 104.33,
+      "description": "Achat / DAVIDsTEA 300",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-25",
+      "credit": null,
+      "debit": 10.69,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-27",
+      "credit": 1886.84,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": "DI"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-27",
+      "credit": null,
+      "debit": 57.84,
+      "description": "Paiement / AFFIRM CANADA",
+      "reference": "RA"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 23.73,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 22.51,
+      "description": "Achat / MAXI #8634",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 45.56,
+      "description": "Achat / EPICERIE AFRICA",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 115,
+      "description": "Virement Interac à / acupuncture /",
+      "reference": "VMW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 119.15,
+      "description": "Achat / MAXI #8634",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 52.26,
+      "description": "Achat / JEAN COUTU 100",
+      "reference": "ACH"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": null,
+      "debit": 166,
+      "description": "Paiement facture - AccèsD Internet / FAIRSTONE CREDIT",
+      "reference": "PWW"
+    },
+    {
+      "StatementDate": "du 1er septembre au 30 septembre 2024",
+      "Received": "2025-02-23T18:30:24.077196+00:00",
+      "date": "2025-09-30",
+      "credit": 0.04,
+      "debit": null,
+      "description": "Intérêt sur EOP",
+      "reference": "INT"
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-01",
+      "credit": 290.76,
+      "debit": null,
+      "description": "Dépôt direct / Allocation famille - QC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-01",
+      "credit": null,
+      "debit": 32.7,
+      "description": "Assurance / DESJARDINS ASS. GENERALES",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-01",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-01",
+      "credit": null,
+      "debit": 50,
+      "description": "Achat / CENTRE DE SERVI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-01",
+      "credit": null,
+      "debit": 238.5,
+      "description": "Virement-remboursement / à PR 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-01",
+      "credit": null,
+      "debit": 432.3,
+      "description": "Virement-remboursement / à MC 2",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-02",
+      "credit": null,
+      "debit": 210,
+      "description": "Virement Interac à / Rose-May         /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-02",
+      "credit": null,
+      "debit": 90,
+      "description": "Achat / LASIK MD LAVAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-02",
+      "credit": null,
+      "debit": 7.26,
+      "description": "Achat / STARBUCKS COFFE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-02",
+      "credit": null,
+      "debit": 100,
+      "description": "Virement Interac à / Husband        /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-02",
+      "credit": null,
+      "debit": 18.08,
+      "description": "Paiement / DESJARDINS FIN. SECUR. PASMC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-04",
+      "credit": null,
+      "debit": 93,
+      "description": "Virement Interac à / Amina        /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-07",
+      "credit": null,
+      "debit": 23.93,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-07",
+      "credit": null,
+      "debit": 72.37,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-10",
+      "credit": null,
+      "debit": 155.1,
+      "description": "Paiement / BENEVA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-10",
+      "credit": null,
+      "debit": 5,
+      "description": "Achat / SQ *CENTRE MEDI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-15",
+      "credit": 2130.97,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-15",
+      "credit": null,
+      "debit": 1456,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                World Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-15",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-15",
+      "credit": null,
+      "debit": 50,
+      "description": "Achat / CENTRE DE SERVI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-15",
+      "credit": null,
+      "debit": 1.61,
+      "description": "Achat / TABAGIE DU MOUL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-16",
+      "credit": null,
+      "debit": 31.09,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-16",
+      "credit": null,
+      "debit": 7.29,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-16",
+      "credit": null,
+      "debit": 55,
+      "description": "Virement Interac à / ester car perf/",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-17",
+      "credit": null,
+      "debit": 6.79,
+      "description": "Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-17",
+      "credit": null,
+      "debit": 13.85,
+      "description": "Achat / RESTAURANT NOUR",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-17",
+      "credit": null,
+      "debit": 4.59,
+      "description": "Paiement / PAYPAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-18",
+      "credit": 187.03,
+      "debit": null,
+      "description": "Allocation Canadienne pour enfants / CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-18",
+      "credit": null,
+      "debit": 50,
+      "description": "Achat / OSMAN CLINIC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-18",
+      "credit": null,
+      "debit": 9.08,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-18",
+      "credit": null,
+      "debit": 2.25,
+      "description": "Achat préautorisé / NAYAX CANADA INC MASTE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-21",
+      "credit": null,
+      "debit": 2.25,
+      "description": "Achat préautorisé / NAYAX CANADA INC MASTE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-21",
+      "credit": null,
+      "debit": 1.6,
+      "description": "Achat préautorisé / NAYAX CANADA INC MASTE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-21",
+      "credit": null,
+      "debit": 1.25,
+      "description": "Achat préautorisé / NAYAX CANADA INC MASTE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-21",
+      "credit": null,
+      "debit": 46,
+      "description": "Virement Interac à / Husband        /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-22",
+      "credit": null,
+      "debit": 172,
+      "description": "Virement Interac à / cozy clean /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-22",
+      "credit": null,
+      "debit": 20,
+      "description": "Virement Interac à / Sokhna       /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-23",
+      "credit": null,
+      "debit": 12.97,
+      "description": "Achat / JEAN COUTU 100",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-23",
+      "credit": null,
+      "debit": 196.27,
+      "description": "Achat / JEAN COUTU 100",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-25",
+      "credit": 737.53,
+      "debit": null,
+      "description": "Remboursement de dépenses / PwC Management\n                 LP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-25",
+      "credit": null,
+      "debit": 30.35,
+      "description": "Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-28",
+      "credit": null,
+      "debit": 70,
+      "description": "Virement Interac à / Amina Qaacha /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-28",
+      "credit": 76.5,
+      "debit": null,
+      "description": "Dépôt direct / SUN LIFE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-28",
+      "credit": null,
+      "debit": 50,
+      "description": "Virement Interac à / Husband    /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-28",
+      "credit": null,
+      "debit": 442.79,
+      "description": "Paiement facture - AccèsD Internet / Desjardins Cash Back\n                 World Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-28",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-29",
+      "credit": null,
+      "debit": 57.84,
+      "description": "Paiement / AFFIRM CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-29",
+      "credit": null,
+      "debit": 166,
+      "description": "Paiement facture - AccèsD Internet / FAIRSTONE CREDIT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-29",
+      "credit": 72.93,
+      "debit": null,
+      "description": "Dépôt provenant de marge de crédit",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-31",
+      "credit": 1877.61,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-31",
+      "credit": null,
+      "debit": 16.96,
+      "description": "Achat / LE WOK",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-31",
+      "credit": null,
+      "debit": 39.11,
+      "description": "Achat / BOUCHERIE ST FR",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-31",
+      "credit": null,
+      "debit": 26.1,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er octobre au 31 octobre 2024",
+      "Received": "2025-02-23T18:30:24.628687+00:00",
+      "date": "2025-10-31",
+      "credit": 0.01,
+      "debit": null,
+      "description": "Intérêt sur EOP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": null,
+      "debit": 192,
+      "description": "VMW Virement Interac à / Rose-May     /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": null,
+      "debit": 32.7,
+      "description": "RA  Assurance / DESJARDINS ASS. GENERALES",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": null,
+      "debit": 74.47,
+      "description": "ACH Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": null,
+      "debit": 16.55,
+      "description": "ACH Achat / MCDONALD'S #412",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": null,
+      "debit": 10.98,
+      "description": "ACH Achat / EPICERIE AFRICA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": null,
+      "debit": 43.45,
+      "description": "ACH Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": 238.5,
+      "debit": null,
+      "description": "VAP Virement-remboursement / à PR 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-01",
+      "credit": 445.65,
+      "debit": null,
+      "description": "VAP Virement-remboursement / à MC 2",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-04",
+      "credit": null,
+      "debit": 19.13,
+      "description": "ACH Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-04",
+      "credit": null,
+      "debit": 150,
+      "description": "VMW Virement Interac à / koho joint /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-04",
+      "credit": null,
+      "debit": 185,
+      "description": "VMW Virement Interac à / Marie agathe /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-04",
+      "credit": null,
+      "debit": 18.08,
+      "description": "RA  Paiement / DESJARDINS FIN. SECUR. PASMC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-04",
+      "credit": null,
+      "debit": 74.25,
+      "description": "ACH Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-05",
+      "credit": 93.5,
+      "debit": null,
+      "description": "DI  Dépôt direct / SUN LIFE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-07",
+      "credit": null,
+      "debit": 3.32,
+      "description": "APA Achat préautorisé / COUCHETARD #102",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-07",
+      "credit": null,
+      "debit": 5.18,
+      "description": "ACH Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-11",
+      "credit": null,
+      "debit": 78.21,
+      "description": "ACH Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-12",
+      "credit": null,
+      "debit": 146.29,
+      "description": "RA  Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-12",
+      "credit": null,
+      "debit": 155,
+      "description": "RA  Paiement / BENEVA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-15",
+      "credit": 2698.05,
+      "debit": null,
+      "description": "DI  Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-15",
+      "credit": null,
+      "debit": 781.31,
+      "description": "PWW Paiement facture - AccèsD Internet / Desjardins Cash BackWorld Mas",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-15",
+      "credit": null,
+      "debit": 72.17,
+      "description": "ACH Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-19",
+      "credit": null,
+      "debit": 4.59,
+      "description": "RA  Paiement / PAYPAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-20",
+      "credit": 187.03,
+      "debit": null,
+      "description": "DI  Allocation Canadienne pour enfants / CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-20",
+      "credit": null,
+      "debit": 13.43,
+      "description": "ACH Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-21",
+      "credit": null,
+      "debit": 16.57,
+      "description": "ACH Achat / BOULANGERIE PAT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-22",
+      "credit": null,
+      "debit": 15.87,
+      "description": "ACH Achat / BOUCHERIE ST FR",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-25",
+      "credit": null,
+      "debit": 146.29,
+      "description": "RA  Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-25",
+      "credit": null,
+      "debit": 219,
+      "description": "VMW Virement Interac à / Husband     /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-26",
+      "credit": null,
+      "debit": 137.86,
+      "description": "ACH Achat / TRAVELODGE BY W",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-26",
+      "credit": null,
+      "debit": 2.86,
+      "description": "ACH Achat / CAFE VAN HOUTTE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": null,
+      "debit": 30,
+      "description": "ACH Achat / CENTRE DE SERVI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": null,
+      "debit": 8.32,
+      "description": "ACH Achat / COUCHETARD #1028",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": null,
+      "debit": 32,
+      "description": "VMW Virement Interac à / Marie agathe /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": null,
+      "debit": 6.79,
+      "description": "ACH Achat / CAFE DEPOT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": 4000,
+      "debit": null,
+      "description": "VMW Virement Interac de / SAPHIETOUNDIAY/",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": null,
+      "debit": 57.84,
+      "description": "RA  Paiement / AFFIRM CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-28",
+      "credit": null,
+      "debit": 4159.81,
+      "description": "ACH Achat / CHEVROLET BUICK GMC VA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": 2552.25,
+      "debit": null,
+      "description": "DI  Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 184,
+      "description": "VMW Retrait - Virement Interac à: / Me         /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 145,
+      "description": "VMW Retrait - Virement Interac à: / koho joint   /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 32.92,
+      "description": "ACH Achat / JEAN COUTU 100",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 183,
+      "description": "VMW Virement Interac à / Amina Qaacha /",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 166,
+      "description": "PWW Paiement facture - AccèsD Internet / FAIRSTONE CREDIT",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 383,
+      "description": "PWW Paiement facture - AccèsD Internet / Desjardins Cash BackWorl",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": null,
+      "debit": 500,
+      "description": "VPA Virement automatique / à ET 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er novembre au 30 novembre 2024",
+      "Received": "2025-02-23T18:30:25.112859+00:00",
+      "date": "2025-11-29",
+      "credit": 0.08,
+      "debit": null,
+      "description": "INT Intérêt sur EOP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-02",
+      "credit": null,
+      "debit": 18.08,
+      "description": "Paiement / DESJARDINS FIN. SECUR. PASMC",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-02",
+      "credit": null,
+      "debit": 32.7,
+      "description": "Assurance / DESJARDINS ASS. GENERALES",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-02",
+      "credit": null,
+      "debit": 200.2,
+      "description": "Virement Interac à / Rose-May",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-02",
+      "credit": null,
+      "debit": 238.5,
+      "description": "Virement-remboursement / à PR 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-02",
+      "credit": null,
+      "debit": 412.74,
+      "description": "Virement-remboursement / à MC 2",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-04",
+      "credit": null,
+      "debit": 22.98,
+      "description": "Paiement / PAYPAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-05",
+      "credit": null,
+      "debit": 7,
+      "description": "Achat / STM BONAVENTURE DIS101",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-06",
+      "credit": null,
+      "debit": 3.56,
+      "description": "Achat / MANGO BICHE MIA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-06",
+      "credit": null,
+      "debit": 52.89,
+      "description": "Achat / REGAL NAILS",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-09",
+      "credit": null,
+      "debit": 4.03,
+      "description": "Achat / DOLLARAMA #0956",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-09",
+      "credit": null,
+      "debit": 146.29,
+      "description": "Prêt / BANQUE DE MONTREAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-10",
+      "credit": null,
+      "debit": 155,
+      "description": "Paiement / BENEVA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": 2534.38,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": 187.03,
+      "debit": null,
+      "description": "Allocation Canadienne pour enfants / CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 184,
+      "description": "Retrait - Virement Interac à: / Me",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 145,
+      "description": "Retrait - Virement Interac à: / koho joint",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 12,
+      "description": "Achat / CENTRE DE SERVICE LEVE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 105.74,
+      "description": "Achat / #402 SPORTS EXP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 60.84,
+      "description": "Achat / LIBRAIRIE RENAU",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 45.94,
+      "description": "Achat / YVES ROCHER",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 68.99,
+      "description": "Achat / MAXI #8913",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 500,
+      "description": "Virement automatique / à ET 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-13",
+      "credit": null,
+      "debit": 14.71,
+      "description": "Achat / MCDONALD'S #8785 Q04",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-16",
+      "credit": null,
+      "debit": 13,
+      "description": "Achat / STM BONAVENTURE DIS101",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-16",
+      "credit": null,
+      "debit": 20,
+      "description": "Virement Interac à / uber dimitri",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-17",
+      "credit": null,
+      "debit": 4.59,
+      "description": "Paiement / PAYPAL",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-18",
+      "credit": null,
+      "debit": 79.34,
+      "description": "Achat / CANISPA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-19",
+      "credit": null,
+      "debit": 152.65,
+      "description": "Achat / Uniqlo Canada P",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-20",
+      "credit": null,
+      "debit": 16,
+      "description": "Achat / STARBUCKS COFFE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-20",
+      "credit": null,
+      "debit": 80.32,
+      "description": "Achat / WALMART STORE #",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-20",
+      "credit": null,
+      "debit": 102.99,
+      "description": "Retrait à un GA / TNS SMART NETWORK",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-20",
+      "credit": null,
+      "debit": 1.5,
+      "description": "Frais au GA Interac/Plus",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-20",
+      "credit": null,
+      "debit": 328.1,
+      "description": "Achat / WALMART STORE #3047",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 6.18,
+      "description": "Achat / TIM HORTONS #59",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 45.99,
+      "description": "Achat / REGAL NAILS",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 27.53,
+      "description": "Achat / WAL-MART #1032",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 120.86,
+      "description": "Achat / JEAN COUTU 100",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 15.26,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 29.97,
+      "description": "Achat / MAXI #8634",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 15.18,
+      "description": "Achat / RESTAURANT ALI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 24.13,
+      "description": "Achat / #402 SPORTS EXP",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 34.66,
+      "description": "Achat / YVES ROCHER",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 42.98,
+      "description": "Achat / AU COIN DU THE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": 4985.87,
+      "debit": null,
+      "description": "Dépôt au GA / CPD TERREBONNE",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-23",
+      "credit": null,
+      "debit": 35.42,
+      "description": "Achat / RESTAURANT ALI",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-24",
+      "credit": null,
+      "debit": 6.59,
+      "description": "Achat / MR. PRETZELS",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-26",
+      "credit": null,
+      "debit": 121,
+      "description": "Virement Interac à / Amina",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-27",
+      "credit": null,
+      "debit": 450,
+      "description": "Retrait - Virement Interac à: / Husband",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-27",
+      "credit": null,
+      "debit": 184,
+      "description": "Retrait - Virement Interac à: / Me",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-27",
+      "credit": null,
+      "debit": 145,
+      "description": "Retrait - Virement Interac à: / koho joint",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-27",
+      "credit": null,
+      "debit": 500,
+      "description": "Virement Interac à / Husband",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-27",
+      "credit": null,
+      "debit": 500,
+      "description": "Virement automatique / à ET 1",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-30",
+      "credit": null,
+      "debit": 800,
+      "description": "Virement Interac à / Husband",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-31",
+      "credit": 2552.25,
+      "debit": null,
+      "description": "Paie / PWC Management",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-31",
+      "credit": null,
+      "debit": 470,
+      "description": "Virement Interac à / Husband",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-31",
+      "credit": null,
+      "debit": 57.84,
+      "description": "Paiement / AFFIRM CANADA",
+      "reference": null
+    },
+    {
+      "StatementDate": "du 1er décembre au 31 décembre 2024",
+      "Received": "2025-02-23T18:30:25.607276+00:00",
+      "date": "2025-12-31",
+      "credit": 0.2,
+      "debit": null,
+      "description": "Intérêt sur EOP",
+      "reference": null
+    }
+  ]

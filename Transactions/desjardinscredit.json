@@ -1,0 +1,3350 @@
+[
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-14",
+      "debit": 1149,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-15",
+      "debit": 37300,
+      "description": "AIR CAN* 0144259354994                      AIRCANADA.COMMB",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-16",
+      "debit": 11699,
+      "description": "PLAZA PREMIUM LOUNGE                        HOUNSLOW",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-16",
+      "debit": 2303,
+      "description": "LONDON'S PRIDE                              HEATHROW TERM                          13,12 LIVRE STERLING                  TX: 1.755335",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": 624,
+      "date": "2024-01-16",
+      "debit": null,
+      "description": "AMZN Mktp CA                                WWW.AMAZON.CAON",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-24",
+      "debit": 51199,
+      "description": "WU *8508894556                              Toronto      ON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-24",
+      "debit": 7183,
+      "description": "RYANAIR0000000IQVEPR                        DUBLIN",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-26",
+      "debit": 2901,
+      "description": "BOLT.EU/O/2401261242                        Tallinn      ES                        19,20 EURO                            TX: 1.510937",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-27",
+      "debit": 1846,
+      "description": "BOLT.EU/O/2401270844                        Tallinn               ES                12,30 EURO                            TX: 1.500813",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-27",
+      "debit": 6754,
+      "description": "BOLT.EU/O/2401271050                        Tallinn               ES                45,00 EURO                            TX: 1.500888",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-27",
+      "debit": 1261,
+      "description": "BOLT.EU/O/2401271229                        Tallinn               ES                8,40 EURO                            TX: 1.501190",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-27",
+      "debit": 300,
+      "description": "NYA*Bologna Airport              Bologna          IT              2,00 EURO                    TX: 1.500000",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-28",
+      "debit": 705,
+      "description": "BOLT.EU/O/2401280432             Tallinn          ES              4,70 EURO                    TX: 1.500000",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-28",
+      "debit": 4296,
+      "description": "CREVALCORE SMK                   CREVALCORE                      28,62 EURO                      TX: 1.501048",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-28",
+      "debit": 1801,
+      "description": "MIAN HALAL KEBAB DI A.           CREVALCORE                      12,00 EURO                      TX: 1.500833",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-29",
+      "debit": 3032,
+      "description": "MERCATONE API                    CREVALCORE                      20,20 EURO                      TX: 1.500990",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-31",
+      "debit": 23675,
+      "description": "KARACHI KEBAB                    CREVALCORE                    158,50 EURO                     TX: 1.493690",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-01-31",
+      "debit": 6783,
+      "description": "CREVALCORE SMK                   CREVALCORE                      45,41 EURO                      TX: 1.493723",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-01",
+      "debit": 3390,
+      "description": "PRICEWATERHOUSECOOPERS           TORONTO          ON",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-02",
+      "debit": 1044,
+      "description": "SFPEM S913732S CREVALC           BOLOGNA                         7,00 EURO                    TX: 1.491428",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-02",
+      "debit": 3880,
+      "description": "BEIRUT SNACK CARRACCI            BOLOGNA                         26,00 EURO                      TX: 1.492307",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-02",
+      "debit": 4178,
+      "description": "SumUp   *Newmoda                 BOLOGNA          IT             28,00 EURO                      TX: 1.492142",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-02",
+      "debit": 1932,
+      "description": "KFC BOLOGNA STAZIONE             BOLOGNA                         12,95 EURO                      TX: 1.491891",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-02",
+      "debit": 1044,
+      "description": "BOLOGNA CENTRALE SELF            BOLOGNA                         7,00 EURO                    TX: 1.491428",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-03",
+      "debit": 448,
+      "description": "KARACHI KEBAB                    CREVALCORE                       3,00 EURO                    TX: 1.493333",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-03",
+      "debit": 3077,
+      "description": "MIAN HALAL KEBAB DI A.           CREVALCORE                      20,60 EURO                      TX: 1.493689",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-03",
+      "debit": 1180,
+      "description": "MERCATONE API                    CREVALCORE                      7,90 EURO                    TX: 1.493670",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-03",
+      "debit": 1036,
+      "description": "CREVALCORE SMK                   CREVALCORE                      6,94 EURO                    TX: 1.492795",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-04",
+      "debit": 1329,
+      "description": "JAMES BREAKFAST LUNCH            CREVALCORE                      8,90 EURO                    TX: 1.493258",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-05",
+      "debit": 7588,
+      "description": "CREVALCORE SMK                   CREVALCORE                      50,80 EURO                      TX: 1.493700",
+      "reference": "030"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-05",
+      "debit": 254,
+      "description": "CREVALCORE SMK                   CREVALCORE                       1,70 EURO                    TX: 1.494117",
+      "reference": "031"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-06",
+      "debit": 5960,
+      "description": "BREVEGLIERI MASSIMO              CARPI                           40,00 EURO                      TX: 1.490000",
+      "reference": "032"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-06",
+      "debit": 9074,
+      "description": "FARMACIA CREVALCORE              CREVALCORE                      60,90 EURO                      TX: 1.489983",
+      "reference": "033"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-06",
+      "debit": 1723,
+      "description": "SPOTIFY                          STOCKHOLM    AB",
+      "reference": "034"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-08",
+      "debit": 10199,
+      "description": "WU *                             800-235-0000 ON",
+      "reference": "035"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-08",
+      "debit": 432,
+      "description": "YE LEANDRO                       CREVALCORE                      2,90 EURO                    TX: 1.489655",
+      "reference": "036"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-09",
+      "debit": 506,
+      "description": "MIAN HALAL KEBAB DI A.           CREVALCORE                       3,40 EURO                    TX: 1.488235",
+      "reference": "037"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-09",
+      "debit": 372,
+      "description": "MIAN HALAL KEBAB DI A.           CREVALCORE                       2,50 EURO                    TX: 1.488000",
+      "reference": "038"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-10",
+      "debit": 21379,
+      "description": "FIDO Mobile ******9523           888-481-3436 ON",
+      "reference": "039"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-11",
+      "debit": 2413,
+      "description": "NETFLIX.COM                      866-716-0414 ON",
+      "reference": "040"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-11",
+      "debit": 7394,
+      "description": "MIAN HALAL KEBAB DI A.           CREVALCORE                     49,62 EURO                      TX: 1.490124",
+      "reference": "041"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-12",
+      "debit": 2334,
+      "description": "CREVALCORE SMK                   CREVALCORE                      15,66 EURO                      TX: 1.490421",
+      "reference": "042"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": 100000,
+      "date": "2024-01-17",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": 100000,
+      "date": "2024-01-31",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": 5000,
+      "date": "2024-02-01",
+      "debit": null,
+      "description": "CRÉDIT REMISES",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 02 Année 2024",
+      "Received": "2024-02-22T23:50:06.072826+00:00",
+      "credit": null,
+      "date": "2024-02-13",
+      "debit": 5165,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "14 09",
+      "debit": 91.99,
+      "description": "BOULANGERIE PATISSERIE                      Laval        QC",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "14 09",
+      "debit": 11.49,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "17 09",
+      "debit": 108,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "18 09",
+      "debit": 84.06,
+      "description": "MAXI #8634                                  LAVAL        QC",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "21 09",
+      "debit": 50,
+      "description": "CONCESSION A25 SEC                          514-766-8225 QC",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "21 09",
+      "debit": 26.22,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "23 09",
+      "debit": 26.01,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "24 09",
+      "debit": 108,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "28 09",
+      "debit": 75.25,
+      "description": "TICKETMASTER CANADA HO                      TORONTO      ON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-01-10",
+      "debit": 13.64,
+      "description": "DEVICE PROTECTION                           855-562-1955 BC",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-01-10",
+      "debit": 737.53,
+      "description": "BARREAU DU QUEBEC                           MONTREAL     QC",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-01-10",
+      "debit": 108,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-05-10",
+      "debit": 123.46,
+      "description": "RESTAURANT LUCILLE S                        BROSSARD     QC",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-06-10",
+      "debit": 17.23,
+      "description": "SPOTIFY                                     STOCKHOLM    AB",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-08-10",
+      "debit": 108,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-11-10",
+      "debit": 185.78,
+      "description": "FIDO Mobile ******9523                      888-481-3436 ON",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": null,
+      "date": "2024-11-10",
+      "debit": 24.13,
+      "description": "NETFLIX.COM                         VANCOUVER      BC",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 10 Année 2024",
+      "Received": "2024-02-22T23:50:06.578644+00:00",
+      "credit": 2088.13,
+      "date": "17 09",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": 25200,
+      "date": "2024-05-15",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": 20000,
+      "date": "2024-05-21",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": 50000,
+      "date": "2024-05-27",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": 50000,
+      "date": "2024-06-03",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": 100000,
+      "date": "2024-06-04",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-14",
+      "debit": 1149,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-17",
+      "debit": 13200,
+      "description": "SQ *SENSIA MASSAGE                          BEACONSFIELD QC",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-20",
+      "debit": 8253,
+      "description": "TST* LE PAIN QUOTIDIEN                      NEW YORK     NY",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-20",
+      "debit": 1325,
+      "description": "FORT LEE FOODMART                           FORT LEE              NJ",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-20",
+      "debit": 1581,
+      "description": "100 MARKETPLACE                             NEW YORK              NY",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-23",
+      "debit": 3878,
+      "description": "Amazon.ca*4C2144KU3                         AMAZON.CA    ON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-23",
+      "debit": 7012,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-26",
+      "debit": 9179,
+      "description": "UBER* EATS                                  TORONTO      ON",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-26",
+      "debit": 4780,
+      "description": "AMAZON* 702-8536286-45                      DOWNTOWN TOROON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-27",
+      "debit": 6603,
+      "description": "SHEIN.COM                                   Toronto      ON",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-05-30",
+      "debit": 10800,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-01",
+      "debit": 4023,
+      "description": "AMZN Mktp CA*TL0X16LS3                      WWW.AMAZON.CAON",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-01",
+      "debit": 6894,
+      "description": "AMZN Mktp CA*7C3AS24H3                      WWW.AMAZON.CAON",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-02",
+      "debit": 2705,
+      "description": "AMZN Mktp CA*ZW93C3IO3              WWW.AMAZON.CAON",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-02",
+      "debit": 14947,
+      "description": "SP MANMADEBRAND.COM                 MONTREAL     QC",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-03",
+      "debit": 3967,
+      "description": "UBER* EATS                          TORONTO      ON",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-04",
+      "debit": 1838,
+      "description": "AMZN Mktp CA*736J26GH3              WWW.AMAZON.CAON",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-06",
+      "debit": 1723,
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-07",
+      "debit": 8640,
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-10",
+      "debit": 13444,
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-11",
+      "debit": 10800,
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-11",
+      "debit": 2413,
+      "description": "NETFLIX.COM                         VANCOUVER    BC",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 06 Année 2024",
+      "Received": "2024-02-22T23:50:07.077931+00:00",
+      "credit": null,
+      "date": "2024-06-13",
+      "debit": 7772,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-12",
+      "debit": 42.26,
+      "description": "UBER* EATS                                  TORONTO      ON",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-13",
+      "debit": 25.5,
+      "description": "ADONIS 21944 LAVAL EST                      LAVAL        QC",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-14",
+      "debit": 11.49,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-14",
+      "debit": 23.02,
+      "description": "TIM HORTONS #1860                           LAVAL        QC",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-14",
+      "debit": 35.88,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-16",
+      "debit": 85.02,
+      "description": "MAXI #8634                                  LAVAL        QC",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-18",
+      "debit": 36.74,
+      "description": "AMZN Mktp CA*GZ1BU7IK3                      WWW.AMAZON.CAON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-18",
+      "debit": 81.68,
+      "description": "AMZN Mktp CA*884X04DS3                      WWW.AMAZON.CAON",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-19",
+      "debit": 26.74,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-22",
+      "debit": 30,
+      "description": "CENTRE DE SERVICE LEVE                      LAVAL        QC",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-22",
+      "debit": 21.5,
+      "description": "MAXI #8634                                  LAVAL        QC",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-23",
+      "debit": 52.1,
+      "description": "Amazon.ca*Y79X21B03                         AMAZON.CA    ON",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-23",
+      "debit": 52.89,
+      "description": "SEPHORA.CA                                  SEPHORA.CA   QC",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-23",
+      "debit": 38.72,
+      "description": "Amazon.ca*5M7R69NE3                         AMAZON.CA    ON",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-24",
+      "debit": 21.85,
+      "description": "SEPHORA.CA                                  SEPHORA.CA   QC",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-28",
+      "debit": 260.19,
+      "description": "SUPER C LAVAL CONCORDE                      LAVAL        QC",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-28",
+      "debit": 30,
+      "description": "SQ *SMITHAIRX                       MONTREAL     QC",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-04-30",
+      "debit": 50,
+      "description": "CONCESSION A25 SEC                  514-766-8225 QC",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-01",
+      "debit": 25.27,
+      "description": "AMZN Mktp CA*JK5TI4KX3              WWW.AMAZON.CAON",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-01",
+      "debit": 19.53,
+      "description": "AMZN Mktp CA*A14093NW3              WWW.AMAZON.CAON",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-01",
+      "debit": 9.08,
+      "description": "AMZN Mktp CA*6I5OO90A3              WWW.AMAZON.CAON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-04",
+      "debit": 94.38,
+      "description": "SUPER C LAVAL CONCORDE              LAVAL        QC",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-04",
+      "debit": 5.74,
+      "description": "COUCHETARD #186                     LAVAL        QC",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-06",
+      "debit": 17.23,
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-09",
+      "debit": 4.13,
+      "description": "CREMERIE BANANE ROYALE              LAVAL        QC",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-09",
+      "debit": 35.47,
+      "description": "MAXI #8634                          LAVAL        QC",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-09",
+      "debit": 31.04,
+      "description": "DOLLARAMA # 65                      LAVAL        QC",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-10",
+      "debit": 11.5,
+      "description": "BOULANGERIE PATISSERIE              Laval        QC",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-10",
+      "debit": 50,
+      "description": "CENTRE DE SERVICE LEVE              LAVAL        QC",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-10",
+      "debit": 20.68,
+      "description": "JEAN COUTU 100                      LAVAL        QC",
+      "reference": "030"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-11",
+      "debit": 93.04,
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "reference": "031"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-11",
+      "debit": 24.13,
+      "description": "NETFLIX.COM                         866-716-0414 ON",
+      "reference": "032"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-11",
+      "debit": 72.02,
+      "description": "UBER CANADA/UBEREATS                TORONTO      ON",
+      "reference": "033"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-12",
+      "debit": 38.27,
+      "description": "MAXI #8634                          LAVAL        QC",
+      "reference": "034"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-12",
+      "debit": 45.98,
+      "description": "FLEURISTE ST FRANCOIS               LAVAL        QC",
+      "reference": "035"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": 222,
+      "date": "2024-04-23",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": 300,
+      "date": "2024-04-29",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": 200,
+      "date": "2024-05-08",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": 300,
+      "date": "2024-05-13",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 05 Année 2024",
+      "Received": "2024-02-22T23:50:07.600696+00:00",
+      "credit": null,
+      "date": "2024-05-13",
+      "debit": 89.87,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": 70000,
+      "date": "2024-02-14",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": 40000,
+      "date": "2024-02-21",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": 100000,
+      "date": "2024-02-28",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": 50000,
+      "date": "2024-02-28",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": 5000,
+      "date": "2024-03-05",
+      "debit": null,
+      "description": "CRÉDIT REMISES",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-13",
+      "debit": 5884,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-14",
+      "debit": 1149,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-14",
+      "debit": 2076,
+      "description": "CREVALCORE SMK                              CREVALCORE                           13,92 EURO                            TX: 1.491379",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-14",
+      "debit": 1715,
+      "description": "GELATERIA K2                                CREVALCORE                           11,50 EURO                            TX: 1.491304",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-15",
+      "debit": 1395,
+      "description": "CREVALCORE SMK                              CREVALCORE                           9,35 EURO                            TX: 1.491978",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-15",
+      "debit": 1163,
+      "description": "MIAN HALAL KEBAB DI A.                      CREVALCORE                           7,80 EURO                            TX: 1.491025",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-17",
+      "debit": 5000,
+      "description": "CONCESSION A25 SEC                          514-766-8225 QC",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-17",
+      "debit": 223,
+      "description": "BAR ARCOBALENO                              CREVALCORE   BO                       1,50 EURO                            TX: 1.486666",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-18",
+      "debit": 11934,
+      "description": "CC BERS 13828                               CASALECCHIO D                      80,12 EURO                            TX: 1.489515",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-19",
+      "debit": 8930,
+      "description": "CREVALCORE SMK                              CREVALCORE                           59,95 EURO                            TX: 1.489574",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-19",
+      "debit": 372,
+      "description": "MIAN HALAL KEBAB DI A.            CREVALCORE                      2,50 EURO                     TX: 1.488000",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-21",
+      "debit": 2251,
+      "description": "00095 - BOLOGNA LAME              BOLOGNA                        14,99 EURO                     TX: 1.501667",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-22",
+      "debit": 4878,
+      "description": "CREVALCORE SMK                    CREVALCORE                     32,53 EURO                     TX: 1.499538",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-22",
+      "debit": 375,
+      "description": "MIAN HALAL KEBAB DI A.            CREVALCORE                      2,50 EURO                     TX: 1.500000",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-02-26",
+      "debit": 27817,
+      "description": "KARACHI KEBAB                     CREVALCORE                   185,50 EURO                    TX: 1.499568",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "29 02",
+      "debit": 51850,
+      "description": "KLM      0742109236284            MONTREAL        QC",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "29 02",
+      "debit": 2200,
+      "description": "KLM      0742109236285            MONTREAL        QC",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "29 02",
+      "debit": 7519,
+      "description": "CREVALCORE SMK                    CREVALCORE                    49,84 EURO                     TX: 1.508627",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-01",
+      "debit": 3390,
+      "description": "PRICEWATERHOUSECOOPERS            TORONTO      ON",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-02",
+      "debit": 19745,
+      "description": "ANGEL MERCATONE SEI SR            SAN GIOVANNI BO              130,98 EURO                    TX: 1.507482",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-03",
+      "debit": 1522,
+      "description": "MIAN HALAL KEBAB DI A.            CREVALCORE                     10,10 EURO                     TX: 1.506930",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-04",
+      "debit": 52919,
+      "description": "WU *3033481997                    Toronto      ON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-06",
+      "debit": 1723,
+      "description": "SPOTIFY                           STOCKHOLM    AB",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-06",
+      "debit": 7774,
+      "description": "WU *3979060032                    Toronto      ON",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-07",
+      "debit": 40529,
+      "description": "VERSET PARFUMS ITALY              10121 TORINO IT              267,47 EURO                    TX: 1.515272",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-07",
+      "debit": 3603,
+      "description": "CREVALCORE SMK                    CREVALCORE                     23,78 EURO                     TX: 1.515138",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-08",
+      "debit": 12925,
+      "description": "CROZZOLETTO SIMONA                CREVALCORE                   85,50 EURO                     TX: 1.511695",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-10",
+      "debit": 4234,
+      "description": "MIAN HALAL KEBAB DI A.            CREVALCORE                     28,00 EURO                     TX: 1.512142",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-10",
+      "debit": 756,
+      "description": "MIAN HALAL KEBAB DI A.            CREVALCORE                      5,00 EURO                     TX: 1.512000",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-11",
+      "debit": 6758,
+      "description": "SHEIN.COM                         DUBLIN          DU             44,64 EURO                     TX: 1.513888",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-11",
+      "debit": 2413,
+      "description": "NETFLIX.COM                       Vancover        BC",
+      "reference": "030"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-11",
+      "debit": 394,
+      "description": "YE LEANDRO                        CREVALCORE                      2,60 EURO                     TX: 1.515384",
+      "reference": "031"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-11",
+      "debit": 13414,
+      "description": "CREVALCORE SMK                    CREVALCORE                   88,70 EURO                     TX: 1.512288",
+      "reference": "032"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 03 Année 2024",
+      "Received": "2024-02-22T23:50:08.114388+00:00",
+      "credit": null,
+      "date": "2024-03-12",
+      "debit": 17929,
+      "description": "FIDO Mobile ******9523            888-481-3436 ON",
+      "reference": "033"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-12",
+      "credit": null,
+      "debit": 91.97,
+      "description": "WINNERS 401                                 LAVAL        QC",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-12",
+      "credit": null,
+      "debit": 136.78,
+      "description": "THEBAY.COM #1963                            TORONTO      ON",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-12",
+      "credit": null,
+      "debit": 145.44,
+      "description": "REGAL NAILS                                 LAVAL        QC",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-12",
+      "credit": null,
+      "debit": 120.9,
+      "description": "WAL-MART #1032                              LAVAL        QC",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-14",
+      "credit": null,
+      "debit": 11.49,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-15",
+      "credit": null,
+      "debit": 99.82,
+      "description": "AMZN Mktp CA*1Q2KR3XR3                      WWW.AMAZON.CAON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-15",
+      "credit": null,
+      "debit": 109.84,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-17",
+      "credit": null,
+      "debit": 44.32,
+      "description": "Amazon.ca*2U6ZX68J3                         AMAZON.CA    ON",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-18",
+      "credit": null,
+      "debit": 54.82,
+      "description": "Amazon.ca*555HQ3A43                         AMAZON.CA    ON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-19",
+      "credit": null,
+      "debit": 1.25,
+      "description": "NAYAX CANADA INC MASTE                      FREDERICTON NB",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-19",
+      "credit": null,
+      "debit": 52.27,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-20",
+      "credit": null,
+      "debit": 77,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-22",
+      "credit": null,
+      "debit": 118.09,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-24",
+      "credit": null,
+      "debit": 38.97,
+      "description": "EPICERIE AFRICAINE LE                       LAVAL        QC",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-25",
+      "credit": null,
+      "debit": 67.65,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-26",
+      "credit": null,
+      "debit": 75.68,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-27",
+      "credit": null,
+      "debit": 50,
+      "description": "CONCESSION A25 SEC                  514-766-8225 QC",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-29",
+      "credit": null,
+      "debit": 106.22,
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-30",
+      "credit": null,
+      "debit": 40.15,
+      "description": "UBER CANADA/UBEREATS                TORONTO      ON",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-31",
+      "credit": null,
+      "debit": 50,
+      "description": "CENTRE DE SERVICE LEVE              LAVAL        QC",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-31",
+      "credit": null,
+      "debit": 501.99,
+      "description": "WU *                                800-235-0000 ON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-04",
+      "credit": null,
+      "debit": 12.58,
+      "description": "Amazon.ca*9Z3UD7NW3                 AMAZON.CA    ON",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-04",
+      "credit": null,
+      "debit": 26.99,
+      "description": "AMZN Mktp CA*9773Z8AL3              WWW.AMAZON.CAON",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-04",
+      "credit": null,
+      "debit": 13.64,
+      "description": "DEVICE PROTECTION                   855-562-1955 BC",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-05",
+      "credit": null,
+      "debit": 103.46,
+      "description": "SP AUBAINERIE                       MONTREAL     QC",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-05",
+      "credit": null,
+      "debit": 118.09,
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-06",
+      "credit": null,
+      "debit": 111.53,
+      "description": "SEPHORA.CA                          SEPHORA.CA   QC",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-06",
+      "credit": null,
+      "debit": 17.23,
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-10",
+      "credit": null,
+      "debit": 33.33,
+      "description": "AMZN Mktp CA*506VF24Y3              WWW.AMAZON.CAON",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-10",
+      "credit": null,
+      "debit": 62.08,
+      "description": "AMZN Mktp CA*V66M82Y63              WWW.AMAZON.CAON",
+      "reference": "030"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-10",
+      "credit": null,
+      "debit": 183.89,
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "reference": "031"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-11",
+      "credit": null,
+      "debit": 24.13,
+      "description": "NETFLIX.COM                         Vancover     BC",
+      "reference": "032"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-12",
+      "credit": null,
+      "debit": 80,
+      "description": "CENTRE DE SERVICE LEVE              LAVAL        QC",
+      "reference": "033"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-12",
+      "credit": null,
+      "debit": 106.22,
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "034"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-13",
+      "credit": null,
+      "debit": 5.18,
+      "description": "MTY TIKI MING ENTERPRI              MONTREAL     QC",
+      "reference": "035"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-13",
+      "credit": null,
+      "debit": 30.28,
+      "description": "EPICERIE AFRICAINE LE               LAVAL        QC",
+      "reference": "036"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-13",
+      "credit": 103.46,
+      "debit": null,
+      "description": "AUBAINERIE LAVAL                    LAVAL        QC",
+      "reference": "037"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-11-14",
+      "credit": null,
+      "debit": 11.49,
+      "description": "Amazon.ca Prime Member              amazon.ca/priBC",
+      "reference": "038"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-15",
+      "credit": 1456,
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-16",
+      "credit": 50,
+      "debit": null,
+      "description": "CRÉDIT REMISES",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 14 Mois 11 Année 2024",
+      "Received": "2024-02-22T23:50:08.610281+00:00",
+      "date": "2024-10-28",
+      "credit": 442.79,
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "14\t06",
+      "debit": 7.73,
+      "description": "DEVICE PROTECTION\n844-834-5583 BC",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "14\t06",
+      "debit": 11.49,
+      "description": "Amazon.ca Prime Member\namazon.ca/priBC",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "15\t06",
+      "debit": 30,
+      "description": "SQ *SMITHAIRX\nMONTREAL\tQC",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "18\t06",
+      "debit": 86.4,
+      "description": "HALALMEALS.CA\nSCARBOROUGH ON",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "18\t06",
+      "debit": 108,
+      "description": "HALALMEALS.CA\nSCARBOROUGH ON",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "20\t06",
+      "debit": 83.47,
+      "description": "SEPHORA.CA\nSEPHORA.CA\tQC",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "23\t06",
+      "debit": 70.5,
+      "description": "AMZN Mktp CA*WM6PO3PQ3\nWWW.AMAZON.CAON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "23\t06",
+      "debit": 191.53,
+      "description": "AFFIRM CANADA\nVANCOUVER\tBC",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "25\t06",
+      "debit": 108,
+      "description": "HALALMEALS.CA\nSCARBOROUGH ON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": 108,
+      "date": "25\t06",
+      "debit": null,
+      "description": "HALALMEALS.CA\nSCARBOROUGH ON",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "27\t06",
+      "debit": 63.2,
+      "description": "Amazon.ca*RC5ZC26O0\nAMAZON.CA\tON",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "27\t06",
+      "debit": 51.36,
+      "description": "Amazon.ca*RC7X816W0\nAMAZON.CA\tON",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "27\t06",
+      "debit": 43.91,
+      "description": "UBER* EATS\nTORONTO\tON",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-01-07",
+      "debit": 50,
+      "description": "CONCESSION A25 SEC\n514-766-8225 QC",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-01-07",
+      "debit": 527.79,
+      "description": "WU *\n800-235-0000 ON",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-01-07",
+      "debit": 13.64,
+      "description": "DEVICE PROTECTION\n844-834-5583 BC",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-02-07",
+      "debit": 36.56,
+      "description": "Amazon.ca*R77045FY1\nAMAZON.CA\tON",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-02-07",
+      "debit": 108,
+      "description": "HALALMEALS.CA\nSCARBOROUGH ON",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-03-07",
+      "debit": 80.49,
+      "description": "SP PILGRIM.CA\nMONTREAL\tQC",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-06-07",
+      "debit": 17.23,
+      "description": "SPOTIFY\nSTOCKHOLM\tAB",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-09-07",
+      "debit": 108,
+      "description": "HALALMEALS.CA\nSCARBOROUGH ON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-10-07",
+      "debit": 66.51,
+      "description": "AMZN Mktp CA*RY3SH2TD1\nWWW.AMAZON.CAON",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-11-07",
+      "debit": 207.12,
+      "description": "FIDO Mobile ******9523\n888-481-3436 ON",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-11-07",
+      "debit": 24.13,
+      "description": "NETFLIX.COM\n866-716-0414 ON",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-11-07",
+      "debit": 40,
+      "description": "SQ *FONDATION TERRE EN\nMONTREAL\tQC",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-11-07",
+      "debit": 14.48,
+      "description": "DOLLARAMA # 65\nLAVAL\t\tQC",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-11-07",
+      "debit": 42,
+      "description": "STM BONAVENTURE DIS101\nMONTREAL\tQC",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-11-07",
+      "debit": 44.99,
+      "description": "AFROLECK\nMONTREAL\tQC",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-12-07",
+      "debit": 118.02,
+      "description": "WAL-MART #3047\nLAVAL\t\tQC",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-12-07",
+      "debit": 30.21,
+      "description": "ALLO MON COCO CENTROPO\nLAVAL\t\tQC",
+      "reference": "030"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-12-07",
+      "debit": 62.09,
+      "description": "LS PILGRIM JEWELLERY\nLAVAL\t\tQC",
+      "reference": "031"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-12-07",
+      "debit": 42.39,
+      "description": "BATH AND BODY WORKS #6\nLAVAL\t\tQC",
+      "reference": "032"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-12-07",
+      "debit": 88.11,
+      "description": "Uniqlo Canada\nToronto\tON",
+      "reference": "033"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": 500,
+      "date": "14\t06",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": 1000,
+      "date": "24\t06",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": 50,
+      "date": "26\t06",
+      "debit": null,
+      "description": "CRÉDIT REMISES",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": 1000,
+      "date": "2024-01-07",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 07 Année 2024",
+      "Received": "2024-02-22T23:50:09.142489+00:00",
+      "credit": null,
+      "date": "2024-12-07",
+      "debit": 49.94,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "13 03",
+      "debit": 1862,
+      "description": "LADUREE B84                                 LE MESNIL-AMEFR                      12,32 EURO                            TX: 1.511363",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "14 03",
+      "debit": 1149,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "20 03",
+      "debit": 5170,
+      "description": "AMZN Mktp CA*RH7D31GT2                      WWW.AMAZON.CAON",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "21 03",
+      "debit": 2203,
+      "description": "LE MAITRE BOUKAN INC                        LAVAL        QC",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "21 03",
+      "debit": 5770,
+      "description": "MAXI #8634                                  LAVAL        QC",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "21 03",
+      "debit": 12993,
+      "description": "AMZN Mktp CA*RA4IF0LZ0                      WWW.AMAZON.CAON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "21 03",
+      "debit": 12295,
+      "description": "AMZN Mktp CA*R63698W41                      WWW.AMAZON.CAON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "26 03",
+      "debit": 1817,
+      "description": "BOULANGERIE PATISSERIE                      Laval        QC",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "26 03",
+      "debit": 93,
+      "description": "TABAGIE DU MOULIN                           LAVAL        QC",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "27 03",
+      "debit": 44933,
+      "description": "JEAN COUTU 100                              LAVAL        QC",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "27 03",
+      "debit": 1791,
+      "description": "JEAN COUTU 100                              LAVAL        QC",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "29 03",
+      "debit": 2068,
+      "description": "JEAN COUTU 100                              LAVAL        QC",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "29 03",
+      "debit": 85905,
+      "description": "BARREAU DU QUEBEC-COTI                      MONTREAL     QC",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-01-04",
+      "debit": 3390,
+      "description": "PRICEWATERHOUSECOOPERS                      TORONTO      ON",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-02-04",
+      "debit": 5540,
+      "description": "AMZN Mktp CA*KC4GR0OZ3                      WWW.AMAZON.CAON",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-02-04",
+      "debit": 3488,
+      "description": "UBER CANADA/UBEREATS                TORONTO      ON",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-03-04",
+      "debit": 2870,
+      "description": "AMZN Mktp CA*ON7IE01J3              WWW.AMAZON.CAON",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-03-04",
+      "debit": 3677,
+      "description": "AMZN Mktp CA*VG6YC51P3              WWW.AMAZON.CAON",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-03-04",
+      "debit": 4230,
+      "description": "MARSHALLS 742                       SAINT LEONARDQC",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-03-04",
+      "debit": 5153,
+      "description": "ISTANBUL GUNES KEBAB                MONTREAL     QC",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-04-04",
+      "debit": 8523,
+      "description": "UBER CANADA/UBEREATS                TORONTO      ON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-06-04",
+      "debit": 3000,
+      "description": "CENTRE DE SERVICE LEVE              LAVAL        QC",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-06-04",
+      "debit": 1723,
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-06-04",
+      "debit": 3216,
+      "description": "BOUCHERIE ET GRILLADE               LAVAL        QC",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-07-04",
+      "debit": 8734,
+      "description": "HM Carrefour Laval                  Laval        QC",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-07-04",
+      "debit": 919,
+      "description": "HM Carrefour Laval                  Laval        QC",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-10-04",
+      "debit": 5000,
+      "description": "CONCESSION A25 SEC                  514-766-8225 QC",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-10-04",
+      "debit": 11029,
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-11-04",
+      "debit": 2413,
+      "description": "NETFLIX.COM                         VANCOUVER    BC",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": 100000,
+      "date": "14 03",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": 50000,
+      "date": "27 03",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": 85000,
+      "date": "29 03",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": 5000,
+      "date": "2024-11-04",
+      "debit": null,
+      "description": "CRÉDIT REMISES",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": 40000,
+      "date": "2024-11-04",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 11 Mois 04 Année 2024",
+      "Received": "2024-02-22T23:50:09.640592+00:00",
+      "credit": null,
+      "date": "2024-11-04",
+      "debit": 6879,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-12",
+      "description": "BOUCHERIE ET GRILLADE                       LAVAL        QC",
+      "credit": null,
+      "debit": 72.48
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-12",
+      "description": "BOUCHERIE ET GRILLADE                       LAVAL        QC",
+      "credit": null,
+      "debit": 2.5
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-13",
+      "description": "AGENCE DE MOBILITE DUR                      MONTREAL     QC",
+      "credit": null,
+      "debit": 12.82
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-14",
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "credit": null,
+      "debit": 11.49
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-16",
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "credit": null,
+      "debit": 108
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-19",
+      "description": "MCDONALD'S #40703                           LAVAL        QC",
+      "credit": null,
+      "debit": 32.28
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-23",
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "credit": null,
+      "debit": 108
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-23",
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "credit": null,
+      "debit": 32.19
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-27",
+      "description": "CONCESSION A25 SEC                          514-766-8225 QC",
+      "credit": null,
+      "debit": 50
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-30",
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "credit": null,
+      "debit": 108
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-01",
+      "description": "DEVICE PROTECTION                           844-834-5583 BC",
+      "credit": null,
+      "debit": 13.64
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-01",
+      "description": "Amazon.ca*RV49T8UI1                         AMAZON.CA    ON",
+      "credit": null,
+      "debit": 38.78
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-01",
+      "description": "EVENTBRITE/HALALRIBFES                      SAINT JOHN   NB",
+      "credit": null,
+      "debit": 20
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-02",
+      "description": "CALYPSO PARC INC                            LIMOGES      ON",
+      "credit": null,
+      "debit": 201.09
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-02",
+      "description": "EVENTBRITE/HALALRIBFES                      SAINT JOHN   NB",
+      "credit": null,
+      "debit": 10
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-04",
+      "description": "BOULANGERIE PATISSERIE                      Laval        QC",
+      "credit": null,
+      "debit": 33.86
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-06",
+      "description": "TIM HORTONS #6029                   LAVAL        QC",
+      "credit": null,
+      "debit": 23.87
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-06",
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "credit": null,
+      "debit": 108
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-06",
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "credit": null,
+      "debit": 17.23
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-07",
+      "description": "SP OUR PLACE - CANAD                MISSISSAUGA ON",
+      "credit": null,
+      "debit": 609.36
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-08",
+      "description": "CENTRE DE SANTE DENTAI              LAVAL        QC",
+      "credit": null,
+      "debit": 915
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-10",
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "credit": null,
+      "debit": 184.12
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-11",
+      "description": "NETFLIX.COM                         866-716-0414 ON",
+      "credit": null,
+      "debit": 24.13
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-12",
+      "description": "MAXI #8634                          LAVAL        QC",
+      "credit": null,
+      "debit": 172.15
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-12",
+      "description": "DOLLARAMA # 65                      LAVAL        QC",
+      "credit": null,
+      "debit": 5.75
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-13",
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "credit": null,
+      "debit": 108
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-07-15",
+      "description": "PAIEMENT CAISSE",
+      "credit": 1547.1,
+      "debit": null
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-08",
+      "description": "CRÉDIT REMISES",
+      "credit": 50,
+      "debit": null
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-08",
+      "description": "PAIEMENT CAISSE",
+      "credit": 556,
+      "debit": null
+    },
+    {
+      "StatementDate": "Jour 13 Mois 08 Année 2024",
+      "Received": "2024-02-22T23:50:10.189257+00:00",
+      "date": "2024-08-13",
+      "description": "FRAIS DE CRÉDIT",
+      "credit": null,
+      "debit": 58.67
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 8.87,
+      "date": "16 11",
+      "description": "AMZN Mktp CA                                WWW.AMAZON.CAON",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 118.09,
+      "date": "19 11",
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 26.44,
+      "date": "19 11",
+      "description": "WWW.SAINT-JOSEPH.ORG                        COTE-DES-NEIGQC",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 44.32,
+      "date": "20 11",
+      "description": "Amazon.ca*BY5N476N3                         AMAZON.CA    ON",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 31.6,
+      "date": "20 11",
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 11.49,
+      "date": "22 11",
+      "description": "UBER CANADA/UBERONE                         TORONTO      ON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 118.09,
+      "date": "26 11",
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 3.9,
+      "date": "28 11",
+      "description": "A30 EXPRESS                                 SALABERRY-DE-QC",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 19.2,
+      "date": "29 11",
+      "description": "AMZN Mktp CA*Z39OO76I2                      WWW.AMAZON.CAON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 143.04,
+      "date": "2024-01-12",
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 13.64,
+      "date": "2024-02-12",
+      "description": "DEVICE PROTECTION                           855-562-1955 BC",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 30,
+      "date": "2024-02-12",
+      "description": "SQ *SMITHAIRX                               MONTREAL     QC",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 136.69,
+      "date": "2024-03-12",
+      "description": "RDL*bathandbodyworks.c                      Halifax      NS",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 131.08,
+      "date": "2024-03-12",
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 47.13,
+      "date": "2024-04-12",
+      "description": "Amazon.ca*ZL4WS5D90                         AMAZON.CA    ON",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 96.58,
+      "date": "2024-05-12",
+      "description": "LAROCHE*POSAY.CA                            888-577-5226 QC",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 46.19,
+      "date": "2024-06-12",
+      "description": "SEPHORA CARREFOUR LAVA              LAVAL        QC",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 109.55,
+      "date": "2024-06-12",
+      "description": "WAL-MART #1032                      LAVAL        QC",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 116.07,
+      "date": "2024-06-12",
+      "description": "Lovisa                              Laval        QC",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 20.57,
+      "date": "2024-06-12",
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 52.32,
+      "date": "2024-06-12",
+      "description": "LA MAISON DU SAVON DE               LAVAL        QC",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 62.11,
+      "date": "2024-08-12",
+      "description": "HM Hennes Mauritz I                 Toronto      ON",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 683,
+      "date": "2024-09-12",
+      "description": "PASSPORT HEALTH                     LAVAL        QC",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 114.25,
+      "date": "2024-09-12",
+      "description": "UBER CANADA/UBEREATS                TORONTO      ON",
+      "reference": "024"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 25.96,
+      "date": "2024-10-12",
+      "description": "BOULANGERIE PATISSERIE              Laval        QC",
+      "reference": "025"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 258.66,
+      "date": "2024-10-12",
+      "description": "Amazon.ca*ZR6I08BQ1                 AMAZON.CA    ON",
+      "reference": "026"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 128.82,
+      "date": "2024-10-12",
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "027"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 183.89,
+      "date": "2024-11-12",
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "reference": "028"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "credit": 24.13,
+      "date": "2024-11-12",
+      "description": "NETFLIX.COM                         Vancover     BC",
+      "reference": "029"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "debit": 781.31,
+      "date": "15 11",
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "debit": 383,
+      "date": "29 11",
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "debit": 50,
+      "date": "2024-09-12",
+      "description": "CRÉDIT REMISES",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 12 Mois 12 Année 2024",
+      "Received": "2024-02-22T23:50:10.658910+00:00",
+      "debit": 56.4,
+      "date": "2024-12-12",
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-14",
+      "debit": 55.17,
+      "description": "AMZN Mktp CA*RM6T05UP1                      WWW.AMAZON.CAON",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-14",
+      "debit": 11.49,
+      "description": "Amazon.ca Prime Member                      amazon.ca/priBC",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-16",
+      "debit": 50.24,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-17",
+      "debit": 1797.91,
+      "description": "Lufthansa 220603219032                      Toronto      ON",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-17",
+      "debit": 71.99,
+      "description": "Lufthansa 220603219033                      Toronto      ON",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-20",
+      "debit": 81,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-23",
+      "debit": 58.66,
+      "description": "AMAZON* R481J91N1                           DOWNTOWN TOROON",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-24",
+      "debit": 11.98,
+      "description": "AMAZON* R41I850F0                           DOWNTOWN TOROON",
+      "reference": "008"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-26",
+      "debit": 36.44,
+      "description": "UBER CANADA/UBEREATS                        TORONTO      ON",
+      "reference": "009"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-27",
+      "debit": 108,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "010"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-29",
+      "debit": 41.39,
+      "description": "SEPHORA.CA                                  SEPHORA.CA   QC",
+      "reference": "011"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-01",
+      "debit": 50,
+      "description": "CONCESSION A25 SEC                          514-766-8225 QC",
+      "reference": "012"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-03",
+      "debit": 13.64,
+      "description": "DEVICE PROTECTION                           855-562-1955 BC",
+      "reference": "013"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-03",
+      "debit": 108,
+      "description": "HALALMEALS.CA                               SCARBOROUGH ON",
+      "reference": "014"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-03",
+      "debit": 43.64,
+      "description": "ROCKABERRY ST. MARTIN                       LAVAL        QC",
+      "reference": "015"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-05",
+      "debit": 30,
+      "description": "SQ *SMITHAIRX                               MONTREAL     QC",
+      "reference": "016"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-06",
+      "debit": 17.23,
+      "description": "SPOTIFY                             STOCKHOLM    AB",
+      "reference": "017"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-09",
+      "debit": 26.98,
+      "description": "Subway 29315                        Laval        QC",
+      "reference": "018"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-10",
+      "debit": 268.27,
+      "description": "FIDO Mobile ******9523              888-481-3436 ON",
+      "reference": "019"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-10",
+      "debit": 108,
+      "description": "HALALMEALS.CA                       SCARBOROUGH ON",
+      "reference": "020"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-11",
+      "debit": 24.13,
+      "description": "Netflix.com                         866-716-0414 ON",
+      "reference": "021"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-11",
+      "debit": 34.41,
+      "description": "UBER CANADA/UBEREATS                TORONTO      ON",
+      "reference": "022"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-12",
+      "debit": 44.32,
+      "description": "Amazon.ca*5X5QC7RT3                 AMAZON.CA    ON",
+      "reference": "023"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": 1500,
+      "date": "2024-08-15",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "001"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": 1000,
+      "date": "2024-08-16",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "002"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-08-19",
+      "debit": 50,
+      "description": "FRAIS ANNUELS",
+      "reference": "003"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": 1000,
+      "date": "2024-09-02",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "004"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": 50,
+      "date": "2024-09-10",
+      "debit": null,
+      "description": "CRÉDIT REMISES",
+      "reference": "005"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": 1500,
+      "date": "2024-09-11",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "006"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": 1000,
+      "date": "2024-09-13",
+      "debit": null,
+      "description": "PAIEMENT CAISSE",
+      "reference": "007"
+    },
+    {
+      "StatementDate": "Jour 13 Mois 09 Année 2024",
+      "Received": "2024-02-22T23:51:33.037711+00:00",
+      "credit": null,
+      "date": "2024-09-13",
+      "debit": 50.54,
+      "description": "FRAIS DE CRÉDIT",
+      "reference": "008"
+    }
+  ]

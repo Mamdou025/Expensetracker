@@ -26,7 +26,9 @@ const categoryColors = {
     "Telecommunications": "#EC69E4",
     "Investments": "#040175",
         "Transfer":"#F94AAA",
-    "Other": "#888888"
+    "Other": "#888888",
+    "Remove":"#000000"
+
 };
 
 const TransactionsListPage = () => {

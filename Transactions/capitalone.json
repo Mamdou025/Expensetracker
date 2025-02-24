@@ -1,0 +1,105 @@
+ {
+
+"janvier24":[
+    {"amount": 13.76, "description": "RAPIDAPISAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2023-12-16", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Services", "created_at": null},
+    {"amount": 44.04, "description": "BUBBLE PERSONAL PLANNEW YORKNY", "card_type": "CapitalONE", "date": "2023-12-17", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Services", "created_at": null},
+    {"amount": 20.54, "description": "RAINFORESTAPI.COMBELLEVUEWA", "card_type": "CapitalONE", "date": "2023-12-21", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Services", "created_at": null},
+    {"amount": 9.35, "description": "BOULANGERIE PATISSERIELavalQC", "card_type": "CapitalONE", "date": "2023-12-31", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 68.26, "description": "ULTRAMAR #26408SAINT-JEAN-SUQC", "card_type": "CapitalONE", "date": "2023-12-31", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 30.00, "description": "PARC INDIGO - NO CMO00QUEBECQC", "card_type": "CapitalONE", "date": "2024-01-05", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 8.07, "description": "AGENCE DE MOBILITE DURMONTREALQC", "card_type": "CapitalONE", "date": "2024-01-05", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null}
+    
+    
+],
+"fevrier":[
+    {"amount": 119.32, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-01-23", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null}
+
+],
+"mars":[
+    {"amount": 31.87, "description": "CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-02-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 7.30, "description": "AGENCE DE MOBILITE DURMONTREALQC", "card_type": "CapitalONE", "date": "2024-03-02", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 28.74, "description": "IVORIAN SPIRITMONTREALQC", "card_type": "CapitalONE", "date": "2024-03-12", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null}
+    
+],
+"avril":[
+    {"amount": 33.12, "description": "BOULANGERIE PATISSERIELavalQC", "card_type": "CapitalONE", "date": "2024-03-16", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null},
+{"amount": 32.08, "description": "CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-03-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+{"amount": 4.00, "description": "DEPANNEUR ULTRALavalQC", "card_type": "CapitalONE", "date": "2024-04-11", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Convenience", "created_at": null},
+{"amount": 7.05, "description": "DEPANNEUR ULTRALavalQC", "card_type": "CapitalONE", "date": "2024-04-11", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Convenience", "created_at": null}
+
+],
+"mai":[
+    {"amount": 5.25, "description": "AGENCE DE MOBILITE DURMONTREALQC", "card_type": "CapitalONE", "date": "2024-04-16", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+{"amount": 32.44, "description": "CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-04-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null}
+
+],
+"juin":[
+    {"amount": 4.05, "description": "MTA*NYCT PAYGONEW YORKNY", "card_type": "CapitalONE", "date": "2024-05-19", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 4.05, "description": "MTA*NYCT PAYGONEW YORKNY", "card_type": "CapitalONE", "date": "2024-05-19", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 4.05, "description": "MTA*NYCT PAYGONEW YORKNY", "card_type": "CapitalONE", "date": "2024-05-19", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 256.96, "description": "A RACINE ET FILS LTEE LACOLLEQC", "card_type": "CapitalONE", "date": "2024-05-21", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Travel", "created_at": null},
+    {"amount": 32.25, "description": "OPENAI *CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-05-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null}
+    
+
+],
+"juillet":[
+    {"amount": 32.34, "description": "OPENAI *CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-06-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 7.46, "description": "MCDONALD'S #41226LAVALQC", "card_type": "CapitalONE", "date": "2024-07-01", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Fast Food", "created_at": null}
+    
+],
+"aout":[
+    {"amount": 32.48, "description": "OPENAI *CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-07-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 146.81, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-07-24", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 30.00, "description": "SHELL C03122MONTREALQC", "card_type": "CapitalONE", "date": "2024-07-25", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 122.11, "description": "L AVENUE LAVALLAVALQC", "card_type": "CapitalONE", "date": "2024-07-28", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Shopping", "created_at": null},
+    {"amount": 105.20, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-07-29", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 55.78, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-07-29", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 48.82, "description": "MCDONALD'S #41226LAVALQC", "card_type": "CapitalONE", "date": "2024-08-03", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 57.86, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-08-11", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null}
+    
+],
+"septembre":[
+    {"amount": 23.44, "description": "JEAN COUTU 100LAVALQC", "card_type": "CapitalONE", "date": "2024-08-15", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Convenience", "created_at": null},
+    {"amount": 63.24, "description": "BELL CANADA (OB)MONTREALQC", "card_type": "CapitalONE", "date": "2024-08-16", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Telecommunications", "created_at": null},
+    {"amount": 32.11, "description": "OPENAI *CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-08-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 3.11, "description": "AGENCE DE MOBILITE DURMONTREALQC", "card_type": "CapitalONE", "date": "2024-08-30", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 63.24, "description": "BELL CANADA (OB)MONTREALQC", "card_type": "CapitalONE", "date": "2024-09-08", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Telecommunications", "created_at": null}
+    
+],
+"octobre":[
+    {"amount": 54.46, "description": "SHELL C10225LAVALQC", "card_type": "CapitalONE", "date": "2024-09-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 32.04, "description": "OPENAI *CHATGPT SUBSCRIPTION SAN FRANCISCOCA", "card_type": "CapitalONE", "date": "2024-09-22", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 84.00, "description": "TELUQ888-843-4333QC", "card_type": "CapitalONE", "date": "2024-09-24", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Education", "created_at": null},
+    {"amount": 108.92, "description": "ANIMANIA LAVALLAVALQC", "card_type": "CapitalONE", "date": "2024-10-07", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Vet", "created_at": null},
+    {"amount": 9.25, "description": "TOM-Americas BBQMontrealQC", "card_type": "CapitalONE", "date": "2024-10-12", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 43.71, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-10-14", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null},
+    {"amount": 62.31, "description": "MAXI #8634LAVALQC", "card_type": "CapitalONE", "date": "2024-10-14", "time": null, "bank": "CapitalONE", "full_email": null, "category": "Groceries", "created_at": null}
+    
+],
+"novembre":[
+    {"amount": 8.57, "description": "AGENCE DE MOBILITE DURMONTREALQC", "card_type": "capitalONE", "date": "2024-10-14", "time": null, "bank": "capitalONE", "full_email": null, "category": "Transport", "created_at": null},
+    {"amount": 6.33, "description": "KANGARIDE/AMIGO EXPRESMONTREALQC", "card_type": "capitalONE", "date": "2024-10-15", "time": null, "bank": "capitalONE", "full_email": null, "category": "miscellaneous", "created_at": null},
+    {"amount": 30.00, "description": "KANGARIDE/AMIGO EXPRESVERDUNQC", "card_type": "capitalONE", "date": "2024-10-17", "time": null, "bank": "capitalONE", "full_email": null, "category": "miscellaneous", "created_at": null},
+    {"amount": 14.40, "description": "MCDONALD'S #41226LAVALQC", "card_type": "capitalONE", "date": "2024-10-19", "time": null, "bank": "capitalONE", "full_email": null, "category": "Fast Food", "created_at": null},
+    {"amount": 63.24, "description": "BELL CANADA (OB)MONTREALQC", "card_type": "capitalONE", "date": "2024-10-21", "time": null, "bank": "capitalONE", "full_email": null, "category": "Telecommunications", "created_at": null},
+    {"amount": 32.65, "description": "OPENAI *CHATGPT SUBSCRSAN FRANCISCOCA", "card_type": "capitalONE", "date": "2024-10-22", "time": null, "bank": "capitalONE", "full_email": null, "category": "Subscription", "created_at": null},
+    {"amount": 63.24, "description": "BELL CANADA (OB)MONTREALQC", "card_type": "capitalONE", "date": "2024-11-04", "time": null, "bank": "capitalONE", "full_email": null, "category": "Telecommunications", "created_at": null}
+    
+],
+"decembre":[
+    
+        { "amount": 47.21, "description": "JEAN COUTU 100LAVALQC", "card_type": "capitalONE",  "date": "2024-11-18",  "time": null, "bank": "capitalONE","full_email": null,  "category": "Convenience",  "created_at": null},
+        { "amount": 33.06,"description": "OPENAI *CHATGPT SUBSCRSAN FRANCISCOCA", "card_type": "capitalONE", "date": "2024-11-22","time": null, "bank": "capitalONE", "full_email": null, "category": "Subscription", "created_at": null },
+        {"amount": 29.88,"description": "AdobeSan JoseCA","card_type": "capitalONE", "date": "2024-11-25", "time": null, "bank": "capitalONE", "full_email": null, "category": "Software", "created_at": null},
+        {"amount": 329.93,"description": "ENTERPRISE CANADA C722SAINT-LEONARDQC","card_type": "capitalONE", "date": "2024-11-30", "time": null,"bank": "capitalONE", "full_email": null, "category": "Transport", "created_at": null },
+        { "amount": 63.24, "description": "BELL CANADA (OB)MONTREALQC", "card_type": "capitalONE", "date": "2024-12-04", "time": null, "bank": "capitalONE", "full_email": null, "category": "Utilities", "created_at": null  }
+    
+    
+],
+"janvier":[
+
+]
+
+}
+
+

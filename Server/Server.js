@@ -199,6 +199,24 @@ app.delete('/api/transactions/:id/tags', async (req, res) => {
     }
 });
 
+// ✅ Delete a tag from the tags table
+app.delete('/api/tags/:tagName', (req, res) => {
+    const { tagName } = req.params;
+
+    const deleteTagQuery = `
+        DELETE FROM tags WHERE tag_name = ?;
+    `;
+
+    db.run(deleteTagQuery, [tagName], function (err) {
+        if (err) {
+            console.error("❌ Failed to delete tag:", err);
+            res.status(500).json({ error: "Failed to delete tag" });
+            return;
+        }
+
+        res.json({ message: `✅ Tag '${tagName}' deleted successfully` });
+    });
+});
 
 
 // ✅ Update a transaction's category

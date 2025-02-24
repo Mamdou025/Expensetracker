@@ -27,19 +27,18 @@ const categoryColors = {
     "Telecommunications": "#EC69E4",
     "Other": "#888888",
     "Investments": "#040175",
-    "Rent":"#D86D03",
-    "Transfer":"#F94AAA",
-    "Debt":"#970102"
-
-    
+    "Rent": "#D86D03",
+    "Transfer": "#F94AAA",
+    "Debt": "#970102",
+    "Remove": "#000000"
 };
 
 // 🔥 Define custom category stacking order
 const customOrder = [
-   "Rent", "Food Delivery", "Groceries", "Restaurant", "Fast Food", "Food",
-    "Travel", "Transport", "Convenience", "Entertainment","Miscellaneous",
-    "Shopping","Education", "Transfer","Home Improvement","Healthcare", "Vet",
-    "Services", "Subscription", "Telecommunications","Debt"
+    "Rent", "Food Delivery", "Groceries", "Restaurant", "Fast Food", "Food",
+    "Travel", "Transport", "Convenience", "Entertainment", "Miscellaneous",
+    "Shopping", "Education", "Transfer", "Home Improvement", "Healthcare", "Vet",
+    "Services", "Subscription", "Telecommunications", "Debt"
 ];
 
 // 🔥 Custom Tooltip Component (includes total spending per month)
@@ -66,6 +65,7 @@ const MonthlySpendingPage = () => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedBanks, setSelectedBanks] = useState([]);
 
     useEffect(() => {
         fetch("http://localhost:5000/api/transactions")
@@ -81,6 +81,15 @@ const MonthlySpendingPage = () => {
             });
     }, []);
 
+    // 🔥 Get unique list of banks for filtering
+    const bankOptions = useMemo(() => [...new Set(transactions.map(txn => txn.bank))], [transactions]);
+
+    // 🔥 Filter transactions by selected banks
+    const filteredTransactions = useMemo(() => {
+        if (selectedBanks.length === 0) return transactions; // No filter applied
+        return transactions.filter(txn => selectedBanks.includes(txn.bank));
+    }, [transactions, selectedBanks]);
+
     // 🔥 Get last completed month (e.g., if today is February, show up to January)
     const getLastCompletedMonth = () => {
         const today = new Date();
@@ -92,28 +101,22 @@ const MonthlySpendingPage = () => {
     // 🔥 Aggregate spending by month and category (only for completed months)
     const aggregateSpendingByMonth = () => {
         const lastCompletedMonth = getLastCompletedMonth();
-        const monthlySpending = transactions.reduce((acc, txn) => {
+        const monthlySpending = filteredTransactions.reduce((acc, txn) => {
             const month = txn.date.substring(0, 7); // Extract YYYY-MM
             if (month > lastCompletedMonth) return acc; // Skip current incomplete month
 
-            if (!acc[month]) acc[month] = { total: 0 };
-            acc[month].total += txn.amount; // Track total spending per month
+            if (!acc[month]) acc[month] = { month, total: 0 };
+            acc[month].total += txn.amount;
             acc[month][txn.category] = (acc[month][txn.category] || 0) + txn.amount;
 
             return acc;
         }, {});
 
-        return Object.keys(monthlySpending)
-            .sort((a, b) => a.localeCompare(b)) // 🔥 Sort months in ASCENDING order
-            .map(month => ({
-                month,
-                total: monthlySpending[month].total,
-                ...monthlySpending[month]
-            }));
+        return Object.values(monthlySpending).sort((a, b) => a.month.localeCompare(b.month));
     };
 
     // 🔥 Processed monthly spending data
-    const spendingByMonth = useMemo(() => aggregateSpendingByMonth(), [transactions]);
+    const spendingByMonth = useMemo(() => aggregateSpendingByMonth(), [filteredTransactions]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -122,6 +125,16 @@ const MonthlySpendingPage = () => {
         <div style={{ fontFamily: "Arial, sans-serif", padding: "40px", backgroundColor: "white", color: "black", maxWidth: "1000px", margin: "auto" }}>
             <h1 style={{ textAlign: "center", fontSize: "2.2em", marginBottom: "30px" }}>Monthly Spending Breakdown</h1>
 
+            {/* 🔥 Bank Filter (Multi-Select) */}
+            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                <label style={{ fontSize: "1.2em", marginRight: "10px" }}>Select Bank(s):</label>
+                <select multiple value={selectedBanks} onChange={(e) => setSelectedBanks([...e.target.selectedOptions].map(option => option.value))} style={{ width: "300px", height: "120px" }}>
+                    {bankOptions.map((bank, index) => (
+                        <option key={index} value={bank}>{bank}</option>
+                    ))}
+                </select>
+            </div>
+
             {/* 🔥 Stacked Bar Chart with Tooltip */}
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={spendingByMonth}>
@@ -129,7 +142,6 @@ const MonthlySpendingPage = () => {
                     <XAxis dataKey="month" />
                     <YAxis />
                     <Tooltip content={<CustomTooltip />} />
-                    {/* 🔥 Display each category in the correct stacked order */}
                     {customOrder.map(category => (
                         <Bar
                             key={category}

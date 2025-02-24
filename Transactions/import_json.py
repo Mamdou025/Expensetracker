@@ -55,4 +55,4 @@ def insert_transactions_from_json(json_file):
 
 # Run the script
 if __name__ == "__main__":
-    insert_transactions_from_json("mbna.json")
+    insert_transactions_from_json("juildec.json")
