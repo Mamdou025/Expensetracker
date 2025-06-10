@@ -239,6 +239,133 @@ app.put('/api/transactions/:id/category', (req, res) => {
     });
 });
 
+// Add these new endpoints to your server.js:
+
+// Dashboard summary stats
+app.get('/api/dashboard/stats', (req, res) => {
+    const queries = {
+        totalTransactions: "SELECT COUNT(*) as count FROM transactions",
+        totalAmount: "SELECT SUM(amount) as total FROM transactions", 
+        totalIncome: "SELECT SUM(amount) as total FROM transactions WHERE amount > 0",
+        totalExpense: "SELECT SUM(ABS(amount)) as total FROM transactions WHERE amount < 0",
+        avgTransaction: "SELECT AVG(amount) as avg FROM transactions"
+    };
+    
+    // Execute all queries and combine results
+    // Implementation similar to your existing patterns
+});
+
+// Monthly spending data for charts
+app.get('/api/dashboard/monthly-spending', (req, res) => {
+    const query = `
+        SELECT 
+            strftime('%Y-%m', date) as month,
+            SUM(amount) as total_amount,
+            COUNT(*) as transaction_count
+        FROM transactions 
+        GROUP BY strftime('%Y-%m', date)
+        ORDER BY month DESC 
+        LIMIT 12
+    `;
+    
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+// Add to server.js:
+app.get('/api/analytics/category-breakdown', (req, res) => {
+    const { startDate, endDate } = req.query;
+    
+    let query = `
+        SELECT 
+            category,
+            COUNT(*) as transaction_count,
+            SUM(ABS(amount)) as total_amount,
+            AVG(ABS(amount)) as avg_amount
+        FROM transactions 
+    `;
+    
+    const params = [];
+    if (startDate && endDate) {
+        query += " WHERE date BETWEEN ? AND ?";
+        params.push(startDate, endDate);
+    }
+    
+    query += " GROUP BY category ORDER BY total_amount DESC";
+    
+    db.all(query, params, (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+// Get all categories with stats
+app.get('/api/categories', (req, res) => {
+    const query = `
+        SELECT 
+            category as name,
+            COUNT(*) as transaction_count,
+            SUM(ABS(amount)) as total_amount
+        FROM transactions 
+        WHERE category IS NOT NULL
+        GROUP BY category
+    `;
+    
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+// Get all tags with stats  
+app.get('/api/tags/stats', (req, res) => {
+    const query = `
+        SELECT 
+            g.tag_name as name,
+            COUNT(tt.transaction_id) as usage_count,
+            SUM(ABS(t.amount)) as total_amount
+        FROM tags g
+        LEFT JOIN transaction_tags tt ON g.id = tt.tag_id
+        LEFT JOIN transactions t ON tt.transaction_id = t.id
+        GROUP BY g.tag_name
+        ORDER BY usage_count DESC
+    `;
+    
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
+// Rules table - you'll need to create this
+app.get('/api/rules', (req, res) => {
+    // You'll need to create a 'rules' table first
+    const query = `
+        SELECT * FROM rules WHERE active = 1
+    `;
+    
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
+
 // ✅ Start the server
 app.listen(port, () => {
     console.log(`🚀 Server is running at http://localhost:${port}`);
