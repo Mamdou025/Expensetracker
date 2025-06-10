@@ -1,0 +1,133 @@
+// src/components/Sections/SettingsSection.jsx
+import { Sliders  } from 'lucide-react';
+import React from 'react';
+import ExpandableSection from '../common/ExpandableSection';
+import DisplaySettings from '../Settings/DisplaySettings';
+import CategoryManager from '../Settings/CategoryManager';
+import TagManager from '../Settings/TagManager';
+import MappingsSettings from '../Settings/MappingsSettings';
+import AddTransactionForm from '../Settings/AddTransactionForm';
+const SettingsSection = ({ 
+  isExpanded, 
+  onToggle, 
+  activeTab,
+  setActiveTab,
+  itemsPerPage,
+  setItemsPerPage,
+  chartType,
+  setChartType,
+  categories,
+  setCategories,
+  tags,
+  setTags,
+  editingItem,
+  setEditingItem,
+  newItemName,
+  setNewItemName,
+  showAddTransaction,
+  setShowAddTransaction,
+  newTransaction,
+  setNewTransaction,
+  onAddItem,
+  onEditItem,
+  onDeleteItem,
+  onAddTransaction
+}) => {
+  const settingsTabs = isExpanded ? (
+    <div className="flex gap-4">
+      {['display', 'categories', 'tags', 'mappings', 'transactions'].map((tab) => (
+        <button
+          key={tab}
+          onClick={() => setActiveTab(tab)}
+          className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+            activeTab === tab
+              ? 'bg-blue-500 text-white shadow-lg'
+              : 'bg-white text-gray-600 hover:bg-gray-100'
+          }`}
+        >
+          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+        </button>
+      ))}
+    </div>
+  ) : null;
+
+  const renderContent = () => {
+    switch(activeTab) {
+      case 'display':
+        return (
+          <DisplaySettings 
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
+            chartType={chartType}
+            setChartType={setChartType}
+          />
+        );
+      case 'categories':
+        return (
+          <CategoryManager 
+            categories={categories}
+            setCategories={setCategories}
+            editingItem={editingItem}
+            setEditingItem={setEditingItem}
+            newItemName={newItemName}
+            setNewItemName={setNewItemName}
+            onAddItem={onAddItem}
+            onEditItem={onEditItem}
+            onDeleteItem={onDeleteItem}
+          />
+        );
+      case 'tags':
+        return (
+          <TagManager 
+            tags={tags}
+            setTags={setTags}
+            editingItem={editingItem}
+            setEditingItem={setEditingItem}
+            newItemName={newItemName}
+            setNewItemName={setNewItemName}
+            onAddItem={onAddItem}
+            onEditItem={onEditItem}
+            onDeleteItem={onDeleteItem}
+          />
+        );
+      case 'mappings':
+        return <MappingsSettings />;
+      case 'transactions':
+        return (
+          <AddTransactionForm 
+            showAddTransaction={showAddTransaction}
+            setShowAddTransaction={setShowAddTransaction}
+            newTransaction={newTransaction}
+            setNewTransaction={setNewTransaction}
+            categories={categories}
+            tags={tags}
+            onAddTransaction={onAddTransaction}
+          />
+        );
+      default:
+        return (
+          <DisplaySettings 
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
+            chartType={chartType}
+            setChartType={setChartType}
+          />
+        );
+    }
+  };
+
+  return (
+    <ExpandableSection
+      title="Configuration"
+      icon={Sliders }
+      isExpanded={isExpanded}
+      onToggle={onToggle}
+      headerContent={settingsTabs}
+      className="mb-8"
+    >
+      {renderContent()}
+    </ExpandableSection>
+  );
+};
+
+export default SettingsSection;
