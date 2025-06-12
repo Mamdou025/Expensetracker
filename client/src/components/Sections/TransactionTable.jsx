@@ -1,5 +1,190 @@
-// src/components/table/TransactionTable.jsx
+// src/components/Sections/TransactionTable.jsx
 import React from 'react';
+
+const EditableTransactionRow = ({ 
+  transaction, 
+  onStartEdit, 
+  onSaveEdit, 
+  onCancelEdit, 
+  editingTransaction, 
+  editValues, 
+  setEditValues, 
+  categories, 
+  onMultiSelectFilter,
+  filters,
+  onOpenTagModal  // ← ADD THIS PARAMETER
+}) => {
+  const isEditing = (field) => editingTransaction === `${transaction.id}-${field}`;
+  
+  return (
+    <tr className="hover:bg-gray-50 transition-colors duration-200">
+      {/* Date - Read only */}
+      <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-900">
+        {transaction.date}
+      </td>
+      
+      {/* Description - Editable */}
+      <td className="px-8 py-6 text-sm text-gray-900">
+        {isEditing('description') ? (
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={editValues.description || ''}
+              onChange={(e) => setEditValues(prev => ({ ...prev, description: e.target.value }))}
+              className="flex-1 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') onSaveEdit(transaction, 'description');
+                if (e.key === 'Escape') onCancelEdit();
+              }}
+            />
+            <button
+              onClick={() => onSaveEdit(transaction, 'description')}
+              className="px-2 py-1 text-green-600 hover:text-green-800 hover:bg-green-100 rounded"
+              title="Save"
+            >
+              ✓
+            </button>
+            <button
+              onClick={onCancelEdit}
+              className="px-2 py-1 text-red-600 hover:text-red-800 hover:bg-red-100 rounded"
+              title="Cancel"
+            >
+              ✕
+            </button>
+          </div>
+        ) : (
+          <div
+            onClick={() => onStartEdit(transaction, 'description')}
+            className="cursor-pointer hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200"
+            title="Click to edit description"
+          >
+            {transaction.description}
+          </div>
+        )}
+      </td>
+      
+      {/* Amount - Editable */}
+      <td className="px-8 py-6 whitespace-nowrap text-sm font-medium text-gray-900">
+        {isEditing('amount') ? (
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              step="0.01"
+              value={editValues.amount || ''}
+              onChange={(e) => setEditValues(prev => ({ ...prev, amount: e.target.value }))}
+              className="w-28 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') onSaveEdit(transaction, 'amount');
+                if (e.key === 'Escape') onCancelEdit();
+              }}
+            />
+            <button
+              onClick={() => onSaveEdit(transaction, 'amount')}
+              className="px-2 py-1 text-green-600 hover:text-green-800 hover:bg-green-100 rounded"
+              title="Save"
+            >
+              ✓
+            </button>
+            <button
+              onClick={onCancelEdit}
+              className="px-2 py-1 text-red-600 hover:text-red-800 hover:bg-red-100 rounded"
+              title="Cancel"
+            >
+              ✕
+            </button>
+          </div>
+        ) : (
+          <div
+            onClick={() => onStartEdit(transaction, 'amount')}
+            className="cursor-pointer hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200"
+            title="Click to edit amount"
+          >
+            ${transaction.amount.toFixed(2)}
+          </div>
+        )}
+      </td>
+      
+      {/* Category - Dropdown */}
+      <td className="px-8 py-6 whitespace-nowrap">
+        {isEditing('category') ? (
+          <div className="flex items-center gap-2">
+            <select
+              value={editValues.category || ''}
+              onChange={(e) => setEditValues(prev => ({ ...prev, category: e.target.value }))}
+              className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              autoFocus
+            >
+              <option value="">Select category</option>
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+            <button
+              onClick={() => onSaveEdit(transaction, 'category')}
+              className="px-2 py-1 text-green-600 hover:text-green-800 hover:bg-green-100 rounded"
+              title="Save"
+            >
+              ✓
+            </button>
+            <button
+              onClick={onCancelEdit}
+              className="px-2 py-1 text-red-600 hover:text-red-800 hover:bg-red-100 rounded"
+              title="Cancel"
+            >
+              ✕
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => onStartEdit(transaction, 'category')}
+            className={`px-3 py-2 text-xs rounded-full transition-all duration-200 hover:shadow-md ${
+              transaction.category 
+                ? filters.categories.includes(transaction.category)
+                  ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-200'
+                  : 'bg-gray-100 text-gray-800 hover:bg-blue-50'
+                : 'bg-red-100 text-red-800 hover:bg-red-200'
+            }`}
+            title="Click to edit category"
+          >
+            {transaction.category || 'No Category'}
+          </button>
+        )}
+      </td>
+      
+      {/* Tags - Display with edit button */}
+      <td className="px-8 py-6 whitespace-nowrap">
+        <div className="flex flex-wrap gap-1 items-center">
+          {transaction.tags && transaction.tags.split(',').map(tag => tag.trim()).filter(tag => tag).map((tag, index) => (
+            <span
+              key={index}
+              className={`px-2 py-1 text-xs rounded-full transition-all duration-200 ${
+                filters.tags.includes(tag)
+                  ? 'bg-green-100 text-green-800 ring-2 ring-green-200'
+                  : 'bg-gray-100 text-gray-800'
+              }`}
+            >
+              {tag}
+            </span>
+          ))}
+          <button
+            onClick={() => onOpenTagModal ? onOpenTagModal(transaction) : onStartEdit(transaction, 'tags')}
+            className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors duration-200"
+            title="Click to edit tags"
+          >
+            ✏️ 
+          </button>
+        </div>
+      </td>
+      
+      {/* Bank - Read only */}
+      <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-600">
+        {transaction.bank}
+      </td>
+    </tr>
+  );
+};
 
 const TransactionTable = ({
   transactions,
@@ -12,7 +197,17 @@ const TransactionTable = ({
   filters,
   onSort,
   onMultiSelectFilter,
-  onPageChange
+  onPageChange,
+  // New editing props
+  editingTransaction,
+  editValues,
+  setEditValues,
+  onStartEdit,
+  onSaveEdit,
+  onCancelEdit,
+  categories,
+  uniqueTags,
+  onOpenTagModal  // ← ADD THIS PROP
 }) => {
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
 
@@ -21,7 +216,14 @@ const TransactionTable = ({
       {/* Header */}
       <div className="p-8 border-b bg-gray-50">
         <div className="flex justify-between items-center">
-          <h3 className="font-semibold text-xl">Transactions ({filteredTransactions.length})</h3>
+          <h3 className="font-semibold text-xl">
+            Transactions ({filteredTransactions.length})
+            {editingTransaction && (
+              <span className="ml-2 text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                ✏️ Editing
+              </span>
+            )}
+          </h3>
           <div className="text-sm text-gray-600 bg-white px-4 py-2 rounded-xl border">
             Page {currentPage} of {totalPages}
           </div>
@@ -66,7 +268,7 @@ const TransactionTable = ({
                 </button>
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tags
+                Tags 
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Bank
@@ -75,46 +277,20 @@ const TransactionTable = ({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {paginatedTransactions.map((transaction) => (
-              <tr key={transaction.id} className="hover:bg-gray-50 transition-colors duration-200">
-                <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-900">
-                  {transaction.date}
-                </td>
-                <td className="px-8 py-6 text-sm text-gray-900">
-                  {transaction.description}
-                </td>
-                <td className="px-8 py-6 whitespace-nowrap text-sm font-medium text-gray-900">
-                  ${transaction.amount.toFixed(2)}
-                </td>
-                <td className="px-8 py-6 whitespace-nowrap">
-                  <button
-                    onClick={() => onMultiSelectFilter('categories', transaction.category)}
-                    className={`px-3 py-2 text-xs rounded-full transition-all duration-200 ${
-                      filters.categories.includes(transaction.category)
-                        ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-200'
-                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                    }`}
-                  >
-                    {transaction.category}
-                  </button>
-                </td>
-                <td className="px-8 py-6 whitespace-nowrap">
-                  {transaction.tags && (
-                    <button
-                      onClick={() => onMultiSelectFilter('tags', transaction.tags)}
-                      className={`px-3 py-2 text-xs rounded-full transition-all duration-200 ${
-                        filters.tags.includes(transaction.tags)
-                          ? 'bg-green-100 text-green-800 ring-2 ring-green-200'
-                          : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                      }`}
-                    >
-                      {transaction.tags}
-                    </button>
-                  )}
-                </td>
-                <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-600">
-                  {transaction.bank}
-                </td>
-              </tr>
+              <EditableTransactionRow
+                key={transaction.id}
+                transaction={transaction}
+                onStartEdit={onStartEdit}
+                onSaveEdit={onSaveEdit}
+                onCancelEdit={onCancelEdit}
+                editingTransaction={editingTransaction}
+                editValues={editValues}
+                setEditValues={setEditValues}
+                categories={categories}
+                onMultiSelectFilter={onMultiSelectFilter}
+                filters={filters}
+                onOpenTagModal={onOpenTagModal}  // ← ADD THIS PROP
+              />
             ))}
           </tbody>
         </table>
@@ -148,4 +324,3 @@ const TransactionTable = ({
 };
 
 export default TransactionTable;
-

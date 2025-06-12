@@ -10,7 +10,8 @@ const FiltersSection = ({
   onFilterChange,
   onMultiSelectFilter,
   uniqueCategories,
-  uniqueTags 
+  uniqueTags,
+  uniqueCardTypes  // ← ADDED
 }) => {
   return (
     <ExpandableSection
@@ -110,6 +111,26 @@ const FiltersSection = ({
               }`}
             >
               {tag}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Card Types - NEW SECTION */}
+      <div className="mt-6">
+        <label className="block text-sm font-medium mb-3">Card Types</label>
+        <div className="flex flex-wrap gap-3">
+          {uniqueCardTypes.map((cardType) => (
+            <button
+              key={cardType}
+              onClick={() => onMultiSelectFilter('card_type', cardType)}
+              className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${
+                filters.card_type && filters.card_type.includes(cardType)
+                  ? 'bg-purple-500 text-white border-purple-500 shadow-lg'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              {cardType}
             </button>
           ))}
         </div>

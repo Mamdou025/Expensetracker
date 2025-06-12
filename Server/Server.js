@@ -20,7 +20,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
 });
 
-// ✅ Fetch all transactions with their tags
+// ✅ FIXED: Fetch all transactions with their tags
 app.get('/api/transactions', (req, res) => {
     const query = `
         SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
@@ -28,7 +28,7 @@ app.get('/api/transactions', (req, res) => {
         FROM transactions t
         LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
         LEFT JOIN tags g ON tt.tag_id = g.id
-        GROUP BY t.id
+        GROUP BY t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category
         ORDER BY t.date DESC;
     `;
 
@@ -363,6 +363,46 @@ app.get('/api/rules', (req, res) => {
             return;
         }
         res.json(rows);
+    });
+});
+
+// ✅ Update transaction amount
+app.put('/api/transactions/:id/amount', (req, res) => {
+    const { id } = req.params;
+    const { amount } = req.body;
+
+    const query = 'UPDATE transactions SET amount = ? WHERE id = ?';
+
+    db.run(query, [amount, id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        if (this.changes === 0) {
+            res.status(404).json({ error: "Transaction not found" });
+            return;
+        }
+        res.json({ message: `✅ Transaction ID ${id} amount updated to ${amount}` });
+    });
+});
+
+// ✅ Update transaction description
+app.put('/api/transactions/:id/description', (req, res) => {
+    const { id } = req.params;
+    const { description } = req.body;
+
+    const query = 'UPDATE transactions SET description = ? WHERE id = ?';
+
+    db.run(query, [description, id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        if (this.changes === 0) {
+            res.status(404).json({ error: "Transaction not found" });
+            return;
+        }
+        res.json({ message: `✅ Transaction ID ${id} description updated` });
     });
 });
 

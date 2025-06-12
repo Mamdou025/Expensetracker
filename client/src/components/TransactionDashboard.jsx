@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import { transactionService } from '../Services/transactionService';
+import { useTransactions } from '../hooks/useTransactions';
 import { useExpandableState } from '../hooks/useExpandableState';
 import FiltersSection from './Sections/FiltersSection';
 import SettingsSection from './Sections/SettingsSection';
@@ -9,7 +11,38 @@ import Header from './ui/Header';
 import QuickStatsSection from './Sections/QuickStatsSection';
 import generateMockData from './utils/mockData';
 
+import TagEditModal from './common/TagEditModal';
 const TransactionDashboard = () => {
+
+
+// Find this line and update it to include the new methods:
+const { 
+  transactions: realTransactions, 
+  loading, 
+  error,
+  addTag,
+  removeTag,
+  updateCategory,
+  updateAmount,        // ← ADD THIS
+  updateDescription    // ← ADD THIS
+} = useTransactions();
+
+// Add this state for toggling between mock and real data
+const [useRealData, setUseRealData] = useState(false);
+
+// Update this effect to switch data sources
+React.useEffect(() => {
+  if (useRealData && realTransactions.length > 0) {
+    console.log('🔄 Switching to real data...', realTransactions.length, 'transactions');
+    setTransactions(realTransactions);
+  } else if (!useRealData) {
+    console.log('🔄 Using mock data...');
+    setTransactions(generateMockData());
+  }
+}, [useRealData, realTransactions]);
+
+
+
   // State management
   const { expandedSections, toggleSection } = useExpandableState({
     settings: false,
@@ -32,6 +65,10 @@ const TransactionDashboard = () => {
   const [tags, setTags] = useState(['essential', 'luxury', 'recurring', 'emergency', 'planned', 'impulse']);
   const [editingItem, setEditingItem] = useState(null);
   const [newItemName, setNewItemName] = useState('');
+
+  // Add these state variables after your existing useState declarations:
+const [editingTransaction, setEditingTransaction] = useState(null);
+const [editValues, setEditValues] = useState({});
   
   // Add transaction form
   const [showAddTransaction, setShowAddTransaction] = useState(false);
@@ -53,12 +90,18 @@ const TransactionDashboard = () => {
     amountMax: '',
     keyword: '',
     categories: [],
-    tags: []
+    tags: [],
+    card_type:[]
   });
 
   // Get unique values for filter options
   const uniqueCategories = [...new Set(transactions.map(t => t.category))];
   const uniqueTags = [...new Set(transactions.map(t => t.tags).filter(t => t))];
+  const uniqueCardTypes = [...new Set(transactions.map(t => t.card_type).filter(t => t))]; 
+  // Add this state after your existing editing state:
+const [showTagModal, setShowTagModal] = useState(false);
+const [editingTagsForTransaction, setEditingTagsForTransaction] = useState(null);
+
 
   // Filter transactions
   const filteredTransactions = useMemo(() => {
@@ -70,6 +113,8 @@ const TransactionDashboard = () => {
       if (filters.keyword && !transaction.description.toLowerCase().includes(filters.keyword.toLowerCase())) return false;
       if (filters.categories.length > 0 && !filters.categories.includes(transaction.category)) return false;
       if (filters.tags.length > 0 && !filters.tags.includes(transaction.tags)) return false;
+      if (filters.card_type.length > 0 && !filters.card_type.includes(transaction.card_type)) return false; 
+
       return true;
     });
   }, [transactions, filters]);
@@ -154,6 +199,78 @@ const TransactionDashboard = () => {
     setCurrentPage(1);
   };
 
+const handleOpenTagModal = (transaction) => {
+  console.log('🔄 Opening tag modal for:', transaction);
+  setEditingTagsForTransaction(transaction);
+  setShowTagModal(true);
+};
+
+const handleCloseTagModal = () => {
+  setShowTagModal(false);
+  setEditingTagsForTransaction(null);
+};
+
+const handleSaveTagChanges = async (updatedTags) => {
+  // This will be implemented with the modal component
+  console.log('Save tag changes:', updatedTags);
+  setShowTagModal(false);
+  setEditingTagsForTransaction(null);
+};
+
+const handleStartEdit = (transaction, field) => {
+  console.log('🔄 handleStartEdit called:', { transaction: transaction.id, field });
+  
+  setEditingTransaction(`${transaction.id}-${field}`);
+  setEditValues({
+    [field]: field === 'tags' 
+      ? transaction.tags.split(',').map(t => t.trim()).filter(t => t) 
+      : transaction[field]
+  });
+  
+  console.log('✅ Editing state set:', {
+    editingTransaction: `${transaction.id}-${field}`,
+    editValues: { [field]: field === 'tags' ? transaction.tags.split(',').map(t => t.trim()).filter(t => t) : transaction[field] }
+  });
+};
+
+// Find your handleSaveEdit function and update the tags case:
+const handleSaveEdit = async (transaction, field) => {
+  console.log('🔄 handleSaveEdit called:', { transaction: transaction.id, field });
+  
+  try {
+    const newValue = editValues[field];
+    
+    if (field === 'category') {
+      await updateCategory(transaction.id, newValue);
+    } else if (field === 'amount') {
+      await updateAmount(transaction.id, parseFloat(newValue));
+    } else if (field === 'description') {
+      await updateDescription(transaction.id, newValue);
+    } else if (field === 'tags') {
+      console.log('✏️ Opening tag modal for transaction:', transaction);
+      // Open modal for tag editing instead of inline editing
+      setEditingTagsForTransaction(transaction);
+      setShowTagModal(true);
+      setEditingTransaction(null); // Clear inline editing
+      setEditValues({});
+      console.log('✅ Modal state set:', { showTagModal: true, transaction: transaction.id });
+      return; // Don't close editing state yet
+    }
+    
+    setEditingTransaction(null);
+    setEditValues({});
+  } catch (error) {
+    console.error('Failed to update:', error);
+    alert('Failed to update transaction. Please try again.');
+  }
+};
+
+const handleCancelEdit = () => {
+  setEditingTransaction(null);
+  setEditValues({});
+};
+
+
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
     setCurrentPage(1);
@@ -234,9 +351,35 @@ const TransactionDashboard = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header */}
+{/* Header */}
+<Header onSettingsToggle={() => toggleSection('settings')} />
 
-        <Header onSettingsToggle={() => toggleSection('settings')} />
+{/* Temporary toggle button for testing */}
+<div className="mb-6 flex justify-center">
+  <button
+    onClick={() => setUseRealData(!useRealData)}
+    className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+      useRealData 
+        ? 'bg-green-500 text-white shadow-lg' 
+        : 'bg-blue-500 text-white shadow-lg'
+    }`}
+    disabled={loading}
+  >
+    {loading ? (
+      '⏳ Loading Real Data...'
+    ) : useRealData ? (
+      `🟢 Real Data (${realTransactions.length} transactions)`
+    ) : (
+      '🔵 Mock Data (500 transactions)'
+    )}
+  </button>
+  
+  {error && (
+    <div className="ml-4 px-4 py-2 bg-red-100 text-red-700 rounded-xl">
+      ❌ Error: {error}
+    </div>
+  )}
+</div>
 
 
 
@@ -279,6 +422,8 @@ const TransactionDashboard = () => {
           onMultiSelectFilter={handleMultiSelectFilter}
           uniqueCategories={uniqueCategories}
           uniqueTags={uniqueTags}
+          uniqueCardTypes={uniqueCardTypes}  // ← ADD THIS
+
         />
 
         {/* Time Chart Section */}
@@ -297,19 +442,40 @@ const TransactionDashboard = () => {
         />
 
         {/* Transaction Table */}
-        <TransactionTable
-          transactions={transactions}
-          filteredTransactions={filteredTransactions}
-          paginatedTransactions={paginatedTransactions}
-          sortField={sortField}
-          sortDirection={sortDirection}
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          filters={filters}
-          onSort={handleSort}
-          onMultiSelectFilter={handleMultiSelectFilter}
-          onPageChange={setCurrentPage}
+<TransactionTable
+  transactions={transactions}
+  filteredTransactions={filteredTransactions}
+  paginatedTransactions={paginatedTransactions}
+  sortField={sortField}
+  sortDirection={sortDirection}
+  currentPage={currentPage}
+  itemsPerPage={itemsPerPage}
+  filters={filters}
+  onSort={handleSort}
+  onMultiSelectFilter={handleMultiSelectFilter}
+  onPageChange={setCurrentPage}
+  editingTransaction={editingTransaction}
+  editValues={editValues}
+  setEditValues={setEditValues}
+  onStartEdit={handleStartEdit}
+  onSaveEdit={handleSaveEdit}
+  onCancelEdit={handleCancelEdit}
+  categories={categories}
+  uniqueTags={uniqueTags}
+  onOpenTagModal={handleOpenTagModal}  // ← ADD THIS
+/>
+        {/* Tag Edit Modal */}
+        <TagEditModal
+          isOpen={showTagModal}
+          onClose={handleCloseTagModal}
+          transaction={editingTagsForTransaction}
+          allAvailableTags={uniqueTags}
+          onSave={handleSaveTagChanges}
+          addTag={addTag}
+          removeTag={removeTag}
         />
+
+
       </div>
     </div>
   );
