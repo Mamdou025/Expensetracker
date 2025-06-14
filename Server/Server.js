@@ -219,22 +219,27 @@ app.delete('/api/tags/:tagName', (req, res) => {
 });
 
 
-// ✅ Update a transaction's category
+// Make sure this endpoint exists in your server.js:
 app.put('/api/transactions/:id/category', (req, res) => {
     const { id } = req.params;
     const { category } = req.body;
+
+    console.log('🔄 Updating transaction category:', { id, category }); // Add debug log
 
     const query = 'UPDATE transactions SET category = ? WHERE id = ?';
 
     db.run(query, [category, id], function (err) {
         if (err) {
+            console.error('❌ Database error:', err);
             res.status(500).json({ error: err.message });
             return;
         }
         if (this.changes === 0) {
+            console.log('❌ Transaction not found:', id);
             res.status(404).json({ error: "Transaction not found" });
             return;
         }
+        console.log('✅ Category updated successfully');
         res.json({ message: `✅ Transaction ID ${id} updated to category '${category}'` });
     });
 });
@@ -405,6 +410,96 @@ app.put('/api/transactions/:id/description', (req, res) => {
         res.json({ message: `✅ Transaction ID ${id} description updated` });
     });
 });
+
+
+
+// Add these endpoints to your server.js
+
+// ✅ Add a new category
+app.post('/api/categories', (req, res) => {
+    const { name } = req.body;
+    
+    if (!name) {
+        return res.status(400).json({ error: "Category name is required" });
+    }
+    
+    // Check if category already exists by checking existing transactions
+    const checkQuery = "SELECT COUNT(*) as count FROM transactions WHERE category = ?";
+    
+    db.get(checkQuery, [name], (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        
+        if (row.count > 0) {
+            res.status(400).json({ error: "Category already exists" });
+            return;
+        }
+        
+        res.json({ message: `✅ Category '${name}' is ready to use` });
+    });
+});
+
+// ✅ Delete a category (and update transactions)
+app.delete('/api/categories/:categoryName', (req, res) => {
+    const { categoryName } = req.params;
+    
+    // Update all transactions with this category to have no category
+    const updateQuery = "UPDATE transactions SET category = NULL WHERE category = ?";
+    
+    db.run(updateQuery, [categoryName], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        
+        res.json({ 
+            message: `✅ Category '${categoryName}' deleted and ${this.changes} transactions updated`,
+            updatedTransactions: this.changes
+        });
+    });
+});
+
+// ✅ Add a new tag
+app.post('/api/tags', (req, res) => {
+    const { name } = req.body;
+    
+    if (!name) {
+        return res.status(400).json({ error: "Tag name is required" });
+    }
+    
+    // Check if tag already exists
+    const checkQuery = "SELECT id FROM tags WHERE tag_name = ?";
+    
+    db.get(checkQuery, [name], (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        
+        if (row) {
+            res.status(400).json({ error: "Tag already exists" });
+            return;
+        }
+        
+        // Insert new tag
+        const insertQuery = "INSERT INTO tags (tag_name) VALUES (?)";
+        
+        db.run(insertQuery, [name], function (err) {
+            if (err) {
+                res.status(500).json({ error: err.message });
+                return;
+            }
+            
+            res.json({ 
+                message: `✅ Tag '${name}' created successfully`,
+                tagId: this.lastID
+            });
+        });
+    });
+});
+
 
 // ✅ Start the server
 app.listen(port, () => {

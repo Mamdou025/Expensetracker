@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { transactionService } from '../Services/transactionService';
 import { useTransactions } from '../hooks/useTransactions';
 import { useExpandableState } from '../hooks/useExpandableState';
 import FiltersSection from './Sections/FiltersSection';
@@ -10,8 +9,16 @@ import TransactionTable from './Sections/TransactionTable';
 import Header from './ui/Header';
 import QuickStatsSection from './Sections/QuickStatsSection';
 import generateMockData from './utils/mockData';
-
+// Add these imports with your existing ones:
+import { categoryService } from '../Services/categoryService';
+import { tagService } from '../Services/tagservice';
 import TagEditModal from './common/TagEditModal';
+// Add these imports with your existing ones:
+import { useCategories } from '../hooks/useCategories';
+import { useTags } from '../hooks/useTags';
+
+
+
 const TransactionDashboard = () => {
 
 
@@ -27,6 +34,18 @@ const {
   updateDescription    // ← ADD THIS
 } = useTransactions();
 
+// Add these hooks after your useTransactions hook:
+const { 
+  categories: realCategories, 
+  loading: categoriesLoading,
+  refreshCategories 
+} = useCategories();
+
+const { 
+  tags: realTags, 
+  loading: tagsLoading,
+  refreshTags 
+} = useTags();
 // Add this state for toggling between mock and real data
 const [useRealData, setUseRealData] = useState(false);
 
@@ -41,7 +60,20 @@ React.useEffect(() => {
   }
 }, [useRealData, realTransactions]);
 
+// Add these useEffect hooks to sync real data:
+React.useEffect(() => {
+  if (realCategories.length > 0) {
+    console.log('📊 Updating categories from API:', realCategories);
+    setLocalCategories(realCategories);
+  }
+}, [realCategories]);
 
+React.useEffect(() => {
+  if (realTags.length > 0) {
+    console.log('🏷️ Updating tags from API:', realTags);
+    setLocalTags(realTags);
+  }
+}, [realTags]);
 
   // State management
   const { expandedSections, toggleSection } = useExpandableState({
@@ -61,8 +93,9 @@ React.useEffect(() => {
   const [sortDirection, setSortDirection] = useState('desc');
   
   // Settings state
-  const [categories, setCategories] = useState(['Dining Out', 'Groceries', 'Transportation', 'Entertainment', 'Shopping', 'Bills', 'Healthcare', 'Gas']);
-  const [tags, setTags] = useState(['essential', 'luxury', 'recurring', 'emergency', 'planned', 'impulse']);
+ // ✅ REPLACE WITH - Real data from API:
+const [localCategories, setLocalCategories] = useState([]);
+const [localTags, setLocalTags] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
   const [newItemName, setNewItemName] = useState('');
 
@@ -233,28 +266,28 @@ const handleStartEdit = (transaction, field) => {
   });
 };
 
-// Find your handleSaveEdit function and update the tags case:
+// Update your handleSaveEdit function to handle new categories:
 const handleSaveEdit = async (transaction, field) => {
-  console.log('🔄 handleSaveEdit called:', { transaction: transaction.id, field });
-  
   try {
     const newValue = editValues[field];
     
     if (field === 'category') {
+      // Handle new category creation
+      if (editValues.isAddingNew && newValue && newValue.trim()) {
+        console.log('🆕 Creating new category:', newValue);
+        // Category is created automatically when assigned to transaction
+      }
       await updateCategory(transaction.id, newValue);
     } else if (field === 'amount') {
       await updateAmount(transaction.id, parseFloat(newValue));
     } else if (field === 'description') {
       await updateDescription(transaction.id, newValue);
     } else if (field === 'tags') {
-      console.log('✏️ Opening tag modal for transaction:', transaction);
-      // Open modal for tag editing instead of inline editing
       setEditingTagsForTransaction(transaction);
       setShowTagModal(true);
-      setEditingTransaction(null); // Clear inline editing
+      setEditingTransaction(null);
       setEditValues({});
-      console.log('✅ Modal state set:', { showTagModal: true, transaction: transaction.id });
-      return; // Don't close editing state yet
+      return;
     }
     
     setEditingTransaction(null);
@@ -264,7 +297,6 @@ const handleSaveEdit = async (transaction, field) => {
     alert('Failed to update transaction. Please try again.');
   }
 };
-
 const handleCancelEdit = () => {
   setEditingTransaction(null);
   setEditValues({});
@@ -286,40 +318,41 @@ const handleCancelEdit = () => {
     setCurrentPage(1);
   };
 
-  // Settings handlers
-  const handleAddItem = (type) => {
-    if (!newItemName.trim()) return;
-    
-    if (type === 'category') {
-      setCategories(prev => [...prev, newItemName.trim()]);
-    } else if (type === 'tag') {
-      setTags(prev => [...prev, newItemName.trim()]);
-    }
-    setNewItemName('');
-  };
 
-  const handleEditItem = (type, oldName, newName) => {
-    if (type === 'category') {
-      setCategories(prev => prev.map(cat => cat === oldName ? newName : cat));
-      setTransactions(prev => prev.map(t => 
-        t.category === oldName ? { ...t, category: newName } : t
-      ));
-    } else if (type === 'tag') {
-      setTags(prev => prev.map(tag => tag === oldName ? newName : tag));
-      setTransactions(prev => prev.map(t => 
-        t.tags === oldName ? { ...t, tags: newName } : t
-      ));
-    }
-    setEditingItem(null);
-  };
+const handleAddItem = (type) => {
+  if (!newItemName.trim()) return;
+  
+  if (type === 'category') {
+    setLocalCategories(prev => [...prev, newItemName.trim()]); // ← Changed
+  } else if (type === 'tag') {
+    setLocalTags(prev => [...prev, newItemName.trim()]);       // ← Changed
+  }
+  setNewItemName('');
+};
 
-  const handleDeleteItem = (type, name) => {
-    if (type === 'category') {
-      setCategories(prev => prev.filter(cat => cat !== name));
-    } else if (type === 'tag') {
-      setTags(prev => prev.filter(tag => tag !== name));
-    }
-  };
+ // Update handleEditItem function:
+const handleEditItem = (type, oldName, newName) => {
+  if (type === 'category') {
+    setLocalCategories(prev => prev.map(cat => cat === oldName ? newName : cat)); // ← Changed
+    setTransactions(prev => prev.map(t => 
+      t.category === oldName ? { ...t, category: newName } : t
+    ));
+  } else if (type === 'tag') {
+    setLocalTags(prev => prev.map(tag => tag === oldName ? newName : tag));       // ← Changed
+    setTransactions(prev => prev.map(t => 
+      t.tags === oldName ? { ...t, tags: newName } : t
+    ));
+  }
+  setEditingItem(null);
+};
+
+ const handleDeleteItem = (type, name) => {
+  if (type === 'category') {
+    setLocalCategories(prev => prev.filter(cat => cat !== name)); // ← Changed
+  } else if (type === 'tag') {
+    setLocalTags(prev => prev.filter(tag => tag !== name));       // ← Changed
+  }
+};
 
   const handleAddTransaction = () => {
     const transaction = {
@@ -346,6 +379,32 @@ const handleCancelEdit = () => {
     });
     setShowAddTransaction(false);
   };
+
+const handleDeleteCategory = async (categoryName) => {
+  try {
+    const result = await categoryService.delete(categoryName);
+    // Refresh transactions to reflect changes
+    if (useRealData) {
+      // Refresh real data if using real data
+      console.log('Category deleted, refreshing transactions...');
+    }
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+const handleDeleteTag = async (tagName) => {
+  try {
+    const result = await tagService.delete(tagName);
+    console.log('Tag deleted, refreshing...');
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -387,32 +446,35 @@ const handleCancelEdit = () => {
         <QuickStatsSection quickStats={quickStats} />
 
         {/* Settings Section */}
-        <SettingsSection
-          isExpanded={expandedSections.settings}
-          onToggle={() => toggleSection('settings')}
-          activeTab={activeSettingsTab}
-          setActiveTab={setActiveSettingsTab}
-          itemsPerPage={itemsPerPage}
-          setItemsPerPage={setItemsPerPage}
-          chartType={chartType}
-          setChartType={setChartType}
-          categories={categories}
-          setCategories={setCategories}
-          tags={tags}
-          setTags={setTags}
-          editingItem={editingItem}
-          setEditingItem={setEditingItem}
-          newItemName={newItemName}
-          setNewItemName={setNewItemName}
-          showAddTransaction={showAddTransaction}
-          setShowAddTransaction={setShowAddTransaction}
-          newTransaction={newTransaction}
-          setNewTransaction={setNewTransaction}
-          onAddItem={handleAddItem}
-          onEditItem={handleEditItem}
-          onDeleteItem={handleDeleteItem}
-          onAddTransaction={handleAddTransaction}
-        />
+<SettingsSection
+  isExpanded={expandedSections.settings}
+  onToggle={() => toggleSection('settings')}
+  activeTab={activeSettingsTab}
+  setActiveTab={setActiveSettingsTab}
+  itemsPerPage={itemsPerPage}
+  setItemsPerPage={setItemsPerPage}
+  chartType={chartType}
+  setChartType={setChartType}
+  categories={localCategories}
+  setCategories={setLocalCategories}
+  tags={localTags}
+  setTags={setLocalTags}
+  editingItem={editingItem}
+  setEditingItem={setEditingItem}
+  newItemName={newItemName}
+  setNewItemName={setNewItemName}
+  showAddTransaction={showAddTransaction}
+  setShowAddTransaction={setShowAddTransaction}
+  newTransaction={newTransaction}
+  setNewTransaction={setNewTransaction}
+  onAddItem={handleAddItem}
+  onEditItem={handleEditItem}
+  onDeleteItem={handleDeleteItem}
+  onAddTransaction={handleAddTransaction}
+  // ← ADD THESE NEW PROPS:
+  onDeleteCategory={handleDeleteCategory}
+  onDeleteTag={handleDeleteTag}
+/>
         {/* Filters Section */}
         <FiltersSection
           isExpanded={expandedSections.filters}
@@ -442,6 +504,7 @@ const handleCancelEdit = () => {
         />
 
         {/* Transaction Table */}
+
 <TransactionTable
   transactions={transactions}
   filteredTransactions={filteredTransactions}
@@ -460,9 +523,10 @@ const handleCancelEdit = () => {
   onStartEdit={handleStartEdit}
   onSaveEdit={handleSaveEdit}
   onCancelEdit={handleCancelEdit}
-  categories={categories}
+  categories={localCategories}
   uniqueTags={uniqueTags}
-  onOpenTagModal={handleOpenTagModal}  // ← ADD THIS
+  onOpenTagModal={handleOpenTagModal}
+  removeTag={removeTag}  // ← ADD THIS LINE
 />
         {/* Tag Edit Modal */}
         <TagEditModal

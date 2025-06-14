@@ -17,21 +17,19 @@ const SettingsSection = ({
   chartType,
   setChartType,
   categories,
-  setCategories,
   tags,
-  setTags,
-  editingItem,
-  setEditingItem,
-  newItemName,
-  setNewItemName,
   showAddTransaction,
   setShowAddTransaction,
   newTransaction,
   setNewTransaction,
-  onAddItem,
-  onEditItem,
-  onDeleteItem,
-  onAddTransaction
+  onAddTransaction,
+  onCreateCategory,
+  onDeleteCategory, 
+  onRefreshCategories,
+  onCreateTag,
+  onDeleteTag,
+  onRefreshTags
+  
 }) => {
   const settingsTabs = isExpanded ? (
     <div className="flex gap-4">
@@ -62,34 +60,27 @@ const SettingsSection = ({
             setChartType={setChartType}
           />
         );
-      case 'categories':
-        return (
-          <CategoryManager 
-            categories={categories}
-            setCategories={setCategories}
-            editingItem={editingItem}
-            setEditingItem={setEditingItem}
-            newItemName={newItemName}
-            setNewItemName={setNewItemName}
-            onAddItem={onAddItem}
-            onEditItem={onEditItem}
-            onDeleteItem={onDeleteItem}
-          />
-        );
-      case 'tags':
-        return (
-          <TagManager 
-            tags={tags}
-            setTags={setTags}
-            editingItem={editingItem}
-            setEditingItem={setEditingItem}
-            newItemName={newItemName}
-            setNewItemName={setNewItemName}
-            onAddItem={onAddItem}
-            onEditItem={onEditItem}
-            onDeleteItem={onDeleteItem}
-          />
-        );
+      // Update the CategoryManager case in your renderContent function:
+case 'categories':
+  return (
+    <CategoryManager 
+      categories={categories}
+      onRefreshCategories={onRefreshCategories}
+      onCreateCategory={onCreateCategory}
+      onDeleteCategory={onDeleteCategory}
+    />
+  );
+
+// Update the TagManager case:
+case 'tags':
+  return (
+    <TagManager 
+      tags={tags}
+      onRefreshTags={onRefreshTags}
+      onCreateTag={onCreateTag}
+      onDeleteTag={onDeleteTag}
+    />
+  );
       case 'mappings':
         return <MappingsSettings />;
       case 'transactions':

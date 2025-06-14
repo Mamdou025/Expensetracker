@@ -1,5 +1,4 @@
-
-// src/hooks/useTags.js - Custom hook for tags
+// src/hooks/useTags.js
 import { useState, useEffect } from 'react';
 import { tagService } from '../Services/tagservice';
 
@@ -16,27 +15,19 @@ export const useTags = () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await tagService.getWithStats();
+      console.log('🔄 Loading tags from API...');
       
-      // Extract just the tag names for your existing components
+      const data = await tagService.getAllWithStats();
+      
+      // Extract just tag names for your components
       const tagNames = data.map(tag => tag.name);
+      console.log('✅ Tags loaded:', tagNames);
       setTags(tagNames);
     } catch (err) {
-      console.error('Error loading tags:', err);
+      console.error('❌ Error loading tags:', err);
       setError(err.message);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const deleteTag = async (tagName) => {
-    try {
-      await tagService.delete(tagName);
-      await loadTags(); // Reload to get updated data
-    } catch (err) {
-      console.error('Error deleting tag:', err);
-      setError(err.message);
-      throw err;
     }
   };
 
@@ -44,7 +35,6 @@ export const useTags = () => {
     tags,
     loading,
     error,
-    refreshTags: loadTags,
-    deleteTag
+    refreshTags: loadTags
   };
 };

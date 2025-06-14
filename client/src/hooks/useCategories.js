@@ -1,5 +1,4 @@
-
-// src/hooks/useCategories.js - Custom hook for categories
+// src/hooks/useCategories.js
 import { useState, useEffect } from 'react';
 import { categoryService } from '../Services/categoryService';
 
@@ -16,13 +15,16 @@ export const useCategories = () => {
     try {
       setLoading(true);
       setError(null);
+      console.log('🔄 Loading categories from API...');
+      
       const data = await categoryService.getAll();
       
-      // Extract just the category names for your existing components
+      // Extract just category names for your components
       const categoryNames = data.map(cat => cat.name);
+      console.log('✅ Categories loaded:', categoryNames);
       setCategories(categoryNames);
     } catch (err) {
-      console.error('Error loading categories:', err);
+      console.error('❌ Error loading categories:', err);
       setError(err.message);
     } finally {
       setLoading(false);
