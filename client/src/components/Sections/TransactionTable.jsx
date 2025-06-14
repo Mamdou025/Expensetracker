@@ -1,3 +1,4 @@
+// src/components/Sections/TransactionTable.jsx
 import React from 'react';
 
 const EditableTransactionRow = ({ 
@@ -10,9 +11,9 @@ const EditableTransactionRow = ({
   setEditValues, 
   categories, 
   onMultiSelectFilter,
-  removeTag,
+    removeTag,
   filters,
-  onOpenTagModal  // ← ADD THIS PARAMETER
+  onOpenTagModal
 }) => {
   const isEditing = (field) => editingTransaction === `${transaction.id}-${field}`;
   
@@ -114,7 +115,6 @@ const EditableTransactionRow = ({
               value={editValues.category || ''}
               onChange={(e) => {
                 if (e.target.value === '__ADD_NEW__') {
-                  // Switch to text input for new category
                   setEditValues(prev => ({ ...prev, category: '', isAddingNew: true }));
                 } else {
                   setEditValues(prev => ({ ...prev, category: e.target.value, isAddingNew: false }));
@@ -130,7 +130,6 @@ const EditableTransactionRow = ({
               <option value="__ADD_NEW__">+ Add New Category</option>
             </select>
             
-            {/* Show text input when adding new category */}
             {editValues.isAddingNew && (
               <input
                 type="text"
@@ -180,7 +179,6 @@ const EditableTransactionRow = ({
               {transaction.category || 'No Category'}
             </button>
             
-            {/* Quick delete category button */}
             {transaction.category && (
               <button
                 onClick={() => {
@@ -259,7 +257,6 @@ const TransactionTable = ({
   onSort,
   onMultiSelectFilter,
   onPageChange,
-  // New editing props
   editingTransaction,
   editValues,
   setEditValues,
@@ -296,6 +293,9 @@ const TransactionTable = ({
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
+              <th className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button 
                   onClick={() => onSort('date')} 
@@ -350,7 +350,7 @@ const TransactionTable = ({
                 categories={categories}
                 onMultiSelectFilter={onMultiSelectFilter}
                 filters={filters}
-                onOpenTagModal={onOpenTagModal}  // ← ADD THIS PROP
+                onOpenTagModal={onOpenTagModal}
               />
             ))}
           </tbody>

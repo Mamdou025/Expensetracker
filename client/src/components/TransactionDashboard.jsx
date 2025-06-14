@@ -318,6 +318,18 @@ const handleCancelEdit = () => {
     setCurrentPage(1);
   };
 
+// Add this handler after your other handlers:
+const handleDeleteTransaction = async (transactionId) => {
+  try {
+    // You'll need to implement this API endpoint
+    console.log('🗑️ Deleting transaction:', transactionId);
+    // For now, just log - you can implement the actual deletion later
+    alert('Delete functionality coming soon!');
+  } catch (error) {
+    console.error('Failed to delete transaction:', error);
+    alert('Failed to delete transaction. Please try again.');
+  }
+};
 
 const handleAddItem = (type) => {
   if (!newItemName.trim()) return;
@@ -526,7 +538,8 @@ const handleDeleteTag = async (tagName) => {
   categories={localCategories}
   uniqueTags={uniqueTags}
   onOpenTagModal={handleOpenTagModal}
-  removeTag={removeTag}  // ← ADD THIS LINE
+  removeTag={removeTag} 
+  onDeleteTransaction={handleDeleteTransaction} 
 />
         {/* Tag Edit Modal */}
         <TagEditModal
