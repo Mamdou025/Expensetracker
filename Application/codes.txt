@@ -1,0 +1,3 @@
+UPDATE transactions
+SET bank = 'mbna_credit'
+WHERE bank = 'MBNA';
