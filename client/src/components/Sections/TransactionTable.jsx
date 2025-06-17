@@ -1,5 +1,17 @@
 // src/components/Sections/TransactionTable.jsx
 import React from 'react';
+import TransactionActionsMenu from '../common/TransactionActionsMenu';
+
+// We need to create a wrapper component to fix the dropdown positioning
+const FixedTransactionActionsMenu = (props) => {
+  return (
+    <div className="flex justify-end">
+      <div className="relative">
+        <TransactionActionsMenu {...props} />
+      </div>
+    </div>
+  );
+};
 
 const EditableTransactionRow = ({ 
   transaction, 
@@ -11,9 +23,10 @@ const EditableTransactionRow = ({
   setEditValues, 
   categories, 
   onMultiSelectFilter,
-    removeTag,
+  removeTag,
   filters,
-  onOpenTagModal
+  onOpenTagModal,
+  onDeleteTransaction
 }) => {
   const isEditing = (field) => editingTransaction === `${transaction.id}-${field}`;
   
@@ -24,7 +37,7 @@ const EditableTransactionRow = ({
         {transaction.date}
       </td>
       
-      {/* Description - Editable */}
+      {/* Description - Clean display + inline editing when triggered */}
       <td className="px-8 py-6 text-sm text-gray-900">
         {isEditing('description') ? (
           <div className="flex items-center gap-2">
@@ -55,17 +68,13 @@ const EditableTransactionRow = ({
             </button>
           </div>
         ) : (
-          <div
-            onClick={() => onStartEdit(transaction, 'description')}
-            className="cursor-pointer hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200"
-            title="Click to edit description"
-          >
+          <span className="text-gray-900">
             {transaction.description}
-          </div>
+          </span>
         )}
       </td>
       
-      {/* Amount - Editable */}
+      {/* Amount - Clean display + inline editing when triggered */}
       <td className="px-8 py-6 whitespace-nowrap text-sm font-medium text-gray-900">
         {isEditing('amount') ? (
           <div className="flex items-center gap-2">
@@ -97,17 +106,13 @@ const EditableTransactionRow = ({
             </button>
           </div>
         ) : (
-          <div
-            onClick={() => onStartEdit(transaction, 'amount')}
-            className="cursor-pointer hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200"
-            title="Click to edit amount"
-          >
+          <span className="text-gray-900 font-medium">
             ${transaction.amount.toFixed(2)}
-          </div>
+          </span>
         )}
       </td>
       
-      {/* Category - Enhanced Dropdown with Add New */}
+      {/* Category - Clean badge display + dropdown editing when triggered */}
       <td className="px-8 py-6 whitespace-nowrap">
         {isEditing('category') ? (
           <div className="flex items-center gap-2">
@@ -164,82 +169,57 @@ const EditableTransactionRow = ({
             </button>
           </div>
         ) : (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => onStartEdit(transaction, 'category')}
-              className={`px-3 py-2 text-xs rounded-full transition-all duration-200 hover:shadow-md ${
-                transaction.category 
-                  ? filters.categories.includes(transaction.category)
-                    ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-200'
-                    : 'bg-gray-100 text-gray-800 hover:bg-blue-50'
-                  : 'bg-red-100 text-red-800 hover:bg-red-200'
-              }`}
-              title="Click to edit category"
-            >
-              {transaction.category || 'No Category'}
-            </button>
-            
-            {transaction.category && (
-              <button
-                onClick={() => {
-                  if (window.confirm(`Remove "${transaction.category}" from this transaction?`)) {
-                    onSaveEdit({ ...transaction, category: null }, 'category');
-                  }
-                }}
-                className="text-red-500 hover:text-red-700 hover:bg-red-100 p-1 rounded transition-colors duration-200"
-                title="Remove category"
-              >
-                ✕
-              </button>
-            )}
-          </div>
+          <span
+            className={`px-3 py-1 text-xs rounded-full ${
+              transaction.category 
+                ? filters.categories.includes(transaction.category)
+                  ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-200'
+                  : 'bg-gray-100 text-gray-800'
+                : 'bg-red-100 text-red-800'
+            }`}
+          >
+            {transaction.category || 'No Category'}
+          </span>
         )}
       </td>
       
-      {/* Tags - Enhanced with quick delete */}
+      {/* Tags - Clean badge display only (editing through modal) */}
       <td className="px-8 py-6 whitespace-nowrap">
-        <div className="flex flex-wrap gap-1 items-center">
+        <div className="flex flex-wrap gap-1">
           {transaction.tags && transaction.tags.split(',').map(tag => tag.trim()).filter(tag => tag).map((tag, index) => (
-            <div key={index} className="flex items-center gap-1">
-              <span
-                className={`px-2 py-1 text-xs rounded-full transition-all duration-200 ${
-                  filters.tags.includes(tag)
-                    ? 'bg-green-100 text-green-800 ring-2 ring-green-200'
-                    : 'bg-gray-100 text-gray-800'
-                }`}
-              >
-                {tag}
-              </span>
-              <button
-                onClick={async () => {
-                  if (window.confirm(`Remove "${tag}" from this transaction?`)) {
-                    try {
-                      await removeTag(transaction.id, tag);
-                    } catch (error) {
-                      alert('Failed to remove tag: ' + error.message);
-                    }
-                  }
-                }}
-                className="text-red-500 hover:text-red-700 hover:bg-red-100 w-4 h-4 rounded-full flex items-center justify-center text-xs transition-colors duration-200"
-                title="Remove tag"
-              >
-                ✕
-              </button>
-            </div>
+            <span
+              key={index}
+              className={`px-2 py-1 text-xs rounded-full transition-all duration-200 ${
+                filters.tags.includes(tag)
+                  ? 'bg-green-100 text-green-800 ring-2 ring-green-200'
+                  : 'bg-gray-100 text-gray-800'
+              }`}
+            >
+              {tag}
+            </span>
           ))}
-          <button
-            onClick={() => onOpenTagModal ? onOpenTagModal(transaction) : onStartEdit(transaction, 'tags')}
-            className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors duration-200"
-            title="Add/Edit tags"
-          >
-            ✏️ Edit
-          </button>
+          {(!transaction.tags || transaction.tags.split(',').filter(tag => tag.trim()).length === 0) && (
+            <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-500">
+              No tags
+            </span>
+          )}
         </div>
       </td>
       
       {/* Bank - Read only */}
       <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-600">
         {transaction.bank}
+      </td>
+      
+      {/* Actions - Three Dot Menu (moved to right) */}
+      <td className="px-4 py-6 whitespace-nowrap text-right">
+        <FixedTransactionActionsMenu
+          transaction={transaction}
+          onStartEdit={onStartEdit}
+          onOpenTagModal={onOpenTagModal}
+          onDeleteTransaction={onDeleteTransaction}
+          removeTag={removeTag}
+        />
       </td>
     </tr>
   );
@@ -266,6 +246,8 @@ const TransactionTable = ({
   categories,
   uniqueTags,
   onOpenTagModal,
+  removeTag,
+  onDeleteTransaction
 }) => {
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
 
@@ -293,9 +275,6 @@ const TransactionTable = ({
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button 
                   onClick={() => onSort('date')} 
@@ -329,10 +308,13 @@ const TransactionTable = ({
                 </button>
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tags ✏️
+                Tags
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Bank
+              </th>
+              <th className="px-4 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
               </th>
             </tr>
           </thead>
@@ -351,6 +333,8 @@ const TransactionTable = ({
                 onMultiSelectFilter={onMultiSelectFilter}
                 filters={filters}
                 onOpenTagModal={onOpenTagModal}
+                removeTag={removeTag}
+                onDeleteTransaction={onDeleteTransaction}
               />
             ))}
           </tbody>

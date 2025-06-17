@@ -18,7 +18,6 @@ import { useCategories } from '../hooks/useCategories';
 import { useTags } from '../hooks/useTags';
 
 
-
 const TransactionDashboard = () => {
 
 
@@ -78,9 +77,9 @@ React.useEffect(() => {
   // State management
   const { expandedSections, toggleSection } = useExpandableState({
     settings: false,
-    filters: true,
-    timeChart: true,
-    categoryChart: true
+    filters: false,
+    timeChart: false,
+    categoryChart: false
   });
 
   // Transaction data
@@ -91,7 +90,11 @@ React.useEffect(() => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortField, setSortField] = useState('date');
   const [sortDirection, setSortDirection] = useState('desc');
-  
+  // Add these new state variables to your TransactionDashboard.jsx
+const [timeGrouping, setTimeGrouping] = useState('daily');
+const [showCategoryBreakdown, setShowCategoryBreakdown] = useState('none');
+  // Add this temporarily in TransactionDashboard.jsx after your state declarations
+console.log('Dashboard state:', { timeGrouping, showCategoryBreakdown });
   // Settings state
  // ✅ REPLACE WITH - Real data from API:
 const [localCategories, setLocalCategories] = useState([]);
@@ -115,42 +118,43 @@ const [editValues, setEditValues] = useState({});
     tags: ''
   });
   
-  // Filters
-  const [filters, setFilters] = useState({
-    dateFrom: '',
-    dateTo: '',
-    amountMin: '',
-    amountMax: '',
-    keyword: '',
-    categories: [],
-    tags: [],
-    card_type:[]
-  });
+ // Find this in your TransactionDashboard.jsx and change it:
+const [filters, setFilters] = useState({
+  dateFrom: '',
+  dateTo: '',
+  amountMin: '',
+  amountMax: '',
+  keyword: '',
+  categories: [],
+  tags: [],
+  banks: []      // ← CHANGE FROM 'card_type' TO 'banks'
+});
 
   // Get unique values for filter options
   const uniqueCategories = [...new Set(transactions.map(t => t.category))];
   const uniqueTags = [...new Set(transactions.map(t => t.tags).filter(t => t))];
-  const uniqueCardTypes = [...new Set(transactions.map(t => t.card_type).filter(t => t))]; 
+  const uniqueCardTypes = [...new Set(transactions.map(t => t.bank).filter(t => t))]; 
   // Add this state after your existing editing state:
 const [showTagModal, setShowTagModal] = useState(false);
 const [editingTagsForTransaction, setEditingTagsForTransaction] = useState(null);
 
 
   // Filter transactions
-  const filteredTransactions = useMemo(() => {
-    return transactions.filter(transaction => {
-      if (filters.dateFrom && transaction.date < filters.dateFrom) return false;
-      if (filters.dateTo && transaction.date > filters.dateTo) return false;
-      if (filters.amountMin && transaction.amount < parseFloat(filters.amountMin)) return false;
-      if (filters.amountMax && transaction.amount > parseFloat(filters.amountMax)) return false;
-      if (filters.keyword && !transaction.description.toLowerCase().includes(filters.keyword.toLowerCase())) return false;
-      if (filters.categories.length > 0 && !filters.categories.includes(transaction.category)) return false;
-      if (filters.tags.length > 0 && !filters.tags.includes(transaction.tags)) return false;
-      if (filters.card_type.length > 0 && !filters.card_type.includes(transaction.card_type)) return false; 
+// Find your filteredTransactions useMemo and change this line:
+const filteredTransactions = useMemo(() => {
+  return transactions.filter(transaction => {
+    if (filters.dateFrom && transaction.date < filters.dateFrom) return false;
+    if (filters.dateTo && transaction.date > filters.dateTo) return false;
+    if (filters.amountMin && transaction.amount < parseFloat(filters.amountMin)) return false;
+    if (filters.amountMax && transaction.amount > parseFloat(filters.amountMax)) return false;
+    if (filters.keyword && !transaction.description.toLowerCase().includes(filters.keyword.toLowerCase())) return false;
+    if (filters.categories.length > 0 && !filters.categories.includes(transaction.category)) return false;
+    if (filters.tags.length > 0 && !filters.tags.includes(transaction.tags)) return false;
+    if (filters.banks.length > 0 && !filters.banks.includes(transaction.bank)) return false; // ← CHANGE THIS LINE
 
-      return true;
-    });
-  }, [transactions, filters]);
+    return true;
+  });
+}, [transactions, filters]);
 
   // Sort transactions
   const sortedTransactions = useMemo(() => {
@@ -192,20 +196,54 @@ const [editingTagsForTransaction, setEditingTagsForTransaction] = useState(null)
   }, [filteredTransactions]);
 
   // Chart data
-  const chartData = useMemo(() => {
-    const dateGroups = filteredTransactions.reduce((acc, transaction) => {
-      const date = transaction.date;
-      if (!acc[date]) {
-        acc[date] = { date, amount: 0, count: 0 };
-      }
-      acc[date].amount += transaction.amount;
-      acc[date].count += 1;
-      return acc;
-    }, {});
-    
-    return Object.values(dateGroups).sort((a, b) => new Date(a.date) - new Date(b.date));
-  }, [filteredTransactions]);
+// Update your chartData useMemo to handle different time groupings
+const chartData = useMemo(() => {
+  const getTimeKey = (date, grouping) => {
+    const d = new Date(date);
+    switch(grouping) {
+      case 'weekly':
+        // Get start of week (Monday)
+        const startOfWeek = new Date(d);
+        startOfWeek.setDate(d.getDate() - d.getDay() + 1);
+        return startOfWeek.toISOString().split('T')[0];
+      case 'monthly':
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      case 'yearly':
+        return `${d.getFullYear()}`;
+      default: // daily
+        return date;
+    }
+  };
 
+  const dateGroups = filteredTransactions.reduce((acc, transaction) => {
+    const timeKey = getTimeKey(transaction.date, timeGrouping);
+    
+    if (!acc[timeKey]) {
+      acc[timeKey] = { 
+        date: timeKey, 
+        amount: 0, 
+        count: 0,
+        categories: {} // For category breakdown
+      };
+    }
+    
+    acc[timeKey].amount += transaction.amount;
+    acc[timeKey].count += 1;
+    
+    // Add category breakdown data
+    if (showCategoryBreakdown !== 'none') {
+      const category = transaction.category || 'Uncategorized';
+      if (!acc[timeKey].categories[category]) {
+        acc[timeKey].categories[category] = 0;
+      }
+      acc[timeKey].categories[category] += transaction.amount;
+    }
+    
+    return acc;
+  }, {});
+  
+  return Object.values(dateGroups).sort((a, b) => new Date(a.date) - new Date(b.date));
+}, [filteredTransactions, timeGrouping, showCategoryBreakdown]);
   // Pie chart data
   const pieChartData = useMemo(() => {
     const categoryGroups = filteredTransactions.reduce((acc, transaction) => {
@@ -416,7 +454,18 @@ const handleDeleteTag = async (tagName) => {
     throw error;
   }
 };
+// Add this function to your TransactionDashboard.jsx after your existing handlers
 
+const handleCreateTag = async (tagName) => {
+  try {
+    const result = await tagService.create(tagName);
+    console.log('Tag created:', result);
+    return result;
+  } catch (error) {
+    console.error('Failed to create tag:', error);
+    throw error;
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -486,6 +535,14 @@ const handleDeleteTag = async (tagName) => {
   // ← ADD THESE NEW PROPS:
   onDeleteCategory={handleDeleteCategory}
   onDeleteTag={handleDeleteTag}
+  onRefreshTags={refreshTags}  
+  onRefreshCategories={refreshCategories}  
+  onCreateTag={handleCreateTag}    
+    timeGrouping={timeGrouping}
+  setTimeGrouping={setTimeGrouping}
+  showCategoryBreakdown={showCategoryBreakdown}
+  setShowCategoryBreakdown={setShowCategoryBreakdown}       // ← Change this line
+
 />
         {/* Filters Section */}
         <FiltersSection
@@ -506,6 +563,8 @@ const handleDeleteTag = async (tagName) => {
           onToggle={() => toggleSection('timeChart')}
           chartData={chartData}
           chartType={chartType}
+          timeGrouping={timeGrouping}
+          showCategoryBreakdown={showCategoryBreakdown}
         />
 
         {/* Category Chart Section */}
@@ -536,7 +595,7 @@ const handleDeleteTag = async (tagName) => {
   onSaveEdit={handleSaveEdit}
   onCancelEdit={handleCancelEdit}
   categories={localCategories}
-  uniqueTags={uniqueTags}
+   uniqueTags={localTags}
   onOpenTagModal={handleOpenTagModal}
   removeTag={removeTag} 
   onDeleteTransaction={handleDeleteTransaction} 
@@ -546,10 +605,11 @@ const handleDeleteTag = async (tagName) => {
           isOpen={showTagModal}
           onClose={handleCloseTagModal}
           transaction={editingTagsForTransaction}
-          allAvailableTags={uniqueTags}
+          allAvailableTags={localTags}
           onSave={handleSaveTagChanges}
           addTag={addTag}
           removeTag={removeTag}
+          
         />
 
 

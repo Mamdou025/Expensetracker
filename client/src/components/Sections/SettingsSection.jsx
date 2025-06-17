@@ -7,6 +7,7 @@ import CategoryManager from '../Settings/CategoryManager';
 import TagManager from '../Settings/TagManager';
 import MappingsSettings from '../Settings/MappingsSettings';
 import AddTransactionForm from '../Settings/AddTransactionForm';
+
 const SettingsSection = ({ 
   isExpanded, 
   onToggle, 
@@ -28,9 +29,15 @@ const SettingsSection = ({
   onRefreshCategories,
   onCreateTag,
   onDeleteTag,
-  onRefreshTags
+  onRefreshTags,
+   timeGrouping,
+  setTimeGrouping,
+  showCategoryBreakdown,
+  setShowCategoryBreakdown
   
 }) => {
+    console.log('SettingsSection received:', { timeGrouping, showCategoryBreakdown });
+
   const settingsTabs = isExpanded ? (
     <div className="flex gap-4">
       {['display', 'categories', 'tags', 'mappings', 'transactions'].map((tab) => (
@@ -51,15 +58,20 @@ const SettingsSection = ({
 
   const renderContent = () => {
     switch(activeTab) {
-      case 'display':
-        return (
-          <DisplaySettings 
-            itemsPerPage={itemsPerPage}
-            setItemsPerPage={setItemsPerPage}
-            chartType={chartType}
-            setChartType={setChartType}
-          />
-        );
+       case 'display':
+  return (
+    <DisplaySettings 
+      itemsPerPage={itemsPerPage}
+      setItemsPerPage={setItemsPerPage}
+      chartType={chartType}
+      setChartType={setChartType}
+      // Add these new props:
+      timeGrouping={timeGrouping}
+      setTimeGrouping={setTimeGrouping}
+      showCategoryBreakdown={showCategoryBreakdown}
+      setShowCategoryBreakdown={setShowCategoryBreakdown}
+    />
+  );
       // Update the CategoryManager case in your renderContent function:
 case 'categories':
   return (
@@ -70,6 +82,7 @@ case 'categories':
       onDeleteCategory={onDeleteCategory}
     />
   );
+
 
 // Update the TagManager case:
 case 'tags':

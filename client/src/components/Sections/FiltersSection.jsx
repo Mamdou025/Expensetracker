@@ -116,25 +116,25 @@ const FiltersSection = ({
         </div>
       </div>
 
-      {/* Card Types - NEW SECTION */}
-      <div className="mt-6">
-        <label className="block text-sm font-medium mb-3">Card Types</label>
-        <div className="flex flex-wrap gap-3">
-          {uniqueCardTypes.map((cardType) => (
-            <button
-              key={cardType}
-              onClick={() => onMultiSelectFilter('card_type', cardType)}
-              className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${
-                filters.card_type && filters.card_type.includes(cardType)
-                  ? 'bg-purple-500 text-white border-purple-500 shadow-lg'
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-              }`}
-            >
-              {cardType}
-            </button>
-          ))}
-        </div>
-      </div>
+{/* Banks - UPDATED SECTION */}
+<div className="mt-6">
+  <label className="block text-sm font-medium mb-3">Banks</label>
+  <div className="flex flex-wrap gap-3">
+    {uniqueCardTypes.map((bank) => (
+      <button
+        key={bank}
+        onClick={() => onMultiSelectFilter('banks', bank)}  // ← CHANGED TO 'banks'
+        className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${
+          filters.banks && filters.banks.includes(bank)      // ← CHANGED TO 'banks'
+            ? 'bg-purple-500 text-white border-purple-500 shadow-lg'
+            : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+        }`}
+      >
+        {bank}
+      </button>
+    ))}
+  </div>
+</div>
     </ExpandableSection>
   );
 };
