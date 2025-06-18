@@ -1,6 +1,6 @@
 // src/components/common/TransactionActionsMenu.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical, Edit3, Tag, Trash2, DollarSign, FileText, Folder } from 'lucide-react';
+import { MoreVertical, Tag, Trash2, DollarSign, FileText, Folder } from 'lucide-react';
 
 const TransactionActionsMenu = ({ 
   transaction, 

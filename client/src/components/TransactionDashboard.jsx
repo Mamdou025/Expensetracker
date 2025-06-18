@@ -11,7 +11,7 @@ import QuickStatsSection from './Sections/QuickStatsSection';
 import generateMockData from './utils/mockData';
 // Add these imports with your existing ones:
 import { categoryService } from '../Services/categoryService';
-import { tagService } from '../Services/tagservice';
+import { tagService } from '../Services/tagService';
 import TagEditModal from './common/TagEditModal';
 // Add these imports with your existing ones:
 import { useCategories } from '../hooks/useCategories';
@@ -36,13 +36,11 @@ const {
 // Add these hooks after your useTransactions hook:
 const { 
   categories: realCategories, 
-  loading: categoriesLoading,
   refreshCategories 
 } = useCategories();
 
 const { 
   tags: realTags, 
-  loading: tagsLoading,
   refreshTags 
 } = useTags();
 // Add this state for toggling between mock and real data
