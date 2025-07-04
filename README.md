@@ -77,15 +77,20 @@ EXPENSETRACKER/
    pip install -r requirements.txt
    ```
 
-3. **Configure credentials**
-   Add your email credentials to `credentials.yml`:
+3. **Provide credentials**
+   You can either create a `credentials.yml` file or use environment variables.
+
+   **Option A - `credentials.yml`**
 
    ```yaml
-   email:
-     address: youremail@example.com
-     password: yourpassword
-     imap_server: imap.gmail.com
+   user: "youremail@example.com"
+   password: "yourapppassword"
    ```
+
+   **Option B - environment variables**
+
+   Set `EMAIL_USER` and `EMAIL_PASS` in your environment. You may place them in a
+   local `.env` file and run `source .env` before starting the application.
 
 4. **Edit `config.yml`** with:
 
