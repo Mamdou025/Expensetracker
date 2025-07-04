@@ -9,6 +9,27 @@ from email.header import decode_header
 SENDER_EMAIL = "info@neofinancial.com"  # Modifiez cette valeur selon l'expéditeur souhaité
 EMAIL_POSITION = -3  # -1 pour le dernier email, -2 pour l'avant-dernier, etc.
 
+def load_credentials():
+    """Load credentials from credentials.yml or environment variables."""
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    credentials_path = os.path.join(base_dir, "credentials.yml")
+
+    user = os.getenv("EMAIL_USER")
+    password = os.getenv("EMAIL_PASS")
+
+    if os.path.exists(credentials_path):
+        with open(credentials_path) as f:
+            creds = yaml.safe_load(f)
+            user = creds.get("user", user)
+            password = creds.get("password", password)
+
+    if not user or not password:
+        raise ValueError(
+            "Email credentials not provided. Set EMAIL_USER and EMAIL_PASS or create credentials.yml"
+        )
+
+    return user, password
+
 def extract_email_body(my_msg):
     """Extracts clean text from an email body (either plain text or HTML)."""
     body = None
@@ -33,13 +54,8 @@ def fetch_email_text():
     imap_url = 'imap.gmail.com'
     my_mail = imaplib.IMAP4_SSL(imap_url)
 
-    # ✅ Get the absolute path to 'credentials.yml'
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    credentials_path = os.path.join(base_dir, "credentials.yml")
-    with open(credentials_path) as f:
-        my_credentials = yaml.load(f, Loader=yaml.FullLoader)
-    
-    user, password = my_credentials["user"], my_credentials["password"]
+    # ✅ Load credentials from file or environment
+    user, password = load_credentials()
 
     # ✅ Login & Select Inbox
     my_mail.login(user, password)
