@@ -195,23 +195,28 @@ const filteredTransactions = useMemo(() => {
 
   // Chart data
 // Update your chartData useMemo to handle different time groupings
+// 🔧 REPLACE your chartData useMemo with this fixed version:
+
 const chartData = useMemo(() => {
-  const getTimeKey = (date, grouping) => {
-    const d = new Date(date);
-    switch(grouping) {
-      case 'weekly':
-        // Get start of week (Monday)
-        const startOfWeek = new Date(d);
-        startOfWeek.setDate(d.getDate() - d.getDay() + 1);
-        return startOfWeek.toISOString().split('T')[0];
-      case 'monthly':
-        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-      case 'yearly':
-        return `${d.getFullYear()}`;
-      default: // daily
-        return date;
-    }
-  };
+  
+const getTimeKey = (date, grouping) => {
+  // 🚨 FIX: Prevent timezone shifting by creating date more carefully
+  const [year, month, day] = date.split('-').map(Number);
+  const d = new Date(year, month - 1, day); // Month is 0-indexed in JavaScript
+  
+  switch(grouping) {
+    case 'weekly':
+      const startOfWeek = new Date(d);
+      startOfWeek.setDate(d.getDate() - d.getDay() + 1);
+      return `${startOfWeek.getFullYear()}-${String(startOfWeek.getMonth() + 1).padStart(2, '0')}-${String(startOfWeek.getDate()).padStart(2, '0')}`;
+    case 'monthly':
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-01`;
+    case 'yearly':
+      return `${d.getFullYear()}-01-01`;
+    default: // daily
+      return date;
+  }
+};
 
   const dateGroups = filteredTransactions.reduce((acc, transaction) => {
     const timeKey = getTimeKey(transaction.date, timeGrouping);
@@ -243,6 +248,24 @@ const chartData = useMemo(() => {
   return Object.values(dateGroups).sort((a, b) => new Date(a.date) - new Date(b.date));
 }, [filteredTransactions, timeGrouping, showCategoryBreakdown]);
   // Pie chart data
+  // Replace your debug code with this more detailed version:
+console.log('🔍 DEBUG - Current filters:', JSON.stringify(filters, null, 2));
+
+console.log('🔍 DEBUG - Filtered transactions sample:');
+filteredTransactions.slice(0, 5).forEach((t, i) => {
+  console.log(`  ${i + 1}. Date: ${t.date} | Amount: $${t.amount} | Desc: ${t.description}`);
+});
+
+console.log('🔍 DEBUG - Chart data generated:');
+chartData.slice(0, 10).forEach((item, i) => {
+  const parsedDate = new Date(item.date);
+  console.log(`  ${i + 1}. Date: ${item.date} | Parsed: ${parsedDate.toLocaleDateString()} | Month: ${parsedDate.getMonth() + 1} | Year: ${parsedDate.getFullYear()} | Amount: $${item.amount}`);
+});
+
+console.log(`🔍 DEBUG - Total chart data points: ${chartData.length}`);
+console.log(`🔍 DEBUG - Time grouping: ${timeGrouping}`);
+  // Add this RIGHT AFTER your chartData useMemo (before the return statement):
+
   const pieChartData = useMemo(() => {
     const categoryGroups = filteredTransactions.reduce((acc, transaction) => {
       const category = transaction.category;
