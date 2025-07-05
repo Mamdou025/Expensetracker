@@ -1,8 +1,8 @@
 # Ignore environment configuration
 .env
 
-# Ignore local credentials if changed
-credentials.yml
+# Ignore Node dependencies
+node_modules/
 
 # Ignore Python cache
 __pycache__/
