@@ -21,3 +21,9 @@ This project extracts transaction data from emails and stores it in a local SQLi
 
 3. Run the extraction scripts located in the `Application` folder.
 
+## Development Notes
+
+Some folders contain Node-based tools. After cloning the repo, run `npm install`
+within those folders to generate `node_modules`. These dependencies are large
+and are ignored by Git. Please avoid committing `node_modules/` directories.
+

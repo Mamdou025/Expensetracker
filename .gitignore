@@ -6,3 +6,6 @@ credentials.yml
 
 # Ignore Python cache
 __pycache__/
+
+# Ignore Node dependencies
+node_modules/
