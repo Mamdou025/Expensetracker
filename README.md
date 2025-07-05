@@ -41,3 +41,9 @@ This project extracts transaction data from emails and stores it in a local SQLi
 
 SQLite is the default database. The file is stored at `Database/transactions.db`.
 
+## Development Notes
+
+Some folders contain Node-based tools. After cloning the repo, run `npm install`
+within those folders to generate `node_modules`. These dependencies are large
+and are ignored by Git. Please avoid committing `node_modules/` directories.
+
