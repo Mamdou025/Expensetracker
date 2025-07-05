@@ -57,10 +57,18 @@ def fetch_emails_by_date_range():
     # ✅ Get credentials
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     credentials_path = os.path.join(base_dir, "credentials.yml")
-    with open(credentials_path) as f:
-        my_credentials = yaml.load(f, Loader=yaml.FullLoader)
-    
-    user, password = my_credentials["user"], my_credentials["password"]
+
+    user = os.getenv("EMAIL_USER")
+    password = os.getenv("EMAIL_PASS")
+
+    if os.path.exists(credentials_path):
+        with open(credentials_path) as f:
+            my_credentials = yaml.safe_load(f)
+            user = user or my_credentials.get("user")
+            password = password or my_credentials.get("password")
+
+    if not user or not password:
+        raise ValueError("Email credentials not provided. Set EMAIL_USER and EMAIL_PASS environment variables or update credentials.yml")
 
     # ✅ Load configuration for keyword matching
     config = load_config()
