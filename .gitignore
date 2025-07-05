@@ -1,0 +1,8 @@
+# Ignore environment configuration
+.env
+
+# Ignore local credentials if changed
+credentials.yml
+
+# Ignore Python cache
+__pycache__/
