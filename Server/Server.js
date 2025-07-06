@@ -2,6 +2,7 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
+const { spawn } = require('child_process');
 
 const app = express();
 // Allow overriding the port via environment variable
@@ -369,6 +370,77 @@ app.get('/api/rules', (req, res) => {
             return;
         }
         res.json(rows);
+    });
+});
+
+// Extract emails within a date range and return preliminary transaction data
+app.post('/api/extract-emails', (req, res) => {
+    const { startDate, endDate } = req.body;
+    if (!startDate || !endDate) {
+        return res.status(400).json({ error: 'startDate and endDate required' });
+    }
+
+    const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
+    const py = spawn('python3', [script, startDate, endDate]);
+
+    let output = '';
+    let errOutput = '';
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Python script error' });
+        }
+        try {
+            const parsed = JSON.parse(output);
+            res.json(parsed);
+        } catch (e) {
+            res.status(500).json({ error: 'Failed to parse python output', details: output });
+        }
+    });
+});
+
+// Process a batch of emails into transactions
+app.post('/api/process-queue', (req, res) => {
+    const emails = req.body.emails;
+    if (!Array.isArray(emails)) {
+        return res.status(400).json({ error: 'emails array required' });
+    }
+
+    const script = path.join(__dirname, '../Application/api_scripts/process_queue.py');
+    const py = spawn('python3', [script]);
+
+    let output = '';
+    let errOutput = '';
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Python script error' });
+        }
+        try {
+            const parsed = JSON.parse(output);
+            res.json(parsed);
+        } catch (e) {
+            res.status(500).json({ error: 'Failed to parse python output', details: output });
+        }
+    });
+
+    py.stdin.write(JSON.stringify(emails));
+    py.stdin.end();
+});
+
+// Retrieve stored full email for a transaction
+app.get('/api/transactions/:id/email', (req, res) => {
+    const { id } = req.params;
+    db.get('SELECT full_email FROM transactions WHERE id = ?', [id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (!row) {
+            return res.status(404).json({ error: 'Transaction not found' });
+        }
+        res.json({ full_email: row.full_email });
     });
 });
 
