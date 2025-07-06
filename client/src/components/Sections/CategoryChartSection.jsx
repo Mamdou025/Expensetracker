@@ -2,6 +2,7 @@ import React from 'react';
 import { PieChart as PieChartIcon } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import ExpandableSection from '../common/ExpandableSection';
+import { useTranslation } from 'react-i18next';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D', '#FFC658', '#FF7C7C'];
 
@@ -23,9 +24,11 @@ const CategoryChartSection = ({
     return null;
   };
 
+  const { t } = useTranslation();
+
   return (
     <ExpandableSection
-      title="Categories Distribution"
+      title={t('categoryChart.title')}
       icon={PieChartIcon}
       isExpanded={isExpanded}
       onToggle={onToggle}
