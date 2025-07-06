@@ -9,7 +9,7 @@ from datetime import datetime, date
 # ✅ Configuration for date range extraction
 SENDER_EMAIL = "mailbox.noreply@cibc.com"
 START_DATE = "09-Feb-2025"  # Format: DD-Mon-YYYY
-END_DATE = "16-jun-2025"    # Format: DD-Mon-YYYY
+END_DATE = "28-jun-2025"    # Format: DD-Mon-YYYY
 
 def load_config():
     """Load the configuration file to get bank keywords."""

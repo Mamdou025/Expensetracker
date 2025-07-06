@@ -1,0 +1,3710 @@
+TRANSACTION EMAILS FROM mailbox.noreply@cibc.com
+Date Range: 09-Feb-2025 to 28-jun-2025
+Total Transaction Emails: 121
+============================================================
+
+--- TRANSACTION EMAIL 1 ---
+Date: Sun, 9 Feb 2025 16:13:34 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :TIM HORTONS #6029 LAVAL QCCA
+
+      Montant de l'achat :4,64$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 2 ---
+Date: Sun, 9 Feb 2025 18:19:10 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :EXTENSION MOBILE FIRST +33632479366 FR
+
+      Montant de l'achat :7,21$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 3 ---
+Date: Sun, 9 Feb 2025 18:42:07 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 30,07$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 4 ---
+Date: Tue, 11 Feb 2025 17:39:11 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 49,32$  RESTAURANT ALI BABA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 5 ---
+Date: Wed, 12 Feb 2025 19:49:27 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :KOHO FINANCIAL VANCOUVER CA
+
+      Montant de l'achat :200,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 6 ---
+Date: Thu, 13 Feb 2025 09:55:18 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Adobe Inc San Jose US
+
+      Montant de l'achat :44,83$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 7 ---
+Date: Thu, 13 Feb 2025 17:43:10 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 50,84$  BOULANGERIE PATISSERIE avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 8 ---
+Date: Sat, 15 Feb 2025 23:13:23 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 197,25$  Restaurant Lucilles avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 9 ---
+Date: Mon, 17 Feb 2025 10:05:51 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.
+      
+    
+      
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :VIRGIN PLUS VERDUN CA
+
+      Montant de l'achat :59,26$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 10 ---
+Date: Mon, 17 Feb 2025 17:33:15 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 87,47$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 11 ---
+Date: Wed, 19 Feb 2025 17:43:19 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 9,42$  MCDONALD'S #41226 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 12 ---
+Date: Wed, 19 Feb 2025 18:36:42 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 50,85$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 13 ---
+Date: Fri, 21 Feb 2025 20:22:55 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 25,44$  KORYO KOREAN BARBEQUE avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 14 ---
+Date: Sat, 22 Feb 2025 03:42:50 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet international a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Adobe Inc 800-8336687 US
+
+      Montant de l'achat :44,83$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 15 ---
+Date: Tue, 25 Feb 2025 12:50:38 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :KOHO FINANCIAL VANCOUVER CA
+
+      Montant de l'achat :200,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 16 ---
+Date: Fri, 28 Feb 2025 20:39:05 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 32,85$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 17 ---
+Date: Fri, 28 Feb 2025 21:45:42 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 17,45$  BURGER KING #14554 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 18 ---
+Date: Fri, 28 Feb 2025 22:40:14 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LE CIRCUIT ELECTRIQUE +18559998378 CA
+
+      Montant de l'achat :20,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 19 ---
+Date: Fri, 28 Feb 2025 23:34:12 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LE CIRCUIT ELECTRIQUE +18559998378 CA
+
+      Montant de l'achat :6,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 20 ---
+Date: Sat, 1 Mar 2025 15:50:11 -0500
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :TELUQ QUEBEC CA
+
+      Montant de l'achat :11,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 21 ---
+Date: Tue, 4 Mar 2025 17:05:36 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 9,90$  BOULANGERIE PATISSERIE avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 22 ---
+Date: Tue, 4 Mar 2025 21:09:07 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 15,99$  Amazon.ca avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 23 ---
+Date: Sat, 8 Mar 2025 11:19:43 -0500
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 48,00$  TRANSPORTS ILO avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 24 ---
+Date: Sun, 9 Mar 2025 11:14:39 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 61,23$  AMZN Mktp CA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 25 ---
+Date: Sun, 9 Mar 2025 19:19:26 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :EXTENSION MOBILE FIRST +33632479366 FR
+
+      Montant de l'achat :7,25$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 26 ---
+Date: Tue, 11 Mar 2025 15:04:20 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :KOHO FINANCIAL VANCOUVER CA
+
+      Montant de l'achat :300,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 27 ---
+Date: Tue, 11 Mar 2025 16:26:32 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 24,26$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 28 ---
+Date: Tue, 11 Mar 2025 18:22:12 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 32,19$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 29 ---
+Date: Thu, 13 Mar 2025 16:06:13 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Sendwave Toronto CA
+
+      Montant de l'achat :88,46$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 30 ---
+Date: Fri, 14 Mar 2025 18:37:55 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 5,29$  BOULANGERIE PATISSERIE avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 31 ---
+Date: Fri, 14 Mar 2025 22:37:52 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 9,67$  Amazon.ca avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 32 ---
+Date: Mon, 17 Mar 2025 09:42:06 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.
+      
+    
+      
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :VIRGIN PLUS VERDUN CA
+
+      Montant de l'achat :62,14$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 33 ---
+Date: Tue, 18 Mar 2025 17:22:34 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 44,87$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 34 ---
+Date: Thu, 20 Mar 2025 17:00:24 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 34,46$  WALMART STORE #3656 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 35 ---
+Date: Sun, 23 Mar 2025 20:02:55 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 42,53$  AMZN Mktp CA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 36 ---
+Date: Mon, 24 Mar 2025 17:09:50 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MAXI #8634 LAVAL QCCA
+
+      Montant de l'achat :2,31$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 37 ---
+Date: Mon, 24 Mar 2025 17:43:08 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Sendwave Toronto CA
+
+      Montant de l'achat :145,70$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 38 ---
+Date: Tue, 25 Mar 2025 17:00:33 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 17,12$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 39 ---
+Date: Wed, 26 Mar 2025 20:31:55 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LinkedInPre *11741984 Mountain ViewUS
+
+      Montant de l'achat :82,12$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 40 ---
+Date: Thu, 27 Mar 2025 17:04:13 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 30,57$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 41 ---
+Date: Thu, 27 Mar 2025 17:05:21 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 2,68$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 42 ---
+Date: Tue, 1 Apr 2025 14:50:25 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 21,71$  RESTAURANT ALI BABA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 43 ---
+Date: Tue, 1 Apr 2025 21:56:57 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 58,67$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 44 ---
+Date: Wed, 2 Apr 2025 20:01:51 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 16,75$  LS FiveGuys 1970 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 45 ---
+Date: Sat, 5 Apr 2025 01:04:58 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :WWW.COURSEHERO.COM REDWOOD CITY US
+
+      Montant de l'achat :43,78$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 46 ---
+Date: Sat, 5 Apr 2025 16:24:05 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :KOHO FINANCIAL VANCOUVER CA
+
+      Montant de l'achat :400,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 47 ---
+Date: Mon, 7 Apr 2025 18:53:40 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 22,74$  JEAN COUTU 100 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 48 ---
+Date: Mon, 7 Apr 2025 19:03:41 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 6,90$  JEAN COUTU 100 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 49 ---
+Date: Mon, 7 Apr 2025 20:55:35 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 16,75$  LS FiveGuys 1970 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 50 ---
+Date: Wed, 9 Apr 2025 12:49:17 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 39,98$  AMZN Mktp CA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 51 ---
+Date: Wed, 9 Apr 2025 19:19:33 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :EXTENSION MOBILE FIRST +33632479366 FR
+
+      Montant de l'achat :7,18$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 52 ---
+Date: Fri, 11 Apr 2025 17:56:41 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :KOHO FINANCIAL VANCOUVER CA
+
+      Montant de l'achat :200,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 53 ---
+Date: Sat, 12 Apr 2025 18:39:52 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Sendwave Toronto CA
+
+      Montant de l'achat :61,91$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 54 ---
+Date: Mon, 14 Apr 2025 17:19:34 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 21,13$  MCDONALD'S #41226 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 55 ---
+Date: Tue, 15 Apr 2025 17:07:05 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 16,55$  MCDONALD'S #41226 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 56 ---
+Date: Wed, 16 Apr 2025 21:18:57 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 54,11$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 57 ---
+Date: Wed, 16 Apr 2025 21:31:10 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 4,79$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 58 ---
+Date: Thu, 17 Apr 2025 10:44:48 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.
+      
+    
+      
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :VIRGIN PLUS VERDUN CA
+
+      Montant de l'achat :59,26$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 59 ---
+Date: Thu, 17 Apr 2025 21:19:55 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 11,25$  MCDONALD'S #41226 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 60 ---
+Date: Fri, 18 Apr 2025 13:05:42 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 9,42$  MCDONALD'S #41226 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 61 ---
+Date: Fri, 18 Apr 2025 17:53:38 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 4,36$  PHARMAPRIX 5786 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 62 ---
+Date: Fri, 18 Apr 2025 18:59:51 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :DEPANNEUR HARRY LAVAL QCCA
+
+      Montant de l'achat :11,58$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 63 ---
+Date: Sat, 19 Apr 2025 08:53:59 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Sendwave Toronto CA
+
+      Montant de l'achat :88,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 64 ---
+Date: Sat, 19 Apr 2025 10:03:58 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 36,74$  TRANSPORTS ILO avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 65 ---
+Date: Sun, 20 Apr 2025 20:10:16 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :WIX.COM 1174018635 +14154494724 US
+
+      Montant de l'achat :28,36$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 66 ---
+Date: Wed, 23 Apr 2025 11:26:49 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :REMITLY* *A20DE 888-736-4859 CA
+
+      Montant de l'achat :100,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 67 ---
+Date: Wed, 23 Apr 2025 16:54:04 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 40,98$  Pizzaratta Storefront avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 68 ---
+Date: Fri, 25 Apr 2025 19:44:14 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 58,23$  RESTAURANT ALI BABA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 69 ---
+Date: Sat, 26 Apr 2025 10:51:49 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 14,49$  BOULANGERIE PATISSERIE avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 70 ---
+Date: Sat, 26 Apr 2025 16:47:45 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :SUPERIOR PARKIN MONTREAL QCCA
+
+      Montant de l'achat :10,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 71 ---
+Date: Sat, 26 Apr 2025 20:31:15 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LinkedInPre *68501654 Mountain ViewUS
+
+      Montant de l'achat :82,12$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 72 ---
+Date: Sun, 27 Apr 2025 13:39:32 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MCDONALD'S #412 LAVAL QCCA
+
+      Montant de l'achat :9,42$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 73 ---
+Date: Mon, 28 Apr 2025 16:46:14 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 16,55$  MCDONALD'S #41226 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 74 ---
+Date: Mon, 28 Apr 2025 17:27:51 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 4,81$  DEPANNEUR ULTRA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 75 ---
+Date: Tue, 29 Apr 2025 17:13:35 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 16,28$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 76 ---
+Date: Thu, 1 May 2025 20:07:27 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 59,37$  MAXI #8634 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 77 ---
+Date: Mon, 5 May 2025 01:04:57 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :WWW.COURSEHERO.COM REDWOOD CITY US
+
+      Montant de l'achat :42,57$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 78 ---
+Date: Fri, 9 May 2025 19:18:16 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :EXTENSION MOBILE FIRST +33632479366 FR
+
+      Montant de l'achat :7,01$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 79 ---
+Date: Sat, 10 May 2025 14:15:50 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 79,30$  LIBRAIRIE RENAUD BRAY - L avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 80 ---
+Date: Sat, 10 May 2025 20:48:12 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 11,12$  DEPANNEUR ULTRA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 81 ---
+Date: Tue, 13 May 2025 13:46:53 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 445,50$  CHOMEDEY HYUNDAI avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 82 ---
+Date: Wed, 14 May 2025 20:59:15 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :THE HOME DEPOT #7156 ANJOU QCCA
+
+      Montant de l'achat :18,58$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 83 ---
+Date: Thu, 15 May 2025 09:57:31 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.
+      
+    
+      
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :VIRGIN PLUS VERDUN CA
+
+      Montant de l'achat :59,26$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 84 ---
+Date: Fri, 16 May 2025 12:37:05 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Store Laval QCCA
+
+      Montant de l'achat :23,62$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 85 ---
+Date: Fri, 16 May 2025 21:22:45 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LS FiveGuys 1970 Laval QCCA
+
+      Montant de l'achat :26,21$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 86 ---
+Date: Sat, 17 May 2025 00:15:49 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LE CIRCUIT ELECTRIQUE +18559998378 CA
+
+      Montant de l'achat :10,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 87 ---
+Date: Sat, 17 May 2025 08:31:01 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Sendwave Toronto CA
+
+      Montant de l'achat :146,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 88 ---
+Date: Sat, 17 May 2025 11:36:00 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LE CIRCUIT ELECTRIQUE +18559998378 CA
+
+      Montant de l'achat :20,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 89 ---
+Date: Sat, 17 May 2025 15:46:46 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :NAYAX CANADA INC MASTER FREDERICTONNBCA
+
+      Montant de l'achat :29,42$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 90 ---
+Date: Sat, 17 May 2025 16:53:33 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :BURGER KING #5336 CHICOUTIMI QCCA
+
+      Montant de l'achat :16,64$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 91 ---
+Date: Sat, 17 May 2025 23:08:47 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :NAYAX CANADA INC MASTER FREDERICTONNBCA
+
+      Montant de l'achat :23,39$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 92 ---
+Date: Sun, 18 May 2025 19:09:42 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :OPENAI +14158799686 US
+
+      Montant de l'achat :8,25$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 93 ---
+Date: Tue, 20 May 2025 16:53:43 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MCDONALD'S #41226 LAVAL QCCA
+
+      Montant de l'achat :10,57$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 94 ---
+Date: Fri, 23 May 2025 20:57:59 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 26,66$  LS Five Guys Peel avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 95 ---
+Date: Sat, 24 May 2025 16:43:53 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MAXI #8634 LAVAL QCCA
+
+      Montant de l'achat :23,25$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 96 ---
+Date: Sun, 25 May 2025 20:34:14 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LS FiveGuys 1970 Laval QCCA
+
+      Montant de l'achat :26,66$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 97 ---
+Date: Mon, 26 May 2025 20:31:26 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LinkedInPreC *23031734 Mountain ViewUS
+
+      Montant de l'achat :82,12$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 98 ---
+Date: Fri, 30 May 2025 12:46:41 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MAXI #8634 LAVAL QCCA
+
+      Montant de l'achat :26,92$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 99 ---
+Date: Fri, 30 May 2025 17:41:03 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MR PRETZELS LAVAL LAVAL QCCA
+
+      Montant de l'achat :6,31$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 100 ---
+Date: Fri, 30 May 2025 17:50:10 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :TIM HORTONS #6029 LAVAL QCCA
+
+      Montant de l'achat :12,51$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 101 ---
+Date: Fri, 30 May 2025 18:35:49 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MANGO BICHE MIA LAVAL QCCA
+
+      Montant de l'achat :13,29$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 102 ---
+Date: Sun, 1 Jun 2025 06:48:34 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet international a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Google GSUITE_qprostwaterDublin IE
+
+      Montant de l'achat :12,89$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 103 ---
+Date: Sun, 1 Jun 2025 20:33:11 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LS FiveGuys 1970 Laval QCCA
+
+      Montant de l'achat :26,21$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 104 ---
+Date: Mon, 2 Jun 2025 16:49:44 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MAXI #8634 LAVAL QCCA
+
+      Montant de l'achat :19,81$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 105 ---
+Date: Sat, 7 Jun 2025 09:35:58 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :KOHO FINANCIAL VANCOUVER CA
+
+      Montant de l'achat :50,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 106 ---
+Date: Sun, 8 Jun 2025 17:16:40 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet international a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :DAZN Limited dazn.com GB
+
+      Montant de l'achat :22,98$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 107 ---
+Date: Mon, 9 Jun 2025 19:18:39 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :EXTENSION MOBILE FIRST +33632479366 FR
+
+      Montant de l'achat :6,89$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 108 ---
+Date: Thu, 12 Jun 2025 16:51:39 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat Internet a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Sendwave Toronto CA
+
+      Montant de l'achat :100,00$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 109 ---
+Date: Fri, 13 Jun 2025 19:20:18 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 13,50$  SPAQ / UQAM - ST-URBAIN avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 110 ---
+Date: Sat, 14 Jun 2025 21:36:01 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :DEPANNEUR ULTRA LAVAL QCCA
+
+      Montant de l'achat :12,45$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 111 ---
+Date: Tue, 17 Jun 2025 09:40:47 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.
+      
+    
+      
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :VIRGIN PLUS VERDUN CA
+
+      Montant de l'achat :192,82$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 112 ---
+Date: Tue, 17 Jun 2025 17:11:54 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MCDONALD'S #41226 LAVAL QCCA
+
+      Montant de l'achat :23,07$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 113 ---
+Date: Thu, 19 Jun 2025 18:00:22 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :CREMERIE BANANE ROYALE LAVAL QCCA
+
+      Montant de l'achat :8,97$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 114 ---
+Date: Fri, 20 Jun 2025 15:43:36 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 18,44$  TIM HORTONS #6029 avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 115 ---
+Date: Sat, 21 Jun 2025 19:12:14 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LS FiveGuys 1970 Laval QCCA
+
+      Montant de l'achat :52,43$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 116 ---
+Date: Sun, 22 Jun 2025 12:14:28 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :BOULANGERIE PATISSERIE Laval QCCA
+
+      Montant de l'achat :11,65$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 117 ---
+Date: Sun, 22 Jun 2025 23:16:03 -0400
+Subject: Nouvel achat avec votre carte de crédit
+Bank: cibc_credit
+Matched Keyword: Nouvel achat avec votre carte de
+Sender: mailbox.noreply@cibc.com
+Content:
+Bonjour Mamadou, 
+        
+Vous avez rcemment effectu un achat de 129,16$  AMZN Mktp CA avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.
+Pour plus de dtails sur cette opration, ouvrez 
+une session bancaire CIBC en ligne ou dans l'appli
+.
+Cordialement, 
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.
+Courriel en texte brut :
+Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 118 ---
+Date: Wed, 25 Jun 2025 17:06:11 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MCDONALD'S #41226 LAVAL QCCA
+
+      Montant de l'achat :21,70$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 119 ---
+Date: Thu, 26 Jun 2025 16:41:05 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :MAXI #8634 LAVAL QCCA
+
+      Montant de l'achat :73,06$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 120 ---
+Date: Thu, 26 Jun 2025 20:31:41 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat international par la poste ou par tlphone a t effectu  l'aide de la carte de dbit dont le numro se termine par8781. 
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :LinkedInPreC *75491554 Mountain ViewUS
+
+      Montant de l'achat :82,12$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+
+--- TRANSACTION EMAIL 121 ---
+Date: Fri, 27 Jun 2025 18:37:33 -0400
+Subject: Achat en point de vente
+Bank: cibc_debit
+Matched Keyword: Achat en point de vente
+Sender: mailbox.noreply@cibc.com
+Content:
+BonjourMamadouFall,
+      
+    
+      
+    
+Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    
+Voici les dtails :
+Numro de compte :6594
+
+      Lieu de l'achat :Store Laval QCCA
+
+      Montant de l'achat :19,98$
+
+      Montant du seuil :1,00$
+Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. 
+Cordialement,
+    
+La Banque CIBC
+La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.
+Veuillez ne pas rpondre au prsent courriel.
+Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. 
+Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.
+
+
+==================================================
+

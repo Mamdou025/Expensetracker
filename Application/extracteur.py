@@ -85,8 +85,6 @@ def fetch_email_text():
 
     return None
 
-
-
 if __name__ == "__main__":
     email_data = fetch_email_text()
     if email_data:
