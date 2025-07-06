@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 Transaction: Nouvel achat avec votre carte de crédit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        .email-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
+        }
+        .email-header h1 {
+            margin: 0 0 15px 0;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .transaction-icon {
+            font-size: 32px;
+        }
+        .metadata {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 12px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .metadata strong {
+            color: #fff;
+            font-weight: 600;
+        }
+        .content {
+            border: 2px solid #4CAF50;
+            padding: 30px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .transaction-badge {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+        }
+        .bank-tag {
+            background: #2196F3;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .original-content {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 5px solid #4CAF50;
+        }
+        .keyword-highlight {
+            background: #fff3cd;
+            color: #856404;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-header">
+        <h1><span class="transaction-icon">💳</span> TRANSACTION EMAIL</h1>
+        <div class="metadata">
+            <strong>Bank:</strong> 
+            <span>mailbox.noreply@cibc.com <span class="bank-tag">CIBC_DEBIT</span></span>
+            
+            <strong>Date:</strong> 
+            <span>Fri, 21 Feb 2025 20:22:55 -0500</span>
+            
+            <strong>Subject:</strong> 
+            <span>Nouvel achat avec votre carte de crédit</span>
+            
+            <strong>Classification:</strong> 
+            <span class="transaction-badge">💳 CONFIRMED TRANSACTION</span>
+            
+            <strong>Trigger Keyword:</strong> 
+            <span class="keyword-highlight">"Nouvel achat avec votre carte de"</span>
+            
+            <strong>Email ID:</strong> 
+            <span>b'43636'</span>
+            
+            <strong>Bank Type:</strong> 
+            <span>Cibc Debit</span>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h3>📧 Transaction Email Content</h3>
+        <div class="original-content">
+            <?xml version="1.0" encoding="ISO-8859-1"?><html><head/><body><p>Bonjour Mamadou, 
+        </p><p>Vous avez rcemment effectu un achat de 25,44$  KORYO KOREAN BARBEQUE avec votre CIBC Dividend Visa Infinite Card dont le numro se termine par 0165.<br/>Pour plus de dtails sur cette opration, ouvrez <a href="https://www.cibc.com/fr/personal-banking.html">une session bancaire CIBC en ligne ou dans l'appli</a>.</p><p>Cordialement, <br/>La Banque CIBC</p><p>La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.<br/>Veuillez ne pas rpondre au prsent courriel.<br/>Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC.<br/>Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.</p><p>Cette alerte sera envoye par courriel, qui n'est pas protg et pourrait tre perdu, intercept ou lu par d'autres.<br/><em>Courriel en texte brut :</em><br/>Si vous slectionnez le format texte brut, votre courriel n'affichera pas de graphiques ni de liens.</p></body></html>
+
+        </div>
+    </div>
+</body>
+</html>

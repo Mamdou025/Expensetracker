@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 Transaction: Achat en point de vente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        .email-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
+        }
+        .email-header h1 {
+            margin: 0 0 15px 0;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .transaction-icon {
+            font-size: 32px;
+        }
+        .metadata {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 12px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .metadata strong {
+            color: #fff;
+            font-weight: 600;
+        }
+        .content {
+            border: 2px solid #4CAF50;
+            padding: 30px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .transaction-badge {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+        }
+        .bank-tag {
+            background: #2196F3;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .original-content {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 5px solid #4CAF50;
+        }
+        .keyword-highlight {
+            background: #fff3cd;
+            color: #856404;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-header">
+        <h1><span class="transaction-icon">💳</span> TRANSACTION EMAIL</h1>
+        <div class="metadata">
+            <strong>Bank:</strong> 
+            <span>mailbox.noreply@cibc.com <span class="bank-tag">CIBC_CREDIT</span></span>
+            
+            <strong>Date:</strong> 
+            <span>Fri, 30 May 2025 17:41:03 -0400</span>
+            
+            <strong>Subject:</strong> 
+            <span>Achat en point de vente</span>
+            
+            <strong>Classification:</strong> 
+            <span class="transaction-badge">💳 CONFIRMED TRANSACTION</span>
+            
+            <strong>Trigger Keyword:</strong> 
+            <span class="keyword-highlight">"Achat en point de vente"</span>
+            
+            <strong>Email ID:</strong> 
+            <span>b'46201'</span>
+            
+            <strong>Bank Type:</strong> 
+            <span>Cibc Credit</span>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h3>📧 Transaction Email Content</h3>
+        <div class="original-content">
+            <?xml version="1.0" encoding="ISO-8859-1"?><html><head/><body><p>BonjourMamadouFall,
+      
+    
+      
+    </p><p>Un achat a t effectu  l'aide de la carte de dbit dont le numro se termine par8781.  
+    </p><p>Voici les dtails :</p><p>Numro de compte :6594<br/>
+      Lieu de l'achat :MR PRETZELS LAVAL LAVAL QCCA<br/>
+      Montant de l'achat :6,31$<br/>
+      Montant du seuil :1,00$<br/></p><p>Si vous n'avez pas effectu cet achat, veuillez appeler Services bancaires tlphoniques CIBC au 1 888 337-2422. </p><p>Cordialement,
+    <br/>La Banque CIBC</p><p>La Banque CIBC s'engage  protger vos renseignements personnels. Nous n'allons pas inclure de renseignements personnels  votre sujet dans des messages en dehors de Services bancaires en direct ou mobiles car le courrier lectronique n'est pas un mode de communication scuris.<br/>Veuillez ne pas rpondre au prsent courriel.<br/>Si vous avez reu ce message par erreur, veuillez ouvrir une session sur CIBC en direct. Slectionnez Nous contacter, puis Commencez  clavarder, pour vous connecter  notre assistant virtuel ou  un reprsentant CIBC. <br/>Si vous ne souhaitez plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, allez  la section Grer mes alertes et dsactivez la fonction.</p></body></html>
+
+        </div>
+    </div>
+</body>
+</html>

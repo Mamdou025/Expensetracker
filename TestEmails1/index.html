@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 Transaction Emails Index</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 5px solid #4CAF50;
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        .filter-btn.active {
+            background: #4CAF50;
+            color: white;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+        }
+        .filter-btn:not(.active) {
+            background: #e0e0e0;
+            color: #666;
+        }
+        .filter-btn:hover:not(.active) {
+            background: #d0d0d0;
+        }
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .search-box:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f1f8e9;
+        }
+        .transaction-row {
+            border-left: 5px solid #4CAF50;
+        }
+        .bank-badge {
+            background: #FF9800;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .email-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 2px solid #4CAF50;
+            border-radius: 20px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .email-link:hover {
+            background: #4CAF50;
+            color: white;
+        }
+        .keyword-tag {
+            background: #fff3cd;
+            color: #856404;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><span>💳</span> Transaction Emails Only</h1>
+        <p style="margin: 0; font-size: 18px; opacity: 0.9;">Filtered transaction emails from all configured banks</p>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">360</div>
+            <div>Total Transaction Emails</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div>Banks with Transactions</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">09-Feb-2025</div>
+            <div>Start Date</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">31-Dec-2025</div>
+            <div>End Date</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterEmails('all')">All Transactions</button>
+            <button class="filter-btn" onclick="filterEmails('cibc_debit')">Cibc Debit (129)</button>
+            <button class="filter-btn" onclick="filterEmails('cibc_credit')">Cibc Credit (129)</button>
+            <button class="filter-btn" onclick="filterEmails('capital_one_credit')">Capital One Credit (43)</button>
+            <button class="filter-btn" onclick="filterEmails('mbna_credit')">Mbna Credit (35)</button>
+            <button class="filter-btn" onclick="filterEmails('neo_credit')">Neo Credit (24)</button>
+        </div>
+        <input type="text" class="search-box" placeholder="Search by subject, keyword, or date..." onkeyup="searchEmails()" id="searchInput">
+    </div>
+    
+    <table id="emailTable">
+        <thead>
+            <tr>
+                <th>Bank</th>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Keyword Match</th>
+                <th>View Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 9 Feb 2025 16:13:34 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0001_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 9 Feb 2025 18:19:10 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0002_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 9 Feb 2025 18:42:07 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0003_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 11 Feb 2025 17:39:11 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0004_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 12 Feb 2025 19:49:27 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0005_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 13 Feb 2025 09:55:18 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0006_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 13 Feb 2025 17:43:10 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0007_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 15 Feb 2025 23:13:23 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0008_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 17 Feb 2025 10:05:51 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0009_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 17 Feb 2025 17:33:15 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0010_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 19 Feb 2025 17:43:19 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0011_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 19 Feb 2025 18:36:42 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0012_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 21 Feb 2025 20:22:55 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0013_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 22 Feb 2025 03:42:50 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0014_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 25 Feb 2025 12:50:38 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0015_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 28 Feb 2025 20:39:05 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0016_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 28 Feb 2025 21:45:42 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0017_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 28 Feb 2025 22:40:14 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0018_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 28 Feb 2025 23:34:12 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0019_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 1 Mar 2025 15:50:11 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0020_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 4 Mar 2025 17:05:36 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0021_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 4 Mar 2025 21:09:07 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0022_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 8 Mar 2025 11:19:43 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0023_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 9 Mar 2025 11:14:39 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0024_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 9 Mar 2025 19:19:26 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0025_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 11 Mar 2025 15:04:20 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0026_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 11 Mar 2025 16:26:32 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0027_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 11 Mar 2025 18:22:12 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0028_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 13 Mar 2025 16:06:13 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0029_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 14 Mar 2025 18:37:55 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0030_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 14 Mar 2025 22:37:52 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0031_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 17 Mar 2025 09:42:06 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0032_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 18 Mar 2025 17:22:34 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0033_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 20 Mar 2025 17:00:24 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0034_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 23 Mar 2025 20:02:55 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0035_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 24 Mar 2025 17:09:50 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0036_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 24 Mar 2025 17:43:08 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0037_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 25 Mar 2025 17:00:33 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0038_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 26 Mar 2025 20:31:55 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0039_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 27 Mar 2025 17:04:13 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0040_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 27 Mar 2025 17:05:21 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0041_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 1 Apr 2025 14:50:25 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0042_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 1 Apr 2025 21:56:57 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0043_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 2 Apr 2025 20:01:51 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0044_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 5 Apr 2025 01:04:58 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0045_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 5 Apr 2025 16:24:05 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0046_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 7 Apr 2025 18:53:40 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0047_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 7 Apr 2025 19:03:41 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0048_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 7 Apr 2025 20:55:35 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0049_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 9 Apr 2025 12:49:17 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0050_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 9 Apr 2025 19:19:33 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0051_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 11 Apr 2025 17:56:41 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0052_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 12 Apr 2025 18:39:52 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0053_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 14 Apr 2025 17:19:34 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0054_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 15 Apr 2025 17:07:05 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0055_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 16 Apr 2025 21:18:57 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0056_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 16 Apr 2025 21:31:10 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0057_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 17 Apr 2025 10:44:48 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0058_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 17 Apr 2025 21:19:55 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0059_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 18 Apr 2025 13:05:42 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0060_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 18 Apr 2025 17:53:38 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0061_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 18 Apr 2025 18:59:51 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0062_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 19 Apr 2025 08:53:59 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0063_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 19 Apr 2025 10:03:58 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0064_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 20 Apr 2025 20:10:16 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0065_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 23 Apr 2025 11:26:49 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0066_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 23 Apr 2025 16:54:04 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0067_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 25 Apr 2025 19:44:14 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0068_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 26 Apr 2025 10:51:49 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0069_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 26 Apr 2025 16:47:45 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0070_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 26 Apr 2025 20:31:15 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0071_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 27 Apr 2025 13:39:32 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0072_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 28 Apr 2025 16:46:14 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0073_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 28 Apr 2025 17:27:51 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0074_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 29 Apr 2025 17:13:35 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0075_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 1 May 2025 20:07:27 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0076_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 5 May 2025 01:04:57 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0077_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 9 May 2025 19:18:16 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0078_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 10 May 2025 14:15:50 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0079_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 10 May 2025 20:48:12 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0080_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 13 May 2025 13:46:53 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0081_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 14 May 2025 20:59:15 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0082_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 15 May 2025 09:57:31 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0083_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 16 May 2025 12:37:05 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0084_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 16 May 2025 21:22:45 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0085_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 17 May 2025 00:15:49 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0086_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 17 May 2025 08:31:01 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0087_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 17 May 2025 11:36:00 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0088_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 17 May 2025 15:46:46 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0089_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 17 May 2025 16:53:33 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0090_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 17 May 2025 23:08:47 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0091_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 18 May 2025 19:09:42 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0092_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 20 May 2025 16:53:43 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0093_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 23 May 2025 20:57:59 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0094_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 24 May 2025 16:43:53 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0095_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 25 May 2025 20:34:14 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0096_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 26 May 2025 20:31:26 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0097_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 30 May 2025 12:46:41 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0098_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 30 May 2025 17:41:03 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0099_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 30 May 2025 17:50:10 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0100_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 30 May 2025 18:35:49 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0101_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 1 Jun 2025 06:48:34 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0102_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 1 Jun 2025 20:33:11 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0103_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 2 Jun 2025 16:49:44 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0104_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 7 Jun 2025 09:35:58 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0105_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 8 Jun 2025 17:16:40 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0106_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 9 Jun 2025 19:18:39 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0107_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 12 Jun 2025 16:51:39 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0108_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 13 Jun 2025 19:20:18 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0109_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 14 Jun 2025 21:36:01 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0110_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 17 Jun 2025 09:40:47 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0111_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 17 Jun 2025 17:11:54 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0112_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 19 Jun 2025 18:00:22 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0113_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 20 Jun 2025 15:43:36 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0114_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 21 Jun 2025 19:12:14 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0115_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 22 Jun 2025 12:14:28 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0116_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sun, 22 Jun 2025 23:16:03 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0117_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Wed, 25 Jun 2025 17:06:11 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0118_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 26 Jun 2025 16:41:05 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0119_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 26 Jun 2025 20:31:41 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0120_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 27 Jun 2025 18:37:33 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0121_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Sat, 28 Jun 2025 12:32:00 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0122_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 30 Jun 2025 17:26:47 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0123_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Mon, 30 Jun 2025 22:03:55 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0124_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 1 Jul 2025 07:50:11 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0125_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Tue, 1 Jul 2025 19:41:35 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0126_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Thu, 3 Jul 2025 22:41:04 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0127_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 4 Jul 2025 19:01:16 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0128_cibc_debit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_debit">
+                <td><span class="bank-badge">Cibc Debit</span></td>
+                <td>Fri, 4 Jul 2025 19:17:04 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0129_cibc_debit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 9 Feb 2025 16:13:34 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0130_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 9 Feb 2025 18:19:10 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0131_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 9 Feb 2025 18:42:07 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0132_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 11 Feb 2025 17:39:11 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0133_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 12 Feb 2025 19:49:27 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0134_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 13 Feb 2025 09:55:18 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0135_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 13 Feb 2025 17:43:10 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0136_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 15 Feb 2025 23:13:23 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0137_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 17 Feb 2025 10:05:51 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0138_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 17 Feb 2025 17:33:15 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0139_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 19 Feb 2025 17:43:19 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0140_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 19 Feb 2025 18:36:42 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0141_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 21 Feb 2025 20:22:55 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0142_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 22 Feb 2025 03:42:50 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0143_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 25 Feb 2025 12:50:38 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0144_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 28 Feb 2025 20:39:05 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0145_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 28 Feb 2025 21:45:42 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0146_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 28 Feb 2025 22:40:14 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0147_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 28 Feb 2025 23:34:12 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0148_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 1 Mar 2025 15:50:11 -0500</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0149_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 4 Mar 2025 17:05:36 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0150_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 4 Mar 2025 21:09:07 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0151_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 8 Mar 2025 11:19:43 -0500</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0152_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 9 Mar 2025 11:14:39 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0153_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 9 Mar 2025 19:19:26 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0154_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 11 Mar 2025 15:04:20 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0155_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 11 Mar 2025 16:26:32 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0156_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 11 Mar 2025 18:22:12 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0157_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 13 Mar 2025 16:06:13 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0158_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 14 Mar 2025 18:37:55 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0159_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 14 Mar 2025 22:37:52 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0160_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 17 Mar 2025 09:42:06 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0161_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 18 Mar 2025 17:22:34 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0162_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 20 Mar 2025 17:00:24 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0163_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 23 Mar 2025 20:02:55 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0164_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 24 Mar 2025 17:09:50 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0165_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 24 Mar 2025 17:43:08 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0166_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 25 Mar 2025 17:00:33 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0167_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 26 Mar 2025 20:31:55 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0168_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 27 Mar 2025 17:04:13 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0169_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 27 Mar 2025 17:05:21 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0170_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 1 Apr 2025 14:50:25 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0171_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 1 Apr 2025 21:56:57 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0172_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 2 Apr 2025 20:01:51 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0173_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 5 Apr 2025 01:04:58 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0174_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 5 Apr 2025 16:24:05 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0175_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 7 Apr 2025 18:53:40 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0176_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 7 Apr 2025 19:03:41 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0177_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 7 Apr 2025 20:55:35 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0178_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 9 Apr 2025 12:49:17 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0179_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 9 Apr 2025 19:19:33 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0180_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 11 Apr 2025 17:56:41 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0181_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 12 Apr 2025 18:39:52 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0182_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 14 Apr 2025 17:19:34 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0183_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 15 Apr 2025 17:07:05 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0184_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 16 Apr 2025 21:18:57 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0185_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 16 Apr 2025 21:31:10 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0186_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 17 Apr 2025 10:44:48 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0187_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 17 Apr 2025 21:19:55 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0188_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 18 Apr 2025 13:05:42 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0189_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 18 Apr 2025 17:53:38 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0190_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 18 Apr 2025 18:59:51 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0191_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 19 Apr 2025 08:53:59 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0192_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 19 Apr 2025 10:03:58 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0193_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 20 Apr 2025 20:10:16 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0194_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 23 Apr 2025 11:26:49 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0195_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 23 Apr 2025 16:54:04 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0196_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 25 Apr 2025 19:44:14 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0197_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 26 Apr 2025 10:51:49 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0198_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 26 Apr 2025 16:47:45 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0199_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 26 Apr 2025 20:31:15 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0200_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 27 Apr 2025 13:39:32 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0201_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 28 Apr 2025 16:46:14 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0202_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 28 Apr 2025 17:27:51 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0203_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 29 Apr 2025 17:13:35 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0204_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 1 May 2025 20:07:27 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0205_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 5 May 2025 01:04:57 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0206_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 9 May 2025 19:18:16 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0207_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 10 May 2025 14:15:50 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0208_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 10 May 2025 20:48:12 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0209_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 13 May 2025 13:46:53 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0210_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 14 May 2025 20:59:15 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0211_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 15 May 2025 09:57:31 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0212_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 16 May 2025 12:37:05 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0213_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 16 May 2025 21:22:45 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0214_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 17 May 2025 00:15:49 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0215_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 17 May 2025 08:31:01 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0216_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 17 May 2025 11:36:00 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0217_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 17 May 2025 15:46:46 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0218_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 17 May 2025 16:53:33 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0219_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 17 May 2025 23:08:47 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0220_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 18 May 2025 19:09:42 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0221_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 20 May 2025 16:53:43 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0222_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 23 May 2025 20:57:59 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0223_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 24 May 2025 16:43:53 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0224_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 25 May 2025 20:34:14 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0225_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 26 May 2025 20:31:26 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0226_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 30 May 2025 12:46:41 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0227_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 30 May 2025 17:41:03 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0228_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 30 May 2025 17:50:10 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0229_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 30 May 2025 18:35:49 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0230_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 1 Jun 2025 06:48:34 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0231_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 1 Jun 2025 20:33:11 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0232_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 2 Jun 2025 16:49:44 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0233_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 7 Jun 2025 09:35:58 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0234_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 8 Jun 2025 17:16:40 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0235_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 9 Jun 2025 19:18:39 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0236_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 12 Jun 2025 16:51:39 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0237_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 13 Jun 2025 19:20:18 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0238_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 14 Jun 2025 21:36:01 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0239_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 17 Jun 2025 09:40:47 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0240_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 17 Jun 2025 17:11:54 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0241_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 19 Jun 2025 18:00:22 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0242_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 20 Jun 2025 15:43:36 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0243_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 21 Jun 2025 19:12:14 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0244_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 22 Jun 2025 12:14:28 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0245_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sun, 22 Jun 2025 23:16:03 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0246_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Wed, 25 Jun 2025 17:06:11 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0247_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 26 Jun 2025 16:41:05 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0248_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 26 Jun 2025 20:31:41 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0249_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 27 Jun 2025 18:37:33 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0250_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Sat, 28 Jun 2025 12:32:00 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0251_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 30 Jun 2025 17:26:47 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0252_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Mon, 30 Jun 2025 22:03:55 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0253_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 1 Jul 2025 07:50:11 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0254_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Tue, 1 Jul 2025 19:41:35 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0255_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Thu, 3 Jul 2025 22:41:04 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0256_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 4 Jul 2025 19:01:16 -0400</td>
+                <td>Achat en point de vente</td>
+                <td><span class="keyword-tag">"Achat en point de vente"</span></td>
+                <td><a href="0257_cibc_credit_Achat en point de vente.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="cibc_credit">
+                <td><span class="bank-badge">Cibc Credit</span></td>
+                <td>Fri, 4 Jul 2025 19:17:04 -0400</td>
+                <td>Nouvel achat avec votre carte de crédit</td>
+                <td><span class="keyword-tag">"Nouvel achat avec votre carte de"</span></td>
+                <td><a href="0258_cibc_credit_Nouvel achat avec votre carte de crédit.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Feb 2025 15:00:07 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0259_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Feb 2025 15:00:08 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0260_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Feb 2025 21:08:24 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0261_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Feb 2025 21:08:25 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0262_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Feb 2025 23:43:14 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0263_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Feb 2025 23:43:14 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0264_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 01 Mar 2025 22:24:30 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0265_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 06 Mar 2025 10:30:21 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0266_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sun, 16 Mar 2025 02:32:16 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0267_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Mar 2025 15:49:59 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0268_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Mar 2025 15:49:59 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0269_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Mar 2025 23:43:18 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0270_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 22 Mar 2025 23:43:18 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0271_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 03 Apr 2025 08:47:29 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0272_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Fri, 18 Apr 2025 23:12:12 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0273_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Tue, 22 Apr 2025 23:43:02 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0274_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Tue, 22 Apr 2025 23:43:03 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0275_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 24 Apr 2025 14:35:11 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0276_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 24 Apr 2025 14:35:11 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0277_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 01 May 2025 23:08:52 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0278_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 01 May 2025 23:09:12 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0279_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Fri, 02 May 2025 09:15:26 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0280_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Fri, 02 May 2025 16:00:21 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0281_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Wed, 14 May 2025 21:40:42 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0282_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Tue, 20 May 2025 20:58:24 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0283_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 22 May 2025 12:37:10 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0284_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 22 May 2025 12:37:11 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0285_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 22 May 2025 23:47:49 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0286_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 22 May 2025 23:47:51 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0287_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Mon, 26 May 2025 12:28:45 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0288_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Mon, 26 May 2025 12:28:45 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0289_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Tue, 03 Jun 2025 08:16:24 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0290_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Tue, 03 Jun 2025 23:33:43 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0291_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sun, 22 Jun 2025 10:42:03 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0292_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sun, 22 Jun 2025 10:42:04 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0293_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sun, 22 Jun 2025 23:43:06 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0294_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sun, 22 Jun 2025 23:43:07 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0295_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 26 Jun 2025 13:30:01 +0000</td>
+                <td>International transaction alert | Alerte de transaction internationale</td>
+                <td><span class="keyword-tag">"International transaction alert"</span></td>
+                <td><a href="0296_capital_one_credit_International transaction alert _ Alerte de transaction internationale.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 26 Jun 2025 13:30:01 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0297_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 28 Jun 2025 14:57:57 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0298_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Sat, 28 Jun 2025 19:08:58 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0299_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Thu, 03 Jul 2025 21:06:21 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0300_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="capital_one_credit">
+                <td><span class="bank-badge">Capital One Credit</span></td>
+                <td>Fri, 04 Jul 2025 08:12:37 +0000</td>
+                <td>A transaction was charged to your account | Une transaction a été port...</td>
+                <td><span class="keyword-tag">"A transaction was charged to your account"</span></td>
+                <td><a href="0301_capital_one_credit_A transaction was charged to your account _ Une transaction a été portée à votre compte.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sun, 9 Feb 2025 16:06:16 -0500 (EST)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0302_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 15 Feb 2025 18:00:15 -0500 (EST)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0303_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Mon, 3 Mar 2025 17:28:11 -0500 (EST)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0304_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sun, 9 Mar 2025 23:41:50 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0305_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 15 Mar 2025 19:00:27 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0306_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Tue, 18 Mar 2025 17:10:18 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0307_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Tue, 18 Mar 2025 17:11:19 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0308_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 29 Mar 2025 18:35:38 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0309_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 29 Mar 2025 19:08:32 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0310_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 29 Mar 2025 19:08:32 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0311_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 29 Mar 2025 20:16:39 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0312_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Tue, 1 Apr 2025 13:39:43 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0313_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 5 Apr 2025 18:12:49 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0314_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Wed, 9 Apr 2025 17:08:26 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0315_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 12 Apr 2025 00:06:30 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0316_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Tue, 15 Apr 2025 19:00:32 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0317_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Thu, 17 Apr 2025 19:32:33 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0318_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sun, 20 Apr 2025 15:55:29 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0319_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Wed, 23 Apr 2025 16:59:04 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0320_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 26 Apr 2025 17:43:33 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0321_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Mon, 28 Apr 2025 18:11:56 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0322_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Fri, 2 May 2025 14:19:44 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0323_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Fri, 2 May 2025 14:42:39 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0324_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Thu, 8 May 2025 17:41:41 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0325_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Fri, 9 May 2025 17:10:42 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0326_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sat, 10 May 2025 16:24:35 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0327_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Tue, 13 May 2025 20:35:01 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0328_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Thu, 15 May 2025 19:00:29 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0329_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Wed, 21 May 2025 17:31:38 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0330_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Fri, 23 May 2025 19:06:52 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0331_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Mon, 2 Jun 2025 17:27:42 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0332_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Tue, 10 Jun 2025 00:20:06 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0333_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Sun, 15 Jun 2025 19:00:28 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0334_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Thu, 3 Jul 2025 22:04:07 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0335_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="mbna_credit">
+                <td><span class="bank-badge">Mbna Credit</span></td>
+                <td>Fri, 4 Jul 2025 17:35:53 -0400 (EDT)</td>
+                <td>MBNA - Transaction Alert</td>
+                <td><span class="keyword-tag">"Transaction Alert"</span></td>
+                <td><a href="0336_mbna_credit_MBNA - Transaction Alert.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Sun, 09 Feb 2025 23:36:18 +0000 (UTC)</td>
+                <td>Votre achat chez Maxi #8634 Laval Can</td>
+                <td><span class="keyword-tag">"Votre achat chez"</span></td>
+                <td><a href="0337_neo_credit_Votre achat chez Maxi #8634 Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Wed, 26 Feb 2025 23:01:42 +0000 (UTC)</td>
+                <td>Votre achat chez Lsp*ls Fiveguys 1970 Laval Can</td>
+                <td><span class="keyword-tag">"Votre achat chez"</span></td>
+                <td><a href="0338_neo_credit_Votre achat chez Lsp_ls Fiveguys 1970 Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Thu, 27 Feb 2025 10:09:24 +0000 (UTC)</td>
+                <td>Votre achat chez YouTube Premium Online</td>
+                <td><span class="keyword-tag">"Votre achat chez"</span></td>
+                <td><a href="0339_neo_credit_Votre achat chez YouTube Premium Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Fri, 14 Mar 2025 22:37:00 +0000 (UTC)</td>
+                <td>Votre achat chez Boulangerie Patisserie Laval Can</td>
+                <td><span class="keyword-tag">"Votre achat chez"</span></td>
+                <td><a href="0340_neo_credit_Votre achat chez Boulangerie Patisserie Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Thu, 27 Mar 2025 09:09:25 +0000 (UTC)</td>
+                <td>Votre achat chez YouTube Premium Online</td>
+                <td><span class="keyword-tag">"Votre achat chez"</span></td>
+                <td><a href="0341_neo_credit_Votre achat chez YouTube Premium Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Fri, 18 Apr 2025 22:06:55 +0000 (UTC)</td>
+                <td>Your purchase at Cage Brasserie Sportiv Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0342_neo_credit_Your purchase at Cage Brasserie Sportiv Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Sat, 19 Apr 2025 15:29:40 +0000 (UTC)</td>
+                <td>Your purchase at Tim Hortons #6029 Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0343_neo_credit_Your purchase at Tim Hortons #6029 Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Sun, 27 Apr 2025 09:09:25 +0000 (UTC)</td>
+                <td>Your purchase at YouTube Premium Online</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0344_neo_credit_Your purchase at YouTube Premium Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Tue, 29 Apr 2025 21:44:08 +0000 (UTC)</td>
+                <td>Your purchase at Store Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0345_neo_credit_Your purchase at Store Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Fri, 02 May 2025 16:41:14 +0000 (UTC)</td>
+                <td>Your purchase at Jean Coutu 100 Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0346_neo_credit_Your purchase at Jean Coutu 100 Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Mon, 12 May 2025 06:56:33 +0000 (UTC)</td>
+                <td>Your purchase at Amazon Online</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0347_neo_credit_Your purchase at Amazon Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Thu, 15 May 2025 20:53:15 +0000 (UTC)</td>
+                <td>Your purchase at Store Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0348_neo_credit_Your purchase at Store Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Wed, 21 May 2025 16:06:25 +0000 (UTC)</td>
+                <td>Your purchase at Amazon Online</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0349_neo_credit_Your purchase at Amazon Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Thu, 22 May 2025 02:18:24 +0000 (UTC)</td>
+                <td>Your purchase at Amazon Online</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0350_neo_credit_Your purchase at Amazon Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Fri, 23 May 2025 23:58:46 +0000 (UTC)</td>
+                <td>Your purchase at Transports Ilo Montreal Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0351_neo_credit_Your purchase at Transports Ilo Montreal Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Sat, 24 May 2025 20:24:26 +0000 (UTC)</td>
+                <td>Your purchase at Boucherie St Francois Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0352_neo_credit_Your purchase at Boucherie St Francois Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Sun, 25 May 2025 07:45:16 +0000 (UTC)</td>
+                <td>Your purchase at brilliant.org - Edu +16504682966 Usa</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0353_neo_credit_Your purchase at brilliant.org - Edu +16504682966 Usa.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Tue, 27 May 2025 09:09:23 +0000 (UTC)</td>
+                <td>Your purchase at YouTube Premium Online</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0354_neo_credit_Your purchase at YouTube Premium Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Thu, 05 Jun 2025 20:45:27 +0000 (UTC)</td>
+                <td>Your purchase at McDonald's Canada</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0355_neo_credit_Your purchase at McDonald's Canada.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Wed, 11 Jun 2025 21:25:26 +0000 (UTC)</td>
+                <td>Your purchase at Store Laval Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0356_neo_credit_Your purchase at Store Laval Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Tue, 17 Jun 2025 20:31:58 +0000 (UTC)</td>
+                <td>Your purchase at Chaussures Foot Zone Montreal Can</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0357_neo_credit_Your purchase at Chaussures Foot Zone Montreal Can.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Fri, 27 Jun 2025 09:09:23 +0000 (UTC)</td>
+                <td>Your purchase at YouTube Premium Online</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0358_neo_credit_Your purchase at YouTube Premium Online.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Sat, 28 Jun 2025 16:11:21 +0000 (UTC)</td>
+                <td>Your purchase at Bar George Rue Drummond</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0359_neo_credit_Your purchase at Bar George Rue Drummond.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+            <tr class="transaction-row" data-bank="neo_credit">
+                <td><span class="bank-badge">Neo Credit</span></td>
+                <td>Tue, 01 Jul 2025 17:17:14 +0000 (UTC)</td>
+                <td>Your purchase at McDonald's Canada</td>
+                <td><span class="keyword-tag">"Your purchase at"</span></td>
+                <td><a href="0360_neo_credit_Your purchase at McDonald's Canada.html" target="_blank" class="email-link">View Transaction</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function filterEmails(type) {
+            const rows = document.querySelectorAll('#emailTable tbody tr');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            rows.forEach(row => {
+                if (type === 'all') {
+                    row.style.display = '';
+                } else {
+                    // Bank filter
+                    row.style.display = row.dataset.bank === type ? '' : 'none';
+                }
+            });
+        }
+        
+        function searchEmails() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const rows = document.querySelectorAll('#emailTable tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }
+    </script>
+    
+    <div style="margin-top: 30px; padding: 25px; background: white; border-radius: 12px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h3>📊 Transaction Statistics by Bank</h3>
+        <p><strong>Cibc Debit:</strong> 129 transaction emails</p>
+        <p><strong>Cibc Credit:</strong> 129 transaction emails</p>
+        <p><strong>Capital One Credit:</strong> 43 transaction emails</p>
+        <p><strong>Mbna Credit:</strong> 35 transaction emails</p>
+        <p><strong>Neo Credit:</strong> 24 transaction emails</p>
+    </div>
+</body>
+</html>
