@@ -3,7 +3,7 @@
 
 # Ignore Node dependencies
 node_modules/
-Client/node_modules/
+#Client/node_modules/
 
 # Ignore Python cache
 __pycache__/
