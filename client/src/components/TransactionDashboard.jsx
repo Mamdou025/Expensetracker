@@ -22,15 +22,16 @@ const TransactionDashboard = () => {
 
 
 // Find this line and update it to include the new methods:
-const { 
-  transactions: realTransactions, 
-  loading, 
+const {
+  transactions: realTransactions,
+  loading,
   error,
   addTag,
   removeTag,
   updateCategory,
   updateAmount,        // ← ADD THIS
-  updateDescription    // ← ADD THIS
+  updateDescription,   // ← ADD THIS
+  deleteTransaction
 } = useTransactions();
 
 // Add these hooks after your useTransactions hook:
@@ -380,10 +381,14 @@ const handleCancelEdit = () => {
 // Add this handler after your other handlers:
 const handleDeleteTransaction = async (transactionId) => {
   try {
-    // You'll need to implement this API endpoint
     console.log('🗑️ Deleting transaction:', transactionId);
-    // For now, just log - you can implement the actual deletion later
-    alert('Delete functionality coming soon!');
+    await deleteTransaction(transactionId);
+
+    if (!useRealData) {
+      setTransactions(prev => prev.filter(t => t.id !== transactionId));
+    }
+
+    alert('Transaction deleted successfully!');
   } catch (error) {
     console.error('Failed to delete transaction:', error);
     alert('Failed to delete transaction. Please try again.');
