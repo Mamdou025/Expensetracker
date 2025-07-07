@@ -4,6 +4,9 @@ const cors = require('cors');
 const path = require('path');
 const { spawn } = require('child_process');
 
+// Use "python" on Windows to support common installations
+const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+
 const app = express();
 // Allow overriding the port via environment variable
 const port = process.env.PORT || 5000;
@@ -391,7 +394,14 @@ app.post('/api/extract-emails', (req, res) => {
     const formattedEnd = formatDate(endDate);
 
     const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
-    const py = spawn('python3', [script, formattedStart, formattedEnd]);
+    const py = spawn(pythonCmd, [script, formattedStart, formattedEnd]);
+
+    py.on('error', (err) => {
+        console.error('❌ Failed to start extract-emails script:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: err.message });
+        }
+    });
 
     let output = '';
     let errOutput = '';
@@ -418,7 +428,14 @@ app.post('/api/process-queue', (req, res) => {
     }
 
     const script = path.join(__dirname, '../Application/api_scripts/process_queue.py');
-    const py = spawn('python3', [script]);
+    const py = spawn(pythonCmd, [script]);
+
+    py.on('error', (err) => {
+        console.error('❌ Failed to start process-queue script:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: err.message });
+        }
+    });
 
     let output = '';
     let errOutput = '';
