@@ -3,6 +3,7 @@ import Header from './ui/Header';
 import { useTranslation } from 'react-i18next';
 import { emailService } from '../Services/emailService';
 import { useTransactions } from '../hooks/useTransactions';
+import { AlertTriangle } from 'lucide-react';
 
 const EmailExtractionPage = () => {
   const { t } = useTranslation();
@@ -180,6 +181,7 @@ const EmailExtractionPage = () => {
                 <th className="px-6 py-3">{t('queue.table.date')}</th>
                 <th className="px-6 py-3">{t('queue.table.amount')}</th>
                 <th className="px-6 py-3">{t('queue.table.description')}</th>
+                <th className="px-6 py-3">{t('queue.table.bank')}</th>
                 <th className="px-6 py-3">{t('queue.table.duplicate')}</th>
                 <th className="px-6 py-3">{t('queue.table.remove')}</th>
               </tr>
@@ -200,7 +202,9 @@ const EmailExtractionPage = () => {
                   <td className="px-6 py-4">{item.transaction.date}</td>
                   <td className="px-6 py-4">{item.transaction.amount}</td>
                   <td className="px-6 py-4">{item.transaction.description}</td>
-                  <td className="px-6 py-4 text-red-600">
+                  <td className="px-6 py-4">{item.transaction.bank}</td>
+                  <td className="px-6 py-4 text-red-600 flex items-center gap-1">
+                    {item.transaction.duplicate && <AlertTriangle className="w-4 h-4" />}
                     {item.transaction.duplicate ? t('queue.table.duplicateYes') : t('queue.table.duplicateNo')}
                   </td>
                   <td className="px-6 py-4">
