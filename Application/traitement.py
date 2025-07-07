@@ -123,7 +123,7 @@ def extract_transaction_data(
         "date": formatted_date.split(" ")[0] if formatted_date else None,
         "time": formatted_date.split(" ")[1] if formatted_date else None,
         "bank": bank_name,
-        "full_email": email_text,
+        "full_email": html if html else email_text,
     }
 
     dup = False
