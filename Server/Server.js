@@ -512,6 +512,29 @@ app.put('/api/transactions/:id/description', (req, res) => {
     });
 });
 
+// ✅ Delete a transaction
+app.delete('/api/transactions/:id', (req, res) => {
+    const { id } = req.params;
+
+    // Remove any tag links first
+    db.run('DELETE FROM transaction_tags WHERE transaction_id = ?', [id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        // Now delete the transaction itself
+        db.run('DELETE FROM transactions WHERE id = ?', [id], function (err2) {
+            if (err2) {
+                return res.status(500).json({ error: err2.message });
+            }
+            if (this.changes === 0) {
+                return res.status(404).json({ error: "Transaction not found" });
+            }
+            res.json({ message: `✅ Transaction ID ${id} deleted` });
+        });
+    });
+});
+
 
 
 // Add these endpoints to your server.js
