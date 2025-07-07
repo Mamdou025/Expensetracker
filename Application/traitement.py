@@ -3,8 +3,14 @@ import re
 import yaml
 import email.utils
 import sqlite3
+import logging
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+
+# Setup basic logging if not already configured
+if not logging.getLogger().handlers:
+    logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # ✅ Load configuration file
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yml")
@@ -12,15 +18,16 @@ with open(CONFIG_FILE, "r") as f:
     config = yaml.safe_load(f)
 
 def identify_bank(email_sender, email_subject):
-    print(email_subject)
+    """Identify the bank that sent the email based on sender and subject."""
+    logger.debug("Subject: %s", email_subject)
     for bank, details in config["banks"].items():
-        print(details["keywords"])
+        logger.debug("Checking keywords for %s: %s", bank, details["keywords"])
         if details["sender"] == email_sender:
             if any(keyword in email_subject for keyword in details["keywords"]):
-                print(f"✅ Identified Bank: {bank}")
+                logger.info("Identified Bank: %s", bank)
                 return bank
-    print(f"⚠️ Could not identify bank for sender: {email_sender}")
-    print(email_subject)
+    logger.warning("Could not identify bank for sender: %s", email_sender)
+    logger.debug("Subject was: %s", email_subject)
     return "Unknown"
 
 
@@ -77,6 +84,7 @@ def extract_transaction_data(
 
     # Determine whether ``email_data`` is new-style dict or plain text
     bank_key = None
+    html = ""
     if isinstance(email_data, dict):
         email_sender = email_data.get("sender", email_sender)
         email_subject = email_data.get("subject", email_subject)
@@ -107,7 +115,7 @@ def extract_transaction_data(
             )
             extracted_data["card_type"] = "credit card" if "credit" in bank_name else "debit card"
         except KeyError:
-            print(f"⚠️ Regex patterns not found for {bank_name} in config.")
+            logger.error("Regex patterns not found for %s in config.", bank_name)
 
     ordered_data = {
         "amount": extracted_data.get("amount"),
@@ -116,7 +124,8 @@ def extract_transaction_data(
         "date": formatted_date.split(" ")[0] if formatted_date else None,
         "time": formatted_date.split(" ")[1] if formatted_date else None,
         "bank": bank_name,
-        "full_email": email_text,
+        # Store HTML when available so the UI can display the original email
+        "full_email": html if html else email_text,
     }
 
     dup = False
