@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import Header from './ui/Header';
 import { emailService } from '../Services/emailService';
-import { transactionService } from '../Services/transactionService';
+import { useTransactions } from '../hooks/useTransactions';
 
 const EmailExtractionPage = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [queue, setQueue] = useState([]); // {email, transaction}
-  const [selected, setSelected] = useState({});
+  const [selectedIds, setSelectedIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  const { refreshTransactions } = useTransactions();
 
   const loadEmails = async () => {
     if (!startDate || !endDate) return;
@@ -18,11 +20,7 @@ const EmailExtractionPage = () => {
     try {
       const data = await emailService.extractEmails(startDate, endDate);
       setQueue(data || []);
-      const sel = {};
-      data.forEach((_, idx) => {
-        sel[idx] = true;
-      });
-      setSelected(sel);
+      setSelectedIds(data.map((_, idx) => idx));
     } catch (err) {
       console.error(err);
     } finally {
@@ -30,28 +28,28 @@ const EmailExtractionPage = () => {
     }
   };
 
-  const toggle = (idx) => {
-    setSelected((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  const addToQueue = (item) => setQueue((prev) => [...prev, item]);
+
+  const toggleSelect = (idx) => {
+    setSelectedIds((prev) =>
+      prev.includes(idx) ? prev.filter((id) => id !== idx) : [...prev, idx]
+    );
   };
 
   const selectAll = () => {
-    const sel = {};
-    queue.forEach((_, idx) => {
-      sel[idx] = true;
-    });
-    setSelected(sel);
+    setSelectedIds(queue.map((_, idx) => idx));
   };
 
-  const clearSelection = () => setSelected({});
+  const clearSelection = () => setSelectedIds([]);
 
   const removeSelected = () => {
-    const filtered = queue.filter((_, idx) => !selected[idx]);
-    setQueue(filtered);
-    const sel = {};
-    filtered.forEach((_, idx) => {
-      sel[idx] = true;
-    });
-    setSelected(sel);
+    setQueue((prev) => prev.filter((_, idx) => !selectedIds.includes(idx)));
+    setSelectedIds([]);
+  };
+
+  const clearQueue = () => {
+    setQueue([]);
+    setSelectedIds([]);
   };
 
   const processEmails = async (emails) => {
@@ -61,8 +59,9 @@ const EmailExtractionPage = () => {
     try {
       await emailService.processQueue(emails);
       setProgress(emails.length);
-      await transactionService.getAll();
-      await loadEmails();
+      setQueue((prev) => prev.filter((q) => !emails.includes(q.email)));
+      setSelectedIds([]);
+      await refreshTransactions();
     } catch (err) {
       console.error(err);
     } finally {
@@ -71,7 +70,9 @@ const EmailExtractionPage = () => {
   };
 
   const processSelected = () => {
-    const emails = queue.filter((_, idx) => selected[idx]).map((q) => q.email);
+    const emails = queue
+      .filter((_, idx) => selectedIds.includes(idx))
+      .map((q) => q.email);
     processEmails(emails);
   };
 
@@ -80,7 +81,11 @@ const EmailExtractionPage = () => {
     processEmails(emails);
   };
 
-  const allSelected = queue.length > 0 && queue.every((_, idx) => selected[idx]);
+  const allSelected =
+    queue.length > 0 && queue.every((_, idx) => selectedIds.includes(idx));
+
+  const duplicateCount = queue.filter((q) => q.transaction.duplicate).length;
+  const selectedCount = selectedIds.length;
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -118,6 +123,9 @@ const EmailExtractionPage = () => {
 
       {queue.length > 0 && (
         <div className="bg-white p-8 rounded-3xl shadow-xl border">
+          <p className="mb-4 text-sm text-gray-700">
+            Total: {queue.length} | Duplicates: {duplicateCount} | Selected: {selectedCount}
+          </p>
           <div className="flex justify-between mb-4">
             <div className="space-x-2">
               <button onClick={selectAll} className="px-3 py-1 border rounded-xl text-sm">
@@ -128,6 +136,9 @@ const EmailExtractionPage = () => {
               </button>
               <button onClick={removeSelected} className="px-3 py-1 border rounded-xl text-sm">
                 Remove
+              </button>
+              <button onClick={clearQueue} className="px-3 py-1 border rounded-xl text-sm">
+                Clear Queue
               </button>
             </div>
             <div className="space-x-2">
@@ -163,12 +174,15 @@ const EmailExtractionPage = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {queue.map((item, idx) => (
-                <tr key={idx} className={item.transaction.duplicate ? 'bg-yellow-50' : ''}>
+                <tr
+                  key={idx}
+                  className={item.transaction.duplicate ? 'bg-yellow-50' : ''}
+                >
                   <td className="px-6 py-4">
                     <input
                       type="checkbox"
-                      checked={!!selected[idx]}
-                      onChange={() => toggle(idx)}
+                      checked={selectedIds.includes(idx)}
+                      onChange={() => toggleSelect(idx)}
                     />
                   </td>
                   <td className="px-6 py-4">{item.transaction.date}</td>
