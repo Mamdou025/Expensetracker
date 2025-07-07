@@ -42,4 +42,22 @@
   "settings.tabs.tags": "Tags",
   "settings.tabs.mappings": "Correspondances",
   "settings.tabs.transactions": "Transactions"
+  ,"navigation.dashboard": "Tableau de bord"
+  ,"navigation.emailExtraction": "Extraction d'emails"
+  ,"emailExtraction.startDate": "Date de début"
+  ,"emailExtraction.endDate": "Date de fin"
+  ,"emailExtraction.extract": "Extraire les emails"
+  ,"emailExtraction.extracting": "Extraction..."
+  ,"queue.selectAll": "Tout sélectionner"
+  ,"queue.clear": "Effacer"
+  ,"queue.remove": "Supprimer"
+  ,"queue.processSelected": "Traiter la sélection"
+  ,"queue.processAll": "Tout traiter"
+  ,"queue.table.date": "Date"
+  ,"queue.table.amount": "Montant"
+  ,"queue.table.description": "Description"
+  ,"queue.table.duplicate": "Dupliquer"
+  ,"queue.table.duplicateYes": "Oui"
+  ,"queue.table.duplicateNo": "Non"
+  ,"queue.processing": "Traitement de {{current}} sur {{total}}..."
 }
