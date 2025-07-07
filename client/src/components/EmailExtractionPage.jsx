@@ -49,6 +49,15 @@ const EmailExtractionPage = () => {
     setSelectedIds([]);
   };
 
+  const removeFromQueue = (idxToRemove) => {
+    setQueue((prev) => prev.filter((_, idx) => idx !== idxToRemove));
+    setSelectedIds((prev) =>
+      prev
+        .filter((id) => id !== idxToRemove)
+        .map((id) => (id > idxToRemove ? id - 1 : id))
+    );
+  };
+
   const clearQueue = () => {
     setQueue([]);
     setSelectedIds([]);
@@ -172,6 +181,7 @@ const EmailExtractionPage = () => {
                 <th className="px-6 py-3">{t('queue.table.amount')}</th>
                 <th className="px-6 py-3">{t('queue.table.description')}</th>
                 <th className="px-6 py-3">{t('queue.table.duplicate')}</th>
+                <th className="px-6 py-3">{t('queue.table.remove')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -192,6 +202,14 @@ const EmailExtractionPage = () => {
                   <td className="px-6 py-4">{item.transaction.description}</td>
                   <td className="px-6 py-4 text-red-600">
                     {item.transaction.duplicate ? t('queue.table.duplicateYes') : t('queue.table.duplicateNo')}
+                  </td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => removeFromQueue(idx)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      {t('queue.table.remove')}
+                    </button>
                   </td>
                 </tr>
               ))}
