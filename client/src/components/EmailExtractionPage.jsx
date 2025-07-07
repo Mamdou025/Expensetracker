@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Header from './ui/Header';
+import { useTranslation } from 'react-i18next';
 import { emailService } from '../Services/emailService';
 import { transactionService } from '../Services/transactionService';
 
 const EmailExtractionPage = () => {
+  const { t } = useTranslation();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [queue, setQueue] = useState([]); // {email, transaction}
@@ -88,7 +90,7 @@ const EmailExtractionPage = () => {
       <div className="bg-white p-8 rounded-3xl shadow-xl border mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium mb-2">Start Date</label>
+            <label className="block text-sm font-medium mb-2">{t('emailExtraction.startDate')}</label>
             <input
               type="date"
               value={startDate}
@@ -97,7 +99,7 @@ const EmailExtractionPage = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">End Date</label>
+            <label className="block text-sm font-medium mb-2">{t('emailExtraction.endDate')}</label>
             <input
               type="date"
               value={endDate}
@@ -110,7 +112,7 @@ const EmailExtractionPage = () => {
               onClick={loadEmails}
               className="w-full bg-blue-500 text-white px-4 py-3 rounded-xl hover:bg-blue-600"
             >
-              {loading ? 'Extracting...' : 'Extract Emails'}
+              {loading ? t('emailExtraction.extracting') : t('emailExtraction.extract')}
             </button>
           </div>
         </div>
@@ -121,13 +123,13 @@ const EmailExtractionPage = () => {
           <div className="flex justify-between mb-4">
             <div className="space-x-2">
               <button onClick={selectAll} className="px-3 py-1 border rounded-xl text-sm">
-                Select All
+                {t('queue.selectAll')}
               </button>
               <button onClick={clearSelection} className="px-3 py-1 border rounded-xl text-sm">
-                Clear
+                {t('queue.clear')}
               </button>
               <button onClick={removeSelected} className="px-3 py-1 border rounded-xl text-sm">
-                Remove
+                {t('queue.remove')}
               </button>
             </div>
             <div className="space-x-2">
@@ -135,13 +137,13 @@ const EmailExtractionPage = () => {
                 onClick={processSelected}
                 className="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700"
               >
-                Process Selected
+                {t('queue.processSelected')}
               </button>
               <button
                 onClick={processAll}
                 className="px-4 py-2 bg-green-700 text-white rounded-xl hover:bg-green-800"
               >
-                Process All
+                {t('queue.processAll')}
               </button>
             </div>
           </div>
@@ -155,10 +157,10 @@ const EmailExtractionPage = () => {
                     onChange={() => (allSelected ? clearSelection() : selectAll())}
                   />
                 </th>
-                <th className="px-6 py-3">Date</th>
-                <th className="px-6 py-3">Amount</th>
-                <th className="px-6 py-3">Description</th>
-                <th className="px-6 py-3">Duplicate</th>
+                <th className="px-6 py-3">{t('queue.table.date')}</th>
+                <th className="px-6 py-3">{t('queue.table.amount')}</th>
+                <th className="px-6 py-3">{t('queue.table.description')}</th>
+                <th className="px-6 py-3">{t('queue.table.duplicate')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -175,14 +177,16 @@ const EmailExtractionPage = () => {
                   <td className="px-6 py-4">{item.transaction.amount}</td>
                   <td className="px-6 py-4">{item.transaction.description}</td>
                   <td className="px-6 py-4 text-red-600">
-                    {item.transaction.duplicate ? 'Yes' : 'No'}
+                    {item.transaction.duplicate ? t('queue.table.duplicateYes') : t('queue.table.duplicateNo')}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
           {processing && (
-            <p className="mt-4 text-sm text-gray-600">Processing {progress} of {queue.length}...</p>
+            <p className="mt-4 text-sm text-gray-600">
+              {t('queue.processing', { current: progress, total: queue.length })}
+            </p>
           )}
         </div>
       )}

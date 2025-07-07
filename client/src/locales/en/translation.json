@@ -42,4 +42,22 @@
   "settings.tabs.tags": "Tags",
   "settings.tabs.mappings": "Mappings",
   "settings.tabs.transactions": "Transactions"
+  ,"navigation.dashboard": "Dashboard"
+  ,"navigation.emailExtraction": "Email Extraction"
+  ,"emailExtraction.startDate": "Start Date"
+  ,"emailExtraction.endDate": "End Date"
+  ,"emailExtraction.extract": "Extract Emails"
+  ,"emailExtraction.extracting": "Extracting..."
+  ,"queue.selectAll": "Select All"
+  ,"queue.clear": "Clear"
+  ,"queue.remove": "Remove"
+  ,"queue.processSelected": "Process Selected"
+  ,"queue.processAll": "Process All"
+  ,"queue.table.date": "Date"
+  ,"queue.table.amount": "Amount"
+  ,"queue.table.description": "Description"
+  ,"queue.table.duplicate": "Duplicate"
+  ,"queue.table.duplicateYes": "Yes"
+  ,"queue.table.duplicateNo": "No"
+  ,"queue.processing": "Processing {{current}} of {{total}}..."
 }
