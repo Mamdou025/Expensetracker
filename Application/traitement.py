@@ -3,8 +3,14 @@ import re
 import yaml
 import email.utils
 import sqlite3
+import logging
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+
+# Setup basic logging if not already configured
+if not logging.getLogger().handlers:
+    logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # ✅ Load configuration file
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.yml")
@@ -12,15 +18,16 @@ with open(CONFIG_FILE, "r") as f:
     config = yaml.safe_load(f)
 
 def identify_bank(email_sender, email_subject):
-    print(email_subject)
+    """Identify the bank that sent the email based on sender and subject."""
+    logger.debug("Subject: %s", email_subject)
     for bank, details in config["banks"].items():
-        print(details["keywords"])
+        logger.debug("Checking keywords for %s: %s", bank, details["keywords"])
         if details["sender"] == email_sender:
             if any(keyword in email_subject for keyword in details["keywords"]):
-                print(f"✅ Identified Bank: {bank}")
+                logger.info("Identified Bank: %s", bank)
                 return bank
-    print(f"⚠️ Could not identify bank for sender: {email_sender}")
-    print(email_subject)
+    logger.warning("Could not identify bank for sender: %s", email_sender)
+    logger.debug("Subject was: %s", email_subject)
     return "Unknown"
 
 
@@ -107,7 +114,7 @@ def extract_transaction_data(
             )
             extracted_data["card_type"] = "credit card" if "credit" in bank_name else "debit card"
         except KeyError:
-            print(f"⚠️ Regex patterns not found for {bank_name} in config.")
+            logger.error("Regex patterns not found for %s in config.", bank_name)
 
     ordered_data = {
         "amount": extracted_data.get("amount"),
