@@ -2,8 +2,10 @@ import sys
 import os
 import json
 
-# Ensure Application modules are importable
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Ensure Application and project root modules are importable
+current_dir = os.path.dirname(__file__)
+sys.path.append(os.path.abspath(os.path.join(current_dir, '..')))
+sys.path.append(os.path.abspath(os.path.join(current_dir, '..', '..')))
 
 from traitement import extract_transaction_data
 from Database.Insert import insert_transaction
