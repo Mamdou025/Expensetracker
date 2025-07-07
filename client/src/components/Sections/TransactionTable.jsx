@@ -1,6 +1,7 @@
 // src/components/Sections/TransactionTable.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import TransactionActionsMenu from '../common/TransactionActionsMenu';
+import EmailViewerModal from '../common/EmailViewerModal';
 import { useTranslation } from 'react-i18next';
 
 // We need to create a wrapper component to fix the dropdown positioning
@@ -27,7 +28,8 @@ const EditableTransactionRow = ({
   removeTag,
   filters,
   onOpenTagModal,
-  onDeleteTransaction
+  onDeleteTransaction,
+  onViewEmail
 }) => {
   const isEditing = (field) => editingTransaction === `${transaction.id}-${field}`;
   
@@ -220,6 +222,7 @@ const EditableTransactionRow = ({
           onOpenTagModal={onOpenTagModal}
           onDeleteTransaction={onDeleteTransaction}
           removeTag={removeTag}
+          onViewEmail={onViewEmail}
         />
       </td>
     </tr>
@@ -253,7 +256,21 @@ const TransactionTable = ({
   const { t } = useTranslation();
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
 
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailModalTransaction, setEmailModalTransaction] = useState(null);
+
+  const handleViewEmail = (txn) => {
+    setEmailModalTransaction(txn);
+    setShowEmailModal(true);
+  };
+
+  const handleCloseEmailModal = () => {
+    setShowEmailModal(false);
+    setEmailModalTransaction(null);
+  };
+
   return (
+    <>
     <div className="bg-white rounded-3xl shadow-xl border overflow-hidden">
       {/* Header */}
       <div className="p-8 border-b bg-gray-50">
@@ -337,6 +354,7 @@ const TransactionTable = ({
                 onOpenTagModal={onOpenTagModal}
                 removeTag={removeTag}
                 onDeleteTransaction={onDeleteTransaction}
+                onViewEmail={handleViewEmail}
               />
             ))}
           </tbody>
@@ -367,6 +385,12 @@ const TransactionTable = ({
         </div>
       </div>
     </div>
+    <EmailViewerModal
+      isOpen={showEmailModal}
+      onClose={handleCloseEmailModal}
+      transaction={emailModalTransaction}
+    />
+    </>
   );
 };
 
