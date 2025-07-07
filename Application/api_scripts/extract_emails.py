@@ -1,12 +1,18 @@
 import sys
 import os
 import json
+import logging
 
 # Ensure modules in the parent directory (Application) are importable
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from extracteur import fetch_emails
 from traitement import extract_transaction_data
+
+# Configure logging if not already done
+if not logging.getLogger().handlers:
+    logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -19,8 +25,19 @@ def main():
     emails = fetch_emails(start_date, end_date)
     results = []
     for email in emails:
-        trans = extract_transaction_data(email, email.get('sender'), email.get('subject'), email.get('email_datetime'))
-        results.append({'email': email, 'transaction': trans})
+        trans = extract_transaction_data(
+            email,
+            email.get('sender'),
+            email.get('subject'),
+            email.get('email_datetime')
+        )
+        if trans.get('amount'):
+            results.append({'email': email, 'transaction': trans})
+        else:
+            logger.info(
+                "Skipped email without transaction amount: %s",
+                email.get('subject')
+            )
     print(json.dumps(results))
 
 
