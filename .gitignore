@@ -8,5 +8,5 @@ Client/node_modules/
 # Ignore Python cache
 __pycache__/
 
-
+server/node_modules
 /TestEmails1
