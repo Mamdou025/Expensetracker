@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { apiClient } from '../../Services/api';
 
 const EmailViewerModal = ({ isOpen, onClose, transaction }) => {
   const [emailHtml, setEmailHtml] = useState('');
@@ -10,9 +11,7 @@ const EmailViewerModal = ({ isOpen, onClose, transaction }) => {
       if (isOpen && transaction) {
         try {
           setLoading(true);
-          const res = await fetch(`/api/transactions/${transaction.id}/email`);
-          if (!res.ok) throw new Error('Failed to fetch email');
-          const data = await res.json();
+          const data = await apiClient.get(`/api/transactions/${transaction.id}/email`);
           setEmailHtml(data.full_email || '');
         } catch (err) {
           console.error('Failed to fetch email:', err);
