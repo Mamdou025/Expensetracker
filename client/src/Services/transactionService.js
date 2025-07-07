@@ -21,8 +21,21 @@ export const transactionService = {
     apiClient.post(`/api/transactions/${transactionId}/tags`, { tag }),
 
   // Remove tag from transaction
-  removeTag: (transactionId, tag) => 
+  removeTag: (transactionId, tag) =>
     apiClient.delete(`/api/transactions/${transactionId}/tags`, { tag }),
+
+  // Delete a transaction
+  delete: async (id) => {
+    console.log('🔄 Deleting transaction:', id);
+    try {
+      const result = await apiClient.delete(`/api/transactions/${id}`);
+      console.log('✅ Transaction deleted successfully');
+      return result;
+    } catch (error) {
+      console.error('❌ Failed to delete transaction:', error);
+      throw error;
+    }
+  },
 
   // Update transaction category
   updateCategory: (id, category) => 

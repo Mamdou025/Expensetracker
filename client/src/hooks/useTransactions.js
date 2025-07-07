@@ -96,6 +96,17 @@ const updateDescription = async (id, description) => {
   }
 };
 
+const deleteTransaction = async (id) => {
+  try {
+    await transactionService.delete(id);
+    await loadTransactions(); // Reload to get updated data
+  } catch (err) {
+    console.error('Error deleting transaction:', err);
+    setError(err.message);
+    throw err;
+  }
+};
+
 // Update your return statement to include these new methods:
 return {
   transactions,
@@ -105,8 +116,9 @@ return {
   addTag,
   removeTag,
   updateCategory,
-  updateAmount,        
-  updateDescription,   
+  updateAmount,
+  updateDescription,
+  deleteTransaction,
 };
 
 
