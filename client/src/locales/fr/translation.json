@@ -59,5 +59,6 @@
   ,"queue.table.duplicate": "Dupliquer"
   ,"queue.table.duplicateYes": "Oui"
   ,"queue.table.duplicateNo": "Non"
+  ,"queue.table.remove": "Supprimer"
   ,"queue.processing": "Traitement de {{current}} sur {{total}}..."
 }
