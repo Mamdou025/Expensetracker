@@ -26,6 +26,7 @@ const EmailExtractionPage = () => {
       setSelectedIds(data.map((_, idx) => idx));
     } catch (err) {
       console.error(err);
+      alert(err.message || 'Failed to extract emails');
     } finally {
       setLoading(false);
     }
@@ -76,6 +77,7 @@ const EmailExtractionPage = () => {
       await refreshTransactions();
     } catch (err) {
       console.error(err);
+      alert(err.message || 'Failed to process emails');
     } finally {
       setProcessing(false);
     }
