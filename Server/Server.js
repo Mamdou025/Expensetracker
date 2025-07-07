@@ -414,7 +414,14 @@ app.post('/api/extract-emails', (req, res) => {
         }
         try {
             const parsed = JSON.parse(output);
-            res.json(parsed);
+
+            // Filter out emails where the extracted amount is missing
+            const filtered = parsed.filter(item => {
+                const amt = parseFloat(item?.transaction?.amount);
+                return !isNaN(amt);
+            });
+
+            res.json(filtered);
         } catch (e) {
             res.status(500).json({ error: 'Failed to parse python output', details: output });
         }
