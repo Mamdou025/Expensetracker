@@ -20,3 +20,40 @@ This project extracts transaction data from emails and stores it in a local SQLi
    ```
 3. Run the extraction scripts located in the `Application` folder.
 
+
+## Running the React client and Node server
+
+The web interface lives in the `client` folder while the API server resides in `Server`.
+
+### Installing dependencies
+1. **Client**
+   ```bash
+   cd client
+   npm install --legacy-peer-deps
+   # or install TypeScript 4.9 manually if you prefer
+   npm install typescript@4.9 --save-dev
+   ```
+2. **Server**
+   ```bash
+   cd Server
+   npm install
+   ```
+
+### Starting the services
+Start the React development server:
+```bash
+cd client
+npm start
+```
+
+Start the Node API server (runs on port 5000 by default):
+```bash
+cd Server
+node Server.js
+```
+
+The React app reads `REACT_APP_API_URL` to determine the API base URL (defaults to `http://localhost:5000`).
+You can place this variable in a `.env` file inside the `client` folder.
+The Node server uses the optional `PORT` environment variable and reads the SQLite
+`transactions.db` from the `Database` directory.
+
