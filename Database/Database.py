@@ -25,6 +25,11 @@ def create_database():
         )
     """)
 
+    # ✅ Create index for faster duplicate checks and lookups
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_amount_date ON transactions(amount, date)"
+    )
+
     # ✅ Create tags table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tags (
