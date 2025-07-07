@@ -1,5 +1,11 @@
 import sqlite3
 import os
+import logging
+
+# Configure logging if not already done
+if not logging.getLogger().handlers:
+    logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def insert_transaction(ordered_data):
     """
@@ -51,10 +57,10 @@ def insert_transaction(ordered_data):
             cursor.execute("INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)", (transaction_id, tag_id))
 
         conn.commit()
-        print(f"✅ Transaction saved: {ordered_data}")
+        logger.info("Transaction saved: %s", ordered_data)
 
     except ValueError:
-        print(f"❌ Error: Amount '{ordered_data['amount']}' is not a valid number.")
+        logger.error("Amount '%s' is not a valid number.", ordered_data['amount'])
 
     finally:
         conn.close()
