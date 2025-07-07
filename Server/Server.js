@@ -12,7 +12,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json()); // ✅ Allow JSON request body parsing
+// Increase JSON payload limit to handle larger request bodies
+app.use(express.json({ limit: '10mb' })); // ✅ Allow JSON request body parsing
 
 // ✅ Construct absolute path to transactions.db in Database folder
 const dbPath = path.join(__dirname, '../Database/transactions.db');
