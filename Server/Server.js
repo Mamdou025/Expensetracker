@@ -414,7 +414,14 @@ app.post('/api/extract-emails', (req, res) => {
         }
         try {
             const parsed = JSON.parse(output);
-            res.json(parsed);
+
+            // Filter out emails where the extracted amount is missing
+            const filtered = parsed.filter(item => {
+                const amt = parseFloat(item?.transaction?.amount);
+                return !isNaN(amt);
+            });
+
+            res.json(filtered);
         } catch (e) {
             res.status(500).json({ error: 'Failed to parse python output', details: output });
         }
@@ -509,6 +516,29 @@ app.put('/api/transactions/:id/description', (req, res) => {
             return;
         }
         res.json({ message: `✅ Transaction ID ${id} description updated` });
+    });
+});
+
+// ✅ Delete a transaction
+app.delete('/api/transactions/:id', (req, res) => {
+    const { id } = req.params;
+
+    // Remove any tag links first
+    db.run('DELETE FROM transaction_tags WHERE transaction_id = ?', [id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        // Now delete the transaction itself
+        db.run('DELETE FROM transactions WHERE id = ?', [id], function (err2) {
+            if (err2) {
+                return res.status(500).json({ error: err2.message });
+            }
+            if (this.changes === 0) {
+                return res.status(404).json({ error: "Transaction not found" });
+            }
+            res.json({ message: `✅ Transaction ID ${id} deleted` });
+        });
     });
 });
 
