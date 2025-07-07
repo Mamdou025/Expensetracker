@@ -5,8 +5,10 @@ This project extracts transaction data from emails and stores it in a local SQLi
 ## Setup
 
 1. **Provide email credentials** used by the extraction scripts.
-   - Either edit `credentials.yml` with your Gmail address and app password.
+   - Either edit `credentials.yml` with your email address and app password.
    - Or set the environment variables `EMAIL_USER` and `EMAIL_PASS`. A `.env` file can be used with tools such as `python-dotenv`.
+   The scripts read environment variables first and fall back to `credentials.yml` if they are not set.
+   If you store real credentials in the file, consider adding `credentials.yml` to `.gitignore` to avoid committing secrets.
    Example `.env` file:
    ```
    EMAIL_USER=your_email@example.com
