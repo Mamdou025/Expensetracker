@@ -10,3 +10,5 @@ __pycache__/
 
 #Server/node_modules
 /TestEmails1
+client/file_structure.txt
+client/src/project_structure.txt
