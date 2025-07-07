@@ -380,8 +380,18 @@ app.post('/api/extract-emails', (req, res) => {
         return res.status(400).json({ error: 'startDate and endDate required' });
     }
 
+    // Convert YYYY-MM-DD to DD-Mon-YYYY for the Python script
+    function formatDate(iso) {
+        const [y, m, d] = iso.split('-');
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return `${d}-${months[parseInt(m, 10) - 1]}-${y}`;
+    }
+
+    const formattedStart = formatDate(startDate);
+    const formattedEnd = formatDate(endDate);
+
     const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
-    const py = spawn('python3', [script, startDate, endDate]);
+    const py = spawn('python3', [script, formattedStart, formattedEnd]);
 
     let output = '';
     let errOutput = '';
