@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { apiClient } from '../../Services/api';
 
-const EmailViewerModal = ({ isOpen, onClose, transaction }) => {
+const EmailViewerModal = ({ isOpen, onClose, transaction, html }) => {
   const [emailHtml, setEmailHtml] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchEmail = async () => {
-      if (isOpen && transaction) {
+      if (!isOpen) return;
+
+      if (html) {
+        setEmailHtml(html);
+        return;
+      }
+
+      if (transaction) {
         try {
           setLoading(true);
           const data = await apiClient.get(`/api/transactions/${transaction.id}/email`);
@@ -22,7 +29,7 @@ const EmailViewerModal = ({ isOpen, onClose, transaction }) => {
       }
     };
     fetchEmail();
-  }, [isOpen, transaction]);
+  }, [isOpen, transaction, html]);
 
   if (!isOpen) return null;
 

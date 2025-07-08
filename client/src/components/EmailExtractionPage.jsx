@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { emailService } from '../Services/emailService';
 import { useTransactions } from '../hooks/useTransactions';
 import { AlertTriangle } from 'lucide-react';
+import EmailViewerModal from './common/EmailViewerModal';
 
 const EmailExtractionPage = () => {
   const { t } = useTranslation();
@@ -14,6 +15,8 @@ const EmailExtractionPage = () => {
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [modalHtml, setModalHtml] = useState('');
 
   const { refreshTransactions } = useTransactions();
 
@@ -58,6 +61,16 @@ const EmailExtractionPage = () => {
         .filter((id) => id !== idxToRemove)
         .map((id) => (id > idxToRemove ? id - 1 : id))
     );
+  };
+
+  const viewEmail = (html) => {
+    setModalHtml(html);
+    setShowEmailModal(true);
+  };
+
+  const closeEmailModal = () => {
+    setShowEmailModal(false);
+    setModalHtml('');
   };
 
   const clearQueue = () => {
@@ -184,6 +197,7 @@ const EmailExtractionPage = () => {
                 <th className="px-6 py-3">{t('queue.table.amount')}</th>
                 <th className="px-6 py-3">{t('queue.table.description')}</th>
                 <th className="px-6 py-3">{t('queue.table.bank')}</th>
+                <th className="px-6 py-3">{t('queue.table.viewEmail')}</th>
                 <th className="px-6 py-3">{t('queue.table.duplicate')}</th>
                 <th className="px-6 py-3">{t('queue.table.remove')}</th>
               </tr>
@@ -205,6 +219,14 @@ const EmailExtractionPage = () => {
                   <td className="px-6 py-4">{item.transaction.amount}</td>
                   <td className="px-6 py-4">{item.transaction.description}</td>
                   <td className="px-6 py-4">{item.transaction.bank}</td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => viewEmail(item.transaction.full_email)}
+                      className="text-blue-600 hover:underline"
+                    >
+                      {t('queue.table.viewEmail')}
+                    </button>
+                  </td>
                   <td className="px-6 py-4 text-red-600 flex items-center gap-1">
                     {item.transaction.duplicate && <AlertTriangle className="w-4 h-4" />}
                     {item.transaction.duplicate ? t('queue.table.duplicateYes') : t('queue.table.duplicateNo')}
@@ -228,6 +250,11 @@ const EmailExtractionPage = () => {
           )}
         </div>
       )}
+      <EmailViewerModal
+        isOpen={showEmailModal}
+        onClose={closeEmailModal}
+        html={modalHtml}
+      />
     </div>
   );
 };
