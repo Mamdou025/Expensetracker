@@ -65,6 +65,24 @@ You can place this variable in a `.env` file inside the `client` folder.
 The Node server uses the optional `PORT` environment variable and reads the SQLite
 `transactions.db` from the `Database` directory.
 
+
+
+## Running tests
+
+Install dependencies and run the Python suite:
+```bash
+pip install -r requirements.txt
+pip install pytest
+pytest Application
+```
+
+For the React client tests:
+```bash
+cd client
+npm install --legacy-peer-deps
+npm test -- --watchAll=false
+```
+
 ## Database schema upgrades
 If you update the project and new columns are added (for example the
 `category` field), run the database creation script again:
@@ -73,4 +91,5 @@ If you update the project and new columns are added (for example the
 python Database/Database.py
 ```
 This will alter the existing database tables to include any missing columns.
+
 
