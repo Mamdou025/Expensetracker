@@ -40,6 +40,7 @@ The web interface lives in the `client` folder while the API server resides in `
    # or install TypeScript 4.9 manually if you prefer
    npm install typescript@4.9 --save-dev
    ```
+   Run `npm install` within `client/` before `npm test`.
 2. **Server**
    ```bash
    cd Server
@@ -63,4 +64,13 @@ The React app reads `REACT_APP_API_URL` to determine the API base URL (defaults 
 You can place this variable in a `.env` file inside the `client` folder.
 The Node server uses the optional `PORT` environment variable and reads the SQLite
 `transactions.db` from the `Database` directory.
+
+## Database schema upgrades
+If you update the project and new columns are added (for example the
+`category` field), run the database creation script again:
+
+```bash
+python Database/Database.py
+```
+This will alter the existing database tables to include any missing columns.
 
