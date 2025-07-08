@@ -64,3 +64,12 @@ You can place this variable in a `.env` file inside the `client` folder.
 The Node server uses the optional `PORT` environment variable and reads the SQLite
 `transactions.db` from the `Database` directory.
 
+## Database schema upgrades
+If you update the project and new columns are added (for example the
+`category` field), run the database creation script again:
+
+```bash
+python Database/Database.py
+```
+This will alter the existing database tables to include any missing columns.
+
