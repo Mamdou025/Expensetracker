@@ -40,6 +40,7 @@ The web interface lives in the `client` folder while the API server resides in `
    # or install TypeScript 4.9 manually if you prefer
    npm install typescript@4.9 --save-dev
    ```
+   Run `npm install` within `client/` before `npm test`.
 2. **Server**
    ```bash
    cd Server
