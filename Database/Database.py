@@ -1,6 +1,26 @@
 import sqlite3
 import os
 
+def _check_and_update_columns(cursor):
+    """Ensure the transactions table has all required columns."""
+    required = {
+        "time": "TEXT DEFAULT NULL",
+        "bank": "TEXT NOT NULL",
+        "full_email": "TEXT DEFAULT 'No email content'",
+        "category": "TEXT DEFAULT 'Uncategorized'",
+        "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+    }
+
+    cursor.execute("PRAGMA table_info(transactions)")
+    existing = {row[1] for row in cursor.fetchall()}
+
+    for col, definition in required.items():
+        if col not in existing:
+            cursor.execute(
+                f"ALTER TABLE transactions ADD COLUMN {col} {definition}"
+            )
+            print(f"➡️ Added missing column '{col}' to transactions table")
+
 def create_database():
     # ✅ Get the absolute path of the 'Database' folder
     base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -24,6 +44,9 @@ def create_database():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+
+    # Ensure new columns exist when upgrading from older schemas
+    _check_and_update_columns(cursor)
 
     # ✅ Create index to speed up queries on amount and date
     cursor.execute("""
