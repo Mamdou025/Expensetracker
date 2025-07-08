@@ -104,8 +104,23 @@ def extract_transaction_data(
     if bank_name != "Unknown" and bank_name in cfg.get("banks", {}):
         try:
             regex_patterns = cfg["banks"][bank_name]["regex"]
-            amount_match = re.search(regex_patterns["amount"], email_text)
-            description_match = re.search(regex_patterns["description"], email_text)
+
+            amount_match = description_match = None
+
+            if isinstance(regex_patterns, list):
+                for pat in regex_patterns:
+                    if not isinstance(pat, dict):
+                        continue
+                    a_match = re.search(pat.get("amount", ""), email_text)
+                    d_match = re.search(pat.get("description", ""), email_text)
+                    if a_match and d_match:
+                        amount_match = a_match
+                        description_match = d_match
+                        break
+            else:
+                amount_match = re.search(regex_patterns["amount"], email_text)
+                description_match = re.search(regex_patterns["description"], email_text)
+
             extracted_data["amount"] = (
                 amount_match.group(1).replace(",", ".") if amount_match else None
             )
