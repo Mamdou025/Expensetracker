@@ -1,0 +1,7 @@
+{
+  "name": "expensetracker-root",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix client install --legacy-peer-deps"
+  }
+}
