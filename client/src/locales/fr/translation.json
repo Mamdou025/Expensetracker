@@ -57,6 +57,7 @@
   ,"queue.table.amount": "Montant"
   ,"queue.table.description": "Description"
   ,"queue.table.bank": "Banque"
+  ,"queue.table.viewEmail": "Voir le courriel"
   ,"queue.table.duplicate": "Dupliquer"
   ,"queue.table.duplicateYes": "Oui"
   ,"queue.table.duplicateNo": "Non"

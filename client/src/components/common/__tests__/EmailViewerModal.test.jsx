@@ -40,4 +40,27 @@ describe('EmailViewerModal', () => {
       expect(screen.getByText('Hello World')).toBeInTheDocument();
     });
   });
+
+  it('displays provided HTML without fetching when html prop is used', async () => {
+    const htmlContent = '<p>Preview</p>';
+
+    const Wrapper = () => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>Show Email</button>
+          <EmailViewerModal isOpen={open} onClose={() => setOpen(false)} html={htmlContent} />
+        </>
+      );
+    };
+
+    render(<Wrapper />);
+
+    await userEvent.click(screen.getByText('Show Email'));
+
+    expect(apiClient.get).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect(screen.getByText('Preview')).toBeInTheDocument();
+    });
+  });
 });
