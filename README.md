@@ -64,3 +64,19 @@ You can place this variable in a `.env` file inside the `client` folder.
 The Node server uses the optional `PORT` environment variable and reads the SQLite
 `transactions.db` from the `Database` directory.
 
+
+## Running tests
+
+Install dependencies and run the Python suite:
+```bash
+pip install -r requirements.txt
+pip install pytest
+pytest Application
+```
+
+For the React client tests:
+```bash
+cd client
+npm install --legacy-peer-deps
+npm test -- --watchAll=false
+```
