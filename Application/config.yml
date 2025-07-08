@@ -33,4 +33,5 @@ banks:
     regex:
       amount: "\\$([0-9]+[.,][0-9]{2})"
       description: "(?:purchase.*?at |auprès de )([A-Za-z0-9 #]+)"
+      
 
