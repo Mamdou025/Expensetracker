@@ -35,3 +35,18 @@ def test_unknown_bank(monkeypatch):
     result = traitement.extract_transaction_data(data)
     assert result["bank"] == "Unknown"
     assert result["amount"] is None
+
+
+def test_neo_credit_multiple_regex(monkeypatch):
+    monkeypatch.setattr(traitement, "is_duplicate", lambda amount, date: False)
+    email = {
+        "full_email_html": "<p>You earned cashback on your purchase of $12.34 at Starbucks</p>",
+        "sender": "info@neofinancial.com",
+        "subject": "Your purchase at Starbucks",
+        "email_datetime": "Mon, 01 Jan 2024 12:00:00 +0000",
+        "bank_config": "neo_credit",
+    }
+    result = traitement.extract_transaction_data(email)
+    assert result["bank"] == "neo_credit"
+    assert result["amount"] == "12.34"
+    assert result["description"] == "Starbucks"
