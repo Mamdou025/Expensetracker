@@ -631,6 +631,89 @@ app.post('/api/tags', (req, res) => {
     });
 });
 
+// Apply a category to all transactions matching a keyword in the description
+app.post('/api/apply-keyword-category', (req, res) => {
+    const { keyword, category } = req.body;
+
+    if (!keyword || !category) {
+        return res.status(400).json({ error: "keyword and category are required" });
+    }
+
+    const like = `%${keyword}%`;
+    const query = "UPDATE transactions SET category = ? WHERE description LIKE ?";
+
+    db.run(query, [category, like], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        res.json({
+            message: `✅ ${this.changes} transactions updated to category '${category}'`,
+            updatedTransactions: this.changes
+        });
+    });
+});
+
+// Apply tags to all transactions matching a keyword in the description
+app.post('/api/apply-keyword-tags', async (req, res) => {
+    try {
+        const { keyword, tags } = req.body;
+
+        if (!keyword || !Array.isArray(tags)) {
+            return res.status(400).json({ error: "keyword and tags array are required" });
+        }
+
+        const like = `%${keyword}%`;
+
+        // Get matching transaction IDs
+        const transactions = await new Promise((resolve, reject) => {
+            db.all('SELECT id FROM transactions WHERE description LIKE ?', [like], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows.map(r => r.id));
+            });
+        });
+
+        for (const tag of tags) {
+            await new Promise((resolve, reject) => {
+                db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], err => {
+                    if (err) reject(err);
+                    else resolve();
+                });
+            });
+
+            const tagRow = await new Promise((resolve, reject) => {
+                db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                });
+            });
+
+            const tagId = tagRow.id;
+
+            for (const tId of transactions) {
+                await new Promise((resolve, reject) => {
+                    db.run(
+                        'INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)',
+                        [tId, tagId],
+                        err => {
+                            if (err) reject(err);
+                            else resolve();
+                        }
+                    );
+                });
+            }
+        }
+
+        res.json({
+            message: `✅ Tags applied to ${transactions.length} transactions`,
+            updatedTransactions: transactions.length
+        });
+    } catch (error) {
+        console.error("Error applying keyword tags:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 // ✅ Start the server
 app.listen(port, () => {
