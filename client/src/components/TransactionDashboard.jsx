@@ -514,9 +514,9 @@ const handleCreateTag = async (tagName) => {
     {loading ? (
       '⏳ Loading Real Data...'
     ) : useRealData ? (
-      `🟢 Real Data (${realTransactions.length} transactions)`
+      `🟢 Vraies données (${realTransactions.length} transactions)`
     ) : (
-      '🔵 Mock Data (500 transactions)'
+      '🔵 données fictives (500 transactions)'
     )}
   </button>
   
