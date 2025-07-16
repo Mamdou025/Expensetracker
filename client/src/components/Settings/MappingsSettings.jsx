@@ -1,23 +1,138 @@
 // src/components/settings/MappingsSettings.jsx
-import React from 'react';
+import React, { useState } from 'react';
+import { useCategories } from '../../hooks/useCategories';
+import { useTags } from '../../hooks/useTags';
+import { keywordMappingService } from '../../Services/keywordMappingService';
 
 const MappingsSettings = () => {
+  const { categories } = useCategories();
+  const { tags } = useTags();
+
+  const [keywordCat, setKeywordCat] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [categoryResult, setCategoryResult] = useState(null);
+  const [loadingCat, setLoadingCat] = useState(false);
+
+  const [keywordTags, setKeywordTags] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [tagsResult, setTagsResult] = useState(null);
+  const [loadingTags, setLoadingTags] = useState(false);
+
+  const handleCategorySubmit = async (e) => {
+    e.preventDefault();
+    if (!keywordCat || !selectedCategory) return;
+    try {
+      setLoadingCat(true);
+      const res = await keywordMappingService.applyCategory(keywordCat, selectedCategory);
+      setCategoryResult(res.updatedTransactions);
+    } catch (err) {
+      alert('Failed to apply category: ' + err.message);
+    } finally {
+      setLoadingCat(false);
+    }
+  };
+
+  const handleTagSelect = (e) => {
+    const options = Array.from(e.target.options);
+    setSelectedTags(options.filter((o) => o.selected).map((o) => o.value));
+  };
+
+  const handleTagsSubmit = async (e) => {
+    e.preventDefault();
+    if (!keywordTags || selectedTags.length === 0) return;
+    try {
+      setLoadingTags(true);
+      const res = await keywordMappingService.applyTags(keywordTags, selectedTags);
+      setTagsResult(res.updatedTransactions);
+    } catch (err) {
+      alert('Failed to apply tags: ' + err.message);
+    } finally {
+      setLoadingTags(false);
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="font-semibold text-lg mb-4">Tag-Category Mappings</h3>
-        <p className="text-gray-600 mb-4">Associate tags with categories for automatic tagging</p>
-        <div className="bg-gray-50 p-4 rounded-xl">
-          <p className="text-sm text-gray-600">Feature coming soon - Auto-assign tags based on categories</p>
-        </div>
+        <h3 className="font-semibold text-lg mb-4">Keyword-Category Mapping</h3>
+        <p className="text-gray-600 mb-4">Assign a category to all transactions containing a keyword.</p>
+        <form onSubmit={handleCategorySubmit} className="bg-gray-50 p-4 rounded-xl space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Keyword</label>
+            <input
+              type="text"
+              value={keywordCat}
+              onChange={(e) => setKeywordCat(e.target.value)}
+              className="w-full border rounded-lg px-3 py-2"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Category</label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full border rounded-lg px-3 py-2 bg-white"
+            >
+              <option value="">Select category</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="submit"
+            disabled={loadingCat}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            Apply
+          </button>
+          {categoryResult !== null && (
+            <p className="text-sm text-green-600">{categoryResult} transactions updated</p>
+          )}
+        </form>
       </div>
-      
+
       <div>
-        <h3 className="font-semibold text-lg mb-4">Keyword-Tag Mappings</h3>
-        <p className="text-gray-600 mb-4">Auto-assign tags based on keywords in descriptions</p>
-        <div className="bg-gray-50 p-4 rounded-xl">
-          <p className="text-sm text-gray-600">Feature coming soon - Auto-assign tags based on keywords</p>
-        </div>
+        <h3 className="font-semibold text-lg mb-4">Keyword-Tag Mapping</h3>
+        <p className="text-gray-600 mb-4">Assign tags to transactions containing a keyword.</p>
+        <form onSubmit={handleTagsSubmit} className="bg-gray-50 p-4 rounded-xl space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Keyword</label>
+            <input
+              type="text"
+              value={keywordTags}
+              onChange={(e) => setKeywordTags(e.target.value)}
+              className="w-full border rounded-lg px-3 py-2"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Tags</label>
+            <select
+              multiple
+              value={selectedTags}
+              onChange={handleTagSelect}
+              className="w-full border rounded-lg px-3 py-2 bg-white h-32"
+            >
+              {tags.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="submit"
+            disabled={loadingTags}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            Apply
+          </button>
+          {tagsResult !== null && (
+            <p className="text-sm text-green-600">{tagsResult} transactions updated</p>
+          )}
+        </form>
       </div>
     </div>
   );
