@@ -14,3 +14,4 @@ client/file_structure.txt
 client/src/project_structure.txt
 
 credentials.yml
+*.db
