@@ -1,0 +1,213 @@
+---
+title: "ExpenseTracker - Statistiques Simples"
+author: "Aperçu Financier Rapide"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 5)
+
+# Charger les bibliothèques
+library(RSQLite)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(knitr)
+library(lubridate)
+library(RColorBrewer)
+
+# Connexion à la base de données
+DB_PATH <- "../Database/transactions.db"
+
+# Charger les données
+con <- dbConnect(SQLite(), DB_PATH)
+transactions <- dbGetQuery(con, "SELECT * FROM transactions ORDER BY date DESC")
+dbDisconnect(con)
+
+# Préparation des données
+transactions$date <- as.Date(transactions$date)
+transactions$amount <- as.numeric(transactions$amount)
+transactions$month <- floor_date(transactions$date, "month")
+```
+
+# Aperçu des Statistiques Financières
+
+## Métriques Clés
+
+```{r key_metrics}
+# Calculer les statistiques de base
+total_transactions <- nrow(transactions)
+total_amount <- sum(transactions$amount, na.rm = TRUE)
+avg_amount <- mean(transactions$amount, na.rm = TRUE)
+median_amount <- median(transactions$amount, na.rm = TRUE)
+
+# Créer le tableau des statistiques simples
+stats_table <- data.frame(
+  Métrique = c(
+    "Nombre Total de Transactions",
+    "Montant Total Dépensé", 
+    "Montant Moyen par Transaction",
+    "Montant Médian par Transaction"
+  ),
+  Valeur = c(
+    format(total_transactions, big.mark = " "),
+    paste0(format(total_amount, big.mark = " ", nsmall = 2), " $"),
+    paste0(format(avg_amount, nsmall = 2), " $"),
+    paste0(format(median_amount, nsmall = 2), " $")
+  )
+)
+
+kable(stats_table, col.names = c("Métrique", "Valeur"))
+```
+
+## Dépenses par Mois
+
+```{r spending_by_month}
+# Graphique en barres des dépenses mensuelles
+monthly_spending <- transactions %>%
+  group_by(month) %>%
+  summarise(total = sum(amount, na.rm = TRUE), .groups = 'drop')
+
+ggplot(monthly_spending, aes(x = month, y = total)) +
+  geom_col(fill = "#3498db", alpha = 0.8) +
+  scale_y_continuous(labels = function(x) paste0(format(x, big.mark = " "), " $")) +
+  scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +
+  labs(title = "Dépenses par Mois", x = "Mois", y = "Total des Dépenses") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Dépenses par Catégorie
+
+```{r spending_by_category}
+# Graphique circulaire des dépenses par catégorie
+category_spending <- transactions %>%
+  group_by(category) %>%
+  summarise(total = sum(amount, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(percentage = total / sum(total) * 100) %>%
+  arrange(desc(total))
+
+ggplot(category_spending, aes(x = "", y = percentage, fill = category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(type = "qual", palette = "Set3") +
+  labs(title = "Dépenses par Catégorie", fill = "Catégorie") +
+  theme_void() +
+  geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5))
+```
+
+## Dépenses par Banque
+
+```{r spending_by_bank}
+# Graphique en barres horizontales des dépenses par banque
+bank_spending <- transactions %>%
+  group_by(bank) %>%
+  summarise(total = sum(amount, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(desc(total))
+
+ggplot(bank_spending, aes(x = reorder(bank, total), y = total)) +
+  geom_col(fill = "#e74c3c", alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(labels = function(x) paste0(format(x, big.mark = " "), " $")) +
+  labs(title = "Dépenses par Banque", x = "Banque", y = "Total des Dépenses") +
+  theme_minimal()
+```
+
+## Dépenses par Jour de la Semaine
+
+```{r spending_by_day}
+# Ajouter le jour de la semaine
+transactions$jour_semaine <- wday(transactions$date, label = TRUE, abbr = FALSE, locale = "fr_FR.UTF-8")
+
+# Si la locale française n'est pas disponible, utiliser les noms manuellement
+if(any(is.na(transactions$jour_semaine))) {
+  transactions$jour_semaine <- factor(wday(transactions$date), 
+                                     levels = 1:7,
+                                     labels = c("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"))
+}
+
+# Calculer les dépenses par jour
+daily_spending <- transactions %>%
+  group_by(jour_semaine) %>%
+  summarise(
+    total = sum(amount, na.rm = TRUE),
+    moyenne = mean(amount, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Graphique en barres des dépenses par jour
+ggplot(daily_spending, aes(x = jour_semaine, y = total)) +
+  geom_col(fill = "#9b59b6", alpha = 0.8) +
+  scale_y_continuous(labels = function(x) paste0(format(x, big.mark = " "), " $")) +
+  labs(title = "Dépenses par Jour de la Semaine", x = "Jour", y = "Total des Dépenses") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Dépenses Week-end vs Semaine
+
+```{r weekend_vs_weekday}
+# Classifier les jours en week-end ou semaine
+transactions$type_jour <- ifelse(wday(transactions$date) %in% c(1, 7), "Week-end", "Semaine")
+
+# Calculer les statistiques
+weekend_stats <- transactions %>%
+  group_by(type_jour) %>%
+  summarise(
+    total = sum(amount, na.rm = TRUE),
+    nombre_transactions = n(),
+    moyenne_par_transaction = mean(amount, na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  mutate(
+    pourcentage = round(total / sum(total) * 100, 1)
+  )
+
+# Tableau de comparaison
+kable(weekend_stats %>%
+      mutate(
+        total = paste0(format(total, big.mark = " ", nsmall = 2), " $"),
+        moyenne_par_transaction = paste0(format(moyenne_par_transaction, nsmall = 2), " $"),
+        pourcentage = paste0(pourcentage, "%")
+      ),
+      col.names = c("Type de Jour", "Total", "Nb Transactions", "Moyenne/Transaction", "%"),
+      caption = "Comparaison Week-end vs Semaine")
+
+# Graphique en barres
+ggplot(weekend_stats, aes(x = type_jour, y = total, fill = type_jour)) +
+  geom_col(alpha = 0.8) +
+  scale_fill_manual(values = c("Week-end" = "#e67e22", "Semaine" = "#2ecc71")) +
+  scale_y_continuous(labels = function(x) paste0(format(x, big.mark = " "), " $")) +
+  labs(title = "Dépenses : Week-end vs Semaine", x = "Type de Jour", y = "Total des Dépenses") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  geom_text(aes(label = paste0(format(total, big.mark = " "), " $")), vjust = -0.5)
+```
+
+---
+
+## Comment Ajouter Plus de Statistiques
+
+Pour ajouter de nouvelles statistiques, ajoutez simplement un nouveau bloc de code comme ceci :
+
+```
+## Titre de Votre Nouvelle Statistique
+
+{r nom_de_votre_stat}
+# Votre code R ici
+# Exemple: transactions %>% group_by(quelque_chose) %>% summarise(...)
+# Puis créer un graphique ou tableau
+```
+
+### Exemples de statistiques faciles à ajouter :
+
+- `## Top 5 des Marchands`
+- `## Dépenses Week-end vs Semaine`
+- `## Plus Grosses Transactions`
+- `## Dépenses par Trimestre`
+- `## Moyenne Quotidienne`

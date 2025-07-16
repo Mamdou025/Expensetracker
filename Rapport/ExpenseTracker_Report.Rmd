@@ -1,0 +1,625 @@
+---
+title: "ExpenseTracker Financial Analytics Report"
+subtitle: "Comprehensive Transaction Analysis and Insights"
+author: "Generated from ExpenseTracker Database"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+    code_folding: hide
+---
+
+```{r setup_report, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+
+# Load required libraries
+library(RSQLite)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(lubridate)
+library(scales)
+library(knitr)
+library(DT)
+library(RColorBrewer)
+```
+
+```{r data_loading, include=FALSE}
+# Database connection
+DB_PATH <- "../Database/transactions.db"
+
+# Load data function
+load_data <- function() {
+  tryCatch({
+    con <- dbConnect(SQLite(), DB_PATH)
+    
+    # Load transactions with tags
+    query <- "SELECT 
+                t.id,
+                t.amount,
+                t.description,
+                t.card_type,
+                t.date,
+                t.time,
+                t.bank,
+                t.category,
+                t.created_at,
+                COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
+              FROM transactions t
+              LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
+              LEFT JOIN tags g ON tt.tag_id = g.id
+              GROUP BY t.id
+              ORDER BY t.date DESC"
+    
+    transactions <- dbGetQuery(con, query)
+    dbDisconnect(con)
+    
+    # Data cleaning and preprocessing
+    transactions$date <- as.Date(transactions$date)
+    transactions$amount <- as.numeric(transactions$amount)
+    transactions$tags[transactions$tags == ""] <- "No tags"
+    transactions$month <- floor_date(transactions$date, "month")
+    transactions$week <- floor_date(transactions$date, "week")
+    transactions$year <- year(transactions$date)
+    transactions$weekday <- wday(transactions$date, label = TRUE)
+    transactions$hour <- ifelse(!is.na(transactions$time), 
+                                hour(hms(transactions$time)), NA)
+    
+    return(transactions)
+    
+  }, error = function(e) {
+    cat("Database not found, using sample data\n")
+    # Sample data if database not available
+    set.seed(123)
+    n_transactions <- 200
+    
+    sample_dates <- seq(as.Date("2024-01-01"), as.Date("2025-01-15"), length.out = n_transactions)
+    
+    data.frame(
+      id = 1:n_transactions,
+      amount = abs(rnorm(n_transactions, 50, 30)),
+      description = sample(c("Grocery Store", "Gas Station", "Restaurant", "Coffee Shop", 
+                            "Amazon", "Uber", "Netflix", "Gym", "Pharmacy", "Bank Fee"),
+                          n_transactions, replace = TRUE),
+      date = sample_dates,
+      category = sample(c("Groceries", "Transportation", "Entertainment", "Shopping", 
+                         "Health", "Utilities", "Food"), n_transactions, replace = TRUE),
+      bank = sample(c("cibc_credit", "rbc_debit", "chase_credit"), n_transactions, replace = TRUE),
+      tags = "No tags",
+      month = floor_date(sample_dates, "month"),
+      week = floor_date(sample_dates, "week"),
+      year = year(sample_dates),
+      weekday = wday(sample_dates, label = TRUE),
+      hour = sample(8:22, n_transactions, replace = TRUE)
+    )
+  })
+}
+
+# Load the data
+transactions <- load_data()
+```
+
+# Executive Summary
+
+```{r summary_stats}
+# Calculate key metrics
+total_transactions <- nrow(transactions)
+total_amount <- sum(transactions$amount, na.rm = TRUE)
+average_amount <- mean(transactions$amount, na.rm = TRUE)
+median_amount <- median(transactions$amount, na.rm = TRUE)
+date_range <- range(transactions$date, na.rm = TRUE)
+unique_categories <- length(unique(transactions$category))
+unique_banks <- length(unique(transactions$bank))
+
+# Create summary table
+summary_stats <- data.frame(
+  Metric = c("Total Transactions", "Total Amount", "Average Transaction", 
+             "Median Transaction", "Date Range", "Categories", "Banks/Cards"),
+  Value = c(
+    format(total_transactions, big.mark = ","),
+    paste0("$", format(total_amount, big.mark = ",", nsmall = 2)),
+    paste0("$", format(average_amount, nsmall = 2)),
+    paste0("$", format(median_amount, nsmall = 2)),
+    paste(format(date_range, "%B %Y"), collapse = " to "),
+    unique_categories,
+    unique_banks
+  )
+)
+
+kable(summary_stats, caption = "Financial Overview")
+```
+
+**Key Insights:**
+
+- Analysis covers **`r format(total_transactions, big.mark = ",")`** transactions 
+- Total spending of **$`r format(total_amount, big.mark = ",", nsmall = 2)`**
+- Average transaction: **$`r format(average_amount, nsmall = 2)`**
+- Data spans from **`r format(min(transactions$date), "%B %Y")`** to **`r format(max(transactions$date), "%B %Y")`**
+
+---
+
+# Spending Analysis
+
+## Monthly Spending Trends
+
+```{r monthly_trends}
+# Monthly spending analysis
+monthly_data <- transactions %>%
+  group_by(month) %>%
+  summarise(
+    total_spent = sum(amount, na.rm = TRUE),
+    transaction_count = n(),
+    avg_transaction = mean(amount, na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  mutate(
+    month_label = format(month, "%b %Y"),
+    spending_change = (total_spent - lag(total_spent)) / lag(total_spent) * 100
+  )
+
+# Create spending trend plot
+p1 <- ggplot(monthly_data, aes(x = month, y = total_spent)) +
+  geom_line(color = "#2E86AB", size = 1.2) +
+  geom_point(color = "#A23B72", size = 3) +
+  geom_smooth(method = "loess", se = TRUE, alpha = 0.3, color = "#F18F01") +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +
+  labs(
+    title = "Monthly Spending Trends",
+    subtitle = "Total spending by month with trend line",
+    x = "Month",
+    y = "Total Spending"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 16, face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+print(p1)
+
+# Show monthly data table
+kable(monthly_data %>% 
+      select(month_label, total_spent, transaction_count, avg_transaction, spending_change) %>%
+      mutate(
+        total_spent = dollar(total_spent),
+        avg_transaction = dollar(avg_transaction),
+        spending_change = paste0(round(spending_change, 1), "%")
+      ),
+      col.names = c("Month", "Total Spent", "Transactions", "Avg Transaction", "Change %"),
+      caption = "Monthly Spending Breakdown")
+```
+
+## Category Analysis
+
+```{r category_analysis}
+# Category spending analysis
+category_stats <- transactions %>%
+  group_by(category) %>%
+  summarise(
+    total_spent = sum(amount, na.rm = TRUE),
+    transaction_count = n(),
+    avg_transaction = mean(amount, na.rm = TRUE),
+    median_transaction = median(amount, na.rm = TRUE),
+    max_transaction = max(amount, na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  mutate(
+    percentage = total_spent / sum(total_spent) * 100
+  ) %>%
+  arrange(desc(total_spent))
+
+# Category spending pie chart
+p2 <- ggplot(category_stats, aes(x = "", y = percentage, fill = category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(type = "qual", palette = "Set3") +
+  labs(
+    title = "Spending by Category",
+    subtitle = "Percentage distribution of total spending",
+    fill = "Category"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  ) +
+  geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5))
+
+print(p2)
+
+# Category details table
+kable(category_stats %>%
+      mutate(
+        total_spent = dollar(total_spent),
+        avg_transaction = dollar(avg_transaction),
+        median_transaction = dollar(median_transaction),
+        max_transaction = dollar(max_transaction),
+        percentage = paste0(round(percentage, 1), "%")
+      ),
+      col.names = c("Category", "Total", "Count", "Average", "Median", "Maximum", "%"),
+      caption = "Category Spending Analysis")
+```
+
+## Bank/Card Usage Patterns
+
+```{r bank_analysis}
+# Bank usage analysis
+bank_stats <- transactions %>%
+  group_by(bank) %>%
+  summarise(
+    total_spent = sum(amount, na.rm = TRUE),
+    transaction_count = n(),
+    avg_transaction = mean(amount, na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  mutate(percentage = total_spent / sum(total_spent) * 100) %>%
+  arrange(desc(total_spent))
+
+# Bank usage visualization
+p3 <- ggplot(bank_stats, aes(x = reorder(bank, total_spent), y = total_spent, fill = bank)) +
+  geom_col(alpha = 0.8) +
+  geom_text(aes(label = dollar(total_spent)), hjust = -0.1) +
+  coord_flip() +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_fill_brewer(type = "qual", palette = "Dark2") +
+  labs(
+    title = "Spending by Bank/Card",
+    subtitle = "Total spending by payment method",
+    x = "Bank/Card",
+    y = "Total Spending"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "none",
+    panel.grid.minor = element_blank()
+  )
+
+print(p3)
+
+kable(bank_stats %>%
+      mutate(
+        total_spent = dollar(total_spent),
+        avg_transaction = dollar(avg_transaction),
+        percentage = paste0(round(percentage, 1), "%")
+      ),
+      col.names = c("Bank/Card", "Total Spent", "Transactions", "Average", "%"),
+      caption = "Bank/Card Usage Summary")
+```
+
+---
+
+# Temporal Patterns
+
+## Weekly Spending Patterns
+
+```{r weekly_patterns}
+# Day of week analysis
+weekday_stats <- transactions %>%
+  group_by(weekday) %>%
+  summarise(
+    total_spent = sum(amount, na.rm = TRUE),
+    transaction_count = n(),
+    avg_transaction = mean(amount, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Weekday spending pattern
+p4 <- ggplot(weekday_stats, aes(x = weekday, y = avg_transaction, fill = weekday)) +
+  geom_col(alpha = 0.8) +
+  geom_text(aes(label = dollar(avg_transaction)), vjust = -0.5) +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_fill_brewer(type = "qual", palette = "Spectral") +
+  labs(
+    title = "Average Transaction by Day of Week",
+    subtitle = "Spending behavior across weekdays",
+    x = "Day of Week",
+    y = "Average Transaction Amount"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "none",
+    panel.grid.minor = element_blank()
+  )
+
+print(p4)
+```
+
+## Hourly Spending Patterns
+
+```{r hourly_patterns}
+if(sum(!is.na(transactions$hour)) > 0) {
+  # Hourly analysis
+  hourly_stats <- transactions %>%
+    filter(!is.na(hour)) %>%
+    group_by(hour) %>%
+    summarise(
+      total_spent = sum(amount, na.rm = TRUE),
+      transaction_count = n(),
+      avg_transaction = mean(amount, na.rm = TRUE),
+      .groups = 'drop'
+    )
+  
+  # Hourly spending heatmap
+  p5 <- ggplot(hourly_stats, aes(x = factor(hour), y = 1, fill = total_spent)) +
+    geom_tile(color = "white", size = 0.5) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue", labels = dollar_format()) +
+    scale_x_discrete(breaks = seq(0, 23, 2)) +
+    labs(
+      title = "Spending Intensity by Hour of Day",
+      subtitle = "Heatmap showing total spending by hour",
+      x = "Hour of Day",
+      y = "",
+      fill = "Total Spent"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 16, face = "bold"),
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      panel.grid = element_blank()
+    )
+  
+  print(p5)
+} else {
+  cat("Time data not available for hourly analysis.")
+}
+```
+
+---
+
+# Statistical Analysis
+
+## Transaction Distribution Analysis
+
+```{r distribution_analysis}
+# Transaction amount distribution
+p6 <- ggplot(transactions, aes(x = amount)) +
+  geom_histogram(bins = 30, fill = "#2E86AB", alpha = 0.7, color = "white") +
+  geom_vline(aes(xintercept = mean(amount, na.rm = TRUE)), 
+             color = "red", linetype = "dashed", size = 1) +
+  geom_vline(aes(xintercept = median(amount, na.rm = TRUE)), 
+             color = "orange", linetype = "dashed", size = 1) +
+  scale_x_continuous(labels = dollar_format()) +
+  labs(
+    title = "Transaction Amount Distribution",
+    subtitle = "Histogram with mean (red) and median (orange) lines",
+    x = "Transaction Amount",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+print(p6)
+
+# Box plot by category
+p7 <- ggplot(transactions, aes(x = reorder(category, amount, median), y = amount, fill = category)) +
+  geom_boxplot(alpha = 0.7) +
+  coord_flip() +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_fill_brewer(type = "qual", palette = "Set2") +
+  labs(
+    title = "Transaction Amount Distribution by Category",
+    subtitle = "Box plots showing median, quartiles, and outliers",
+    x = "Category",
+    y = "Transaction Amount"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "none",
+    panel.grid.minor = element_blank()
+  )
+
+print(p7)
+```
+
+## Outlier Analysis
+
+```{r outlier_analysis}
+# Calculate outliers using IQR method
+Q1 <- quantile(transactions$amount, 0.25, na.rm = TRUE)
+Q3 <- quantile(transactions$amount, 0.75, na.rm = TRUE)
+IQR <- Q3 - Q1
+outlier_threshold <- Q3 + 1.5 * IQR
+
+outliers <- transactions %>%
+  filter(amount > outlier_threshold) %>%
+  arrange(desc(amount)) %>%
+  select(date, description, amount, category, bank)
+
+if(nrow(outliers) > 0) {
+  cat(paste("Found", nrow(outliers), "outlier transactions above $", round(outlier_threshold, 2)))
+  
+  kable(outliers %>%
+        mutate(amount = dollar(amount)) %>%
+        head(10),
+        caption = "Top 10 Outlier Transactions")
+} else {
+  cat("No significant outliers detected.")
+}
+```
+
+---
+
+# Spending Behavior Insights
+
+## Description Analysis
+
+```{r description_analysis}
+# Most common merchants/descriptions
+desc_stats <- transactions %>%
+  count(description, sort = TRUE) %>%
+  head(15)
+
+p8 <- ggplot(desc_stats, aes(x = reorder(description, n), y = n, fill = description)) +
+  geom_col(alpha = 0.8) +
+  coord_flip() +
+  scale_fill_viridis_d() +
+  labs(
+    title = "Most Frequent Merchants/Descriptions",
+    subtitle = "Top 15 transaction descriptions by frequency",
+    x = "Description",
+    y = "Number of Transactions"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "none",
+    panel.grid.minor = element_blank()
+  )
+
+print(p8)
+```
+
+## Spending Velocity
+
+```{r velocity_analysis}
+# Calculate spending velocity (transactions per day)
+daily_activity <- transactions %>%
+  group_by(date) %>%
+  summarise(
+    daily_transactions = n(),
+    daily_spending = sum(amount, na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  arrange(date)
+
+p9 <- ggplot(daily_activity, aes(x = date)) +
+  geom_line(aes(y = daily_spending), alpha = 0.6, color = "gray") +
+  geom_smooth(aes(y = daily_spending), color = "#2E86AB", size = 1, se = FALSE) +
+  scale_y_continuous(labels = dollar_format()) +
+  labs(
+    title = "Daily Spending Velocity",
+    subtitle = "Daily spending with trend line (blue)",
+    x = "Date",
+    y = "Daily Spending"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+print(p9)
+```
+
+---
+
+# Budget Recommendations
+
+```{r budget_recommendations}
+# Calculate budget recommendations based on historical data
+monthly_avg <- mean(monthly_data$total_spent, na.rm = TRUE)
+monthly_sd <- sd(monthly_data$total_spent, na.rm = TRUE)
+
+budget_recommendations <- data.frame(
+  Budget_Type = c("Conservative", "Moderate", "Aggressive"),
+  Amount = c(
+    monthly_avg + monthly_sd,
+    monthly_avg,
+    monthly_avg - 0.5 * monthly_sd
+  ),
+  Description = c(
+    "Safe budget with buffer for unexpected expenses",
+    "Based on historical average spending",
+    "Tighter budget for saving goals"
+  )
+)
+
+budget_recommendations$Amount <- pmax(budget_recommendations$Amount, 0)
+
+kable(budget_recommendations %>%
+      mutate(Amount = dollar(Amount)),
+      col.names = c("Budget Type", "Monthly Amount", "Description"),
+      caption = "Monthly Budget Recommendations")
+
+# Category-wise budget breakdown
+category_budget <- category_stats %>%
+  mutate(
+    monthly_avg = total_spent / length(unique(transactions$month)),
+    recommended_budget = monthly_avg * 1.1  # 10% buffer
+  ) %>%
+  select(category, monthly_avg, recommended_budget) %>%
+  arrange(desc(monthly_avg))
+
+kable(category_budget %>%
+      mutate(
+        monthly_avg = dollar(monthly_avg),
+        recommended_budget = dollar(recommended_budget)
+      ),
+      col.names = c("Category", "Historical Average", "Recommended Budget"),
+      caption = "Category-wise Monthly Budget Recommendations")
+```
+
+---
+
+# Data Quality Report
+
+```{r data_quality}
+# Data quality assessment
+quality_report <- data.frame(
+  Metric = c(
+    "Total Records",
+    "Missing Amounts",
+    "Missing Dates", 
+    "Missing Categories",
+    "Missing Descriptions",
+    "Zero Amount Transactions",
+    "Duplicate Transactions (same date/amount/description)"
+  ),
+  Count = c(
+    nrow(transactions),
+    sum(is.na(transactions$amount)),
+    sum(is.na(transactions$date)),
+    sum(is.na(transactions$category) | transactions$category == ""),
+    sum(is.na(transactions$description) | transactions$description == ""),
+    sum(transactions$amount == 0, na.rm = TRUE),
+    sum(duplicated(transactions[c("date", "amount", "description")]))
+  )
+)
+
+quality_report$Percentage <- round(quality_report$Count / nrow(transactions) * 100, 2)
+
+kable(quality_report,
+      col.names = c("Data Quality Metric", "Count", "Percentage (%)"),
+      caption = "Data Quality Assessment")
+```
+
+---
+
+# Conclusions and Recommendations
+
+Based on the analysis of your transaction data, here are the key findings and recommendations:
+
+## Key Findings
+
+1. **Spending Patterns**: Your spending shows `r if(max(monthly_data$total_spent, na.rm = TRUE) > min(monthly_data$total_spent, na.rm = TRUE) * 1.5) "significant variation" else "relatively stable patterns"` across months.
+
+2. **Top Category**: **`r category_stats$category[1]`** represents your largest expense category at `r round(category_stats$percentage[1], 1)`% of total spending.
+
+3. **Transaction Behavior**: You average `r round(nrow(transactions) / length(unique(transactions$month)), 1)` transactions per month with an average amount of $`r round(average_amount, 2)`.
+
+## Actionable Recommendations
+
+1. **Budget Optimization**: Consider setting a monthly budget of **$`r format(round(monthly_avg), big.mark = ",")`** based on your historical average.
+
+2. **Category Focus**: Review your **`r category_stats$category[1]`** spending as it represents the largest portion of your expenses.
+
+3. **Spending Timing**: Monitor `r names(sort(table(transactions$weekday), decreasing = TRUE))[1]` spending as it shows highest activity.
+
+4. **Savings Opportunity**: A 10% reduction in spending would save approximately **$`r format(round(total_amount * 0.1), big.mark = ",")`** annually.
+
+---
+
+*Report generated on `r Sys.time()` using ExpenseTracker data.*

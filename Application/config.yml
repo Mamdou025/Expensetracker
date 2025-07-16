@@ -22,15 +22,23 @@ banks:
 
   mbna_credit:
     sender: "noreply@mbna.ca"
-    keywords: ["Transaction Alert", "Purchase Notification","MBNA - Transaction Alert"]
+    keywords: ["Transaction Alert", "Purchase Notification", "MBNA - Transaction Alert"]
     regex:
       amount: "\\$([0-9]+\\.[0-9]{2})"
       description: "from ([A-Z0-9/& ]+)"
 
   neo_credit:
     sender: "info@neofinancial.com"
-    keywords: ["Your purchase at", "You made a purchase", "Votre achat chez"]
+    keywords: ["You earned", "cashback on your purchase of", "Your purchase at", "You made a purchase", "Votre achat chez"]
     regex:
-      amount: "\\$([0-9]+[.,][0-9]{2})"
-      description: "(?:purchase.*?at |auprès de )([A-Za-z0-9 #]+)"
+      - amount: "purchase of \\$([0-9]+[.,][0-9]{2}) at"
+        description: "purchase of \\$[0-9]+[.,][0-9]{2} at ([A-Za-z0-9'’éèàç() \\-#&]+)"
+
+      - amount: "purchase of \\$([0-9]+[.,][0-9]{2})"
+        description: "purchase of \\$[0-9]+[.,][0-9]{2} at ([A-Za-z0-9'’éèàç() \\-#&]+)"
+
+      - amount: "pour ([0-9]+[.,][0-9]{2}) ?\\$"
+        description: "achat chez ([A-Za-z0-9'’éèàç() \\-#&]+)"
+
+
 

@@ -3,6 +3,7 @@
 // src/components/sections/QuickStatsSection.jsx
 import React from 'react';
 import { Hash, DollarSign, Calendar } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const StatCard = ({ icon: Icon, label, value, color }) => {
   const colorClasses = {
@@ -27,24 +28,26 @@ const StatCard = ({ icon: Icon, label, value, color }) => {
 };
 
 const QuickStatsSection = ({ quickStats }) => {
+  const { t } = useTranslation();
+
   const statCards = [
     {
       icon: Hash,
-      label: "Total Transactions",
+      label: t('quickStats.totalTransactions'),
       value: quickStats.count.toLocaleString(),
-      color: "blue"
+      color: 'blue'
     },
     {
       icon: DollarSign,
-      label: "Total Amount",
+      label: t('quickStats.totalAmount'),
       value: `$${quickStats.total.toFixed(2)}`,
-      color: "green"
+      color: 'green'
     },
     {
       icon: Calendar,
-      label: "Average Amount",
+      label: t('quickStats.averageAmount'),
       value: `$${quickStats.average.toFixed(2)}`,
-      color: "purple"
+      color: 'purple'
     }
   ];
 

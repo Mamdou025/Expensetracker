@@ -11,7 +11,7 @@ import QuickStatsSection from './Sections/QuickStatsSection';
 import generateMockData from './utils/mockData';
 // Add these imports with your existing ones:
 import { categoryService } from '../Services/categoryService';
-import { tagService } from '../Services/tagservice';
+import { tagService } from '../Services/tagService';
 import TagEditModal from './common/TagEditModal';
 // Add these imports with your existing ones:
 import { useCategories } from '../hooks/useCategories';
@@ -22,27 +22,26 @@ const TransactionDashboard = () => {
 
 
 // Find this line and update it to include the new methods:
-const { 
-  transactions: realTransactions, 
-  loading, 
+const {
+  transactions: realTransactions,
+  loading,
   error,
   addTag,
   removeTag,
   updateCategory,
   updateAmount,        // ← ADD THIS
-  updateDescription    // ← ADD THIS
+  updateDescription,   // ← ADD THIS
+  deleteTransaction
 } = useTransactions();
 
 // Add these hooks after your useTransactions hook:
 const { 
   categories: realCategories, 
-  loading: categoriesLoading,
   refreshCategories 
 } = useCategories();
 
 const { 
   tags: realTags, 
-  loading: tagsLoading,
   refreshTags 
 } = useTags();
 // Add this state for toggling between mock and real data
@@ -197,23 +196,28 @@ const filteredTransactions = useMemo(() => {
 
   // Chart data
 // Update your chartData useMemo to handle different time groupings
+// 🔧 REPLACE your chartData useMemo with this fixed version:
+
 const chartData = useMemo(() => {
-  const getTimeKey = (date, grouping) => {
-    const d = new Date(date);
-    switch(grouping) {
-      case 'weekly':
-        // Get start of week (Monday)
-        const startOfWeek = new Date(d);
-        startOfWeek.setDate(d.getDate() - d.getDay() + 1);
-        return startOfWeek.toISOString().split('T')[0];
-      case 'monthly':
-        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-      case 'yearly':
-        return `${d.getFullYear()}`;
-      default: // daily
-        return date;
-    }
-  };
+  
+const getTimeKey = (date, grouping) => {
+  // 🚨 FIX: Prevent timezone shifting by creating date more carefully
+  const [year, month, day] = date.split('-').map(Number);
+  const d = new Date(year, month - 1, day); // Month is 0-indexed in JavaScript
+  
+  switch(grouping) {
+    case 'weekly':
+      const startOfWeek = new Date(d);
+      startOfWeek.setDate(d.getDate() - d.getDay() + 1);
+      return `${startOfWeek.getFullYear()}-${String(startOfWeek.getMonth() + 1).padStart(2, '0')}-${String(startOfWeek.getDate()).padStart(2, '0')}`;
+    case 'monthly':
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-01`;
+    case 'yearly':
+      return `${d.getFullYear()}-01-01`;
+    default: // daily
+      return date;
+  }
+};
 
   const dateGroups = filteredTransactions.reduce((acc, transaction) => {
     const timeKey = getTimeKey(transaction.date, timeGrouping);
@@ -245,6 +249,24 @@ const chartData = useMemo(() => {
   return Object.values(dateGroups).sort((a, b) => new Date(a.date) - new Date(b.date));
 }, [filteredTransactions, timeGrouping, showCategoryBreakdown]);
   // Pie chart data
+  // Replace your debug code with this more detailed version:
+console.log('🔍 DEBUG - Current filters:', JSON.stringify(filters, null, 2));
+
+console.log('🔍 DEBUG - Filtered transactions sample:');
+filteredTransactions.slice(0, 5).forEach((t, i) => {
+  console.log(`  ${i + 1}. Date: ${t.date} | Amount: $${t.amount} | Desc: ${t.description}`);
+});
+
+console.log('🔍 DEBUG - Chart data generated:');
+chartData.slice(0, 10).forEach((item, i) => {
+  const parsedDate = new Date(item.date);
+  console.log(`  ${i + 1}. Date: ${item.date} | Parsed: ${parsedDate.toLocaleDateString()} | Month: ${parsedDate.getMonth() + 1} | Year: ${parsedDate.getFullYear()} | Amount: $${item.amount}`);
+});
+
+console.log(`🔍 DEBUG - Total chart data points: ${chartData.length}`);
+console.log(`🔍 DEBUG - Time grouping: ${timeGrouping}`);
+  // Add this RIGHT AFTER your chartData useMemo (before the return statement):
+
   const pieChartData = useMemo(() => {
     const categoryGroups = filteredTransactions.reduce((acc, transaction) => {
       const category = transaction.category;
@@ -359,10 +381,14 @@ const handleCancelEdit = () => {
 // Add this handler after your other handlers:
 const handleDeleteTransaction = async (transactionId) => {
   try {
-    // You'll need to implement this API endpoint
     console.log('🗑️ Deleting transaction:', transactionId);
-    // For now, just log - you can implement the actual deletion later
-    alert('Delete functionality coming soon!');
+    await deleteTransaction(transactionId);
+
+    if (!useRealData) {
+      setTransactions(prev => prev.filter(t => t.id !== transactionId));
+    }
+
+    alert('Transaction deleted successfully!');
   } catch (error) {
     console.error('Failed to delete transaction:', error);
     alert('Failed to delete transaction. Please try again.');

@@ -1,13 +1,27 @@
 // src/services/api.js - Base API configuration
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
+const handleResponse = async (response) => {
+  let data = {};
+  try {
+    const text = await response.text();
+    data = text ? JSON.parse(text) : {};
+  } catch (e) {
+    data = {};
+  }
+
+  if (!response.ok) {
+    const message = data.error || `HTTP error! status: ${response.status}`;
+    throw new Error(message);
+  }
+
+  return data;
+};
+
 export const apiClient = {
   get: async (endpoint) => {
     const response = await fetch(`${API_BASE_URL}${endpoint}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   post: async (endpoint, data) => {
@@ -18,10 +32,7 @@ export const apiClient = {
       },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   put: async (endpoint, data) => {
@@ -32,10 +43,7 @@ export const apiClient = {
       },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   delete: async (endpoint, data = null) => {
@@ -51,10 +59,7 @@ export const apiClient = {
     }
 
     const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
+    return handleResponse(response);
   },
 };
 

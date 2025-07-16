@@ -1,6 +1,6 @@
 // src/components/Settings/CategoryManager.jsx - Simplified View-Only Version
 import React, { useState } from 'react';
-import { Trash2, AlertTriangle, Info } from 'lucide-react';
+import { Trash2, AlertTriangle } from 'lucide-react';
 
 const CategoryManager = ({ 
   categories, 

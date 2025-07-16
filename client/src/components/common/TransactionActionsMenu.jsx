@@ -1,13 +1,14 @@
 // src/components/common/TransactionActionsMenu.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical, Edit3, Tag, Trash2, DollarSign, FileText, Folder } from 'lucide-react';
+import { MoreVertical, Tag, Trash2, DollarSign, FileText, Folder, Mail } from 'lucide-react';
 
-const TransactionActionsMenu = ({ 
-  transaction, 
-  onStartEdit, 
-  onOpenTagModal, 
+const TransactionActionsMenu = ({
+  transaction,
+  onStartEdit,
+  onOpenTagModal,
   onDeleteTransaction,
-  removeTag 
+  onViewEmail,
+  removeTag
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
@@ -39,6 +40,9 @@ const TransactionActionsMenu = ({
         break;
       case 'edit-tags':
         onOpenTagModal(transaction);
+        break;
+      case 'view-email':
+        if (onViewEmail) onViewEmail(transaction);
         break;
       case 'delete':
         if (window.confirm('Are you sure you want to delete this transaction?')) {
@@ -101,6 +105,14 @@ const TransactionActionsMenu = ({
           >
             <Tag className="w-4 h-4 text-gray-600" />
             <span className="font-medium text-gray-900">Manage Tags</span>
+          </button>
+
+          <button
+            onClick={() => handleAction('view-email')}
+            className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
+          >
+            <Mail className="w-4 h-4 text-gray-600" />
+            <span className="font-medium text-gray-900">View Original Email</span>
           </button>
 
           {/* Divider */}

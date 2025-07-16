@@ -9,28 +9,7 @@ from datetime import datetime, date
 # ✅ Configuration for date range extraction
 SENDER_EMAIL = "mailbox.noreply@cibc.com"
 START_DATE = "09-Feb-2025"  # Format: DD-Mon-YYYY
-END_DATE = "16-jun-2025"    # Format: DD-Mon-YYYY
-
-def load_credentials():
-    """Load credentials from credentials.yml or environment variables."""
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    credentials_path = os.path.join(base_dir, "credentials.yml")
-
-    user = os.getenv("EMAIL_USER")
-    password = os.getenv("EMAIL_PASS")
-
-    if os.path.exists(credentials_path):
-        with open(credentials_path) as f:
-            creds = yaml.safe_load(f)
-            user = creds.get("user", user)
-            password = creds.get("password", password)
-
-    if not user or not password:
-        raise ValueError(
-            "Email credentials not provided. Set EMAIL_USER and EMAIL_PASS or create credentials.yml"
-        )
-
-    return user, password
+END_DATE = "28-jun-2025"    # Format: DD-Mon-YYYY
 
 def load_config():
     """Load the configuration file to get bank keywords."""
@@ -75,8 +54,21 @@ def fetch_emails_by_date_range():
     imap_url = 'imap.gmail.com'
     my_mail = imaplib.IMAP4_SSL(imap_url)
 
-    # ✅ Load credentials from file or environment
-    user, password = load_credentials()
+    # ✅ Get credentials
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    credentials_path = os.path.join(base_dir, "credentials.yml")
+
+    user = os.getenv("EMAIL_USER")
+    password = os.getenv("EMAIL_PASS")
+
+    if os.path.exists(credentials_path):
+        with open(credentials_path) as f:
+            my_credentials = yaml.safe_load(f)
+            user = user or my_credentials.get("user")
+            password = password or my_credentials.get("password")
+
+    if not user or not password:
+        raise ValueError("Email credentials not provided. Set EMAIL_USER and EMAIL_PASS environment variables or update credentials.yml")
 
     # ✅ Load configuration for keyword matching
     config = load_config()

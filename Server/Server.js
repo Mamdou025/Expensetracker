@@ -2,12 +2,18 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
+const { spawn } = require('child_process');
+
+// Use "python" on Windows to support common installations
+const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
 
 const app = express();
-const port = 5000;
+// Allow overriding the port via environment variable
+const port = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json()); // ✅ Allow JSON request body parsing
+// Increase JSON payload limit to handle larger request bodies
+app.use(express.json({ limit: '10mb' })); // ✅ Allow JSON request body parsing
 
 // ✅ Construct absolute path to transactions.db in Database folder
 const dbPath = path.join(__dirname, '../Database/transactions.db');
@@ -371,6 +377,108 @@ app.get('/api/rules', (req, res) => {
     });
 });
 
+// Extract emails within a date range and return preliminary transaction data
+app.post('/api/extract-emails', (req, res) => {
+    const { startDate, endDate } = req.body;
+    if (!startDate || !endDate) {
+        return res.status(400).json({ error: 'startDate and endDate required' });
+    }
+
+    // Convert YYYY-MM-DD to DD-Mon-YYYY for the Python script
+    function formatDate(iso) {
+        const [y, m, d] = iso.split('-');
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return `${d}-${months[parseInt(m, 10) - 1]}-${y}`;
+    }
+
+    const formattedStart = formatDate(startDate);
+    const formattedEnd = formatDate(endDate);
+
+    const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
+    const py = spawn(pythonCmd, [script, formattedStart, formattedEnd]);
+
+    py.on('error', (err) => {
+        console.error('❌ Failed to start extract-emails script:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+
+    let output = '';
+    let errOutput = '';
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Python script error' });
+        }
+        try {
+            const parsed = JSON.parse(output);
+
+            // Filter out emails where the extracted amount is missing
+            const filtered = parsed.filter(item => {
+                const amt = parseFloat(item?.transaction?.amount);
+                return !isNaN(amt);
+            });
+
+            res.json(filtered);
+        } catch (e) {
+            res.status(500).json({ error: 'Failed to parse python output', details: output });
+        }
+    });
+});
+
+// Process a batch of emails into transactions
+app.post('/api/process-queue', (req, res) => {
+    const emails = req.body.emails;
+    if (!Array.isArray(emails)) {
+        return res.status(400).json({ error: 'emails array required' });
+    }
+
+    const script = path.join(__dirname, '../Application/api_scripts/process_queue.py');
+    const py = spawn(pythonCmd, [script]);
+
+    py.on('error', (err) => {
+        console.error('❌ Failed to start process-queue script:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+
+    let output = '';
+    let errOutput = '';
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Python script error' });
+        }
+        try {
+            const parsed = JSON.parse(output);
+            res.json(parsed);
+        } catch (e) {
+            res.status(500).json({ error: 'Failed to parse python output', details: output });
+        }
+    });
+
+    py.stdin.write(JSON.stringify(emails));
+    py.stdin.end();
+});
+
+// Retrieve stored full email for a transaction
+app.get('/api/transactions/:id/email', (req, res) => {
+    const { id } = req.params;
+    db.get('SELECT full_email FROM transactions WHERE id = ?', [id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (!row) {
+            return res.status(404).json({ error: 'Transaction not found' });
+        }
+        res.json({ full_email: row.full_email });
+    });
+});
+
 // ✅ Update transaction amount
 app.put('/api/transactions/:id/amount', (req, res) => {
     const { id } = req.params;
@@ -408,6 +516,29 @@ app.put('/api/transactions/:id/description', (req, res) => {
             return;
         }
         res.json({ message: `✅ Transaction ID ${id} description updated` });
+    });
+});
+
+// ✅ Delete a transaction
+app.delete('/api/transactions/:id', (req, res) => {
+    const { id } = req.params;
+
+    // Remove any tag links first
+    db.run('DELETE FROM transaction_tags WHERE transaction_id = ?', [id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        // Now delete the transaction itself
+        db.run('DELETE FROM transactions WHERE id = ?', [id], function (err2) {
+            if (err2) {
+                return res.status(500).json({ error: err2.message });
+            }
+            if (this.changes === 0) {
+                return res.status(404).json({ error: "Transaction not found" });
+            }
+            res.json({ message: `✅ Transaction ID ${id} deleted` });
+        });
     });
 });
 

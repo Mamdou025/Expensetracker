@@ -1,6 +1,7 @@
 // src/components/Sections/SettingsSection.jsx
 import { Sliders  } from 'lucide-react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ExpandableSection from '../common/ExpandableSection';
 import DisplaySettings from '../Settings/DisplaySettings';
 import CategoryManager from '../Settings/CategoryManager';
@@ -38,6 +39,8 @@ const SettingsSection = ({
 }) => {
     console.log('SettingsSection received:', { timeGrouping, showCategoryBreakdown });
 
+  const { t } = useTranslation();
+
   const settingsTabs = isExpanded ? (
     <div className="flex gap-4">
       {['display', 'categories', 'tags', 'mappings', 'transactions'].map((tab) => (
@@ -50,7 +53,7 @@ const SettingsSection = ({
               : 'bg-white text-gray-600 hover:bg-gray-100'
           }`}
         >
-          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          {t(`settings.tabs.${tab}`)}
         </button>
       ))}
     </div>
@@ -122,7 +125,7 @@ case 'tags':
 
   return (
     <ExpandableSection
-      title="Configuration"
+      title={t('settings.title')}
       icon={Sliders }
       isExpanded={isExpanded}
       onToggle={onToggle}

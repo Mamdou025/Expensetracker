@@ -1,160 +1,95 @@
-Sure! Here's a professional and structured `README.md` text for your **ExpenseTracker** project, tailored to your current architecture and goals:
+# ExpenseTracker
 
----
+This project extracts transaction data from emails and stores it in a local SQLite database.
 
-# 📊 ExpenseTracker
+Make sure **Python 3** is installed and accessible from your command line. Some platforms expose the interpreter as `python3` instead of `python`. You can set a `PYTHON_CMD` environment variable pointing to the correct command if needed.
 
-**ExpenseTracker** is a financial data extraction and visualization system that automatically processes transaction notification emails from multiple financial institutions, stores them in a structured database, and presents meaningful insights through a dynamic dashboard.
+## Setup
 
----
-
-## 🚀 Features
-
-* 📥 **Automated Email Extraction**
-  Extracts transaction data (amount, merchant, date, card type, description) from various banks’ email notifications.
-
-* 🧠 **Smart Bank Identification**
-  Uses sender and keyword matching to route emails to the appropriate regex-based parsing logic defined in `config.yml`.
-
-* 🧾 **Duplicate-Aware Insertion**
-  Inserts all transactions, even similar ones, while flagging potential duplicates for manual review.
-
-* 🗂 **Advanced Categorization & Tagging**
-  Categorize and tag transactions for flexible filtering and deep financial analysis.
-
-* 📊 **Interactive Dashboard (React)**
-  Visualize expenses by category, month, or tag with expandable Recharts components and responsive design.
-
-* 🧪 **Modular Architecture**
-  Easily add new banks, regex patterns, or email templates without modifying core logic.
-
----
-
-## 🗂️ Project Structure
-
-```
-EXPENSETRACKER/
-│
-├── Application/
-│   ├── extracteur.py         # Email fetching & content extraction
-│   ├── traitement.py         # Bank identification & regex parsing
-│   ├── main.py               # Orchestrates the full pipeline
-│
-├── Database/
-│   ├── database.py           # Initializes SQLite DB and schema
-│   ├── insert.py             # Handles transaction insertion logic
-│   ├── manual_insert.py      # CLI tool for manual entry
-│
-├── Transactions/
-│   ├── *.json                # JSON files with raw or manually processed transactions
-│
-├── Server/
-│   ├── server.js             # Node.js API for frontend communication
-│
-├── Client/
-│   ├── (React App)           # Financial dashboard built with React and Recharts
-│
-├── credentials.yml           # Secure email access credentials
-├── config.yml                # Sender and keyword config for bank detection
-```
-
----
-
-## ⚙️ Setup & Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/ExpenseTracker.git
-   cd ExpenseTracker
+1. **Provide email credentials** used by the extraction scripts.
+   - Either edit `credentials.yml` with your email address and app password.
+   - Or set the environment variables `EMAIL_USER` and `EMAIL_PASS`. A `.env` file can be used with tools such as `python-dotenv`.
+   The scripts read environment variables first and fall back to `credentials.yml` if they are not set.
+   If you store real credentials in the file, consider adding `credentials.yml` to `.gitignore` to avoid committing secrets.
+   Example `.env` file:
    ```
-
-2. **Set up the environment**
-
+   EMAIL_USER=your_email@example.com
+   EMAIL_PASS=your_app_password
+   ```
+2. Install Python dependencies (if not already available) using `pip`:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
+   # use `pip3` if your system separates Python 2 and 3
    ```
-
-3. **Provide credentials**
-   You can either create a `credentials.yml` file or use environment variables.
-
-   **Option A - `credentials.yml`**
-
-   ```yaml
-   user: "youremail@example.com"
-   password: "yourapppassword"
-   ```
-
-   **Option B - environment variables**
-
-   Set `EMAIL_USER` and `EMAIL_PASS` in your environment. You may place them in a
-   local `.env` file and run `source .env` before starting the application.
-
-4. **Edit `config.yml`** with:
-
-   * Allowed senders
-   * Keyword triggers
-   * Regex patterns for each bank
-
-5. **Initialize the database**
-
+3. Run the extraction scripts located in the `Application` folder using Python 3:
    ```bash
-   python Database/database.py
+   ${PYTHON_CMD:-python} Application/main.py
    ```
+   Replace `main.py` with whichever script you want to execute. Set `PYTHON_CMD` if `python` does not point to Python 3 on your system.
 
-6. **Run the extraction pipeline**
 
+## Running the React client and Node server
+
+The web interface lives in the `client` folder while the API server resides in `Server`.
+
+### Installing dependencies
+1. **Client**
    ```bash
-   python Application/main.py
+   cd client
+   npm install --legacy-peer-deps
+   # or install TypeScript 4.9 manually if you prefer
+   npm install typescript@4.9 --save-dev
    ```
-
-7. **Start the frontend server**
-   From the `Client/` directory:
-
+   Run `npm install` within `client/` before `npm test`.
+2. **Server**
    ```bash
+   cd Server
    npm install
-   npm start
    ```
 
----
+### Starting the services
+Start the React development server:
+```bash
+cd client
+npm start
+```
 
-## 📈 Technologies Used
+Start the Node API server (runs on port 5000 by default):
+```bash
+cd Server
+node Server.js
+```
 
-* **Backend**: Python (imaplib, re, sqlite3, yaml, bs4)
-* **Database**: SQLite
-* **Frontend**: React + Recharts
-* **API**: Node.js
-* **Visualization (optional)**: R (for report exports)
-* **Version Control**: Git + GitHub
+The React app reads `REACT_APP_API_URL` to determine the API base URL (defaults to `http://localhost:5000`).
+You can place this variable in a `.env` file inside the `client` folder.
+The Node server uses the optional `PORT` environment variable and reads the SQLite
+`transactions.db` from the `Database` directory.
 
----
 
-## 📌 Future Enhancements
 
-* AI-powered auto-categorization using NLP
-* Notifications for unusual spending
-* Scheduled reports (weekly/monthly)
-* External bank integration (Plaid, Yodlee)
-* Dark mode and multi-language support
+## Running tests
 
----
+Install dependencies and run the Python suite:
+```bash
+pip install -r requirements.txt
+pip install pytest
+pytest Application
+```
 
-## 👨‍💻 Author
+For the React client tests:
+```bash
+cd client
+npm install --legacy-peer-deps
+npm test -- --watchAll=false
+```
 
-**Mamadou Fall**
-Major in Computer Science @ TÉLUQ
-Certificate in Data Valorization @ HEC Montréal (incoming)
-[LinkedIn](https://linkedin.com/in/yourprofile) • [Portfolio](https://yourportfolio.com)
+## Database schema upgrades
+If you update the project and new columns are added (for example the
+`category` field), run the database creation script again:
 
----
+```bash
+python Database/Database.py
+```
+This will alter the existing database tables to include any missing columns.
 
-## 🛡️ License
 
-MIT License.
-Use freely and improve — but give credit where it's due!
-
----
-
-Let me know if you'd like me to generate the actual `README.md` file for direct use or tailor it for private vs. public repositories.

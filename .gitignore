@@ -1,1 +1,16 @@
-Database/transactions.db
+# Ignore environment configuration
+.env
+
+# Ignore Node dependencies
+node_modules/
+#Client/node_modules/
+
+# Ignore Python cache
+__pycache__/
+
+#Server/node_modules
+/TestEmails1
+client/file_structure.txt
+client/src/project_structure.txt
+
+credentials.yml

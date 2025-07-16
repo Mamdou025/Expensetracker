@@ -12,6 +12,14 @@ const TimeChartSection = ({
   timeGrouping = 'daily',
   showCategoryBreakdown = 'none'
 }) => {
+
+
+  // Add this at the top of TimeChartSection component
+console.log('📊 Chart Data:', chartData.map(item => ({
+  date: item.date,
+  amount: item.amount,
+  originalDate: new Date(item.date).toISOString()
+})));
   
   // Generate category colors dynamically
   const categoryColors = useMemo(() => {
@@ -37,20 +45,24 @@ const TimeChartSection = ({
   }, [chartData]);
 
   // Format date labels based on time grouping
-  const formatDateLabel = (dateStr) => {
-    const date = new Date(dateStr);
-    
-    switch (timeGrouping) {
-      case 'weekly':
-        return `Week of ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-      case 'monthly':
-        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
-      case 'yearly':
-        return date.getFullYear().toString();
-      default: // daily
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    }
-  };
+// 🔧 REPLACE the formatDateLabel function in TimeChartSection.jsx with this:
+
+const formatDateLabel = (dateStr) => {
+  // 🚨 FIX: Use the same timezone-safe parsing as in chartData
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day); // Month is 0-indexed
+  
+  switch (timeGrouping) {
+    case 'weekly':
+      return `Week of ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    case 'monthly':
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+    case 'yearly':
+      return date.getFullYear().toString();
+    default: // daily
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+};
 
   // Enhanced tooltip for category breakdown
   const CustomTooltip = ({ active, payload, label }) => {

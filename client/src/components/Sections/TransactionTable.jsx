@@ -1,6 +1,8 @@
 // src/components/Sections/TransactionTable.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import TransactionActionsMenu from '../common/TransactionActionsMenu';
+import EmailViewerModal from '../common/EmailViewerModal';
+import { useTranslation } from 'react-i18next';
 
 // We need to create a wrapper component to fix the dropdown positioning
 const FixedTransactionActionsMenu = (props) => {
@@ -26,7 +28,8 @@ const EditableTransactionRow = ({
   removeTag,
   filters,
   onOpenTagModal,
-  onDeleteTransaction
+  onDeleteTransaction,
+  onViewEmail
 }) => {
   const isEditing = (field) => editingTransaction === `${transaction.id}-${field}`;
   
@@ -219,6 +222,7 @@ const EditableTransactionRow = ({
           onOpenTagModal={onOpenTagModal}
           onDeleteTransaction={onDeleteTransaction}
           removeTag={removeTag}
+          onViewEmail={onViewEmail}
         />
       </td>
     </tr>
@@ -249,15 +253,30 @@ const TransactionTable = ({
   removeTag,
   onDeleteTransaction
 }) => {
+  const { t } = useTranslation();
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
 
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailModalTransaction, setEmailModalTransaction] = useState(null);
+
+  const handleViewEmail = (txn) => {
+    setEmailModalTransaction(txn);
+    setShowEmailModal(true);
+  };
+
+  const handleCloseEmailModal = () => {
+    setShowEmailModal(false);
+    setEmailModalTransaction(null);
+  };
+
   return (
+    <>
     <div className="bg-white rounded-3xl shadow-xl border overflow-hidden">
       {/* Header */}
       <div className="p-8 border-b bg-gray-50">
         <div className="flex justify-between items-center">
           <h3 className="font-semibold text-xl">
-            Transactions ({filteredTransactions.length})
+            {t('transactionTable.transactions')} ({filteredTransactions.length})
             {editingTransaction && (
               <span className="ml-2 text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded">
                 ✏️ Editing
@@ -265,7 +284,7 @@ const TransactionTable = ({
             )}
           </h3>
           <div className="text-sm text-gray-600 bg-white px-4 py-2 rounded-xl border">
-            Page {currentPage} of {totalPages}
+            {t('transactionTable.page')} {currentPage} {t('transactionTable.of')} {totalPages}
           </div>
         </div>
       </div>
@@ -280,7 +299,7 @@ const TransactionTable = ({
                   onClick={() => onSort('date')} 
                   className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
                 >
-                  Date {sortField === 'date' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  {t('transactionTable.date')} {sortField === 'date' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -288,7 +307,7 @@ const TransactionTable = ({
                   onClick={() => onSort('description')} 
                   className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
                 >
-                  Description {sortField === 'description' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  {t('transactionTable.description')} {sortField === 'description' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -296,7 +315,7 @@ const TransactionTable = ({
                   onClick={() => onSort('amount')} 
                   className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
                 >
-                  Amount {sortField === 'amount' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  {t('transactionTable.amount')} {sortField === 'amount' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -304,17 +323,17 @@ const TransactionTable = ({
                   onClick={() => onSort('category')} 
                   className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
                 >
-                  Category {sortField === 'category' && (sortDirection === 'asc' ? '↑' : '↓')}
+                  {t('transactionTable.category')} {sortField === 'category' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tags
+                {t('transactionTable.tags')}
               </th>
               <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Bank
+                {t('transactionTable.bank')}
               </th>
               <th className="px-4 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+                {t('transactionTable.actions')}
               </th>
             </tr>
           </thead>
@@ -335,6 +354,7 @@ const TransactionTable = ({
                 onOpenTagModal={onOpenTagModal}
                 removeTag={removeTag}
                 onDeleteTransaction={onDeleteTransaction}
+                onViewEmail={handleViewEmail}
               />
             ))}
           </tbody>
@@ -365,6 +385,12 @@ const TransactionTable = ({
         </div>
       </div>
     </div>
+    <EmailViewerModal
+      isOpen={showEmailModal}
+      onClose={handleCloseEmailModal}
+      transaction={emailModalTransaction}
+    />
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 // src/hooks/useTags.js
 import { useState, useEffect } from 'react';
-import { tagService } from '../Services/tagservice';
+import { tagService } from '../Services/tagService';
 
 export const useTags = () => {
   const [tags, setTags] = useState([]);
