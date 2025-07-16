@@ -75,10 +75,10 @@ React.useEffect(() => {
 
   // State management
   const { expandedSections, toggleSection } = useExpandableState({
-    settings: false,
-    filters: false,
-    timeChart: false,
-    categoryChart: false
+    settings: true,
+    filters: true,
+    timeChart: true,
+    categoryChart: true
   });
 
   // Transaction data
