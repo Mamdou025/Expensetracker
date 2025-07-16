@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { useCategories } from '../../hooks/useCategories';
 import { useTags } from '../../hooks/useTags';
 import { keywordMappingService } from '../../Services/keywordMappingService';
+import { useTranslation } from 'react-i18next';
 
 const MappingsSettings = () => {
   const { categories } = useCategories();
   const { tags } = useTags();
+  const { t } = useTranslation();
 
   const [keywordCat, setKeywordCat] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -54,11 +56,11 @@ const MappingsSettings = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="font-semibold text-lg mb-4">Keyword-Category Mapping</h3>
-        <p className="text-gray-600 mb-4">Assign a category to all transactions containing a keyword.</p>
+        <h3 className="font-semibold text-lg mb-4">{t('mappings.keywordCategory.title')}</h3>
+        <p className="text-gray-600 mb-4">{t('mappings.keywordCategory.description')}</p>
         <form onSubmit={handleCategorySubmit} className="bg-gray-50 p-4 rounded-xl space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Keyword</label>
+            <label className="block text-sm font-medium mb-1">{t('mappings.keywordCategory.keyword')}</label>
             <input
               type="text"
               value={keywordCat}
@@ -67,13 +69,13 @@ const MappingsSettings = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Category</label>
+            <label className="block text-sm font-medium mb-1">{t('mappings.keywordCategory.category')}</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="w-full border rounded-lg px-3 py-2 bg-white"
             >
-              <option value="">Select category</option>
+              <option value="">{t('mappings.keywordCategory.selectCategory')}</option>
               {categories.map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -86,20 +88,20 @@ const MappingsSettings = () => {
             disabled={loadingCat}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            Apply
+            {t('mappings.keywordCategory.apply')}
           </button>
           {categoryResult !== null && (
-            <p className="text-sm text-green-600">{categoryResult} transactions updated</p>
+            <p className="text-sm text-green-600">{t('mappings.keywordCategory.updated', { count: categoryResult })}</p>
           )}
         </form>
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-4">Keyword-Tag Mapping</h3>
-        <p className="text-gray-600 mb-4">Assign tags to transactions containing a keyword.</p>
+        <h3 className="font-semibold text-lg mb-4">{t('mappings.keywordTag.title')}</h3>
+        <p className="text-gray-600 mb-4">{t('mappings.keywordTag.description')}</p>
         <form onSubmit={handleTagsSubmit} className="bg-gray-50 p-4 rounded-xl space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Keyword</label>
+            <label className="block text-sm font-medium mb-1">{t('mappings.keywordTag.keyword')}</label>
             <input
               type="text"
               value={keywordTags}
@@ -108,7 +110,7 @@ const MappingsSettings = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Tags</label>
+            <label className="block text-sm font-medium mb-1">{t('mappings.keywordTag.tags')}</label>
             <select
               multiple
               value={selectedTags}
@@ -127,10 +129,10 @@ const MappingsSettings = () => {
             disabled={loadingTags}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            Apply
+            {t('mappings.keywordTag.apply')}
           </button>
           {tagsResult !== null && (
-            <p className="text-sm text-green-600">{tagsResult} transactions updated</p>
+            <p className="text-sm text-green-600">{t('mappings.keywordTag.updated', { count: tagsResult })}</p>
           )}
         </form>
       </div>
