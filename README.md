@@ -1,95 +1,90 @@
 # ExpenseTracker
 
-This project extracts transaction data from emails and stores it in a local SQLite database.
+Ce projet extrait les données de transaction des courriels et les enregistre dans une base de données SQLite locale.
 
-Make sure **Python 3** is installed and accessible from your command line. Some platforms expose the interpreter as `python3` instead of `python`. You can set a `PYTHON_CMD` environment variable pointing to the correct command if needed.
+Assurez-vous que **Python 3** est installé et accessible depuis votre ligne de commande. Sur certaines plateformes, l’interpréteur est disponible sous `python3` au lieu de `python`. Vous pouvez définir une variable d’environnement `PYTHON_CMD` qui pointe vers la bonne commande si nécessaire.
 
-## Setup
+## Installation
 
-1. **Provide email credentials** used by the extraction scripts.
-   - Either edit `credentials.yml` with your email address and app password.
-   - Or set the environment variables `EMAIL_USER` and `EMAIL_PASS`. A `.env` file can be used with tools such as `python-dotenv`.
-   The scripts read environment variables first and fall back to `credentials.yml` if they are not set.
-   If you store real credentials in the file, consider adding `credentials.yml` to `.gitignore` to avoid committing secrets.
-   Example `.env` file:
+1. **Fournir les identifiants de messagerie** utilisés par les scripts d’extraction.
+   - Soit modifier `credentials.yml` avec votre adresse courriel et votre mot de passe d’application.
+   - Soit définir les variables d’environnement `EMAIL_USER` et `EMAIL_PASS`. Un fichier `.env` peut être utilisé avec des outils tels que `python-dotenv`.
+   Les scripts lisent d’abord les variables d’environnement puis utilisent `credentials.yml` si elles ne sont pas définies.
+   Si vous stockez de vrais identifiants dans le fichier, pensez à ajouter `credentials.yml` au `.gitignore` pour éviter de publier des secrets.
+   Exemple de fichier `.env` :
    ```
    EMAIL_USER=your_email@example.com
    EMAIL_PASS=your_app_password
    ```
-2. Install Python dependencies (if not already available) using `pip`:
+2. Installer les dépendances Python (si elles ne sont pas déjà disponibles) avec `pip` :
    ```bash
    pip install -r requirements.txt
-   # use `pip3` if your system separates Python 2 and 3
+   # utilisez `pip3` si votre système sépare Python 2 et 3
    ```
-3. Run the extraction scripts located in the `Application` folder using Python 3:
+3. Exécuter les scripts d’extraction situés dans le dossier `Application` avec Python 3 :
    ```bash
    ${PYTHON_CMD:-python} Application/main.py
    ```
-   Replace `main.py` with whichever script you want to execute. Set `PYTHON_CMD` if `python` does not point to Python 3 on your system.
+   Remplacez `main.py` par le script de votre choix. Définissez `PYTHON_CMD` si `python` ne pointe pas vers Python 3 sur votre système.
 
+## Exécution du client React et du serveur Node
 
-## Running the React client and Node server
+L’interface web se trouve dans le dossier `client` tandis que l’API réside dans `Server`.
 
-The web interface lives in the `client` folder while the API server resides in `Server`.
-
-### Installing dependencies
+### Installation des dépendances
 1. **Client**
    ```bash
    cd client
    npm install --legacy-peer-deps
-   # or install TypeScript 4.9 manually if you prefer
+   # ou installez TypeScript 4.9 manuellement si vous préférez
    npm install typescript@4.9 --save-dev
    ```
-   Run `npm install` within `client/` before `npm test`.
+   Lancez `npm install` dans `client/` avant `npm test`.
 2. **Server**
    ```bash
    cd Server
    npm install
    ```
 
-### Starting the services
-Start the React development server:
+### Démarrage des services
+Démarrer le serveur de développement React :
 ```bash
 cd client
 npm start
 ```
 
-Start the Node API server (runs on port 5000 by default):
+Démarrer le serveur API Node (port 5000 par défaut) :
 ```bash
 cd Server
 node Server.js
 ```
 
-The React app reads `REACT_APP_API_URL` to determine the API base URL (defaults to `http://localhost:5000`).
-You can place this variable in a `.env` file inside the `client` folder.
-The Node server uses the optional `PORT` environment variable and reads the SQLite
-`transactions.db` from the `Database` directory.
+L’application React lit `REACT_APP_API_URL` pour déterminer l’URL de base de l’API (par défaut `http://localhost:5000`).
+Vous pouvez placer cette variable dans un fichier `.env` dans le dossier `client`.
+Le serveur Node utilise la variable d’environnement facultative `PORT` et lit le fichier SQLite
+`transactions.db` dans le répertoire `Database`.
 
+## Exécution des tests
 
-
-## Running tests
-
-Install dependencies and run the Python suite:
+Installez les dépendances puis lancez la suite Python :
 ```bash
 pip install -r requirements.txt
 pip install pytest
 pytest Application
 ```
 
-For the React client tests:
+Pour les tests du client React :
 ```bash
 cd client
 npm install --legacy-peer-deps
 npm test -- --watchAll=false
 ```
 
-## Database schema upgrades
-If you update the project and new columns are added (for example the
-`category` field), run the database creation script again:
-
+## Mise à niveau du schéma de la base de données
+Si vous mettez à jour le projet et que de nouvelles colonnes sont ajoutées (par exemple le champ
+`category`), exécutez à nouveau le script de création de la base :
 ```bash
 python Database/Database.py
 ```
-This will alter the existing database tables to include any missing columns.
-
+Cela modifiera les tables existantes pour inclure les colonnes manquantes.
 
