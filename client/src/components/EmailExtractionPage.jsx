@@ -35,7 +35,6 @@ const EmailExtractionPage = () => {
     }
   };
 
-  const addToQueue = (item) => setQueue((prev) => [...prev, item]);
 
   const toggleSelect = (idx) => {
     setSelectedIds((prev) =>

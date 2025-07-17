@@ -21,7 +21,6 @@ import { useTags } from '../hooks/useTags';
 const TransactionDashboard = () => {
 
 
-// Find this line and update it to include the new methods:
 const {
   transactions: realTransactions,
   loading,
@@ -29,12 +28,11 @@ const {
   addTag,
   removeTag,
   updateCategory,
-  updateAmount,        // ← ADD THIS
-  updateDescription,   // ← ADD THIS
+  updateAmount,        
+  updateDescription,   
   deleteTransaction
 } = useTransactions();
 
-// Add these hooks after your useTransactions hook:
 const { 
   categories: realCategories, 
   refreshCategories 
@@ -44,10 +42,10 @@ const {
   tags: realTags, 
   refreshTags 
 } = useTags();
-// Add this state for toggling between mock and real data
+
 const [useRealData, setUseRealData] = useState(false);
 
-// Update this effect to switch data sources
+
 React.useEffect(() => {
   if (useRealData && realTransactions.length > 0) {
     console.log('🔄 Switching to real data...', realTransactions.length, 'transactions');
@@ -58,7 +56,7 @@ React.useEffect(() => {
   }
 }, [useRealData, realTransactions]);
 
-// Add these useEffect hooks to sync real data:
+
 React.useEffect(() => {
   if (realCategories.length > 0) {
     console.log('📊 Updating categories from API:', realCategories);
@@ -73,15 +71,15 @@ React.useEffect(() => {
   }
 }, [realTags]);
 
-  // State management
-  const { expandedSections, toggleSection } = useExpandableState({
+
+const { expandedSections, toggleSection } = useExpandableState({
     settings: true,
     filters: true,
     timeChart: true,
     categoryChart: true
   });
 
-  // Transaction data
+
   const [transactions, setTransactions] = useState(generateMockData());
   const [activeSettingsTab, setActiveSettingsTab] = useState('display');
   const [chartType, setChartType] = useState('bar');
@@ -89,23 +87,23 @@ React.useEffect(() => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortField, setSortField] = useState('date');
   const [sortDirection, setSortDirection] = useState('desc');
-  // Add these new state variables to your TransactionDashboard.jsx
-const [timeGrouping, setTimeGrouping] = useState('daily');
+
+  const [timeGrouping, setTimeGrouping] = useState('daily');
 const [showCategoryBreakdown, setShowCategoryBreakdown] = useState('none');
-  // Add this temporarily in TransactionDashboard.jsx after your state declarations
+
 console.log('Dashboard state:', { timeGrouping, showCategoryBreakdown });
-  // Settings state
- // ✅ REPLACE WITH - Real data from API:
+
+
+
 const [localCategories, setLocalCategories] = useState([]);
 const [localTags, setLocalTags] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
   const [newItemName, setNewItemName] = useState('');
 
-  // Add these state variables after your existing useState declarations:
-const [editingTransaction, setEditingTransaction] = useState(null);
+
+  const [editingTransaction, setEditingTransaction] = useState(null);
 const [editValues, setEditValues] = useState({});
   
-  // Add transaction form
   const [showAddTransaction, setShowAddTransaction] = useState(false);
   const [newTransaction, setNewTransaction] = useState({
     amount: '',
@@ -117,7 +115,6 @@ const [editValues, setEditValues] = useState({});
     tags: ''
   });
   
- // Find this in your TransactionDashboard.jsx and change it:
 const [filters, setFilters] = useState({
   dateFrom: '',
   dateTo: '',
@@ -126,20 +123,19 @@ const [filters, setFilters] = useState({
   keyword: '',
   categories: [],
   tags: [],
-  banks: []      // ← CHANGE FROM 'card_type' TO 'banks'
+  banks: []      
 });
 
-  // Get unique values for filter options
-  const uniqueCategories = [...new Set(transactions.map(t => t.category))];
+
+const uniqueCategories = [...new Set(transactions.map(t => t.category))];
   const uniqueTags = [...new Set(transactions.map(t => t.tags).filter(t => t))];
   const uniqueCardTypes = [...new Set(transactions.map(t => t.bank).filter(t => t))]; 
-  // Add this state after your existing editing state:
-const [showTagModal, setShowTagModal] = useState(false);
+
+  const [showTagModal, setShowTagModal] = useState(false);
 const [editingTagsForTransaction, setEditingTagsForTransaction] = useState(null);
 
 
-  // Filter transactions
-// Find your filteredTransactions useMemo and change this line:
+
 const filteredTransactions = useMemo(() => {
   return transactions.filter(transaction => {
     if (filters.dateFrom && transaction.date < filters.dateFrom) return false;
@@ -177,13 +173,13 @@ const filteredTransactions = useMemo(() => {
     });
   }, [filteredTransactions, sortField, sortDirection]);
 
-  // Paginated transactions
+
   const paginatedTransactions = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     return sortedTransactions.slice(startIndex, startIndex + itemsPerPage);
   }, [sortedTransactions, currentPage, itemsPerPage]);
 
-  // Quick stats
+
   const quickStats = useMemo(() => {
     const totalAmount = filteredTransactions.reduce((sum, t) => sum + t.amount, 0);
     const avgAmount = filteredTransactions.length > 0 ? totalAmount / filteredTransactions.length : 0;
@@ -194,14 +190,15 @@ const filteredTransactions = useMemo(() => {
     };
   }, [filteredTransactions]);
 
-  // Chart data
-// Update your chartData useMemo to handle different time groupings
-// 🔧 REPLACE your chartData useMemo with this fixed version:
+
+
+
+
 
 const chartData = useMemo(() => {
   
 const getTimeKey = (date, grouping) => {
-  // 🚨 FIX: Prevent timezone shifting by creating date more carefully
+
   const [year, month, day] = date.split('-').map(Number);
   const d = new Date(year, month - 1, day); // Month is 0-indexed in JavaScript
   
@@ -234,7 +231,6 @@ const getTimeKey = (date, grouping) => {
     acc[timeKey].amount += transaction.amount;
     acc[timeKey].count += 1;
     
-    // Add category breakdown data
     if (showCategoryBreakdown !== 'none') {
       const category = transaction.category || 'Uncategorized';
       if (!acc[timeKey].categories[category]) {
@@ -248,8 +244,9 @@ const getTimeKey = (date, grouping) => {
   
   return Object.values(dateGroups).sort((a, b) => new Date(a.date) - new Date(b.date));
 }, [filteredTransactions, timeGrouping, showCategoryBreakdown]);
-  // Pie chart data
-  // Replace your debug code with this more detailed version:
+
+
+
 console.log('🔍 DEBUG - Current filters:', JSON.stringify(filters, null, 2));
 
 console.log('🔍 DEBUG - Filtered transactions sample:');
@@ -265,7 +262,7 @@ chartData.slice(0, 10).forEach((item, i) => {
 
 console.log(`🔍 DEBUG - Total chart data points: ${chartData.length}`);
 console.log(`🔍 DEBUG - Time grouping: ${timeGrouping}`);
-  // Add this RIGHT AFTER your chartData useMemo (before the return statement):
+
 
   const pieChartData = useMemo(() => {
     const categoryGroups = filteredTransactions.reduce((acc, transaction) => {
@@ -304,7 +301,7 @@ const handleCloseTagModal = () => {
 };
 
 const handleSaveTagChanges = async (updatedTags) => {
-  // This will be implemented with the modal component
+
   console.log('Save tag changes:', updatedTags);
   setShowTagModal(false);
   setEditingTagsForTransaction(null);
@@ -326,16 +323,16 @@ const handleStartEdit = (transaction, field) => {
   });
 };
 
-// Update your handleSaveEdit function to handle new categories:
+
 const handleSaveEdit = async (transaction, field) => {
   try {
     const newValue = editValues[field];
     
     if (field === 'category') {
-      // Handle new category creation
+
       if (editValues.isAddingNew && newValue && newValue.trim()) {
         console.log('🆕 Creating new category:', newValue);
-        // Category is created automatically when assigned to transaction
+
       }
       await updateCategory(transaction.id, newValue);
     } else if (field === 'amount') {
@@ -378,8 +375,8 @@ const handleCancelEdit = () => {
     setCurrentPage(1);
   };
 
-// Add this handler after your other handlers:
-const handleDeleteTransaction = async (transactionId) => {
+
+  const handleDeleteTransaction = async (transactionId) => {
   try {
     console.log('🗑️ Deleting transaction:', transactionId);
     await deleteTransaction(transactionId);
@@ -406,7 +403,7 @@ const handleAddItem = (type) => {
   setNewItemName('');
 };
 
- // Update handleEditItem function:
+
 const handleEditItem = (type, oldName, newName) => {
   if (type === 'category') {
     setLocalCategories(prev => prev.map(cat => cat === oldName ? newName : cat)); // ← Changed
@@ -459,9 +456,8 @@ const handleEditItem = (type, oldName, newName) => {
 const handleDeleteCategory = async (categoryName) => {
   try {
     const result = await categoryService.delete(categoryName);
-    // Refresh transactions to reflect changes
+
     if (useRealData) {
-      // Refresh real data if using real data
       console.log('Category deleted, refreshing transactions...');
     }
     return result;
@@ -480,7 +476,7 @@ const handleDeleteTag = async (tagName) => {
     throw error;
   }
 };
-// Add this function to your TransactionDashboard.jsx after your existing handlers
+
 
 const handleCreateTag = async (tagName) => {
   try {
@@ -526,8 +522,6 @@ const handleCreateTag = async (tagName) => {
     </div>
   )}
 </div>
-
-
 
         {/* Quick Stats */}
         <QuickStatsSection quickStats={quickStats} />
