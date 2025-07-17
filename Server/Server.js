@@ -20,9 +20,9 @@ const dbPath = path.join(__dirname, '../Database/transactions.db');
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error('❌ Failed to connect to database:', err.message);
+        console.error('❌ Échec de la connexion à la base de données:', err.message);
     } else {
-        console.log('✅ Connected to SQLite database at:', dbPath);
+        console.log('✅ Connecté à la base de données SQLite à:', dbPath);
     }
 });
 
@@ -717,5 +717,5 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
 
 // ✅ Start the server
 app.listen(port, () => {
-    console.log(`🚀 Server is running at http://localhost:${port}`);
+    console.log(`Serveur actif à  http://localhost:${port}`);
 });
