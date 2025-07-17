@@ -53,21 +53,21 @@ const TagManager = ({
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold text-lg">Manage Tags</h3>
+        <h3 className="font-semibold text-lg">Gérer les balises</h3>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
           disabled={isLoading}
         >
           <Plus className="w-4 h-4" />
-          Add New Tag
+          Ajouter un nouveau Tag
         </button>
       </div>
 
       {/* Add New Tag Form */}
       {showAddForm && (
         <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-          <h4 className="font-medium text-blue-900 mb-3">Create New Tag</h4>
+          <h4 className="font-medium text-blue-900 mb-3">Creer un Nouveau Tag</h4>
           <div className="flex gap-3">
             <input
               type="text"
@@ -136,7 +136,7 @@ const TagManager = ({
 
       {tags.length === 0 && !isLoading && (
         <div className="text-center text-gray-500 py-8">
-          <p>No tags found. Create a tag or assign tags to transactions to see them here!</p>
+          <p>Aucune balise trouvée. Créez une balise ou attribuez-en une aux transactions pour les voir ici !</p>
         </div>
       )}
 
@@ -146,13 +146,13 @@ const TagManager = ({
           <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4">
             <div className="flex items-center gap-3 mb-4">
               <AlertTriangle className="w-6 h-6 text-red-500" />
-              <h3 className="text-lg font-semibold">Delete Tag</h3>
+              <h3 className="text-lg font-semibold">Supprimer le Tag</h3>
             </div>
             <p className="text-gray-600 mb-6">
-              Are you sure you want to delete "<strong>{showDeleteConfirm}</strong>"? 
+              Êtes-vous sûr de vouloir supprimer "<strong>{showDeleteConfirm}</strong>"? 
               <br />
               <span className="text-sm text-red-600 mt-2 block">
-                This will remove the tag from all transactions using it.
+                Cela supprimera la balise de toutes les transactions l'utilisant.
               </span>
             </p>
             <div className="flex gap-3 justify-end">
@@ -161,7 +161,7 @@ const TagManager = ({
                 className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                 disabled={isLoading}
               >
-                Cancel
+                Annuler
               </button>
               <button
                 onClick={() => handleDeleteTag(showDeleteConfirm)}
@@ -173,7 +173,7 @@ const TagManager = ({
                 ) : (
                   <Trash2 className="w-4 h-4" />
                 )}
-                Delete
+                Supprimer
               </button>
             </div>
           </div>
@@ -183,7 +183,7 @@ const TagManager = ({
       {isLoading && (
         <div className="text-center text-gray-500">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto mb-2"></div>
-          Processing...
+          Traitement...
         </div>
       )}
     </div>

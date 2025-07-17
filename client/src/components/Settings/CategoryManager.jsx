@@ -31,7 +31,7 @@ const CategoryManager = ({
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold text-lg">Manage Categories</h3>
+        <h3 className="font-semibold text-lg">Gérer les catégories</h3>
       </div>
 
      
@@ -67,7 +67,7 @@ const CategoryManager = ({
 
       {categories.length === 0 && !isLoading && (
         <div className="text-center text-gray-500 py-8">
-          <p>No categories found. Assign categories to transactions to see them here!</p>
+          <p>Aucune catégorie trouvée. Attribuez des catégories aux transactions pour les afficher ici !</p>
         </div>
       )}
 
@@ -77,13 +77,13 @@ const CategoryManager = ({
           <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4">
             <div className="flex items-center gap-3 mb-4">
               <AlertTriangle className="w-6 h-6 text-red-500" />
-              <h3 className="text-lg font-semibold">Delete Category</h3>
+              <h3 className="text-lg font-semibold">Supprimer la catégorie</h3>
             </div>
             <p className="text-gray-600 mb-6">
-              Are you sure you want to delete "<strong>{showDeleteConfirm}</strong>"? 
+              Êtes-vous sûr de vouloir supprimer "<strong>{showDeleteConfirm}</strong>"? 
               <br />
               <span className="text-sm text-red-600 mt-2 block">
-                This will remove the category from all transactions using it.
+                Cela supprimera la catégorie de toutes les transactions qui l'utilisent.
               </span>
             </p>
             <div className="flex gap-3 justify-end">
@@ -92,7 +92,7 @@ const CategoryManager = ({
                 className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                 disabled={isLoading}
               >
-                Cancel
+                Annuler
               </button>
               <button
                 onClick={() => handleDeleteCategory(showDeleteConfirm)}
@@ -104,7 +104,7 @@ const CategoryManager = ({
                 ) : (
                   <Trash2 className="w-4 h-4" />
                 )}
-                Delete
+                Supprimer
               </button>
             </div>
           </div>
@@ -114,7 +114,7 @@ const CategoryManager = ({
       {isLoading && (
         <div className="text-center text-gray-500">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto mb-2"></div>
-          Processing...
+          Traitement...
         </div>
       )}
     </div>
