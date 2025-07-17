@@ -19,24 +19,24 @@ const DisplaySettings = ({
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">
         <BarChart3 className="w-6 h-6 text-blue-600" />
-        <h3 className="font-semibold text-lg">Display Settings</h3>
+        <h3 className="font-semibold text-lg">Parametres d'affichage</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Items per page */}
         <div className="bg-gray-50 p-4 rounded-xl">
           <label className="block text-sm font-medium mb-3 flex items-center gap-2">
-            <span>Items per page</span>
+            <span>transactions par page</span>
           </label>
           <select
             value={itemsPerPage}
             onChange={(e) => setItemsPerPage(parseInt(e.target.value))}
             className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
           >
-            <option value={10}>10 items</option>
-            <option value={20}>20 items</option>
-            <option value={50}>50 items</option>
-            <option value={100}>100 items</option>
+            <option value={10}>10 transactions</option>
+            <option value={20}>20 transactions</option>
+            <option value={50}>50 transactions</option>
+            <option value={100}>100 transactions</option>
           </select>
         </div>
 
@@ -44,16 +44,16 @@ const DisplaySettings = ({
         <div className="bg-gray-50 p-4 rounded-xl">
           <label className="block text-sm font-medium mb-3 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-blue-600" />
-            <span>Chart Type</span>
+            <span>Type de graphique</span>
           </label>
           <select
             value={chartType}
             onChange={(e) => setChartType(e.target.value)}
             className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
           >
-            <option value="bar">📊 Bar Chart</option>
-            <option value="line">📈 Line Chart</option>
-            <option value="area">📈 Area Chart</option>
+            <option value="bar">📊 Graphique à barres</option>
+            <option value="line">📈 Graphique linéaire</option>
+            <option value="area">📈 Graphique en aires</option>
           </select>
         </div>
 
@@ -61,20 +61,20 @@ const DisplaySettings = ({
         <div className="bg-gray-50 p-4 rounded-xl">
           <label className="block text-sm font-medium mb-3 flex items-center gap-2">
             <Calendar className="w-4 h-4 text-green-600" />
-            <span>Time Grouping</span>
+            <span>Regroupement par periode</span>
           </label>
           <select
             value={timeGrouping || 'daily'}
             onChange={(e) => setTimeGrouping && setTimeGrouping(e.target.value)}
             className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
           >
-            <option value="daily">📅 Daily</option>
-            <option value="weekly">📆 Weekly</option>
-            <option value="monthly">🗓️ Monthly</option>
-            <option value="yearly">📋 Yearly</option>
+            <option value="daily">📅 Tous les jours</option>
+            <option value="weekly">📆 Hebdomadaire</option>
+            <option value="monthly">🗓️ Mensuelle</option>
+            <option value="yearly">📋Annuelle </option>
           </select>
           <p className="text-xs text-gray-500 mt-2">
-            Group transactions by time period for chart display
+            Regrouper les transactions par période pour l'affichage graphique
           </p>
         </div>
 
@@ -82,7 +82,7 @@ const DisplaySettings = ({
         <div className="bg-gray-50 p-4 rounded-xl">
           <label className="block text-sm font-medium mb-3 flex items-center gap-2">
             <Layers className="w-4 h-4 text-purple-600" />
-            <span>Category Breakdown</span>
+            <span>Répartition des catégories</span>
           </label>
           <div className="space-y-3">
             <label className="flex items-center">
@@ -94,7 +94,7 @@ const DisplaySettings = ({
                 onChange={(e) => setShowCategoryBreakdown && setShowCategoryBreakdown('none')}
                 className="mr-3 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-sm">📊 Total amounts only</span>
+              <span className="text-sm">Montants total</span>
             </label>
             <label className="flex items-center">
               <input
@@ -105,7 +105,7 @@ const DisplaySettings = ({
                 onChange={(e) => setShowCategoryBreakdown && setShowCategoryBreakdown('stacked')}
                 className="mr-3 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-sm">🏗️ Stacked by category</span>
+              <span className="text-sm">Empilés par catégorie</span>
             </label>
             <label className="flex items-center">
               <input
@@ -116,11 +116,11 @@ const DisplaySettings = ({
                 onChange={(e) => setShowCategoryBreakdown && setShowCategoryBreakdown('proportional')}
                 className="mr-3 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-sm">📈 Proportional breakdown</span>
+              <span className="text-sm">Répartition proportionnelle</span>
             </label>
           </div>
           <p className="text-xs text-gray-500 mt-2">
-            Show category breakdown within each time period
+            Afficher la répartition des catégories dans chaque période
           </p>
         </div>
       </div>
