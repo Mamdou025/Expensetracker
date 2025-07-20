@@ -7,6 +7,7 @@ Assurez-vous que **Python 3** est installé et accessible depuis votre ligne de 
 ## Installation
 
 1. **Fournir les identifiants de messagerie** utilisés par les scripts d’extraction.
+
    - Soit modifier `credentials.yml` avec votre adresse courriel et votre mot de passe d’application.
    - Soit définir les variables d’environnement `EMAIL_USER` et `EMAIL_PASS`. Un fichier `.env` peut être utilisé avec des outils tels que `python-dotenv`.
    Les scripts lisent d’abord les variables d’environnement puis utilisent `credentials.yml` si elles ne sont pas définies.
