@@ -80,7 +80,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <DollarSign className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Edit Amount</span>
+            <span className="font-medium text-gray-900">Modifier Montant</span>
           </button>
 
           <button
@@ -88,7 +88,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <FileText className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Edit Description</span>
+            <span className="font-medium text-gray-900">Modifier Description</span>
           </button>
 
           <button
@@ -96,7 +96,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <Folder className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Edit Category</span>
+            <span className="font-medium text-gray-900">Modifier Categorie</span>
           </button>
 
           <button
@@ -104,7 +104,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <Tag className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Manage Tags</span>
+            <span className="font-medium text-gray-900">Gérer les Tags</span>
           </button>
 
           <button
@@ -112,7 +112,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <Mail className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">View Original Email</span>
+            <span className="font-medium text-gray-900">Voir le Email</span>
           </button>
 
           {/* Divider */}
@@ -124,7 +124,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-red-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <Trash2 className="w-4 h-4 text-red-600" />
-            <span className="font-medium text-red-600">Delete Transaction</span>
+            <span className="font-medium text-red-600">Supprimer Transaction</span>
           </button>
         </div>
       )}
