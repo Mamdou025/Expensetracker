@@ -29,7 +29,7 @@ def create_database():
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # ✅ Create transactions table
+    # ✅ Create transactions table --test Mamadou 1234
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
