@@ -124,7 +124,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-red-50 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <Trash2 className="w-4 h-4 text-red-600" />
-            <span className="font-medium text-red-600">Supprimer Transaction</span>
+            <span className="font-medium text-red-600">Supprimer </span>
           </button>
         </div>
       )}
