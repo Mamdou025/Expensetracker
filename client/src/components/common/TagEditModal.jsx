@@ -89,7 +89,7 @@ const TagEditModal = ({
         <div className="p-6 border-b bg-gray-50">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">Edit Tags</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Gerer les Tags</h2>
               <p className="text-sm text-gray-600 mt-1">
                 {transaction?.description} • ${transaction?.amount?.toFixed(2)}
               </p>
@@ -109,10 +109,10 @@ const TagEditModal = ({
           
           {/* Current Tags */}
           <div className="mb-8">
-            <h3 className="font-medium text-gray-900 mb-3">Current Tags</h3>
+            <h3 className="font-medium text-gray-900 mb-3">Tags disponibles</h3>
             {currentTags.length === 0 ? (
               <p className="text-gray-500 text-sm bg-gray-50 p-4 rounded-lg">
-                No tags assigned to this transaction
+                Aucun tag n'est associé à cette transaction
               </p>
             ) : (
               <div className="flex flex-wrap gap-2">
@@ -138,13 +138,13 @@ const TagEditModal = ({
 
           {/* Add New Tag */}
           <div className="mb-8">
-            <h3 className="font-medium text-gray-900 mb-3">Add New Tag</h3>
+            <h3 className="font-medium text-gray-900 mb-3">Ajouter un nouveau tag</h3>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={newTagName}
                 onChange={(e) => setNewTagName(e.target.value)}
-                placeholder="Enter new tag name..."
+                placeholder="Entrer un nom de tag..."
                 className="flex-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') handleAddNewTag();
@@ -157,7 +157,7 @@ const TagEditModal = ({
                 className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
-                Add
+                Ajouter
               </button>
             </div>
           </div>
@@ -165,14 +165,14 @@ const TagEditModal = ({
           {/* Available Tags */}
           <div>
             <h3 className="font-medium text-gray-900 mb-3">
-              Available Tags 
+              Tags Disponibles
               <span className="text-sm text-gray-500 font-normal">
-                ({availableTagsToAdd.length} available)
+                ({availableTagsToAdd.length} disponibles)
               </span>
             </h3>
             {availableTagsToAdd.length === 0 ? (
               <p className="text-gray-500 text-sm bg-gray-50 p-4 rounded-lg">
-                All available tags are already assigned to this transaction
+                TTous les tags disponibles sont déjà associés à cette transaction.
               </p>
             ) : (
               <div className="flex flex-wrap gap-2">
@@ -203,7 +203,7 @@ const TagEditModal = ({
           {isLoading && (
             <div className="flex items-center gap-2 text-blue-600">
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-              <span className="text-sm">Saving...</span>
+              <span className="text-sm">Enregistrement...</span>
             </div>
           )}
         </div>

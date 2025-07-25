@@ -250,19 +250,19 @@ const formatDateLabel = (dateStr) => {
   // Chart title based on current settings
   const getChartTitle = () => {
     const timeText = {
-      daily: 'Daily',
-      weekly: 'Weekly', 
-      monthly: 'Monthly',
-      yearly: 'Yearly'
+      daily: 'journalières',
+      weekly: 'hebdomadaires', 
+      monthly: 'mensuelles',
+      yearly: 'annuelles'
     }[timeGrouping];
     
     const breakdownText = {
       none: '',
-      stacked: ' (by Category)',
-      proportional: ' (Proportional by Category)'
+      stacked: ' (par categorie)',
+      proportional: ' (proportionel par catogorie)'
     }[showCategoryBreakdown];
     
-    return `${timeText} Transactions${breakdownText}`;
+    return `Transactions ${timeText}  ${breakdownText}`;
   };
 
   return (
