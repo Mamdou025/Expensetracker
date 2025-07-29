@@ -4,14 +4,14 @@ banks:
     keywords: ["Achat en point de vente", "achat international"]
     regex: 
       amount: "Montant de l'achat\\s*:\\s*(\\d+[,.]\\d{2})\\$"
-      description: "Lieu de l'achat\\s*:\\s*(.*?)\\r?\\n"
+      description: "Lieu de l'achat\\s*:\\s*([A-Za-z0-9#&\\- ]+)\\r?\\n"
 
   cibc_credit:
     sender: "mailbox.noreply@cibc.com"
     keywords: ["Nouvel achat avec votre carte de"]
     regex:
       amount: "achat de\\s*\\$?([0-9]+[,.][0-9]{2})\\$?"
-      description: "achat de\\s*\\$?[0-9]+[,.][0-9]{2}\\$?\\s*(.*?)\\s+avec votre"
+      description: "achat de\\s*\\$?[0-9]+[,.][0-9]{2}\\$?\\s*([A-Za-z0-9#&\\- ]+)\\s+avec votre"
 
   capital_one_credit:
     sender: "capitalone@notification.capitalone.com"
@@ -22,14 +22,14 @@ banks:
       - "Thank you for your payment"
     regex:
       amount: "\\$?([0-9]+[,.][0-9]{2})\\$?"
-      description: "([A-Z0-9#&\\- ]+)(?=\\s*\\$?[0-9]+[,.][0-9]{2}\\$?)"
+      description: "([A-Za-z0-9#&\\- ]+)(?=\\s*\\$?[0-9]+[,.][0-9]{2}\\$?)"
 
   mbna_credit:
     sender: "noreply@mbna.ca"
     keywords: ["Transaction Alert", "Purchase Notification", "MBNA - Transaction Alert"]
     regex:
       amount: "\\$([0-9]+\\.[0-9]{2})"
-      description: "from ([A-Z0-9/& ]+)"
+      description: "from ([A-Za-z0-9/& ]+)"
 
   neo_credit:
     sender: "info@neofinancial.com"
