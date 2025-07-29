@@ -108,15 +108,25 @@ def decode_email_subject(msg):
         return f"Subject decode error: {str(e)}"
 
 def classify_email(sender, subject, content, config):
-    """Classify email based on sender and keywords from all banks."""
+    """Classify email based on sender and keywords from all banks.
+
+    If the matched bank defines ``exclude_keywords``, the presence of any of
+    those phrases in the subject or body marks the email as a non-transaction.
+    """
     try:
         for bank_name, bank_config in config["banks"].items():
             if bank_config["sender"].lower() == sender.lower():
+                for ex_kw in bank_config.get("exclude_keywords", []):
+                    if ex_kw.lower() in subject.lower() or ex_kw.lower() in content.lower():
+                        return False, None, None
+
                 keywords = bank_config["keywords"]
                 for keyword in keywords:
-                    if (keyword.lower() in subject.lower() or 
+                    if (keyword.lower() in subject.lower() or
                         keyword.lower() in content.lower()):
                         return True, bank_name, keyword
+                return False, None, None
+
         return False, None, None
     except Exception:
         return False, None, None
