@@ -37,16 +37,23 @@ def extract_email_body(my_msg):
     return body if body else "No body content found"
 
 def is_transaction_email(sender, subject, config):
-    """Check if an email is a transaction based on sender and subject keywords."""
+    """Check if an email is a transaction based on sender and subject keywords.
+
+    ``exclude_keywords`` are evaluated first and cause the function to
+    immediately return ``False`` if any are found in the subject.
+    """
     # Find matching bank configuration
     for bank_name, bank_config in config["banks"].items():
         if bank_config["sender"].lower() == sender.lower():
-            # Check if any keyword matches the subject
+            for ex_kw in bank_config.get("exclude_keywords", []):
+                if ex_kw.lower() in subject.lower():
+                    return False, None, None
+
             keywords = bank_config["keywords"]
             for keyword in keywords:
                 if keyword.lower() in subject.lower():
                     return True, bank_name, keyword
-    
+
     return False, None, None
 
 def fetch_emails_by_date_range():
