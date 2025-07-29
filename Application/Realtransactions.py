@@ -141,6 +141,12 @@ def create_html_file(email_info, output_dir, index):
         filename = f"{index:04d}_{email_info['bank_name']}_{safe_subject}.html"
         filepath = os.path.join(output_dir, filename)
         
+        # Build the content HTML snippet separately
+        content_html = (
+            email_info['html_content']
+            or f'<pre style="white-space: pre-wrap; font-family: inherit;">{email_info["content"]}</pre>'
+        )
+
         # Create HTML content focused on transaction details
         html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -262,7 +268,7 @@ def create_html_file(email_info, output_dir, index):
     <div class="content">
         <h3>📧 Transaction Email Content</h3>
         <div class="original-content">
-            {email_info['html_content'] or f'<pre style="white-space: pre-wrap; font-family: inherit;">{email_info['content']}</pre>'}
+            {content_html}
         </div>
     </div>
 </body>
