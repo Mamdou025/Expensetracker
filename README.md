@@ -24,9 +24,29 @@ Assurez-vous que **Python 3** est installé et accessible depuis votre ligne de 
    ```
 3. Exécuter les scripts d’extraction situés dans le dossier `Application` avec Python 3 :
    ```bash
-   ${PYTHON_CMD:-python} Application/main.py
-   ```
-   Remplacez `main.py` par le script de votre choix. Définissez `PYTHON_CMD` si `python` ne pointe pas vers Python 3 sur votre système.
+\${PYTHON_CMD:-python} Application/main.py
+```
+Remplacez `main.py` par le script de votre choix. Définissez `PYTHON_CMD` si `python` ne pointe pas vers Python 3 sur votre système.
+
+## Configuration des banques
+
+Les banques prises en charge sont déclarées dans `Application/config.yml`. Chaque section contient l’adresse courriel de l’expéditeur ainsi qu’une liste de `keywords` indiquant qu’un courriel décrit une transaction.
+
+Vous pouvez également définir une liste optionnelle `exclude_keywords` pour signaler des phrases qui **ne** doivent pas être considérées comme des transactions (par exemple les confirmations de paiement).
+
+Exemple :
+
+```yaml
+  capital_one_credit:
+    sender: "capitalone@notification.capitalone.com"
+    keywords: ["A transaction was charged to your account", "International transaction alert"]
+    exclude_keywords:
+      - "Payment posted"
+      - "Paiement inscrit"
+      - "Thank you for your payment"
+```
+
+Si l’objet ou le contenu d’un courriel contient l’une de ces expressions, il sera marqué comme **non transactionnel** même s’il contient un mot clé positif.
 
 ## Exécution du client React et du serveur Node
 
