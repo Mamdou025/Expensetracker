@@ -7,6 +7,27 @@ if not logging.getLogger().handlers:
     logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def apply_keyword_rules(cursor, description, category, tags):
+    """Apply keyword-based rules to set category and tags."""
+    cursor.execute(
+        """
+        SELECT category, tags FROM keyword_rules
+        WHERE ? LIKE '%' || keyword || '%' COLLATE NOCASE
+        """,
+        (description,)
+    )
+
+    tag_set = set(tags)
+    final_category = category
+
+    for rule_category, rule_tags in cursor.fetchall():
+        if rule_category:
+            final_category = rule_category
+        if rule_tags:
+            tag_set.update(t.strip() for t in rule_tags.split(',') if t.strip())
+
+    return final_category, list(tag_set)
+
 def insert_transaction(ordered_data):
     """
     Inserts a transaction into the database and associates it with relevant tags.
@@ -25,6 +46,13 @@ def insert_transaction(ordered_data):
         # ✅ Assign a category (if not provided, default to 'Uncategorized')
         category = ordered_data.get("category", "Uncategorized")
 
+        # ✅ Apply keyword rules for automatic category and tags
+        card_type = ordered_data.get("card type") or ordered_data.get("card_type")
+        tags = ordered_data.get("tags", [])
+        category, tags = apply_keyword_rules(
+            cursor, ordered_data["description"], category, tags
+        )
+
         # ✅ Get or create transaction entry
         cursor.execute("""
             INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email, category)
@@ -32,7 +60,7 @@ def insert_transaction(ordered_data):
         """, (
             amount,
             ordered_data["description"],
-            ordered_data["card type"],
+            card_type,
             ordered_data["date"],
             ordered_data.get("time", None),  # ✅ Allow NULL time
             ordered_data["bank"],
@@ -44,8 +72,6 @@ def insert_transaction(ordered_data):
         transaction_id = cursor.lastrowid
 
         # ✅ Insert tags and associate them with the transaction
-        tags = ordered_data.get("tags", [])  # Retrieve tags if present
-
         for tag in tags:
             cursor.execute("INSERT OR IGNORE INTO tags (tag_name) VALUES (?)", (tag,))  # Ensure tag exists
 
