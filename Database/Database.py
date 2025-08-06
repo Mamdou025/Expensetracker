@@ -76,8 +76,7 @@ def create_database():
     # ✅ Create keyword_rules table for automatic categorization and tagging
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS keyword_rules (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            keyword TEXT NOT NULL UNIQUE,
+            keyword TEXT PRIMARY KEY,
             category TEXT,
             tags TEXT
         )
