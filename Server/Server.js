@@ -361,19 +361,41 @@ app.get('/api/tags/stats', (req, res) => {
     });
 });
 
-// Rules table - you'll need to create this
-app.get('/api/rules', (req, res) => {
-    // You'll need to create a 'rules' table first
-    const query = `
-        SELECT * FROM rules WHERE active = 1
-    `;
-    
+// ✅ Rule management endpoints for keyword-based categorization/tagging
+app.get('/api/keyword-rules', (req, res) => {
+    const query = 'SELECT keyword, category, tags FROM keyword_rules';
     db.all(query, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json(rows);
+    });
+});
+
+app.put('/api/keyword-rules/:keyword', (req, res) => {
+    const { keyword } = req.params;
+    const { category, tags } = req.body;
+    const tagsString = Array.isArray(tags) ? tags.join(',') : tags;
+    const query = `UPDATE keyword_rules SET category = COALESCE(?, category), tags = COALESCE(?, tags) WHERE keyword = ?`;
+
+    db.run(query, [category, tagsString, keyword], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({ message: `✅ Rule for '${keyword}' updated`, updated: this.changes });
+    });
+});
+
+app.delete('/api/keyword-rules/:keyword', (req, res) => {
+    const { keyword } = req.params;
+    db.run('DELETE FROM keyword_rules WHERE keyword = ?', [keyword], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({ message: `✅ Rule for '${keyword}' deleted` });
     });
 });
 
@@ -647,9 +669,19 @@ app.post('/api/apply-keyword-category', (req, res) => {
             return res.status(500).json({ error: err.message });
         }
 
-        res.json({
-            message: `✅ ${this.changes} transactions updated to category '${category}'`,
-            updatedTransactions: this.changes
+        const updated = this.changes;
+        const ruleQuery = `INSERT INTO keyword_rules (keyword, category) VALUES (?, ?)
+                           ON CONFLICT(keyword) DO UPDATE SET category = excluded.category`;
+
+        db.run(ruleQuery, [keyword, category], (ruleErr) => {
+            if (ruleErr) {
+                return res.status(500).json({ error: ruleErr.message });
+            }
+
+            res.json({
+                message: `✅ ${updated} transactions updated to category '${category}'`,
+                updatedTransactions: updated
+            });
         });
     });
 });
@@ -704,9 +736,20 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
             }
         }
 
-        res.json({
-            message: `✅ Tags applied to ${transactions.length} transactions`,
-            updatedTransactions: transactions.length
+        const tagsString = tags.join(',');
+        const ruleQuery = `INSERT INTO keyword_rules (keyword, tags) VALUES (?, ?)
+                           ON CONFLICT(keyword) DO UPDATE SET tags = excluded.tags`;
+
+        db.run(ruleQuery, [keyword, tagsString], (ruleErr) => {
+            if (ruleErr) {
+                console.error('Error saving keyword rule:', ruleErr);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+
+            res.json({
+                message: `✅ Tags applied to ${transactions.length} transactions`,
+                updatedTransactions: transactions.length
+            });
         });
     } catch (error) {
         console.error("Error applying keyword tags:", error);
