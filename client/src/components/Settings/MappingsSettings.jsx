@@ -53,7 +53,6 @@ const MappingsSettings = () => {
       setLoadingCat(true);
       const res = await keywordMappingService.applyCategory(keywordCat, selectedCategory);
       setCategoryResult(res.updatedTransactions);
-      await keywordMappingService.createRule(keywordCat, selectedCategory, []);
       await loadRules();
     } catch (err) {
       alert('Failed to apply category: ' + err.message);
@@ -74,7 +73,6 @@ const MappingsSettings = () => {
       setLoadingTags(true);
       const res = await keywordMappingService.applyTags(keywordTags, selectedTags);
       setTagsResult(res.updatedTransactions);
-      await keywordMappingService.createRule(keywordTags, null, selectedTags);
       await loadRules();
     } catch (err) {
       alert('Failed to apply tags: ' + err.message);
