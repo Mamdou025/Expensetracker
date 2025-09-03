@@ -91,6 +91,87 @@ app.get('/api/transactions/tag/:tag', (req, res) => {
     });
 });
 
+// ➕ Add a new transaction and return matched keyword rules
+app.post('/api/transactions', async (req, res) => {
+    try {
+        const { amount, description, card_type, date, bank, category = 'Uncategorized', tags = [] } = req.body;
+
+        const applyQuery = `
+            SELECT keyword, category, tags FROM keyword_rules
+            WHERE ? LIKE '%' || keyword || '%' COLLATE NOCASE
+        `;
+
+        const rules = await new Promise((resolve, reject) => {
+            db.all(applyQuery, [description], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            });
+        });
+
+        let finalCategory = category;
+        const tagSet = new Set(Array.isArray(tags) ? tags : [tags]);
+        const matchedRules = [];
+
+        for (const rule of rules) {
+            matchedRules.push({
+                keyword: rule.keyword,
+                category: rule.category || null,
+                tags: rule.tags ? rule.tags.split(',').map(t => t.trim()).filter(Boolean) : []
+            });
+
+            if (rule.category) finalCategory = rule.category;
+            if (rule.tags) {
+                for (const t of rule.tags.split(',')) {
+                    if (t.trim()) tagSet.add(t.trim());
+                }
+            }
+        }
+
+        const insertQuery = `INSERT INTO transactions (amount, description, card_type, date, bank, category)
+                             VALUES (?, ?, ?, ?, ?, ?)`;
+        const transactionId = await new Promise((resolve, reject) => {
+            db.run(insertQuery, [amount, description, card_type, date, bank, finalCategory], function(err){
+                if (err) reject(err);
+                else resolve(this.lastID);
+            });
+        });
+
+        const tagsArray = Array.from(tagSet);
+        for (const tag of tagsArray) {
+            await new Promise((resolve, reject) => {
+                db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], function(err){
+                    if (err) reject(err); else resolve();
+                });
+            });
+            const tagId = await new Promise((resolve, reject) => {
+                db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => {
+                    if (err) reject(err); else resolve(row.id);
+                });
+            });
+            await new Promise((resolve, reject) => {
+                db.run('INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)', [transactionId, tagId], (err) => {
+                    if (err) reject(err); else resolve();
+                });
+            });
+        }
+
+        res.json({
+            id: transactionId,
+            amount,
+            description,
+            card_type,
+            date,
+            bank,
+            category: finalCategory,
+            tags: tagsArray,
+            applied_rules: matchedRules
+        });
+    } catch (error) {
+        console.error('Error inserting transaction:', error);
+        res.status(500).json({ error: 'Failed to insert transaction' });
+    }
+});
+
 // ✅ Fetch all tags and their associated transactions
 app.get('/api/tags', (req, res) => {
     const query = `

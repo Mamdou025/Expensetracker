@@ -8,25 +8,35 @@ if not logging.getLogger().handlers:
 logger = logging.getLogger(__name__)
 
 def apply_keyword_rules(cursor, description, category, tags):
-    """Apply keyword-based rules to set category and tags."""
+    """Apply keyword-based rules to set category and tags and return matched rules."""
     cursor.execute(
         """
-        SELECT category, tags FROM keyword_rules
+        SELECT keyword, category, tags FROM keyword_rules
         WHERE ? LIKE '%' || keyword || '%' COLLATE NOCASE
         """,
-        (description,)
+        (description,),
     )
 
     tag_set = set(tags)
     final_category = category
+    matched_rules = []
 
-    for rule_category, rule_tags in cursor.fetchall():
+    for keyword, rule_category, rule_tags in cursor.fetchall():
+        rule_info = {"keyword": keyword}
         if rule_category:
             final_category = rule_category
+            rule_info["category"] = rule_category
+        else:
+            rule_info["category"] = None
         if rule_tags:
-            tag_set.update(t.strip() for t in rule_tags.split(',') if t.strip())
+            parsed_tags = [t.strip() for t in rule_tags.split(',') if t.strip()]
+            tag_set.update(parsed_tags)
+            rule_info["tags"] = parsed_tags
+        else:
+            rule_info["tags"] = []
+        matched_rules.append(rule_info)
 
-    return final_category, list(tag_set)
+    return final_category, list(tag_set), matched_rules
 
 def insert_transaction(ordered_data):
     """
@@ -49,7 +59,7 @@ def insert_transaction(ordered_data):
         # ✅ Apply keyword rules for automatic category and tags
         card_type = ordered_data.get("card type") or ordered_data.get("card_type")
         tags = ordered_data.get("tags", [])
-        category, tags = apply_keyword_rules(
+        category, tags, matched_rules = apply_keyword_rules(
             cursor, ordered_data["description"], category, tags
         )
 
@@ -85,8 +95,18 @@ def insert_transaction(ordered_data):
         conn.commit()
         logger.info("Transaction saved: %s", ordered_data)
 
+        return {
+            "transaction_id": transaction_id,
+            "category": category,
+            "tags": tags,
+            "applied_rules": matched_rules,
+        }
+
     except ValueError:
         logger.error("Amount '%s' is not a valid number.", ordered_data['amount'])
+        return {
+            "error": f"Invalid amount: {ordered_data['amount']}"
+        }
 
     finally:
         conn.close()

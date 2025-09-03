@@ -24,8 +24,14 @@ def main():
 
     results = []
     for email in emails:
-        trans = extract_transaction_data(email, email.get('sender'), email.get('subject'), email.get('email_datetime'))
-        insert_transaction(trans)
+        trans = extract_transaction_data(
+            email, email.get('sender'), email.get('subject'), email.get('email_datetime')
+        )
+        insert_result = insert_transaction(trans)
+        if isinstance(insert_result, dict):
+            trans['category'] = insert_result.get('category', trans.get('category'))
+            trans['tags'] = insert_result.get('tags', trans.get('tags', []))
+            trans['applied_rules'] = insert_result.get('applied_rules', [])
         results.append(trans)
     print(json.dumps(results))
 

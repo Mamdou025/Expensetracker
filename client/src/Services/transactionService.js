@@ -7,6 +7,9 @@ export const transactionService = {
   // Get all transactions
   getAll: () => apiClient.get('/api/transactions'),
 
+  // Create a new transaction
+  create: (transaction) => apiClient.post('/api/transactions', transaction),
+
   // Get transactions by category
   getByCategory: (category) => apiClient.get(`/api/transactions/category/${category}`),
 
