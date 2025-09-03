@@ -632,7 +632,7 @@ app.post('/api/tags', (req, res) => {
 });
 
 // Apply a category to all transactions matching a keyword in the description
-app.post('/api/apply-keyword-category', (req, res) => {
+app.post('/api/apply-keyword-category', async (req, res) => {
     const { keyword, category } = req.body;
 
     if (!keyword || !category) {
@@ -640,18 +640,49 @@ app.post('/api/apply-keyword-category', (req, res) => {
     }
 
     const like = `%${keyword}%`;
-    const query = "UPDATE transactions SET category = ? WHERE description LIKE ?";
 
-    db.run(query, [category, like], function (err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
+    try {
+        // Begin transaction
+        await new Promise((resolve, reject) => {
+            db.run('BEGIN TRANSACTION', err => (err ? reject(err) : resolve()));
+        });
+
+        // Update matching transactions
+        const updatedTransactions = await new Promise((resolve, reject) => {
+            db.run(
+                "UPDATE transactions SET category = ? WHERE description LIKE ?",
+                [category, like],
+                function (err) {
+                    if (err) reject(err);
+                    else resolve(this.changes);
+                }
+            );
+        });
+
+        // Store keyword rule
+        await new Promise((resolve, reject) => {
+            db.run(
+                'INSERT OR REPLACE INTO keyword_rules (keyword, category, tags) VALUES (?, ?, ?)',
+                [keyword, category, null],
+                err => (err ? reject(err) : resolve())
+            );
+        });
+
+        // Commit transaction
+        await new Promise((resolve, reject) => {
+            db.run('COMMIT', err => (err ? reject(err) : resolve()));
+        });
 
         res.json({
-            message: `✅ ${this.changes} transactions updated to category '${category}'`,
-            updatedTransactions: this.changes
+            message: `✅ ${updatedTransactions} transactions updated to category '${category}'`,
+            updatedTransactions,
+            ruleStored: true
         });
-    });
+    } catch (error) {
+        console.error('Error applying keyword category:', error);
+        await new Promise(resolve => db.run('ROLLBACK', () => resolve()));
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 // Apply tags to all transactions matching a keyword in the description
@@ -664,6 +695,11 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
         }
 
         const like = `%${keyword}%`;
+
+        // Begin transaction
+        await new Promise((resolve, reject) => {
+            db.run('BEGIN TRANSACTION', err => (err ? reject(err) : resolve()));
+        });
 
         // Get matching transaction IDs
         const transactions = await new Promise((resolve, reject) => {
@@ -704,12 +740,28 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
             }
         }
 
+        // Store keyword rule
+        await new Promise((resolve, reject) => {
+            db.run(
+                'INSERT OR REPLACE INTO keyword_rules (keyword, category, tags) VALUES (?, ?, ?)',
+                [keyword, null, tags.join(',')],
+                err => (err ? reject(err) : resolve())
+            );
+        });
+
+        // Commit transaction
+        await new Promise((resolve, reject) => {
+            db.run('COMMIT', err => (err ? reject(err) : resolve()));
+        });
+
         res.json({
             message: `✅ Tags applied to ${transactions.length} transactions`,
-            updatedTransactions: transactions.length
+            updatedTransactions: transactions.length,
+            ruleStored: true
         });
     } catch (error) {
         console.error("Error applying keyword tags:", error);
+        await new Promise(resolve => db.run('ROLLBACK', () => resolve()));
         res.status(500).json({ error: "Internal server error" });
     }
 });
