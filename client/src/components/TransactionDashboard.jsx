@@ -16,6 +16,7 @@ import TagEditModal from './common/TagEditModal';
 // Add these imports with your existing ones:
 import { useCategories } from '../hooks/useCategories';
 import { useTags } from '../hooks/useTags';
+import { keywordMappingService } from '../Services/keywordMappingService';
 
 
 const TransactionDashboard = () => {
@@ -335,6 +336,15 @@ const handleSaveEdit = async (transaction, field) => {
 
       }
       await updateCategory(transaction.id, newValue);
+      if (window.confirm('Save this keyword rule?')) {
+        try {
+          await keywordMappingService.createRule(transaction.description, { category: newValue });
+          alert('Keyword rule saved!');
+        } catch (ruleError) {
+          console.error('Failed to save keyword rule:', ruleError);
+          alert('Failed to save keyword rule.');
+        }
+      }
     } else if (field === 'amount') {
       await updateAmount(transaction.id, parseFloat(newValue));
     } else if (field === 'description') {
