@@ -26,6 +26,42 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
 });
 
+// Cache active keyword rules in memory
+let keywordRules = [];
+const loadKeywordRules = () => {
+    db.all(
+        'SELECT keyword, target_type, target_value FROM keyword_rules WHERE active = 1',
+        [],
+        (err, rows) => {
+            if (err) {
+                console.error('❌ Failed to load keyword rules:', err.message);
+                keywordRules = [];
+            } else {
+                keywordRules = rows;
+            }
+        }
+    );
+};
+
+// Load rules at startup
+loadKeywordRules();
+
+// Apply keyword rules to a transaction object
+function applyKeywordRules(transaction) {
+    const desc = (transaction.description || '').toLowerCase();
+    const tags = new Set(transaction.tags || []);
+    keywordRules.forEach((rule) => {
+        if (desc.includes(rule.keyword.toLowerCase())) {
+            if (rule.target_type === 'category') {
+                transaction.category = rule.target_value;
+            } else if (rule.target_type === 'tag') {
+                tags.add(rule.target_value);
+            }
+        }
+    });
+    transaction.tags = Array.from(tags);
+}
+
 // ✅ FIXED: Fetch all transactions with their tags
 app.get('/api/transactions', (req, res) => {
     const query = `
@@ -89,6 +125,65 @@ app.get('/api/transactions/tag/:tag', (req, res) => {
         }
         res.json(rows);
     });
+});
+
+// ✅ Add a new transaction and apply keyword rules
+app.post('/api/transactions', async (req, res) => {
+    try {
+        const transaction = { ...req.body };
+        applyKeywordRules(transaction);
+
+        const insertQuery = `
+            INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email, category)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        const result = await new Promise((resolve, reject) => {
+            db.run(
+                insertQuery,
+                [
+                    transaction.amount,
+                    transaction.description,
+                    transaction.card_type,
+                    transaction.date,
+                    transaction.time || null,
+                    transaction.bank,
+                    transaction.full_email || 'No email content',
+                    transaction.category || 'Uncategorized',
+                ],
+                function (err) {
+                    if (err) reject(err);
+                    else resolve({ id: this.lastID });
+                }
+            );
+        });
+
+        const tagPromises = (transaction.tags || []).map(
+            (tag) =>
+                new Promise((resolve, reject) => {
+                    db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], function (err) {
+                        if (err) return reject(err);
+                        db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => {
+                            if (err) return reject(err);
+                            db.run(
+                                'INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)',
+                                [result.id, row.id],
+                                (err2) => {
+                                    if (err2) reject(err2);
+                                    else resolve();
+                                }
+                            );
+                        });
+                    });
+                })
+        );
+
+        await Promise.all(tagPromises);
+        res.json({ id: result.id, message: 'Transaction added successfully' });
+    } catch (error) {
+        console.error('Error inserting transaction:', error);
+        res.status(500).json({ error: 'Failed to insert transaction' });
+    }
 });
 
 // ✅ Fetch all tags and their associated transactions
@@ -396,6 +491,7 @@ app.post('/api/rules', (req, res) => {
             res.status(500).json({ error: err.message });
             return;
         }
+        loadKeywordRules();
         res.json({ id: this.lastID, keyword, target_type, target_value, active });
     });
 });
@@ -424,6 +520,7 @@ app.put('/api/rules/:id', (req, res) => {
             res.status(404).json({ error: 'Rule not found' });
             return;
         }
+        loadKeywordRules();
         res.json({ message: 'Rule updated successfully' });
     });
 });
@@ -443,6 +540,7 @@ app.delete('/api/rules/:id', (req, res) => {
             res.status(404).json({ error: 'Rule not found' });
             return;
         }
+        loadKeywordRules();
         res.json({ message: 'Rule deleted successfully' });
     });
 });
