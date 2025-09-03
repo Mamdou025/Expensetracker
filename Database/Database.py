@@ -73,6 +73,17 @@ def create_database():
         )
     """)
 
+    # ✅ Create keyword_rules table for automatic categorization/tagging
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS keyword_rules (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            keyword TEXT NOT NULL,
+            target_type TEXT CHECK(target_type IN ('category','tag')) NOT NULL,
+            target_value TEXT NOT NULL,
+            active INTEGER DEFAULT 1
+        )
+    """)
+
     conn.commit()
     conn.close()
     print("✅ SQLite database and tables created successfully!")
