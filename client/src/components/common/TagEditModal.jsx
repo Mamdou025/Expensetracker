@@ -1,6 +1,7 @@
 // src/components/common/TagEditModal.jsx
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Trash2 } from 'lucide-react';
+import { ruleService } from '../../Services/ruleService';
 
 const TagEditModal = ({ 
   isOpen, 
@@ -32,6 +33,13 @@ const TagEditModal = ({
       setIsLoading(true);
       await addTag(transaction.id, tagName);
       setCurrentTags(prev => [...prev, tagName]);
+      if (window.confirm(`Create rule for keyword ${transaction.description}?`)) {
+        try {
+          await ruleService.create(transaction.description, 'tag', tagName);
+        } catch (err) {
+          console.error('Failed to create rule:', err);
+        }
+      }
     } catch (error) {
       console.error('Failed to add tag:', error);
       alert('Failed to add tag. Please try again.');
@@ -63,6 +71,13 @@ const TagEditModal = ({
       setIsLoading(true);
       await addTag(transaction.id, newTagName.trim());
       setCurrentTags(prev => [...prev, newTagName.trim()]);
+      if (window.confirm(`Create rule for keyword ${transaction.description}?`)) {
+        try {
+          await ruleService.create(transaction.description, 'tag', newTagName.trim());
+        } catch (err) {
+          console.error('Failed to create rule:', err);
+        }
+      }
       setNewTagName('');
     } catch (error) {
       console.error('Failed to add new tag:', error);

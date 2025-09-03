@@ -16,6 +16,7 @@ import TagEditModal from './common/TagEditModal';
 // Add these imports with your existing ones:
 import { useCategories } from '../hooks/useCategories';
 import { useTags } from '../hooks/useTags';
+import { ruleService } from '../Services/ruleService';
 
 
 const TransactionDashboard = () => {
@@ -338,6 +339,13 @@ const handleSaveEdit = async (transaction, field) => {
         // Category is created automatically when assigned to transaction
       }
       await updateCategory(transaction.id, newValue);
+      if (window.confirm(`Create rule for keyword ${transaction.description}?`)) {
+        try {
+          await ruleService.create(transaction.description, 'category', newValue);
+        } catch (err) {
+          console.error('Failed to create rule:', err);
+        }
+      }
     } else if (field === 'amount') {
       await updateAmount(transaction.id, parseFloat(newValue));
     } else if (field === 'description') {
