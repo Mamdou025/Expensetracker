@@ -361,19 +361,99 @@ app.get('/api/tags/stats', (req, res) => {
     });
 });
 
-// Rules table - you'll need to create this
-app.get('/api/rules', (req, res) => {
-    // You'll need to create a 'rules' table first
-    const query = `
-        SELECT * FROM rules WHERE active = 1
-    `;
-    
+// ✅ Keyword-based categorization rules
+// Get all keyword rules
+app.get('/api/keyword-rules', (req, res) => {
+    const query = `SELECT keyword, category, tags FROM keyword_rules`;
+
     db.all(query, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
-        res.json(rows);
+
+        // Convert comma-separated tags to arrays for client convenience
+        const formatted = rows.map(row => ({
+            keyword: row.keyword,
+            category: row.category,
+            tags: row.tags ? row.tags.split(',').map(t => t.trim()).filter(Boolean) : []
+        }));
+
+        res.json(formatted);
+    });
+});
+
+// Add a new keyword rule
+app.post('/api/keyword-rules', (req, res) => {
+    const { keyword, category, tags } = req.body;
+
+    if (!keyword || typeof keyword !== 'string' || !keyword.trim()) {
+        return res.status(400).json({ error: 'Keyword is required' });
+    }
+
+    const tagsStr = Array.isArray(tags) ? tags.join(',') : (typeof tags === 'string' ? tags : null);
+
+    const query = `INSERT INTO keyword_rules (keyword, category, tags) VALUES (?, ?, ?)`;
+    db.run(query, [keyword.trim(), category || null, tagsStr], function (err) {
+        if (err) {
+            if (err.message.includes('UNIQUE')) {
+                return res.status(409).json({ error: 'Keyword rule already exists' });
+            }
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json({ message: 'Rule created', keyword });
+    });
+});
+
+// Update an existing keyword rule
+app.put('/api/keyword-rules/:keyword', (req, res) => {
+    const { keyword } = req.params;
+    const { category, tags } = req.body;
+
+    const updates = [];
+    const params = [];
+
+    if (category !== undefined) {
+        updates.push('category = ?');
+        params.push(category);
+    }
+    if (tags !== undefined) {
+        const tagsStr = Array.isArray(tags) ? tags.join(',') : tags;
+        updates.push('tags = ?');
+        params.push(tagsStr);
+    }
+
+    if (updates.length === 0) {
+        return res.status(400).json({ error: 'Category or tags required' });
+    }
+
+    params.push(keyword);
+    const query = `UPDATE keyword_rules SET ${updates.join(', ')} WHERE keyword = ?`;
+
+    db.run(query, params, function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Keyword rule not found' });
+        }
+        res.json({ message: 'Rule updated' });
+    });
+});
+
+// Delete a keyword rule
+app.delete('/api/keyword-rules/:keyword', (req, res) => {
+    const { keyword } = req.params;
+    const query = `DELETE FROM keyword_rules WHERE keyword = ?`;
+
+    db.run(query, [keyword], function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Keyword rule not found' });
+        }
+        res.json({ message: 'Rule deleted' });
     });
 });
 
