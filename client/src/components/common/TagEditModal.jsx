@@ -1,6 +1,8 @@
 // src/components/common/TagEditModal.jsx
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { keywordMappingService } from '../../Services/keywordMappingService';
 
 const TagEditModal = ({ 
   isOpen, 
@@ -14,6 +16,19 @@ const TagEditModal = ({
   const [currentTags, setCurrentTags] = useState([]);
   const [newTagName, setNewTagName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
+
+  const promptAndSaveRule = async (updatedTags) => {
+    if (window.confirm(t('tagEdit.saveKeywordRulePrompt'))) {
+      try {
+        await keywordMappingService.createRule(transaction.description, null, updatedTags);
+        alert(t('tagEdit.keywordRuleSuccess'));
+      } catch (err) {
+        console.error('Failed to save keyword rule:', err);
+        alert(t('tagEdit.keywordRuleError'));
+      }
+    }
+  };
 
   // Initialize current tags when modal opens
   useEffect(() => {
@@ -31,7 +46,9 @@ const TagEditModal = ({
     try {
       setIsLoading(true);
       await addTag(transaction.id, tagName);
-      setCurrentTags(prev => [...prev, tagName]);
+      const updatedTags = [...currentTags, tagName];
+      setCurrentTags(updatedTags);
+      await promptAndSaveRule(updatedTags);
     } catch (error) {
       console.error('Failed to add tag:', error);
       alert('Failed to add tag. Please try again.');
@@ -44,7 +61,9 @@ const TagEditModal = ({
     try {
       setIsLoading(true);
       await removeTag(transaction.id, tagName);
-      setCurrentTags(prev => prev.filter(tag => tag !== tagName));
+      const updatedTags = currentTags.filter(tag => tag !== tagName);
+      setCurrentTags(updatedTags);
+      await promptAndSaveRule(updatedTags);
     } catch (error) {
       console.error('Failed to remove tag:', error);
       alert('Failed to remove tag. Please try again.');
@@ -62,8 +81,10 @@ const TagEditModal = ({
     try {
       setIsLoading(true);
       await addTag(transaction.id, newTagName.trim());
-      setCurrentTags(prev => [...prev, newTagName.trim()]);
+      const updatedTags = [...currentTags, newTagName.trim()];
+      setCurrentTags(updatedTags);
       setNewTagName('');
+      await promptAndSaveRule(updatedTags);
     } catch (error) {
       console.error('Failed to add new tag:', error);
       alert('Failed to add new tag. Please try again.');

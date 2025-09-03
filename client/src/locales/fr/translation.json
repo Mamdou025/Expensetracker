@@ -86,4 +86,7 @@
   ,"mappings.rules.save": "Enregistrer"
   ,"mappings.rules.cancel": "Annuler"
   ,"mappings.rules.noRules": "Aucune règle définie"
+  ,"tagEdit.saveKeywordRulePrompt": "Enregistrer une règle de mot-clé pour cette description ?"
+  ,"tagEdit.keywordRuleSuccess": "Règle de mot-clé enregistrée"
+  ,"tagEdit.keywordRuleError": "Échec de l'enregistrement de la règle de mot-clé"
 }
