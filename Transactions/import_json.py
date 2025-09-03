@@ -11,6 +11,15 @@ def insert_transactions_from_json(json_file):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
+    # ✅ Fetch active keyword rules once
+    cursor.execute(
+        "SELECT keyword, target_type, target_value FROM keyword_rules WHERE active = 1"
+    )
+    rules = [
+        {"keyword": r[0], "target_type": r[1], "target_value": r[2]}
+        for r in cursor.fetchall()
+    ]
+
     # ✅ Load JSON file
     with open(json_file, "r", encoding="utf-8") as file:
         data = json.load(file)
@@ -25,15 +34,34 @@ def insert_transactions_from_json(json_file):
             date = transaction["date"]
             time = transaction["time"] if transaction["time"] else None
             bank = transaction["bank"]
-            full_email = transaction["full_email"] if transaction["full_email"] else "No email content"
-            category = transaction["category"] if transaction["category"] else "Uncategorized"
+            full_email = (
+                transaction["full_email"] if transaction["full_email"] else "No email content"
+            )
+            category = (
+                transaction["category"] if transaction["category"] else "Uncategorized"
+            )
             tags = transaction.get("tags", [])  # ✅ Extract tags if available
 
+            # ✅ Apply keyword rules
+            description_lower = description.lower()
+            for rule in rules:
+                if rule["keyword"].lower() in description_lower:
+                    if rule["target_type"] == "category":
+                        category = rule["target_value"]
+                    elif rule["target_type"] == "tag":
+                        tags.append(rule["target_value"])
+
+            # Remove duplicate tags while preserving order
+            tags = list(dict.fromkeys(tags))
+
             # ✅ Insert transaction into the transactions table
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email, category)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, (amount, description, card_type, date, time, bank, full_email, category))
+            """,
+                (amount, description, card_type, date, time, bank, full_email, category),
+            )
 
             transaction_id = cursor.lastrowid  # ✅ Get the inserted transaction ID
 
@@ -41,13 +69,16 @@ def insert_transactions_from_json(json_file):
             for tag in tags:
                 # Insert tag if it does not exist
                 cursor.execute("INSERT OR IGNORE INTO tags (tag_name) VALUES (?)", (tag,))
-                
+
                 # Retrieve tag ID
                 cursor.execute("SELECT id FROM tags WHERE tag_name = ?", (tag,))
                 tag_id = cursor.fetchone()[0]
 
                 # Link transaction to tag
-                cursor.execute("INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)", (transaction_id, tag_id))
+                cursor.execute(
+                    "INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)",
+                    (transaction_id, tag_id),
+                )
 
     conn.commit()
     conn.close()
