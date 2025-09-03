@@ -86,4 +86,7 @@
   ,"mappings.rules.save": "Save"
   ,"mappings.rules.cancel": "Cancel"
   ,"mappings.rules.noRules": "No rules defined"
+  ,"tagEdit.saveKeywordRulePrompt": "Save a keyword rule for this description?"
+  ,"tagEdit.keywordRuleSuccess": "Keyword rule saved"
+  ,"tagEdit.keywordRuleError": "Failed to save keyword rule"
 }
