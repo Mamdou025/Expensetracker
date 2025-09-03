@@ -1,6 +1,7 @@
 // src/components/common/TagEditModal.jsx
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Trash2 } from 'lucide-react';
+import { keywordMappingService } from '../../Services/keywordMappingService';
 
 const TagEditModal = ({ 
   isOpen, 
@@ -27,11 +28,20 @@ const TagEditModal = ({
 
   const handleAddExistingTag = async (tagName) => {
     if (currentTags.includes(tagName)) return;
-    
+
     try {
       setIsLoading(true);
       await addTag(transaction.id, tagName);
       setCurrentTags(prev => [...prev, tagName]);
+      if (window.confirm('Save this keyword rule?')) {
+        try {
+          await keywordMappingService.createRule(transaction.description, { tags: [tagName] });
+          alert('Keyword rule saved!');
+        } catch (ruleError) {
+          console.error('Failed to save keyword rule:', ruleError);
+          alert('Failed to save keyword rule.');
+        }
+      }
     } catch (error) {
       console.error('Failed to add tag:', error);
       alert('Failed to add tag. Please try again.');
@@ -61,9 +71,19 @@ const TagEditModal = ({
 
     try {
       setIsLoading(true);
-      await addTag(transaction.id, newTagName.trim());
-      setCurrentTags(prev => [...prev, newTagName.trim()]);
+      const tag = newTagName.trim();
+      await addTag(transaction.id, tag);
+      setCurrentTags(prev => [...prev, tag]);
       setNewTagName('');
+      if (window.confirm('Save this keyword rule?')) {
+        try {
+          await keywordMappingService.createRule(transaction.description, { tags: [tag] });
+          alert('Keyword rule saved!');
+        } catch (ruleError) {
+          console.error('Failed to save keyword rule:', ruleError);
+          alert('Failed to save keyword rule.');
+        }
+      }
     } catch (error) {
       console.error('Failed to add new tag:', error);
       alert('Failed to add new tag. Please try again.');
