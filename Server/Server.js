@@ -361,19 +361,89 @@ app.get('/api/tags/stats', (req, res) => {
     });
 });
 
-// Rules table - you'll need to create this
+// Keyword rules CRUD endpoints
+
+// List all active keyword rules
 app.get('/api/rules', (req, res) => {
-    // You'll need to create a 'rules' table first
     const query = `
-        SELECT * FROM rules WHERE active = 1
+        SELECT * FROM keyword_rules WHERE active = 1
     `;
-    
+
     db.all(query, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json(rows);
+    });
+});
+
+// Create a new keyword rule
+app.post('/api/rules', (req, res) => {
+    const { keyword, target_type, target_value, active = 1 } = req.body;
+
+    if (!keyword || !target_type || !target_value) {
+        return res.status(400).json({ error: 'keyword, target_type, and target_value are required' });
+    }
+
+    const query = `
+        INSERT INTO keyword_rules (keyword, target_type, target_value, active)
+        VALUES (?, ?, ?, ?)
+    `;
+
+    db.run(query, [keyword, target_type, target_value, active], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({ id: this.lastID, keyword, target_type, target_value, active });
+    });
+});
+
+// Update an existing keyword rule
+app.put('/api/rules/:id', (req, res) => {
+    const { id } = req.params;
+    const { keyword, target_type, target_value, active } = req.body;
+
+    const query = `
+        UPDATE keyword_rules
+        SET
+            keyword = COALESCE(?, keyword),
+            target_type = COALESCE(?, target_type),
+            target_value = COALESCE(?, target_value),
+            active = COALESCE(?, active)
+        WHERE id = ?
+    `;
+
+    db.run(query, [keyword, target_type, target_value, active, id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        if (this.changes === 0) {
+            res.status(404).json({ error: 'Rule not found' });
+            return;
+        }
+        res.json({ message: 'Rule updated successfully' });
+    });
+});
+
+// Delete a keyword rule
+app.delete('/api/rules/:id', (req, res) => {
+    const { id } = req.params;
+
+    const query = `DELETE FROM keyword_rules WHERE id = ?`;
+
+    db.run(query, [id], function (err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        if (this.changes === 0) {
+            res.status(404).json({ error: 'Rule not found' });
+            return;
+        }
+        res.json({ message: 'Rule deleted successfully' });
     });
 });
 
