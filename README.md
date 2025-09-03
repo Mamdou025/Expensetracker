@@ -85,6 +85,31 @@ Vous pouvez placer cette variable dans un fichier `.env` dans le dossier `client
 Le serveur Node utilise la variable d’environnement facultative `PORT` et lit le fichier SQLite
 `transactions.db` dans le répertoire `Database`.
 
+## API Endpoints
+
+### Transactions
+
+- `GET /api/transactions` – Retourne toutes les transactions avec leurs tags.
+- `GET /api/transactions/category/:category` – Transactions filtrées par catégorie.
+- `GET /api/transactions/tag/:tag` – Transactions contenant un tag donné.
+- `GET /api/transactions/:id/tags` – Liste les tags associés à une transaction.
+- `POST /api/transactions/:id/tags` – Ajoute un tag à une transaction (`{ tag }`).
+- `DELETE /api/transactions/:id/tags` – Supprime un tag d’une transaction (`{ tag }`).
+- `PUT /api/transactions/:id/category` – Met à jour la catégorie d’une transaction (`{ category }`).
+
+### Tags
+
+- `GET /api/tags` – Retourne les tags avec les transactions associées.
+- `DELETE /api/tags/:tagName` – Supprime un tag de la base.
+- `GET /api/tags/stats` – Statistiques d’utilisation des tags.
+
+### Keyword Rules
+
+- `GET /api/keyword-rules` – Retourne toutes les règles basées sur des mots-clés.
+- `POST /api/keyword-rules` – Crée une règle (`{ keyword, category?, tags? }`). Conflit si le mot-clé existe déjà.
+- `PUT /api/keyword-rules/:keyword` – Met à jour la catégorie ou les tags d’une règle (`{ category?, tags? }`).
+- `DELETE /api/keyword-rules/:keyword` – Supprime une règle.
+
 ## Exécution des tests
 
 Installez les dépendances puis lancez la suite Python :
