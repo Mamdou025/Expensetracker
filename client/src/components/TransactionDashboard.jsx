@@ -16,6 +16,7 @@ import TagEditModal from './common/TagEditModal';
 // Add these imports with your existing ones:
 import { useCategories } from '../hooks/useCategories';
 import { useTags } from '../hooks/useTags';
+import { transactionService } from '../Services/transactionService';
 
 
 const TransactionDashboard = () => {
@@ -427,30 +428,30 @@ const handleEditItem = (type, oldName, newName) => {
   }
 };
 
-  const handleAddTransaction = () => {
-    const transaction = {
-      id: Math.max(...transactions.map(t => t.id)) + 1,
-      amount: parseFloat(newTransaction.amount),
-      description: newTransaction.description,
-      card_type: newTransaction.card_type,
-      date: newTransaction.date,
-      time: null,
-      bank: newTransaction.bank,
-      category: newTransaction.category,
-      tags: newTransaction.tags
-    };
-    
-    setTransactions(prev => [transaction, ...prev]);
-    setNewTransaction({
-      amount: '',
-      description: '',
-      card_type: 'Debit',
-      date: new Date().toISOString().split('T')[0],
-      bank: '',
-      category: '',
-      tags: ''
-    });
-    setShowAddTransaction(false);
+  const handleAddTransaction = async () => {
+    try {
+      const result = await transactionService.create(newTransaction);
+      if (result.applied_rules && result.applied_rules.length > 0) {
+        const msg = result.applied_rules
+          .map(r => `${r.keyword} → ${r.category || ''}${r.tags.length ? ' [' + r.tags.join(', ') + ']' : ''}`)
+          .join('\n');
+        alert(`Applied rules:\n${msg}`);
+      }
+      setTransactions(prev => [result, ...prev]);
+      setNewTransaction({
+        amount: '',
+        description: '',
+        card_type: 'Debit',
+        date: new Date().toISOString().split('T')[0],
+        bank: '',
+        category: '',
+        tags: ''
+      });
+      setShowAddTransaction(false);
+    } catch (error) {
+      console.error('Failed to add transaction:', error);
+      alert('Failed to add transaction');
+    }
   };
 
 const handleDeleteCategory = async (categoryName) => {

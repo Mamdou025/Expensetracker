@@ -82,7 +82,15 @@ const EmailExtractionPage = () => {
     setProcessing(true);
     setProgress(0);
     try {
-      await emailService.processQueue(emails);
+      const processed = await emailService.processQueue(emails);
+      if (Array.isArray(processed)) {
+        const messages = processed
+          .filter(p => p.applied_rules && p.applied_rules.length > 0)
+          .map(p => `${p.transaction?.description || p.description}: ${p.applied_rules.map(r => r.keyword).join(', ')}`);
+        if (messages.length > 0) {
+          alert(`Applied rules:\n${messages.join('\n')}`);
+        }
+      }
       setProgress(emails.length);
       setQueue((prev) => prev.filter((q) => !emails.includes(q.email)));
       setSelectedIds([]);
