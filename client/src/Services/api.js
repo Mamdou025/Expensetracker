@@ -1,6 +1,19 @@
 // src/services/api.js - Base API configuration
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('auth_token');
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  
+  return headers;
+};
+
 const handleResponse = async (response) => {
   let data = {};
   try {
@@ -20,16 +33,16 @@ const handleResponse = async (response) => {
 
 export const apiClient = {
   get: async (endpoint) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      headers: getAuthHeaders(),
+    });
     return handleResponse(response);
   },
 
   post: async (endpoint, data) => {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     return handleResponse(response);
@@ -38,9 +51,7 @@ export const apiClient = {
   put: async (endpoint, data) => {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     return handleResponse(response);
@@ -49,9 +60,7 @@ export const apiClient = {
   delete: async (endpoint, data = null) => {
     const options = {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
     };
     
     if (data) {

@@ -166,7 +166,7 @@ const setupAuthRoutes = (app, db) => {
                 return res.status(401).json({ error: 'Invalid email or password' });
             }
             
-            if (!user.is_active) {
+            if (user.is_active !== 1) {
                 return res.status(401).json({ error: 'Account is deactivated' });
             }
             
