@@ -3,6 +3,18 @@ const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
 const { spawn } = require('child_process');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
+// Import security modules
+const { setupAuthRoutes, authenticateToken } = require('./auth');
+const { setupFileUploadRoutes } = require('./fileUpload');
+
+// Environment validation
+if (!process.env.JWT_SECRET) {
+    console.error('❌ JWT_SECRET environment variable is required!');
+    process.exit(1);
+}
 
 // Use "python" on Windows to support common installations
 const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
@@ -11,7 +23,39 @@ const app = express();
 // Allow overriding the port via environment variable
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+// Security middleware
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: ["'self'"],
+            imgSrc: ["'self'", "data:", "https:"],
+        },
+    },
+}));
+
+// Rate limiting
+const generalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use(generalLimiter);
+
+// CORS configuration
+const corsOptions = {
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://your-domain.com'] 
+        : ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 // Increase JSON payload limit to handle larger request bodies
 app.use(express.json({ limit: '10mb' })); // ✅ Allow JSON request body parsing
 
@@ -26,19 +70,20 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
 });
 
-// ✅ FIXED: Fetch all transactions with their tags
-app.get('/api/transactions', (req, res) => {
+// ✅ SECURE: Fetch all transactions with their tags for authenticated user
+app.get('/api/transactions', authenticateToken, (req, res) => {
     const query = `
         SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
                COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
         FROM transactions t
         LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
         LEFT JOIN tags g ON tt.tag_id = g.id
+        WHERE t.user_id = ?
         GROUP BY t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category
         ORDER BY t.date DESC;
     `;
 
-    db.all(query, [], (err, rows) => {
+    db.all(query, [req.user.id], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -928,7 +973,190 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
 });
 
 
+// ============ SMART CATEGORIZATION ENDPOINTS ============
+
+// Get smart categorization statistics
+app.get('/api/smart-categorization/stats', (req, res) => {
+    const query = `
+        SELECT 
+            COUNT(*) as total,
+            SUM(CASE WHEN category = 'Uncategorized' OR category IS NULL THEN 1 ELSE 0 END) as uncategorized,
+            COUNT(DISTINCT category) as total_categories
+        FROM transactions
+    `;
+    
+    db.get(query, [], (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(row);
+    });
+});
+
+// Run smart categorization (pattern-based)
+app.post('/api/smart-categorization/run', (req, res) => {
+    const script = path.join(__dirname, '../Application/simple_categorizer.py');
+    const py = spawn(pythonCmd, [script]);
+    
+    let output = '';
+    let errOutput = '';
+    
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Smart categorization failed' });
+        }
+        
+        try {
+            const result = JSON.parse(output);
+            res.json(result);
+        } catch (e) {
+            res.json({ updated: 0, message: 'Categorization completed' });
+        }
+    });
+});
+
+// Get keyword suggestions
+app.get('/api/keyword-rules/suggestions', (req, res) => {
+    const script = path.join(__dirname, '../Application/simple_categorizer.py');
+    const py = spawn(pythonCmd, [script, 'suggestions']);
+    
+    let output = '';
+    let errOutput = '';
+    
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Failed to get suggestions' });
+        }
+        
+        try {
+            const result = JSON.parse(output);
+            res.json(result);
+        } catch (e) {
+            res.json([]);
+        }
+    });
+});
+
+// ML Categorization endpoints
+app.post('/api/ml-categorization/train', (req, res) => {
+    const script = path.join(__dirname, '../Application/ml_categorizer.py');
+    const py = spawn(pythonCmd, [script, 'train']);
+    
+    let output = '';
+    let errOutput = '';
+    
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ 
+                error: errOutput || 'ML training failed',
+                details: 'Make sure scikit-learn and pandas are installed: pip install scikit-learn pandas'
+            });
+        }
+        
+        try {
+            const result = JSON.parse(output);
+            res.json(result);
+        } catch (e) {
+            res.json({ accuracy: 0, training_size: 0, message: 'Training completed' });
+        }
+    });
+});
+
+app.get('/api/ml-categorization/stats', (req, res) => {
+    const script = path.join(__dirname, '../Application/ml_categorizer.py');
+    const py = spawn(pythonCmd, [script, 'stats']);
+    
+    let output = '';
+    let errOutput = '';
+    
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.json({ status: 'not_trained' });
+        }
+        
+        try {
+            const result = JSON.parse(output);
+            res.json(result);
+        } catch (e) {
+            res.json({ status: 'not_trained' });
+        }
+    });
+});
+
+app.post('/api/ml-categorization/predict', (req, res) => {
+    const { confidenceThreshold = 0.6 } = req.body;
+    const script = path.join(__dirname, '../Application/ml_categorizer.py');
+    const py = spawn(pythonCmd, [script, 'predict', confidenceThreshold.toString()]);
+    
+    let output = '';
+    let errOutput = '';
+    
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ 
+                error: errOutput || 'ML prediction failed',
+                details: 'Make sure the ML model is trained first'
+            });
+        }
+        
+        try {
+            const result = JSON.parse(output);
+            res.json(result);
+        } catch (e) {
+            res.json({ updated: 0, message: 'Prediction completed' });
+        }
+    });
+});
+
+// 🔐 Setup authentication routes
+setupAuthRoutes(app, db);
+
+// 📁 Setup secure file upload routes
+setupFileUploadRoutes(app, db);
+
+// 🏥 Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
+
+// 🚫 Handle 404 for API routes
+app.use('/api/*', (req, res) => {
+    res.status(404).json({ error: 'API endpoint not found' });
+});
+
+// 🔧 Global error handler
+app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err);
+    res.status(500).json({ 
+        error: 'Internal server error',
+        ...(process.env.NODE_ENV === 'development' && { details: err.message })
+    });
+});
+
 // ✅ Start the server
 app.listen(port, () => {
-    console.log(`Serveur actif à  http://localhost:${port}`);
+    console.log(`🚀 ExpenseTracker Server running at http://localhost:${port}`);
+    console.log(`🔒 Security: ${process.env.NODE_ENV === 'production' ? 'Production' : 'Development'} mode`);
+    console.log(`📊 Database: ${dbPath}`);
 });

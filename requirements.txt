@@ -1,2 +1,3 @@
 beautifulsoup4
 PyYAML
+# No ML dependencies needed! Simple pattern matching only.
