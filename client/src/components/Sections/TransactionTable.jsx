@@ -189,9 +189,9 @@ const EditableTransactionRow = ({
       {/* Tags - Clean badge display only (editing through modal) */}
       <td className="px-8 py-6 whitespace-nowrap">
         <div className="flex flex-wrap gap-1">
-          {transaction.tags && transaction.tags.split(',').map(tag => tag.trim()).filter(tag => tag).map((tag, index) => (
+          {Array.isArray(transaction.tags) && transaction.tags.map((tag, index) => (
             <span
-              key={index}
+              key={`${transaction.id}-${tag}-${index}`}
               className={`px-2 py-1 text-xs rounded-full transition-all duration-200 ${
                 filters.tags.includes(tag)
                   ? 'bg-green-100 text-green-800 ring-2 ring-green-200'
@@ -201,7 +201,7 @@ const EditableTransactionRow = ({
               {tag}
             </span>
           ))}
-          {(!transaction.tags || transaction.tags.split(',').filter(tag => tag.trim()).length === 0) && (
+          {(!Array.isArray(transaction.tags) || transaction.tags.length === 0) && (
             <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-500">
               No tags
             </span>

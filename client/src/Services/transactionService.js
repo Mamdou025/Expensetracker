@@ -2,13 +2,20 @@
 
 // src/services/transactionService.js - Transaction API calls
 import { apiClient } from './api';
+import { transformTransactionFromApi } from './transformers';
 
 export const transactionService = {
   // Get all transactions
-  getAll: () => apiClient.get('/api/transactions'),
+  getAll: async () => {
+    const result = await apiClient.get('/api/transactions');
+    return (Array.isArray(result) ? result : []).map(transformTransactionFromApi);
+  },
 
   // Create a new transaction
-  create: (transaction) => apiClient.post('/api/transactions', transaction),
+  create: async (transaction) => {
+    const result = await apiClient.post('/api/transactions', transaction);
+    return transformTransactionFromApi(result);
+  },
 
   // Get transactions by category
   getByCategory: (category) => apiClient.get(`/api/transactions/category/${category}`),

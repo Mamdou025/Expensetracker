@@ -33,9 +33,7 @@ const TagEditModal = ({
   // Initialize current tags when modal opens
   useEffect(() => {
     if (isOpen && transaction) {
-      const transactionTags = transaction.tags 
-        ? transaction.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
-        : [];
+      const transactionTags = Array.isArray(transaction.tags) ? transaction.tags : [];
       setCurrentTags(transactionTags);
     }
   }, [isOpen, transaction]);
