@@ -7,6 +7,30 @@ if not logging.getLogger().handlers:
     logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def normalize_tags(tags):
+    """Normalize tags to a de-duplicated list of strings."""
+    if tags is None:
+        return []
+
+    if isinstance(tags, str):
+        values = tags.split(",")
+    elif isinstance(tags, list):
+        values = []
+        for item in tags:
+            if isinstance(item, str):
+                values.extend(item.split(","))
+    else:
+        return []
+
+    normalized = []
+    seen = set()
+    for tag in values:
+        cleaned = tag.strip()
+        if cleaned and cleaned not in seen:
+            seen.add(cleaned)
+            normalized.append(cleaned)
+    return normalized
+
 def apply_keyword_rules(cursor, description, category, tags):
     """Apply keyword-based rules to set category and tags and return matched rules."""
     cursor.execute(
@@ -57,16 +81,20 @@ def insert_transaction(ordered_data):
         category = ordered_data.get("category", "Uncategorized")
 
         # ✅ Apply keyword rules for automatic category and tags
-        card_type = ordered_data.get("card type") or ordered_data.get("card_type")
-        tags = ordered_data.get("tags", [])
+        card_type = ordered_data.get("card_type") or ordered_data.get("card type")
+        tags = normalize_tags(ordered_data.get("tags", []))
         category, tags, matched_rules = apply_keyword_rules(
             cursor, ordered_data["description"], category, tags
         )
+        source_type = ordered_data.get("source_type", "manual")
+        source_ref = ordered_data.get("source_ref")
 
         # ✅ Get or create transaction entry
         cursor.execute("""
-            INSERT INTO transactions (amount, description, card_type, date, time, bank, full_email, category)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO transactions (
+                amount, description, card_type, date, time, bank, full_email, category, source_type, source_ref
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             amount,
             ordered_data["description"],
@@ -75,7 +103,9 @@ def insert_transaction(ordered_data):
             ordered_data.get("time", None),  # ✅ Allow NULL time
             ordered_data["bank"],
             ordered_data.get("full_email", "No email content"),
-            category
+            category,
+            source_type,
+            source_ref,
         ))
 
         # ✅ Get the inserted transaction ID
@@ -100,6 +130,8 @@ def insert_transaction(ordered_data):
             "category": category,
             "tags": tags,
             "applied_rules": matched_rules,
+            "source_type": source_type,
+            "source_ref": source_ref,
         }
 
     except ValueError:

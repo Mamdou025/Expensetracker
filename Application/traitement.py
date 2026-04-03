@@ -64,6 +64,24 @@ def _contains_exclude_keyword(bank_cfg: dict, subject: str, content: str) -> boo
     return False
 
 
+def _build_source_ref(email_payload: dict | None) -> str | None:
+    """Create a stable source reference for ingestion tracing."""
+    if not isinstance(email_payload, dict):
+        return None
+
+    explicit_ref = email_payload.get("id") or email_payload.get("source_ref")
+    if explicit_ref:
+        return str(explicit_ref)
+
+    parts = [
+        email_payload.get("sender"),
+        email_payload.get("subject"),
+        email_payload.get("email_datetime"),
+    ]
+    cleaned = [str(p).strip() for p in parts if p]
+    return "|".join(cleaned) if cleaned else None
+
+
 def extract_transaction_data(
     email_data,
     email_sender: str | None = None,
@@ -149,11 +167,17 @@ def extract_transaction_data(
     ordered_data = {
         "amount": extracted_data.get("amount"),
         "description": extracted_data.get("description"),
+        "card_type": extracted_data.get("card_type"),
+        # Backward compatibility for old consumers still reading "card type"
         "card type": extracted_data.get("card_type"),
         "date": formatted_date.split(" ")[0] if formatted_date else None,
         "time": formatted_date.split(" ")[1] if formatted_date else None,
         "bank": bank_name,
         "full_email": html if html else email_text,
+        # Explicit contract defaults
+        "tags": [],
+        "source_type": "email",
+        "source_ref": _build_source_ref(email_data if isinstance(email_data, dict) else None),
     }
 
     dup = False
