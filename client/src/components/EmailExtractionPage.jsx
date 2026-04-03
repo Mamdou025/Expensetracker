@@ -76,12 +76,12 @@ const EmailExtractionPage = () => {
     setSelectedIds([]);
   };
 
-  const processEmails = async (emails) => {
-    if (emails.length === 0) return;
+  const processEmails = async (queueItems) => {
+    if (queueItems.length === 0) return;
     setProcessing(true);
     setProgress(0);
     try {
-      const processed = await emailService.processQueue(emails);
+      const processed = await emailService.processQueue(queueItems);
       if (Array.isArray(processed)) {
         const messages = processed
           .filter((p) => p.applied_rules && p.applied_rules.length > 0)
@@ -95,8 +95,11 @@ const EmailExtractionPage = () => {
           alert(`Applied rules:\n${messages.join('\n')}`);
         }
       }
-      setProgress(emails.length);
-      setQueue((prev) => prev.filter((item) => !emails.includes(item.email)));
+      setProgress(queueItems.length);
+      const processedIds = new Set(
+        queueItems.map((item) => item.queueId).filter(Boolean)
+      );
+      setQueue((prev) => prev.filter((item) => !processedIds.has(item.queueId)));
       setSelectedIds([]);
       await refreshTransactions();
     } catch (err) {
@@ -108,16 +111,14 @@ const EmailExtractionPage = () => {
   };
 
   const processSelected = () => {
-    const emails = queue
+    const selectedItems = queue
       .filter((item) => selectedIds.includes(item.queueId))
-      .map((item) => item.email)
       .filter(Boolean);
-    processEmails(emails);
+    processEmails(selectedItems);
   };
 
   const processAll = () => {
-    const emails = queue.map((item) => item.email).filter(Boolean);
-    processEmails(emails);
+    processEmails(queue);
   };
 
   const allSelected = queue.length > 0 && queue.every((item) => selectedIds.includes(item.queueId));

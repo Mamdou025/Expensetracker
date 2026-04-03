@@ -8,6 +8,8 @@ def _check_and_update_columns(cursor):
         "bank": "TEXT NOT NULL",
         "full_email": "TEXT DEFAULT 'No email content'",
         "category": "TEXT DEFAULT 'Uncategorized'",
+        "source_type": "TEXT DEFAULT 'manual'",
+        "source_ref": "TEXT DEFAULT NULL",
         "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
     }
 
@@ -41,6 +43,8 @@ def create_database():
             bank TEXT NOT NULL,
             full_email TEXT DEFAULT 'No email content',
             category TEXT DEFAULT 'Uncategorized',
+            source_type TEXT DEFAULT 'manual',
+            source_ref TEXT DEFAULT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
@@ -88,4 +92,3 @@ def create_database():
 
 # Run the function to create/update the database schema
 create_database()
-
