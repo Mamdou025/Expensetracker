@@ -54,6 +54,16 @@ def is_duplicate(amount: str, date: str) -> bool:
     except Exception:
         return False
 
+def _contains_exclude_keyword(bank_cfg: dict, subject: str, content: str) -> bool:
+    """Return True when email subject/body contains any bank exclude keyword."""
+    subject_l = (subject or "").lower()
+    content_l = (content or "").lower()
+    for keyword in bank_cfg.get("exclude_keywords", []):
+        if keyword.lower() in subject_l or keyword.lower() in content_l:
+            return True
+    return False
+
+
 def extract_transaction_data(
     email_data,
     email_sender: str | None = None,
@@ -84,6 +94,7 @@ def extract_transaction_data(
 
     # Determine whether ``email_data`` is new-style dict or plain text
     bank_key = None
+    html = ""
     if isinstance(email_data, dict):
         email_sender = email_data.get("sender", email_sender)
         email_subject = email_data.get("subject", email_subject)
@@ -100,6 +111,10 @@ def extract_transaction_data(
 
     bank_name = bank_key or identify_bank(email_sender, email_subject)
     extracted_data = {"amount": None, "description": None, "card_type": None}
+
+    bank_cfg = cfg.get("banks", {}).get(bank_name) if bank_name != "Unknown" else None
+    if bank_cfg and _contains_exclude_keyword(bank_cfg, email_subject or "", email_text):
+        bank_name = "Unknown"
 
     if bank_name != "Unknown" and bank_name in cfg.get("banks", {}):
         try:

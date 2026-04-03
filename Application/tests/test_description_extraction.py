@@ -39,3 +39,36 @@ def test_neo_credit_mixed_case_description():
     result = _extract("neo_credit", html)
     assert result["description"] == "MixedCaseStore"
 
+
+
+def test_plain_text_input_does_not_raise_and_preserves_full_email():
+    result = extract_transaction_data("No structured html", email_sender="unknown@example.com", email_subject="No match")
+    assert result["full_email"] == "No structured html"
+
+
+def test_exclude_keywords_block_transaction_parsing():
+    cfg = {
+        "banks": {
+            "capital_one_credit": {
+                "sender": "capitalone@notification.capitalone.com",
+                "keywords": ["A transaction was charged to your account"],
+                "exclude_keywords": ["Payment posted"],
+                "regex": {
+                    "amount": "\\$?([0-9]+[,.][0-9]{2})\\$?",
+                    "description": "([A-Za-z0-9#&\\- ]+)(?=\\s*\\$?[0-9]+[,.][0-9]{2}\\$?)"
+                }
+            }
+        }
+    }
+
+    email_data = {
+        "sender": "capitalone@notification.capitalone.com",
+        "subject": "Payment posted to your account",
+        "full_email_html": "StoreName $10.00",
+        "bank_config": "capital_one_credit"
+    }
+
+    result = extract_transaction_data(email_data, cfg=cfg)
+    assert result["amount"] is None
+    assert result["description"] is None
+    assert result["bank"] == "Unknown"

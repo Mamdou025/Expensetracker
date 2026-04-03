@@ -241,16 +241,19 @@ app.post('/api/transactions/:id/tags', async (req, res) => {
             tagId = tagExists.id;
         }
 
-        // Link tag to transaction
-        const insertTagLinkQuery = "INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)";
-        await new Promise((resolve, reject) => {
+        // Link tag to transaction idempotently
+        const insertTagLinkQuery = "INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)";
+        const linkChanges = await new Promise((resolve, reject) => {
             db.run(insertTagLinkQuery, [id, tagId], function (err) {
                 if (err) reject(err);
-                resolve();
+                else resolve(this.changes);
             });
         });
 
-        res.json({ message: "Tag added successfully" });
+        res.json({
+            message: linkChanges ? "Tag added successfully" : "Tag already linked to transaction",
+            alreadyLinked: linkChanges === 0
+        });
     } catch (error) {
         console.error("Error adding tag:", error);
         res.status(500).json({ error: "Internal server error" });
@@ -335,16 +338,31 @@ app.put('/api/transactions/:id/category', (req, res) => {
 
 // Dashboard summary stats
 app.get('/api/dashboard/stats', (req, res) => {
-    const queries = {
-        totalTransactions: "SELECT COUNT(*) as count FROM transactions",
-        totalAmount: "SELECT SUM(amount) as total FROM transactions", 
-        totalIncome: "SELECT SUM(amount) as total FROM transactions WHERE amount > 0",
-        totalExpense: "SELECT SUM(ABS(amount)) as total FROM transactions WHERE amount < 0",
-        avgTransaction: "SELECT AVG(amount) as avg FROM transactions"
-    };
-    
-    // Execute all queries and combine results
-    // Implementation similar to your existing patterns
+    const query = `
+        SELECT
+            COUNT(*) AS totalTransactions,
+            COALESCE(SUM(amount), 0) AS totalAmount,
+            COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS totalIncome,
+            COALESCE(SUM(CASE WHEN amount < 0 THEN ABS(amount) ELSE 0 END), 0) AS totalExpense,
+            COALESCE(AVG(amount), 0) AS avgTransaction
+        FROM transactions
+    `;
+
+    db.get(query, [], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        const stats = {
+            totalTransactions: Number(row?.totalTransactions || 0),
+            totalAmount: Number(row?.totalAmount || 0),
+            totalIncome: Number(row?.totalIncome || 0),
+            totalExpense: Number(row?.totalExpense || 0),
+            avgTransaction: Number(row?.avgTransaction || 0)
+        };
+
+        res.json(stats);
+    });
 });
 
 // Monthly spending data for charts

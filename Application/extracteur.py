@@ -14,7 +14,7 @@ import yaml
 import os
 from bs4 import BeautifulSoup
 from email.header import decode_header
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # ✅ Définissez ici l'expéditeur et la position de l'e-mail à extraire
 SENDER_EMAIL = "info@neofinancial.com"  # Modifiez cette valeur selon l'expéditeur souhaité
@@ -39,6 +39,52 @@ def extract_email_body(my_msg):
 
     return body if body else "No body content found"
 
+
+
+def _load_email_credentials():
+    """Load IMAP credentials, preferring environment variables only.
+
+    credentials.yml is supported only when ALLOW_PLAINTEXT_CREDENTIALS=1 is
+    explicitly set for local development.
+    """
+    user = os.getenv("EMAIL_USER")
+    password = os.getenv("EMAIL_PASS")
+    if user and password:
+        return user, password
+
+    if os.getenv("ALLOW_PLAINTEXT_CREDENTIALS") == "1":
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        credentials_path = os.path.join(base_dir, "credentials.yml")
+        if os.path.exists(credentials_path):
+            with open(credentials_path, "r", encoding="utf-8") as f:
+                creds = yaml.safe_load(f) or {}
+            user = user or creds.get("user")
+            password = password or creds.get("password")
+            if user and password:
+                return user, password
+
+    raise ValueError(
+        "Email credentials not provided. Set EMAIL_USER and EMAIL_PASS. "
+        "Plaintext credentials.yml is disabled unless ALLOW_PLAINTEXT_CREDENTIALS=1 for local dev."
+    )
+
+
+def _imap_before_date_inclusive(end_date: str) -> str:
+    """Convert inclusive end date (DD-Mon-YYYY) to IMAP BEFORE date (exclusive)."""
+    end_dt = datetime.strptime(end_date, "%d-%b-%Y")
+    return (end_dt + timedelta(days=1)).strftime("%d-%b-%Y")
+
+
+def _is_excluded_email(bank_cfg: dict, subject: str, content: str) -> bool:
+    """Return True when subject/body contains any configured exclude keyword."""
+    subject_l = (subject or "").lower()
+    content_l = (content or "").lower()
+    for keyword in bank_cfg.get("exclude_keywords", []):
+        if keyword.lower() in subject_l or keyword.lower() in content_l:
+            return True
+    return False
+
+
 def fetch_emails(start_date: str, end_date: str):
     """Retrieve HTML emails from all configured banks within a date range.
 
@@ -61,23 +107,7 @@ def fetch_emails(start_date: str, end_date: str):
     mail = imaplib.IMAP4_SSL(imap_url)
 
     # Load credentials
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    credentials_path = os.path.join(base_dir, "credentials.yml")
-
-    user = os.getenv("EMAIL_USER")
-    password = os.getenv("EMAIL_PASS")
-
-    if os.path.exists(credentials_path):
-        with open(credentials_path, "r", encoding="utf-8") as f:
-            creds = yaml.safe_load(f)
-            user = user or creds.get("user")
-            password = password or creds.get("password")
-
-    if not user or not password:
-        raise ValueError(
-            "Email credentials not provided. Set EMAIL_USER and EMAIL_PASS "
-            "environment variables or update credentials.yml"
-        )
+    user, password = _load_email_credentials()
 
     # Login and select inbox
     mail.login(user, password)
@@ -88,6 +118,8 @@ def fetch_emails(start_date: str, end_date: str):
     with open(config_file, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
+    before_date = _imap_before_date_inclusive(end_date)
+
     fetched_emails = []
 
     for bank_name, bank_cfg in config.get("banks", {}).items():
@@ -95,7 +127,7 @@ def fetch_emails(start_date: str, end_date: str):
         if not sender:
             continue
 
-        search = f'(FROM "{sender}" SINCE "{start_date}" BEFORE "{end_date}")'
+        search = f'(FROM "{sender}" SINCE "{start_date}" BEFORE "{before_date}")'
         _, data = mail.search(None, search)
         mail_ids = data[0].split()
 
@@ -138,6 +170,10 @@ def fetch_emails(start_date: str, end_date: str):
                                     + "</pre>"
                                 )
                             break
+
+                email_text = BeautifulSoup(html_content or "", "html.parser").get_text(separator="\n")
+                if _is_excluded_email(bank_cfg, subject, email_text):
+                    continue
 
                 fetched_emails.append(
                     {
