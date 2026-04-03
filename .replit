@@ -46,6 +46,6 @@ externalPort = 80
 expertMode = true
 
 [deployment]
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
 run = ["npm", "start"]
 build = ["npm", "run", "replit:build"]
