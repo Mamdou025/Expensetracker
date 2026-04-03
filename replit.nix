@@ -1,10 +1,8 @@
 { pkgs }: {
   deps = [
-    pkgs.nodejs-20_x
-    pkgs.python313Full
-    pkgs.gnumake
-    pkgs.gcc
-    pkgs.pkg-config
+    pkgs.nodejs-16_x
+    pkgs.python39Full
+    pkgs.python39Packages.pip
     pkgs.sqlite
   ];
 }
