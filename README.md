@@ -2,31 +2,58 @@
 
 Ce projet extrait les données de transaction des courriels et les enregistre dans une base de données SQLite locale.
 
-Assurez-vous que **Python 3** est installé et accessible depuis votre ligne de commande. Sur certaines plateformes, l’interpréteur est disponible sous `python3` au lieu de `python`. Vous pouvez définir une variable d’environnement `PYTHON_CMD` qui pointe vers la bonne commande si nécessaire.
+Assurez-vous que **Python 3** et **Node.js** sont installés et accessibles depuis votre ligne de commande. Sur certaines plateformes, l’interpréteur Python est disponible sous `python3` au lieu de `python`. Vous pouvez définir une variable d’environnement `PYTHON_CMD` si nécessaire.
+
+## Configuration d’exécution
+
+Variables d’environnement principales :
+
+- `EMAIL_USER` : adresse Gmail/IMAP utilisée pour l’extraction des courriels.
+- `EMAIL_PASS` : mot de passe d’application correspondant.
+- `SQLITE_PATH` : chemin du fichier SQLite. S’il est relatif, il est résolu depuis la racine du dépôt. Par défaut : `Database/transactions.db`.
+- `PORT` : port HTTP du serveur Node. Par défaut : `5000`.
+- `PYTHON_CMD` : commande Python à utiliser pour les scripts invoqués par Node. Par défaut : `python` sur Windows, `python3` ailleurs.
+- `REACT_APP_API_URL` : utile surtout pour le développement du client séparé. En production mono-service, laissez cette variable vide pour utiliser la même origine.
+- `ALLOW_PLAINTEXT_CREDENTIALS=1` : autorise `credentials.yml` uniquement en développement local. Ne pas utiliser en production.
+
+En production, `EMAIL_USER` et `EMAIL_PASS` sont obligatoires, et `ALLOW_PLAINTEXT_CREDENTIALS=1` provoque désormais un échec explicite au démarrage.
 
 ## Installation
 
-1. **Fournir les identifiants de messagerie** utilisés par les scripts d’extraction.
+1. **Installer les dépendances Node.js** depuis la racine :
 
-   - Soit modifier `credentials.yml` avec votre adresse courriel et votre mot de passe d’application.
-   - Soit définir les variables d’environnement `EMAIL_USER` et `EMAIL_PASS`. Un fichier `.env` peut être utilisé avec des outils tels que `python-dotenv`.
-   Les scripts lisent d’abord les variables d’environnement puis utilisent `credentials.yml` si elles ne sont pas définies.
-   Si vous stockez de vrais identifiants dans le fichier, pensez à ajouter `credentials.yml` au `.gitignore` pour éviter de publier des secrets.
+   ```bash
+   npm install
+   ```
+
+   Cette commande installe maintenant les dépendances du client React et du serveur Node.
+
+2. **Installer les dépendances Python** :
+
+   ```bash
+   pip install -r requirements.txt
+   # utilisez `pip3` si votre système sépare Python 2 et 3
+   ```
+
+3. **Fournir les identifiants de messagerie** utilisés par les scripts d’extraction.
+
+   - En production : définir `EMAIL_USER` et `EMAIL_PASS`.
+   - En développement local seulement : vous pouvez encore utiliser `credentials.yml`, mais uniquement si `ALLOW_PLAINTEXT_CREDENTIALS=1` est défini.
+
    Exemple de fichier `.env` :
+
    ```
    EMAIL_USER=your_email@example.com
    EMAIL_PASS=your_app_password
+   SQLITE_PATH=Database/transactions.db
    ```
-2. Installer les dépendances Python (si elles ne sont pas déjà disponibles) avec `pip` :
+
+4. Exécuter les scripts d’extraction situés dans le dossier `Application` avec Python 3 :
+
    ```bash
-   pip install -r requirements.txt
-   # utilisez `pip3` si votre système sépare Python 2 et 3
-   ```
-3. Exécuter les scripts d’extraction situés dans le dossier `Application` avec Python 3 :
-   ```bash
-\${PYTHON_CMD:-python} Application/main.py
+${PYTHON_CMD:-python} Application/main.py
 ```
-Remplacez `main.py` par le script de votre choix. Définissez `PYTHON_CMD` si `python` ne pointe pas vers Python 3 sur votre système.
+Remplacez `main.py` par le script de votre choix. Définissez `PYTHON_CMD` si `python` ne pointe pas vers Python 3 sur votre système.
 
 ## Configuration des banques
 
@@ -52,38 +79,178 @@ Si l’objet ou le contenu d’un courriel contient l’une de ces expressions, 
 
 L’interface web se trouve dans le dossier `client` tandis que l’API réside dans `Server`.
 
-### Installation des dépendances
-1. **Client**
-   ```bash
-   cd client
-   npm install --legacy-peer-deps
-   # ou installez TypeScript 4.9 manuellement si vous préférez
-   npm install typescript@4.9 --save-dev
-   ```
-   Lancez `npm install` dans `client/` avant `npm test`.
-2. **Server**
-   ```bash
-   cd Server
-   npm install
-   ```
+### Développement local
 
-### Démarrage des services
 Démarrer le serveur de développement React :
+
 ```bash
 cd client
 npm start
 ```
 
-Démarrer le serveur API Node (port 5000 par défaut) :
+Démarrer le serveur API Node (port 5000 par défaut) :
+
 ```bash
 cd Server
 node Server.js
 ```
 
-L’application React lit `REACT_APP_API_URL` pour déterminer l’URL de base de l’API (par défaut `http://localhost:5000`).
+L’application React lit `REACT_APP_API_URL` pour déterminer l’URL de base de l’API. Sans cette variable, elle utilise :
+
+- `http://localhost:5000` quand elle tourne sur le serveur de développement React (`localhost:3000`)
+- la même origine en production mono-service
+
 Vous pouvez placer cette variable dans un fichier `.env` dans le dossier `client`.
-Le serveur Node utilise la variable d’environnement facultative `PORT` et lit le fichier SQLite
-`transactions.db` dans le répertoire `Database`.
+
+### Démarrage de production / Replit
+
+Chemin de démarrage recommandé pour un premier hébergement :
+
+1. Construire le client React :
+
+   ```bash
+   npm run build
+   ```
+
+2. Initialiser explicitement le schéma SQLite :
+
+   ```bash
+   npm run init:db
+   ```
+
+3. Démarrer le service de production unique :
+
+   ```bash
+   npm start
+   ```
+
+`npm start` utilise désormais un bootstrap explicite :
+
+- vérifie la configuration d’exécution
+- résout `SQLITE_PATH`
+- lance l’initialisation du schéma
+- démarre le serveur Node
+- sert le build React depuis le même processus quand `client/build` existe
+
+La base SQLite vit par défaut dans `Database/transactions.db`, sauf si `SQLITE_PATH` pointe ailleurs.
+
+### Limites du premier modèle de déploiement
+
+- SQLite reste un fichier local unique : ce modèle convient à une première instance simple, pas à une montée en charge multi-répliques.
+- Les scripts Python sont toujours invoqués par Node : Python doit donc être disponible sur l’environnement d’hébergement.
+- Le stockage des courriels et la logique d’extraction restent couplés au backend existant ; ce patch ne change pas l’architecture applicative.
+
+## Déploiement Replit Reserved VM
+
+Ce dépôt est maintenant préparé pour un premier déploiement Replit avec un seul service web :
+
+- backend Node/Express
+- scripts Python appelés par le backend
+- frontend React compilé puis servi par Express
+- SQLite conservé temporairement comme stockage local
+
+### Fichiers Replit ajoutés
+
+- `.replit` : définit le build et le run path explicites pour Replit
+- `replit.nix` : fournit Node, Python et quelques dépendances système minimales
+
+### Commande de build Replit
+
+Utilisez cette commande de build :
+
+```bash
+npm run replit:build
+```
+
+Elle exécute :
+
+- `npm install`
+- `python -m pip install -r requirements.txt`
+- `npm run build`
+- `npm run verify:deploy`
+
+### Commande de run Replit
+
+Utilisez cette commande de lancement :
+
+```bash
+npm start
+```
+
+Cette commande :
+
+- valide la configuration runtime
+- initialise explicitement le schéma SQLite
+- démarre le serveur Node
+- sert le build React depuis `client/build`
+
+### Secrets / variables d’environnement Replit
+
+Ajoutez ces variables dans le panneau **Deployments** de Replit, pas seulement dans le Workspace. D’après la documentation Replit, les Workspace Secrets ne sont pas automatiquement repris par l’app publiée.
+
+Secrets requis :
+
+- `EMAIL_USER`
+- `EMAIL_PASS`
+
+Variables recommandées :
+
+- `SQLITE_PATH`
+  Exemple Replit simple : `Database/transactions.db`
+- `PYTHON_CMD`
+  Optionnel si `python` fonctionne déjà
+- `NODE_ENV`
+  Optionnel, `npm start` force déjà un mode de production si absent
+- `HOST`
+  Optionnel, valeur par défaut : `0.0.0.0`
+- `PORT`
+  Généralement fourni par Replit ; ne le fixez que si Replit vous le demande explicitement
+
+### Port attendu
+
+- En local : `5000` par défaut
+- En déploiement Replit : le backend utilise `PORT`
+- Le serveur écoute désormais explicitement sur `0.0.0.0`, ce qui est nécessaire pour un déploiement web hébergé
+
+### Vérification de déploiement
+
+Le script suivant vérifie la configuration de déploiement :
+
+```bash
+npm run verify:deploy
+```
+
+Il contrôle notamment :
+
+- présence de `.replit` et `replit.nix`
+- présence du build React
+- initialisation SQLite via le chemin configuré
+- démarrage complet du chemin `npm start`
+- accessibilité HTTP sur le port attendu
+
+Pour un contrôle local sans vrais secrets mail :
+
+```bash
+npm run verify:deploy -- --skip-email-secrets
+```
+
+### Checklist Replit après import GitHub
+
+1. Importer le dépôt dans Replit.
+2. Vérifier que `.replit` et `replit.nix` sont bien présents.
+3. Ouvrir **Deployments** puis choisir un déploiement **Reserved VM** pour une app web toujours active.
+4. Définir la **Build command** sur `npm run replit:build`.
+5. Définir la **Run command** sur `npm start`.
+6. Ajouter `EMAIL_USER` et `EMAIL_PASS` dans les **Deployment Secrets**.
+7. Ajouter `SQLITE_PATH` si vous voulez déplacer la base ailleurs que `Database/transactions.db`.
+8. Lancer le build puis le déploiement.
+9. Vérifier que la page d’accueil se charge et que `/api/transactions` répond.
+
+### Limites actuelles sur Replit
+
+- SQLite reste local au conteneur/VM et ne constitue pas une solution durable pour plusieurs instances ou redéploiements fréquents.
+- Le système de secrets de production doit être configuré dans le panneau Deployments.
+- Cette patch ne migre pas vers une base managée et ne change pas l’architecture existante.
 
 ## API Endpoints
 
@@ -129,8 +296,9 @@ npm test -- --watchAll=false
 ## Mise à niveau du schéma de la base de données
 Si vous mettez à jour le projet et que de nouvelles colonnes sont ajoutées (par exemple le champ
 `category`), exécutez à nouveau le script de création de la base :
+
 ```bash
-python Database/Database.py
+npm run init:db
 ```
-Cela modifiera les tables existantes pour inclure les colonnes manquantes.
+Cela modifiera les tables existantes pour inclure les colonnes manquantes sans dépendre d’un import implicite.
 

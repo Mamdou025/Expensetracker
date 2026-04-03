@@ -1,6 +1,6 @@
-import sqlite3
-import os
 import logging
+
+from db_config import connect_db
 
 # Configure logging if not already done
 if not logging.getLogger().handlers:
@@ -66,11 +66,7 @@ def insert_transaction(ordered_data):
     """
     Inserts a transaction into the database and associates it with relevant tags.
     """
-    # ✅ Ensure correct database path
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
-
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     try:

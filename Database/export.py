@@ -2,13 +2,13 @@ import sqlite3
 import json
 import os
 
+from db_config import connect_db
+
 def export_database_to_json():
-    # ✅ Get the path to the database
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "../Database/transactions.db")  # Adjust path if needed
 
     # ✅ Connect to the SQLite database
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     try:

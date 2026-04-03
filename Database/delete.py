@@ -1,12 +1,10 @@
 import sqlite3
-import os
+
+from db_config import connect_db
 
 def delete_all_data():
     """Deletes all transactions, tags, and their relationships permanently."""
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
-    
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     try:

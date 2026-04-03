@@ -49,6 +49,16 @@ def _load_email_credentials():
     """
     user = os.getenv("EMAIL_USER")
     password = os.getenv("EMAIL_PASS")
+    is_production = os.getenv("NODE_ENV", "").lower() == "production"
+
+    if bool(user) != bool(password):
+        raise ValueError("EMAIL_USER and EMAIL_PASS must both be set together.")
+
+    if is_production and os.getenv("ALLOW_PLAINTEXT_CREDENTIALS") == "1":
+        raise ValueError(
+            "ALLOW_PLAINTEXT_CREDENTIALS=1 is not allowed when NODE_ENV=production."
+        )
+
     if user and password:
         return user, password
 

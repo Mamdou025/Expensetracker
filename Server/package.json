@@ -1,9 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "Server.js",
   "scripts": {
     "start": "node Server.js",
+    "init:db": "node ../scripts/init-db.js",
+    "start:prod": "node ../scripts/start-production.js",
+    "verify:deploy": "node ../scripts/verify-deploy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

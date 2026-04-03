@@ -1,22 +1,40 @@
 const express = require('express');
+const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
 const { spawn } = require('child_process');
-
-// Use "python" on Windows to support common installations
-const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+const {
+    buildRuntimeEnv,
+    ensureSqliteDirectory,
+    getClientBuildPath,
+    getHost,
+    getPort,
+    getPythonCommand,
+    getRepoRoot,
+    validateRuntimeConfig,
+} = require('./runtimeConfig');
 
 const app = express();
-// Allow overriding the port via environment variable
-const port = process.env.PORT || 5000;
+const runtimeEnv = buildRuntimeEnv(process.env);
+validateRuntimeConfig(runtimeEnv);
+
+const port = getPort(runtimeEnv);
+const host = getHost(runtimeEnv);
+const pythonCmd = getPythonCommand(runtimeEnv);
+const repoRoot = getRepoRoot();
+const dbPath = runtimeEnv.SQLITE_PATH;
+const childProcessEnv = {
+    ...runtimeEnv,
+    SQLITE_PATH: dbPath,
+};
+
+process.env.SQLITE_PATH = dbPath;
+ensureSqliteDirectory(dbPath);
 
 app.use(cors());
 // Increase JSON payload limit to handle larger request bodies
 app.use(express.json({ limit: '10mb' })); // ✅ Allow JSON request body parsing
-
-// ✅ Construct absolute path to transactions.db in Database folder
-const dbPath = path.join(__dirname, '../Database/transactions.db');
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
@@ -574,7 +592,10 @@ app.post('/api/extract-emails', (req, res) => {
     const formattedEnd = formatDate(endDate);
 
     const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
-    const py = spawn(pythonCmd, [script, formattedStart, formattedEnd]);
+    const py = spawn(pythonCmd, [script, formattedStart, formattedEnd], {
+        cwd: repoRoot,
+        env: childProcessEnv,
+    });
 
     py.on('error', (err) => {
         console.error('❌ Failed to start extract-emails script:', err);
@@ -615,7 +636,10 @@ app.post('/api/process-queue', (req, res) => {
     }
 
     const script = path.join(__dirname, '../Application/api_scripts/process_queue.py');
-    const py = spawn(pythonCmd, [script]);
+    const py = spawn(pythonCmd, [script], {
+        cwd: repoRoot,
+        env: childProcessEnv,
+    });
 
     py.on('error', (err) => {
         console.error('❌ Failed to start process-queue script:', err);
@@ -946,7 +970,24 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
 });
 
 
+const clientBuildPath = getClientBuildPath();
+const clientIndexPath = path.join(clientBuildPath, 'index.html');
+if (fs.existsSync(clientIndexPath)) {
+    app.use(express.static(clientBuildPath));
+    app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api/')) {
+            return next();
+        }
+
+        return res.sendFile(clientIndexPath);
+    });
+}
+
 // ✅ Start the server
-app.listen(port, () => {
-    console.log(`Serveur actif à  http://localhost:${port}`);
+app.listen(port, host, () => {
+    console.log(`Serveur actif sur ${host}:${port}`);
+    console.log(`Base SQLite active: ${dbPath}`);
+    if (fs.existsSync(clientIndexPath)) {
+        console.log(`Client React servi depuis: ${clientBuildPath}`);
+    }
 });

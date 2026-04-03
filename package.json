@@ -2,6 +2,14 @@
   "name": "expensetracker-root",
   "private": true,
   "scripts": {
-    "postinstall": "npm --prefix client install --legacy-peer-deps"
+    "install:server": "npm --prefix Server install",
+    "install:client": "npm --prefix client install --legacy-peer-deps",
+    "postinstall": "npm run install:server && npm run install:client",
+    "init:db": "node scripts/init-db.js",
+    "build": "npm --prefix client run build",
+    "replit:build": "npm install && python -m pip install -r requirements.txt && npm run build && npm run verify:deploy",
+    "start": "node scripts/start-production.js",
+    "start:server": "npm --prefix Server run start",
+    "verify:deploy": "node scripts/verify-deploy.js"
   }
 }

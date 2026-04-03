@@ -1,5 +1,4 @@
-import sqlite3
-import os
+from db_config import connect_db, ensure_db_directory, get_db_path
 
 def _check_and_update_columns(cursor):
     """Ensure the transactions table has all required columns."""
@@ -24,11 +23,10 @@ def _check_and_update_columns(cursor):
             print(f"➡️ Added missing column '{col}' to transactions table")
 
 def create_database():
-    # ✅ Get the absolute path of the 'Database' folder
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
+    db_path = get_db_path()
+    ensure_db_directory(db_path)
 
-    conn = sqlite3.connect(db_path)
+    conn = connect_db(db_path)
     cursor = conn.cursor()
 
     # ✅ Create transactions table --test Mamadou 1234
@@ -88,7 +86,7 @@ def create_database():
 
     conn.commit()
     conn.close()
-    print("✅ SQLite database and tables created successfully!")
+    print(f"✅ SQLite database and tables created successfully at {db_path}!")
 
-# Run the function to create/update the database schema
-create_database()
+if __name__ == "__main__":
+    create_database()

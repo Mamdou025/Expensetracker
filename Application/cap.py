@@ -1,4 +1,3 @@
-import sqlite3
 import os
 import sys
 from datetime import datetime
@@ -6,11 +5,12 @@ from datetime import datetime
 # Add the root folder to Python's module search path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from Database.db_config import connect_db, get_db_path
+
 class CapitalOne6234DataReplacer:
     def __init__(self, db_path=None):
         if db_path is None:
-            base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-            self.db_path = os.path.join(base_dir, 'Database', 'transactions.db')
+            self.db_path = get_db_path()
         else:
             self.db_path = db_path
         
@@ -22,7 +22,7 @@ class CapitalOne6234DataReplacer:
     def connect_db(self):
         """Connect to the database"""
         try:
-            return sqlite3.connect(self.db_path)
+            return connect_db(self.db_path)
         except Exception as e:
             print(f"❌ Error connecting to database: {e}")
             return None

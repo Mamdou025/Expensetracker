@@ -1,0 +1,11 @@
+entrypoint = "package.json"
+build = "npm run replit:build"
+run = "npm start"
+hidden = [".git", "node_modules", "client/node_modules", "Server/node_modules", "__pycache__"]
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", "package.json", "Server/package.json", "client/package.json", "requirements.txt"]
+
+[deployment]
+build = "npm run replit:build"
+run = "npm start"

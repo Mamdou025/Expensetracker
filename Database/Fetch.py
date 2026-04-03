@@ -1,17 +1,14 @@
-import sqlite3
-import os
+from db_config import connect_db, get_db_path
 
 def fetch_transactions(category=None):
     """
     Fetches transactions stored in the SQLite database.
     If a category is provided, it fetches only transactions for that category.
     """
-    # ✅ Ensure the correct database path
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    db_path = os.path.join(base_dir, "Database", "transactions.db")
+    db_path = get_db_path()
 
     # ✅ Connect to the database
-    conn = sqlite3.connect(db_path)
+    conn = connect_db(db_path)
     cursor = conn.cursor()
 
     # ✅ Select transactions, filtered by category if provided

@@ -1,5 +1,23 @@
 // src/services/api.js - Base API configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const resolveApiBaseUrl = () => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL.replace(/\/$/, '');
+  }
+
+  if (typeof window !== 'undefined') {
+    const isLocalReactDevServer =
+      ['localhost', '127.0.0.1'].includes(window.location.hostname) &&
+      window.location.port === '3000';
+
+    if (isLocalReactDevServer) {
+      return 'http://localhost:5000';
+    }
+  }
+
+  return '';
+};
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 const handleResponse = async (response) => {
   let data = {};

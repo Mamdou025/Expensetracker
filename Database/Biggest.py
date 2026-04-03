@@ -1,13 +1,10 @@
 import sqlite3
-import os
+
+from db_config import connect_db
 
 def get_top_100_transactions():
-    # ✅ Get the path to the database
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "../Database/transactions.db")
-
     # ✅ Connect to the database
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     try:

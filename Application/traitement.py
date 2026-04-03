@@ -1,11 +1,17 @@
 import os
 import re
+import sys
 import yaml
 import email.utils
-import sqlite3
 import logging
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+
+# Add the project root so Database.db_config remains importable when this
+# module is executed directly.
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from Database.db_config import connect_db
 
 # Setup basic logging if not already configured
 if not logging.getLogger().handlers:
@@ -34,10 +40,7 @@ def identify_bank(email_sender, email_subject):
 def is_duplicate(amount: str, date: str) -> bool:
     """Check if a similar transaction already exists within +/- 1 day."""
     try:
-        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Database"))
-        db_path = os.path.join(base_dir, "transactions.db")
-
-        conn = sqlite3.connect(db_path)
+        conn = connect_db()
         cursor = conn.cursor()
 
         dt = datetime.strptime(date, "%Y-%m-%d")

@@ -1,11 +1,10 @@
 import sqlite3
-import os
+
+from db_config import connect_db
 
 def get_all_transactions():
     """Fetch all transactions for selection."""
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -23,9 +22,7 @@ def get_all_transactions():
 
 def get_all_tags():
     """Fetch all available tags for selection."""
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     cursor.execute("SELECT id, tag_name FROM tags ORDER BY tag_name;")
@@ -36,9 +33,7 @@ def get_all_tags():
 
 def assign_tag_to_transactions(tag_id, transaction_ids):
     """Assigns a tag to multiple transactions."""
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     for transaction_id in transaction_ids:
@@ -66,9 +61,7 @@ def main():
     # Ask the user for a new tag or existing tag ID
     tag_name = input("\nEnter a new tag name (or existing tag ID): ").strip()
 
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(base_dir, "transactions.db")
-    conn = sqlite3.connect(db_path)
+    conn = connect_db()
     cursor = conn.cursor()
 
     if tag_name.isdigit():  # If the user entered an existing tag ID
