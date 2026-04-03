@@ -46,4 +46,6 @@ externalPort = 80
 expertMode = true
 
 [deployment]
-deploymentTarget = "cloudrun"
+deploymentTarget = "autoscale"
+run = ["npm", "start"]
+build = ["npm", "run", "replit:build"]
