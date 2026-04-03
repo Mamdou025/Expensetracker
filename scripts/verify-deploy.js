@@ -135,7 +135,12 @@ async function main() {
   });
 
   checkFileExists(path.join(repoRoot, '.replit'), '.replit');
-  checkFileExists(path.join(repoRoot, 'replit.nix'), 'replit.nix');
+  const nixPath = path.join(repoRoot, 'replit.nix');
+  if (fs.existsSync(nixPath)) {
+    console.log('[verify-deploy] replit.nix found');
+  } else {
+    console.log('[verify-deploy] replit.nix not found (using Replit modules instead — OK)');
+  }
   checkFileExists(clientIndexPath, 'React production build');
 
   if (fs.existsSync(tempDbPath)) {

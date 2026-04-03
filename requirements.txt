@@ -1,2 +1,4 @@
 beautifulsoup4
 PyYAML
+beautifulsoup4
+pyyaml

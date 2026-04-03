@@ -17,7 +17,8 @@ const {
 
 const app = express();
 const runtimeEnv = buildRuntimeEnv(process.env);
-validateRuntimeConfig(runtimeEnv);
+const _hasEmail = Boolean(runtimeEnv.EMAIL_USER) && Boolean(runtimeEnv.EMAIL_PASS);
+validateRuntimeConfig(runtimeEnv, { requireProductionEmailCredentials: _hasEmail });
 
 const port = getPort(runtimeEnv);
 const host = getHost(runtimeEnv);

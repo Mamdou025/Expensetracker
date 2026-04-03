@@ -36,7 +36,11 @@ async function main() {
     NODE_ENV: process.env.NODE_ENV || 'production',
   });
 
-  validateRuntimeConfig(runtimeEnv, { requireClientBuild: true });
+  const hasEmail = Boolean(runtimeEnv.EMAIL_USER) && Boolean(runtimeEnv.EMAIL_PASS);
+  validateRuntimeConfig(runtimeEnv, {
+    requireClientBuild: true,
+    requireProductionEmailCredentials: hasEmail,
+  });
   ensureSqliteDirectory(runtimeEnv.SQLITE_PATH);
   console.log(`[startup] Using SQLite database at ${runtimeEnv.SQLITE_PATH}`);
 

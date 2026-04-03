@@ -11,5 +11,21 @@
     "start": "node scripts/start-production.js",
     "start:server": "npm --prefix Server run start",
     "verify:deploy": "node scripts/verify-deploy.js"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.27",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "i18next": "^26.0.3",
+    "lucide-react": "^1.7.0",
+    "postcss": "^8.5.8",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-i18next": "^17.0.2",
+    "react-router-dom": "^7.14.0",
+    "react-scripts": "^5.0.1",
+    "recharts": "^3.8.1",
+    "sqlite3": "^6.0.1",
+    "tailwindcss": "^4.2.2"
   }
 }
