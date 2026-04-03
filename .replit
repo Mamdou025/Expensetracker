@@ -11,6 +11,9 @@ packages = ["libyaml"]
 PORT = "5000"
 HOST = "0.0.0.0"
 
+[userenv.production]
+NODE_ENV = "production"
+
 [workflows]
 runButton = "Project"
 
@@ -41,8 +44,3 @@ externalPort = 80
 
 [agent]
 expertMode = true
-
-[deployment]
-deploymentTarget = "vm"
-run = ["npm", "start"]
-build = ["npm", "run", "replit:build"]
