@@ -17,6 +17,7 @@ import TagEditModal from './common/TagEditModal';
 import { useCategories } from '../hooks/useCategories';
 import { useTags } from '../hooks/useTags';
 import { transactionService } from '../Services/transactionService';
+import { transformTransactionFromApi } from '../Services/transformers';
 
 
 const TransactionDashboard = () => {
@@ -44,32 +45,28 @@ const {
   refreshTags 
 } = useTags();
 
-const [useRealData, setUseRealData] = useState(false);
+const [useRealData, setUseRealData] = useState(true);
 
 
 React.useEffect(() => {
-  if (useRealData && realTransactions.length > 0) {
+  if (useRealData) {
     console.log('🔄 Switching to real data...', realTransactions.length, 'transactions');
     setTransactions(realTransactions);
-  } else if (!useRealData) {
+  } else {
     console.log('🔄 Using mock data...');
-    setTransactions(generateMockData());
+    setTransactions(generateMockData().map(transformTransactionFromApi));
   }
 }, [useRealData, realTransactions]);
 
 
 React.useEffect(() => {
-  if (realCategories.length > 0) {
-    console.log('📊 Updating categories from API:', realCategories);
-    setLocalCategories(realCategories);
-  }
+  console.log('📊 Updating categories from API:', realCategories);
+  setLocalCategories(Array.isArray(realCategories) ? realCategories : []);
 }, [realCategories]);
 
 React.useEffect(() => {
-  if (realTags.length > 0) {
-    console.log('🏷️ Updating tags from API:', realTags);
-    setLocalTags(realTags);
-  }
+  console.log('🏷️ Updating tags from API:', realTags);
+  setLocalTags(Array.isArray(realTags) ? realTags : []);
 }, [realTags]);
 
 
@@ -81,7 +78,7 @@ const { expandedSections, toggleSection } = useExpandableState({
   });
 
 
-  const [transactions, setTransactions] = useState(generateMockData());
+  const [transactions, setTransactions] = useState([]);
   const [activeSettingsTab, setActiveSettingsTab] = useState('display');
   const [chartType, setChartType] = useState('bar');
   const [itemsPerPage, setItemsPerPage] = useState(20);
@@ -128,8 +125,8 @@ const [filters, setFilters] = useState({
 });
 
 
-const uniqueCategories = [...new Set(transactions.map(t => t.category))];
-  const uniqueTags = [...new Set(transactions.map(t => t.tags).filter(t => t))];
+const uniqueCategories = [...new Set(transactions.map(t => t.category).filter(Boolean))];
+  const uniqueTags = [...new Set(transactions.flatMap(t => (Array.isArray(t.tags) ? t.tags : [])).filter(Boolean))];
   const uniqueCardTypes = [...new Set(transactions.map(t => t.bank).filter(t => t))]; 
 
   const [showTagModal, setShowTagModal] = useState(false);
@@ -143,9 +140,9 @@ const filteredTransactions = useMemo(() => {
     if (filters.dateTo && transaction.date > filters.dateTo) return false;
     if (filters.amountMin && transaction.amount < parseFloat(filters.amountMin)) return false;
     if (filters.amountMax && transaction.amount > parseFloat(filters.amountMax)) return false;
-    if (filters.keyword && !transaction.description.toLowerCase().includes(filters.keyword.toLowerCase())) return false;
+    if (filters.keyword && !(transaction.description || '').toLowerCase().includes(filters.keyword.toLowerCase())) return false;
     if (filters.categories.length > 0 && !filters.categories.includes(transaction.category)) return false;
-    if (filters.tags.length > 0 && !filters.tags.includes(transaction.tags)) return false;
+    if (filters.tags.length > 0 && !filters.tags.some((tag) => transaction.tags?.includes(tag))) return false;
     if (filters.banks.length > 0 && !filters.banks.includes(transaction.bank)) return false; // ← CHANGE THIS LINE
 
     return true;
@@ -314,13 +311,13 @@ const handleStartEdit = (transaction, field) => {
   setEditingTransaction(`${transaction.id}-${field}`);
   setEditValues({
     [field]: field === 'tags' 
-      ? transaction.tags.split(',').map(t => t.trim()).filter(t => t) 
+      ? (Array.isArray(transaction.tags) ? transaction.tags : []) 
       : transaction[field]
   });
   
   console.log('✅ Editing state set:', {
     editingTransaction: `${transaction.id}-${field}`,
-    editValues: { [field]: field === 'tags' ? transaction.tags.split(',').map(t => t.trim()).filter(t => t) : transaction[field] }
+    editValues: { [field]: field === 'tags' ? (Array.isArray(transaction.tags) ? transaction.tags : []) : transaction[field] }
   });
 };
 
@@ -413,9 +410,10 @@ const handleEditItem = (type, oldName, newName) => {
     ));
   } else if (type === 'tag') {
     setLocalTags(prev => prev.map(tag => tag === oldName ? newName : tag));       // ← Changed
-    setTransactions(prev => prev.map(t => 
-      t.tags === oldName ? { ...t, tags: newName } : t
-    ));
+    setTransactions(prev => prev.map(t => ({
+      ...t,
+      tags: Array.isArray(t.tags) ? t.tags.map(tag => (tag === oldName ? newName : tag)) : []
+    })));
   }
   setEditingItem(null);
 };
@@ -433,7 +431,7 @@ const handleEditItem = (type, oldName, newName) => {
       const result = await transactionService.create(newTransaction);
       if (result.applied_rules && result.applied_rules.length > 0) {
         const msg = result.applied_rules
-          .map(r => `${r.keyword} → ${r.category || ''}${r.tags.length ? ' [' + r.tags.join(', ') + ']' : ''}`)
+          .map(r => `${r.keyword} → ${r.category || ''}${Array.isArray(r.tags) && r.tags.length ? ' [' + r.tags.join(', ') + ']' : ''}`)
           .join('\n');
         alert(`Applied rules:\n${msg}`);
       }

@@ -5,12 +5,13 @@ import { emailService } from '../Services/emailService';
 import { useTransactions } from '../hooks/useTransactions';
 import { AlertTriangle } from 'lucide-react';
 import EmailViewerModal from './common/EmailViewerModal';
+import { transformQueueItemFromApi } from '../Services/transformers';
 
 const EmailExtractionPage = () => {
   const { t } = useTranslation();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [queue, setQueue] = useState([]); // {email, transaction}
+  const [queue, setQueue] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -25,8 +26,11 @@ const EmailExtractionPage = () => {
     setLoading(true);
     try {
       const data = await emailService.extractEmails(startDate, endDate);
-      setQueue(data || []);
-      setSelectedIds(data.map((_, idx) => idx));
+      const normalizedQueue = (Array.isArray(data) ? data : []).map((item, idx) =>
+        transformQueueItemFromApi(item, idx)
+      );
+      setQueue(normalizedQueue);
+      setSelectedIds(normalizedQueue.map((item) => item.queueId));
     } catch (err) {
       console.error(err);
       alert(err.message || 'Failed to extract emails');
@@ -35,35 +39,30 @@ const EmailExtractionPage = () => {
     }
   };
 
-
-  const toggleSelect = (idx) => {
+  const toggleSelect = (queueId) => {
     setSelectedIds((prev) =>
-      prev.includes(idx) ? prev.filter((id) => id !== idx) : [...prev, idx]
+      prev.includes(queueId) ? prev.filter((id) => id !== queueId) : [...prev, queueId]
     );
   };
 
   const selectAll = () => {
-    setSelectedIds(queue.map((_, idx) => idx));
+    setSelectedIds(queue.map((item) => item.queueId));
   };
 
   const clearSelection = () => setSelectedIds([]);
 
   const removeSelected = () => {
-    setQueue((prev) => prev.filter((_, idx) => !selectedIds.includes(idx)));
+    setQueue((prev) => prev.filter((item) => !selectedIds.includes(item.queueId)));
     setSelectedIds([]);
   };
 
-  const removeFromQueue = (idxToRemove) => {
-    setQueue((prev) => prev.filter((_, idx) => idx !== idxToRemove));
-    setSelectedIds((prev) =>
-      prev
-        .filter((id) => id !== idxToRemove)
-        .map((id) => (id > idxToRemove ? id - 1 : id))
-    );
+  const removeFromQueue = (queueIdToRemove) => {
+    setQueue((prev) => prev.filter((item) => item.queueId !== queueIdToRemove));
+    setSelectedIds((prev) => prev.filter((id) => id !== queueIdToRemove));
   };
 
   const viewEmail = (html) => {
-    setModalHtml(html);
+    setModalHtml(html || '');
     setShowEmailModal(true);
   };
 
@@ -85,14 +84,19 @@ const EmailExtractionPage = () => {
       const processed = await emailService.processQueue(emails);
       if (Array.isArray(processed)) {
         const messages = processed
-          .filter(p => p.applied_rules && p.applied_rules.length > 0)
-          .map(p => `${p.transaction?.description || p.description}: ${p.applied_rules.map(r => r.keyword).join(', ')}`);
+          .filter((p) => p.applied_rules && p.applied_rules.length > 0)
+          .map(
+            (p) =>
+              `${p.transaction?.description || p.description || 'Unknown'}: ${p.applied_rules
+                .map((r) => r.keyword)
+                .join(', ')}`
+          );
         if (messages.length > 0) {
           alert(`Applied rules:\n${messages.join('\n')}`);
         }
       }
       setProgress(emails.length);
-      setQueue((prev) => prev.filter((q) => !emails.includes(q.email)));
+      setQueue((prev) => prev.filter((item) => !emails.includes(item.email)));
       setSelectedIds([]);
       await refreshTransactions();
     } catch (err) {
@@ -105,20 +109,20 @@ const EmailExtractionPage = () => {
 
   const processSelected = () => {
     const emails = queue
-      .filter((_, idx) => selectedIds.includes(idx))
-      .map((q) => q.email);
+      .filter((item) => selectedIds.includes(item.queueId))
+      .map((item) => item.email)
+      .filter(Boolean);
     processEmails(emails);
   };
 
   const processAll = () => {
-    const emails = queue.map((q) => q.email);
+    const emails = queue.map((item) => item.email).filter(Boolean);
     processEmails(emails);
   };
 
-  const allSelected =
-    queue.length > 0 && queue.every((_, idx) => selectedIds.includes(idx));
+  const allSelected = queue.length > 0 && queue.every((item) => selectedIds.includes(item.queueId));
 
-  const duplicateCount = queue.filter((q) => q.transaction.duplicate).length;
+  const duplicateCount = queue.filter((item) => Boolean(item?.transaction?.duplicate)).length;
   const selectedCount = selectedIds.length;
 
   return (
@@ -210,44 +214,46 @@ const EmailExtractionPage = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {queue.map((item, idx) => (
-                <tr
-                  key={idx}
-                  className={item.transaction.duplicate ? 'bg-yellow-50' : ''}
-                >
-                  <td className="px-6 py-4">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.includes(idx)}
-                      onChange={() => toggleSelect(idx)}
-                    />
-                  </td>
-                  <td className="px-6 py-4">{item.transaction.date}</td>
-                  <td className="px-6 py-4">{item.transaction.amount}</td>
-                  <td className="px-6 py-4">{item.transaction.description}</td>
-                  <td className="px-6 py-4">{item.transaction.bank}</td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => viewEmail(item.transaction.full_email)}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {t('queue.table.viewEmail')}
-                    </button>
-                  </td>
-                  <td className="px-6 py-4 text-red-600 flex items-center gap-1">
-                    {item.transaction.duplicate && <AlertTriangle className="w-4 h-4" />}
-                    {item.transaction.duplicate ? t('queue.table.duplicateYes') : t('queue.table.duplicateNo')}
-                  </td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => removeFromQueue(idx)}
-                      className="text-red-600 hover:text-red-800"
-                    >
-                      {t('queue.table.remove')}
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {queue.map((item) => {
+                const transaction = item?.transaction || {};
+                const isDuplicate = Boolean(transaction.duplicate);
+
+                return (
+                  <tr key={item.queueId} className={isDuplicate ? 'bg-yellow-50' : ''}>
+                    <td className="px-6 py-4">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(item.queueId)}
+                        onChange={() => toggleSelect(item.queueId)}
+                      />
+                    </td>
+                    <td className="px-6 py-4">{transaction.date || item.email_datetime || '-'}</td>
+                    <td className="px-6 py-4">{transaction.amount ?? '-'}</td>
+                    <td className="px-6 py-4">{transaction.description || item.subject || '-'}</td>
+                    <td className="px-6 py-4">{transaction.bank || '-'}</td>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => viewEmail(transaction.full_email || item.email || '')}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {t('queue.table.viewEmail')}
+                      </button>
+                    </td>
+                    <td className="px-6 py-4 text-red-600 flex items-center gap-1">
+                      {isDuplicate && <AlertTriangle className="w-4 h-4" />}
+                      {isDuplicate ? t('queue.table.duplicateYes') : t('queue.table.duplicateNo')}
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => removeFromQueue(item.queueId)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        {t('queue.table.remove')}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           {processing && (

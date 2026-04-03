@@ -17,16 +17,7 @@ export const useTransactions = () => {
       setError(null);
       const data = await transactionService.getAll();
       
-      // Transform data to match your existing format
-      const transformedData = data.map(transaction => ({
-        ...transaction,
-        // Ensure tags is a string (your API returns comma-separated tags)
-        tags: transaction.tags || '',
-        // Ensure amount is a number
-        amount: parseFloat(transaction.amount)
-      }));
-      
-      setTransactions(transformedData);
+      setTransactions(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error('Error loading transactions:', err);
       setError(err.message);
