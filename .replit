@@ -41,3 +41,8 @@ externalPort = 80
 
 [agent]
 expertMode = true
+
+[deployment]
+deploymentTarget = "vm"
+run = ["npm", "start"]
+build = ["npm", "run", "replit:build"]
