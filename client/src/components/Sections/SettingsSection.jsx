@@ -1,5 +1,4 @@
-// src/components/Sections/SettingsSection.jsx
-import { Sliders  } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ExpandableSection from '../common/ExpandableSection';
@@ -9,9 +8,9 @@ import TagManager from '../Settings/TagManager';
 import MappingsSettings from '../Settings/MappingsSettings';
 import AddTransactionForm from '../Settings/AddTransactionForm';
 
-const SettingsSection = ({ 
-  isExpanded, 
-  onToggle, 
+const SettingsSection = ({
+  isExpanded,
+  onToggle,
   activeTab,
   setActiveTab,
   itemsPerPage,
@@ -26,31 +25,28 @@ const SettingsSection = ({
   setNewTransaction,
   onAddTransaction,
   onCreateCategory,
-  onDeleteCategory, 
+  onDeleteCategory,
   onRefreshCategories,
   onCreateTag,
   onDeleteTag,
   onRefreshTags,
-   timeGrouping,
+  timeGrouping,
   setTimeGrouping,
   showCategoryBreakdown,
   setShowCategoryBreakdown
-  
 }) => {
-    console.log('SettingsSection received:', { timeGrouping, showCategoryBreakdown });
-
   const { t } = useTranslation();
 
   const settingsTabs = isExpanded ? (
-    <div className="flex gap-4">
+    <div className="flex gap-1">
       {['display', 'categories', 'tags', 'mappings', 'transactions'].map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveTab(tab)}
-          className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             activeTab === tab
-              ? 'bg-blue-500 text-white shadow-lg'
-              : 'bg-white text-gray-600 hover:bg-gray-100'
+              ? 'bg-gray-900 text-white'
+              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
           }`}
         >
           {t(`settings.tabs.${tab}`)}
@@ -61,47 +57,42 @@ const SettingsSection = ({
 
   const renderContent = () => {
     switch(activeTab) {
-       case 'display':
-  return (
-    <DisplaySettings 
-      itemsPerPage={itemsPerPage}
-      setItemsPerPage={setItemsPerPage}
-      chartType={chartType}
-      setChartType={setChartType}
-      // Add these new props:
-      timeGrouping={timeGrouping}
-      setTimeGrouping={setTimeGrouping}
-      showCategoryBreakdown={showCategoryBreakdown}
-      setShowCategoryBreakdown={setShowCategoryBreakdown}
-    />
-  );
-      // Update the CategoryManager case in your renderContent function:
-case 'categories':
-  return (
-    <CategoryManager 
-      categories={categories}
-      onRefreshCategories={onRefreshCategories}
-      onCreateCategory={onCreateCategory}
-      onDeleteCategory={onDeleteCategory}
-    />
-  );
-
-
-// Update the TagManager case:
-case 'tags':
-  return (
-    <TagManager 
-      tags={tags}
-      onRefreshTags={onRefreshTags}
-      onCreateTag={onCreateTag}
-      onDeleteTag={onDeleteTag}
-    />
-  );
+      case 'display':
+        return (
+          <DisplaySettings
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
+            chartType={chartType}
+            setChartType={setChartType}
+            timeGrouping={timeGrouping}
+            setTimeGrouping={setTimeGrouping}
+            showCategoryBreakdown={showCategoryBreakdown}
+            setShowCategoryBreakdown={setShowCategoryBreakdown}
+          />
+        );
+      case 'categories':
+        return (
+          <CategoryManager
+            categories={categories}
+            onRefreshCategories={onRefreshCategories}
+            onCreateCategory={onCreateCategory}
+            onDeleteCategory={onDeleteCategory}
+          />
+        );
+      case 'tags':
+        return (
+          <TagManager
+            tags={tags}
+            onRefreshTags={onRefreshTags}
+            onCreateTag={onCreateTag}
+            onDeleteTag={onDeleteTag}
+          />
+        );
       case 'mappings':
         return <MappingsSettings />;
       case 'transactions':
         return (
-          <AddTransactionForm 
+          <AddTransactionForm
             showAddTransaction={showAddTransaction}
             setShowAddTransaction={setShowAddTransaction}
             newTransaction={newTransaction}
@@ -113,7 +104,7 @@ case 'tags':
         );
       default:
         return (
-          <DisplaySettings 
+          <DisplaySettings
             itemsPerPage={itemsPerPage}
             setItemsPerPage={setItemsPerPage}
             chartType={chartType}
@@ -126,11 +117,11 @@ case 'tags':
   return (
     <ExpandableSection
       title={t('settings.title')}
-      icon={Sliders }
+      icon={Settings}
       isExpanded={isExpanded}
       onToggle={onToggle}
       headerContent={settingsTabs}
-      className="mb-8"
+      className="mb-4"
     >
       {renderContent()}
     </ExpandableSection>

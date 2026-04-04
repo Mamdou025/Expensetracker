@@ -36,12 +36,11 @@ const EditableTransactionRow = ({
   return (
     <tr className="hover:bg-gray-50 transition-colors duration-200">
       {/* Date - Read only */}
-      <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-900">
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
         {transaction.date}
       </td>
       
-      {/* Description - Clean display + inline editing when triggered */}
-      <td className="px-8 py-6 text-sm text-gray-900">
+      <td className="px-4 py-3 text-sm text-gray-900">
         {isEditing('description') ? (
           <div className="flex items-center gap-2">
             <input
@@ -78,7 +77,7 @@ const EditableTransactionRow = ({
       </td>
       
       {/* Amount - Clean display + inline editing when triggered */}
-      <td className="px-8 py-6 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
         {isEditing('amount') ? (
           <div className="flex items-center gap-2">
             <input
@@ -116,7 +115,7 @@ const EditableTransactionRow = ({
       </td>
       
       {/* Category - Clean badge display + dropdown editing when triggered */}
-      <td className="px-8 py-6 whitespace-nowrap">
+      <td className="px-4 py-3 whitespace-nowrap">
         {isEditing('category') ? (
           <div className="flex items-center gap-2">
             <select
@@ -187,7 +186,7 @@ const EditableTransactionRow = ({
       </td>
       
       {/* Tags - Clean badge display only (editing through modal) */}
-      <td className="px-8 py-6 whitespace-nowrap">
+      <td className="px-4 py-3 whitespace-nowrap">
         <div className="flex flex-wrap gap-1">
           {Array.isArray(transaction.tags) && transaction.tags.map((tag, index) => (
             <span
@@ -210,7 +209,7 @@ const EditableTransactionRow = ({
       </td>
       
       {/* Bank - Read only */}
-      <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-600">
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
         {transaction.bank}
       </td>
       
@@ -271,11 +270,11 @@ const TransactionTable = ({
 
   return (
     <>
-    <div className="bg-white rounded-3xl shadow-xl border overflow-hidden">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="p-8 border-b bg-gray-50">
+      <div className="px-5 py-3 border-b bg-gray-50">
         <div className="flex justify-between items-center">
-          <h3 className="font-semibold text-xl">
+          <h3 className="font-medium text-sm text-gray-700 uppercase tracking-wide">
             {t('transactionTable.transactions')} ({filteredTransactions.length})
             {editingTransaction && (
               <span className="ml-2 text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded">
@@ -283,7 +282,7 @@ const TransactionTable = ({
               </span>
             )}
           </h3>
-          <div className="text-sm text-gray-600 bg-white px-4 py-2 rounded-xl border">
+          <div className="text-sm text-gray-600 bg-white px-3 py-1.5 rounded-md border border-gray-200">
             {t('transactionTable.page')} {currentPage} {t('transactionTable.of')} {totalPages}
           </div>
         </div>
@@ -294,45 +293,45 @@ const TransactionTable = ({
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button 
                   onClick={() => onSort('date')} 
-                  className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
+                  className="flex items-center gap-1 hover:text-gray-700"
                 >
                   {t('transactionTable.date')} {sortField === 'date' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
-              <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button 
                   onClick={() => onSort('description')} 
-                  className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
+                  className="flex items-center gap-1 hover:text-gray-700"
                 >
                   {t('transactionTable.description')} {sortField === 'description' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
-              <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button 
                   onClick={() => onSort('amount')} 
-                  className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
+                  className="flex items-center gap-1 hover:text-gray-700"
                 >
                   {t('transactionTable.amount')} {sortField === 'amount' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
-              <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button 
                   onClick={() => onSort('category')} 
-                  className="flex items-center gap-1 hover:text-gray-700 transition-colors duration-200"
+                  className="flex items-center gap-1 hover:text-gray-700"
                 >
                   {t('transactionTable.category')} {sortField === 'category' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </button>
               </th>
-              <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('transactionTable.tags')}
               </th>
-              <th className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('transactionTable.bank')}
               </th>
-              <th className="px-4 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('transactionTable.actions')}
               </th>
             </tr>
@@ -362,7 +361,7 @@ const TransactionTable = ({
       </div>
 
       {/* Pagination */}
-      <div className="px-8 py-6 border-t bg-gray-50 flex justify-between items-center">
+      <div className="px-4 py-3 border-t bg-gray-50 flex justify-between items-center">
         <div className="text-sm text-gray-600">
           Showing {Math.min((currentPage - 1) * itemsPerPage + 1, filteredTransactions.length)} to{' '}
           {Math.min(currentPage * itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} results
@@ -371,14 +370,14 @@ const TransactionTable = ({
           <button
             onClick={() => onPageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
-            className="px-4 py-2 border rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors duration-200"
+            className="px-3 py-1.5 border border-gray-200 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
           >
             Previous
           </button>
           <button
             onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage >= totalPages}
-            className="px-4 py-2 border rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors duration-200"
+            className="px-3 py-1.5 border border-gray-200 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
           >
             Next
           </button>

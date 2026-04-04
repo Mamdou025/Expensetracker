@@ -1,28 +1,18 @@
-// ===================================
-
-// src/components/sections/QuickStatsSection.jsx
 import React from 'react';
-import { Hash, DollarSign, Calendar } from 'lucide-react';
+import { Hash, DollarSign, TrendingDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-const StatCard = ({ icon: Icon, label, value, color, subtitle }) => {
-  const colorClasses = {
-    blue: 'bg-blue-100 text-blue-600',
-    green: 'bg-green-100 text-green-600',
-    purple: 'bg-purple-100 text-purple-600',
-    emerald: 'bg-emerald-100 text-emerald-600'
-  };
-
+const StatCard = ({ icon: Icon, label, value, subtitle }) => {
   return (
-    <div className="bg-white p-8 rounded-3xl shadow-xl border">
-      <div className="flex items-center gap-4">
-        <div className={`p-4 ${colorClasses[color]} rounded-2xl`}>
-          <Icon className="w-8 h-8" />
+    <div className="bg-white px-5 py-4 rounded-lg border border-gray-200 shadow-sm">
+      <div className="flex items-center gap-3">
+        <div className="p-2 bg-gray-50 rounded-md">
+          <Icon className="w-5 h-5 text-gray-500" />
         </div>
-        <div>
-          <p className="text-gray-600 text-sm font-medium">{label}</p>
-          <p className="text-3xl font-bold text-gray-900">{value}</p>
-          {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
+        <div className="min-w-0">
+          <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">{label}</p>
+          <p className="text-xl font-semibold text-gray-900 mt-0.5">{value}</p>
+          {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
         </div>
       </div>
     </div>
@@ -40,24 +30,21 @@ const QuickStatsSection = ({ quickStats }) => {
       subtitle: quickStats.incomeCount > 0
         ? `${quickStats.expenseCount} ${t('quickStats.expenses')}, ${quickStats.incomeCount} ${t('quickStats.deposits')}`
         : undefined,
-      color: 'blue'
     },
     {
       icon: DollarSign,
       label: t('quickStats.totalSpending'),
-      value: `$${quickStats.total.toFixed(2)}`,
-      color: 'green'
+      value: `$${quickStats.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
     },
     {
-      icon: Calendar,
+      icon: TrendingDown,
       label: t('quickStats.averageExpense'),
       value: `$${quickStats.average.toFixed(2)}`,
-      color: 'purple'
     }
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       {statCards.map((stat, index) => (
         <StatCard key={index} {...stat} />
       ))}
