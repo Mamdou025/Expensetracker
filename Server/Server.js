@@ -4,6 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
 const { spawn } = require('child_process');
+const multer = require('multer');
 const {
     buildRuntimeEnv,
     ensureSqliteDirectory,
@@ -969,6 +970,114 @@ app.post('/api/apply-keyword-tags', async (req, res) => {
     }
 });
 
+
+const uploadsDir = path.join(repoRoot, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+const pdfUpload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => cb(null, uploadsDir),
+        filename: (req, file, cb) => {
+            const uniqueName = `${Date.now()}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+            cb(null, uniqueName);
+        },
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype === 'application/pdf') {
+            cb(null, true);
+        } else {
+            cb(new Error('Only PDF files are accepted'));
+        }
+    },
+});
+
+app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'No PDF file uploaded' });
+    }
+
+    const filepath = req.file.path;
+    const script = path.join(__dirname, '../Application/api_scripts/parse_pdf.py');
+    const py = spawn(pythonCmd, [script], {
+        cwd: repoRoot,
+        env: childProcessEnv,
+    });
+
+    py.on('error', (err) => {
+        console.error('Failed to start parse-pdf script:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+
+    let output = '';
+    let errOutput = '';
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    py.on('close', (code) => {
+        try {
+            fs.unlinkSync(filepath);
+        } catch (_) {}
+
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'PDF parsing error' });
+        }
+        try {
+            const parsed = JSON.parse(output);
+            if (parsed.error) {
+                return res.status(400).json(parsed);
+            }
+            res.json(parsed);
+        } catch (e) {
+            res.status(500).json({ error: 'Failed to parse python output', details: output });
+        }
+    });
+
+    py.stdin.write(JSON.stringify({ filepath }));
+    py.stdin.end();
+});
+
+app.post('/api/import-pdf/confirm', (req, res) => {
+    const { transactions } = req.body;
+    if (!Array.isArray(transactions) || transactions.length === 0) {
+        return res.status(400).json({ error: 'transactions array required' });
+    }
+
+    const script = path.join(__dirname, '../Application/api_scripts/import_pdf_confirm.py');
+    const py = spawn(pythonCmd, [script], {
+        cwd: repoRoot,
+        env: childProcessEnv,
+    });
+
+    py.on('error', (err) => {
+        console.error('Failed to start import-pdf-confirm script:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+
+    let output = '';
+    let errOutput = '';
+    py.stdout.on('data', (data) => { output += data; });
+    py.stderr.on('data', (data) => { errOutput += data; });
+    py.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ error: errOutput || 'Import confirmation error' });
+        }
+        try {
+            const parsed = JSON.parse(output);
+            res.json(parsed);
+        } catch (e) {
+            res.status(500).json({ error: 'Failed to parse python output', details: output });
+        }
+    });
+
+    py.stdin.write(JSON.stringify(transactions));
+    py.stdin.end();
+});
 
 const clientBuildPath = getClientBuildPath();
 const clientIndexPath = path.join(clientBuildPath, 'index.html');
