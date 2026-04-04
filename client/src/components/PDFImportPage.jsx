@@ -3,7 +3,7 @@ import Header from './ui/Header';
 import { useTranslation } from 'react-i18next';
 import { pdfImportService } from '../Services/pdfImportService';
 import { useTransactions } from '../hooks/useTransactions';
-import { Upload, FileText, CheckCircle, XCircle, Trash2, Edit3, X } from 'lucide-react';
+import { Upload, FileText, CheckCircle, XCircle, Trash2, Edit3, X, ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react';
 
 const PDFImportPage = () => {
   const { t } = useTranslation();
@@ -19,6 +19,16 @@ const PDFImportPage = () => {
   const [importResult, setImportResult] = useState(null);
   const [editingIdx, setEditingIdx] = useState(null);
   const [editValues, setEditValues] = useState({});
+  const [expandedDups, setExpandedDups] = useState(new Set());
+
+  const toggleDupExpand = (idx) => {
+    setExpandedDups((prev) => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx);
+      else next.add(idx);
+      return next;
+    });
+  };
 
   const handleFileSelect = (e) => {
     const selected = e.target.files?.[0];
@@ -245,6 +255,12 @@ const PDFImportPage = () => {
               {t('pdfImport.depositNote')}
             </p>
           )}
+          {parseResult && parseResult.duplicate_count > 0 && (
+            <p className="mb-4 text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg inline-flex items-center gap-1.5">
+              <AlertTriangle className="w-3.5 h-3.5" />
+              {t('pdfImport.duplicatesReviewNote')}
+            </p>
+          )}
           <div className="flex justify-between mb-4">
             <div className="space-x-2">
               <button onClick={selectAll} className="px-3 py-1 border rounded-xl text-sm">
@@ -294,9 +310,21 @@ const PDFImportPage = () => {
                 {transactions.map((row) => {
                   const isEditing = editingIdx === row._idx;
                   const isDeposit = row.direction === 'deposit' || row.direction === 'payment';
+                  const isDup = row.is_duplicate;
+                  const hasMatch = row.is_duplicate && row.existing_match;
+                  const isExpanded = expandedDups.has(row._idx);
+                  const colCount = 9;
+
+                  let dateDiffDays = 0;
+                  let descDiffers = false;
+                  if (hasMatch) {
+                    dateDiffDays = Math.round(Math.abs(new Date(row.date) - new Date(row.existing_match.date)) / 86400000);
+                    descDiffers = (row.description || '').toLowerCase().trim() !== (row.existing_match.description || '').toLowerCase().trim();
+                  }
 
                   return (
-                    <tr key={row._idx} className={`${selectedIds.has(row._idx) ? 'bg-blue-50' : ''} ${isDeposit ? 'opacity-60' : ''} ${row.is_duplicate ? 'bg-yellow-50/50' : ''}`}>
+                    <React.Fragment key={row._idx}>
+                    <tr className={`${selectedIds.has(row._idx) ? 'bg-blue-50' : ''} ${isDeposit ? 'opacity-60' : ''} ${isDup ? 'bg-amber-50/60' : ''}`}>
                       <td className="px-4 py-3">
                         <input
                           type="checkbox"
@@ -354,8 +382,19 @@ const PDFImportPage = () => {
                           ) : (
                             row.description
                           )}
-                          {row.is_duplicate && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 whitespace-nowrap">
+                          {isDup && hasMatch && (
+                            <button
+                              onClick={() => toggleDupExpand(row._idx)}
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 whitespace-nowrap hover:bg-amber-200 transition-colors cursor-pointer"
+                            >
+                              <AlertTriangle className="w-3 h-3" />
+                              {t('pdfImport.duplicate')}
+                              {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                            </button>
+                          )}
+                          {isDup && !hasMatch && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 whitespace-nowrap">
+                              <AlertTriangle className="w-3 h-3" />
                               {t('pdfImport.duplicate')}
                             </span>
                           )}
@@ -430,6 +469,48 @@ const PDFImportPage = () => {
                         </div>
                       </td>
                     </tr>
+                    {hasMatch && isExpanded && (
+                      <tr className="bg-amber-50/40">
+                        <td colSpan={colCount} className="px-4 py-3">
+                          <div className="ml-8 border border-amber-200 rounded-xl p-4 bg-white/80">
+                            <p className="text-xs font-semibold text-amber-800 mb-2 flex items-center gap-1.5">
+                              <AlertTriangle className="w-3.5 h-3.5" />
+                              {t('pdfImport.existingMatch')}
+                            </p>
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <p className="text-xs text-gray-500 mb-1">PDF ({t('pdfImport.source')}: pdf)</p>
+                                <p><strong>{row.date}</strong> &mdash; {Number(row.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</p>
+                                <p className="text-gray-700 mt-0.5">{row.description}</p>
+                              </div>
+                              <div>
+                                <p className="text-xs text-gray-500 mb-1">{t('pdfImport.existingMatch')} ({t('pdfImport.source')}: {row.existing_match.source_type})</p>
+                                <p><strong>{row.existing_match.date}</strong> &mdash; {Number(row.existing_match.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</p>
+                                <p className="text-gray-700 mt-0.5">{row.existing_match.description}</p>
+                              </div>
+                            </div>
+                            <div className="mt-2 flex gap-2 flex-wrap">
+                              {dateDiffDays > 0 ? (
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+                                  {t('pdfImport.dateDiff', { days: dateDiffDays })}
+                                </span>
+                              ) : null}
+                              {descDiffers ? (
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+                                  {t('pdfImport.descDiff')}
+                                </span>
+                              ) : null}
+                              {dateDiffDays === 0 && !descDiffers && (
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700">
+                                  {t('pdfImport.exactMatch')}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                    </React.Fragment>
                   );
                 })}
               </tbody>
