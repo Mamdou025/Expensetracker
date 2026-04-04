@@ -45,7 +45,7 @@ const SettingsSection = ({
           onClick={() => setActiveTab(tab)}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
             activeTab === tab
-              ? 'bg-gray-100 text-gray-900'
+              ? 'nav-active'
               : 'text-gray-500 hover:text-gray-300 hover:bg-gray-800'
           }`}
         >

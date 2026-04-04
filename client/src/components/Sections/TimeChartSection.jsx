@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { BarChart3 } from 'lucide-react';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import ExpandableSection from '../common/ExpandableSection';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const TimeChartSection = ({ 
   isExpanded, 
@@ -12,7 +13,9 @@ const TimeChartSection = ({
   timeGrouping = 'daily',
   showCategoryBreakdown = 'none'
 }) => {
-
+  const { theme } = useTheme();
+  const gridColor = theme === 'light' ? '#e5e7eb' : '#374151';
+  const tickColor = theme === 'light' ? '#6b7280' : '#9ca3af';
 
   const categoryColors = useMemo(() => {
     const colors = [
@@ -142,16 +145,16 @@ const formatDateLabel = (dateStr) => {
     if (chartType === 'area') {
       return (
         <AreaChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis 
             dataKey="date" 
             tickFormatter={formatDateLabel}
             angle={timeGrouping === 'daily' ? -45 : 0}
             textAnchor={timeGrouping === 'daily' ? 'end' : 'middle'}
             height={timeGrouping === 'daily' ? 60 : 30}
-            tick={{ fill: '#9ca3af' }}
+            tick={{ fill: tickColor }}
           />
-          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: '#9ca3af' }} />
+          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: tickColor }} />
           <Tooltip content={<CustomTooltip />} />
           
           {showCategoryBreakdown === 'stacked' || showCategoryBreakdown === 'proportional' ? (
@@ -182,16 +185,16 @@ const formatDateLabel = (dateStr) => {
     if (chartType === 'bar') {
       return (
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
           <XAxis 
             dataKey="date" 
             tickFormatter={formatDateLabel}
             angle={timeGrouping === 'daily' ? -45 : 0}
             textAnchor={timeGrouping === 'daily' ? 'end' : 'middle'}
             height={timeGrouping === 'daily' ? 60 : 30}
-            tick={{ fill: '#9ca3af' }}
+            tick={{ fill: tickColor }}
           />
-          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: '#9ca3af' }} />
+          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: tickColor }} />
           <Tooltip content={<CustomTooltip />} />
           
           {showCategoryBreakdown === 'stacked' || showCategoryBreakdown === 'proportional' ? (
@@ -206,16 +209,16 @@ const formatDateLabel = (dateStr) => {
     // Line chart
     return (
       <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
         <XAxis 
           dataKey="date" 
           tickFormatter={formatDateLabel}
           angle={timeGrouping === 'daily' ? -45 : 0}
           textAnchor={timeGrouping === 'daily' ? 'end' : 'middle'}
           height={timeGrouping === 'daily' ? 60 : 30}
-          tick={{ fill: '#9ca3af' }}
+          tick={{ fill: tickColor }}
         />
-        <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: '#9ca3af' }} />
+        <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: tickColor }} />
         <Tooltip content={<CustomTooltip />} />
         
         {showCategoryBreakdown === 'stacked' || showCategoryBreakdown === 'proportional' ? (

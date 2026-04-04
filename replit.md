@@ -12,11 +12,16 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - **Startup:** `scripts/start-production.js` → init DB → start Express server
 
 ## UI Design
-- **Dashboard:** Professional neutral theme — `bg-gray-50` background, compact stat cards, dark nav with icons
-- **Navigation:** Icon-labeled top nav (Dashboard, Email, PDF Import, Bank Templates) with dark active state
+- **Theme toggle:** Light/dark mode via sun/moon button in header; preference saved in localStorage; defaults to dark
+- **Theme system:** CSS override strategy in `index.css` — `.light` class on `<html>` remaps all dark Tailwind classes to light equivalents; ThemeContext in `client/src/contexts/ThemeContext.jsx`
+- **Dark palette:** bg-gray-950 (page), bg-gray-900 (cards), bg-gray-800 (inputs), border-gray-800/700, text-gray-100-500
+- **Light palette:** white cards, gray-50 inputs, gray-200 borders, gray-900-500 text (via CSS overrides)
+- **Active states:** `.nav-active` class — inverted colors (light bg in dark mode, dark bg in light mode)
+- **Shared layout:** Header rendered once in App.js; all pages share consistent `max-w-7xl` container
+- **Navigation:** Icon-labeled top nav (Dashboard, Email, PDF Import, Bank Templates) with active state
 - **Sections:** Collapsible panels with `rounded-lg` borders, uppercase section headers, compact padding
 - **Configuration:** Collapsed by default, tabbed interface (Display, Categories, Tags, Mappings, Transactions)
-- **No debug artifacts:** All `console.log` debug statements removed from frontend code
+- **Charts:** TimeChartSection uses theme-aware grid/tick colors via ThemeContext
 
 ## Key Files
 - `package.json` — root orchestrator with build/start scripts
