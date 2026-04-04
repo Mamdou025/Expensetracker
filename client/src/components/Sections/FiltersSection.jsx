@@ -106,7 +106,7 @@ const FiltersSection = ({
               onClick={() => onMultiSelectFilter('tags', tag)}
               className={`px-3 py-1 rounded-md text-sm border transition-colors ${
                 filters.tags.includes(tag)
-                  ? 'bg-gray-100 text-gray-900 border-gray-100'
+                  ? 'nav-active border-transparent'
                   : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500'
               }`}
             >
@@ -125,7 +125,7 @@ const FiltersSection = ({
               onClick={() => onMultiSelectFilter('banks', bank)}
               className={`px-3 py-1 rounded-md text-sm border transition-colors ${
                 filters.banks && filters.banks.includes(bank)
-                  ? 'bg-gray-100 text-gray-900 border-gray-100'
+                  ? 'nav-active border-transparent'
                   : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500'
               }`}
             >
