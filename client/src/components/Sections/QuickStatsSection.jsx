@@ -2,7 +2,7 @@
 
 // src/components/sections/QuickStatsSection.jsx
 import React from 'react';
-import { Hash, DollarSign, Calendar, ArrowDownCircle } from 'lucide-react';
+import { Hash, DollarSign, Calendar } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const StatCard = ({ icon: Icon, label, value, color, subtitle }) => {
@@ -49,12 +49,6 @@ const QuickStatsSection = ({ quickStats }) => {
       color: 'green'
     },
     {
-      icon: ArrowDownCircle,
-      label: t('quickStats.totalDeposits'),
-      value: `$${quickStats.totalIncome.toFixed(2)}`,
-      color: 'emerald'
-    },
-    {
       icon: Calendar,
       label: t('quickStats.averageExpense'),
       value: `$${quickStats.average.toFixed(2)}`,
@@ -63,7 +57,7 @@ const QuickStatsSection = ({ quickStats }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       {statCards.map((stat, index) => (
         <StatCard key={index} {...stat} />
       ))}

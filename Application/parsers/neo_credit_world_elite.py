@@ -5,7 +5,7 @@ except ImportError:
 
 TEMPLATE_META = {
     'id': 'neo_credit_world_elite',
-    'bank': 'Neo Financial World Elite',
+    'bank': 'neo_credit',
     'account_type': 'World Elite Mastercard Credit Card',
     'country': 'Canada',
     'detection_keywords': ['Neo Financial', 'World Elite', 'neofinancial.com'],
@@ -36,4 +36,4 @@ def detect(full_text):
 def parse(pages_text, document_id=None, filepath=None):
     return parse_neo(pages_text, document_id=document_id, filepath=filepath,
                      template_id='neo_credit_world_elite',
-                     bank_label='Neo Financial World Elite')
+                     bank_label='neo_credit')

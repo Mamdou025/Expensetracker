@@ -108,7 +108,7 @@ def detect_neo(full_text):
     )
 
 
-def parse_neo(pages_text, document_id=None, filepath=None, template_id='neo_credit', bank_label='Neo Financial'):
+def parse_neo(pages_text, document_id=None, filepath=None, template_id='neo_credit', bank_label='neo_credit'):
     if not filepath:
         return None
 

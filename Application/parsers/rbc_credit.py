@@ -198,7 +198,7 @@ def _extract_amount_from_line(text):
 
 TEMPLATE_META = {
     'id': 'rbc_credit',
-    'bank': 'RBC',
+    'bank': 'rbc_credit',
     'account_type': 'Visa Credit Card',
     'country': 'Canada',
     'detection_keywords': ['Avion® Visa Infinite‡ RBC®', 'Relevé du', 'SOLDE DE COMPTE'],
@@ -377,7 +377,7 @@ def parse(pages_text, document_id=None, filepath=None):
             'date': op_date,
             'posting_date': post_date,
             'time': None,
-            'bank': 'RBC',
+            'bank': 'rbc_credit',
             'card_type': 'Credit',
             'category': 'Uncategorized',
             'tags': [],
@@ -396,7 +396,7 @@ def parse(pages_text, document_id=None, filepath=None):
 
     return {
         'template': 'rbc_credit',
-        'bank': 'RBC',
+        'bank': 'rbc_credit',
         'card_type': 'Credit',
         'card_number': card_number,
         'statement_period': f'{period_start} to {period_end}' if period_start else None,
