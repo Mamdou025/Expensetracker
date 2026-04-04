@@ -56,15 +56,16 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - Uploaded PDFs are stored in `uploads/` directory
 
 ## Dependencies
-- **Python:** beautifulsoup4, PyYAML, pdfplumber (PDF text extraction)
+- **Python:** beautifulsoup4, PyYAML, pdfplumber (PDF text extraction), PyMuPDF (font-obfuscated PDF decoding for Neo Financial)
 - **Node (Server/):** express, cors, sqlite3, multer (file uploads)
 
 ## Template-Based PDF Parsing
 - Bank-specific template parsers live in `Application/parsers/`
-- Each template has a `detect(full_text)` function and a `parse(pages_text, document_id)` function
+- Each template has a `detect(full_text)` function and a `parse(pages_text, document_id, filepath)` function
 - `pdf_parser.py` tries template parsers first (via `TEMPLATE_PARSERS` list); falls back to generic line-by-line parsing
 - **CIBC Chequing** (`parsers/cibc_chequing.py`): handles `Mon DD` dates (year from header), Withdrawals/Deposits/Balance columns, multi-line descriptions, FX conversion lines, and service charges. Validates totals against account summary.
 - **RBC Visa Credit** (`parsers/rbc_credit.py`): handles French-format RBC credit card statements — `DD MON` dates with French month names, amounts in `XX,XX $` format, parenthesized payments `(100,00 $)`, two-date lines (operation + posting), reference number filtering, and right-column noise removal. Validates against statement summary totals.
+- **Neo Financial Credit** (`parsers/neo_credit.py`): handles English Neo Financial Mastercard statements. Uses PyMuPDF (fitz) instead of pdfplumber because Neo PDFs use font obfuscation that maps digit glyphs to null bytes. Parses 4-line transaction blocks (tx_date, posted_date, description, amount). Negative amounts = purchases, positive = payments. Validates against statement summary totals.
 - To add a new bank: create `Application/parsers/<bank>_<type>.py` with `detect()` + `parse()` + `metadata()`, import it in `pdf_parser.py`, and add to `TEMPLATE_PARSERS`
 
 ## Duplicate Detection

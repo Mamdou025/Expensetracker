@@ -239,7 +239,7 @@ def detect(full_text):
     )
 
 
-def parse(pages_text, document_id=None):
+def parse(pages_text, document_id=None, filepath=None):
     full_text = '\n'.join(pages_text)
 
     period_match = STATEMENT_PERIOD_RE.search(full_text)
