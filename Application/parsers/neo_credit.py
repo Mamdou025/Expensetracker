@@ -220,10 +220,12 @@ def parse(pages_text, document_id=None, filepath=None):
     while i < len(all_lines):
         line = all_lines[i]
 
-        if 'Amount ($CAD)' in line and i > 0 and 'Description' in all_lines[i-1]:
-            in_transactions = True
-            i += 1
-            continue
+        if ('Amount ($CAD)' in line or line == '($CAD)') and i >= 2:
+            prev_lines = ' '.join(all_lines[max(0, i-3):i])
+            if 'Description' in prev_lines and ('Posted Date' in prev_lines or 'Transaction' in prev_lines):
+                in_transactions = True
+                i += 1
+                continue
 
         if 'Important information' in line or 'Frequently Asked' in line:
             in_transactions = False
@@ -266,7 +268,7 @@ def parse(pages_text, document_id=None, filepath=None):
                     i += 1
                     continue
 
-                desc = ' '.join(desc_lines)
+                desc = re.sub(r'\s+', ' ', ' '.join(desc_lines)).strip()
                 amount_line = all_lines[j]
 
                 amt_match = AMOUNT_LINE_RE.match(amount_line)
