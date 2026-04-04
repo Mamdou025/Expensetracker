@@ -15,18 +15,18 @@ const ExpandableSection = ({
   headerContent = null
 }) => {
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 shadow-sm ${className}`}>
+    <div className={`bg-gray-900 rounded-lg border border-gray-800 ${className}`}>
       <div className={`flex justify-between items-center px-5 py-3 ${headerClassName} ${
-        headerContent ? 'border-b' : ''
+        headerContent ? 'border-b border-gray-800' : ''
       }`}>
-        <h3 className="font-medium text-sm text-gray-700 flex items-center gap-2 uppercase tracking-wide">
-          {Icon && <Icon className="w-4 h-4 text-gray-400" />}
+        <h3 className="font-medium text-sm text-gray-400 flex items-center gap-2 uppercase tracking-wide">
+          {Icon && <Icon className="w-4 h-4 text-gray-500" />}
           {title}
         </h3>
         {showToggle && (
           <button
             onClick={onToggle}
-            className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+            className="p-1 text-gray-500 hover:text-gray-300 transition-colors"
           >
             {isExpanded ? (
               <ChevronUp className="w-4 h-4" />
@@ -38,7 +38,7 @@ const ExpandableSection = ({
       </div>
 
       {headerContent && (
-        <div className="border-b px-5 py-3">
+        <div className="border-b border-gray-800 px-5 py-3">
           {headerContent}
         </div>
       )}

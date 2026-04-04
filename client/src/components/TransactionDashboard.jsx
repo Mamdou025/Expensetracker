@@ -404,17 +404,17 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
 
         <Header />
 
         {loading && (
-          <div className="mb-4 text-center text-sm text-gray-500">Loading transactions...</div>
+          <div className="mb-4 text-center text-sm text-gray-400">Loading transactions...</div>
         )}
 
         {error && (
-          <div className="mb-4 px-4 py-2 bg-red-50 text-red-600 rounded-lg border border-red-200 text-sm">
+          <div className="mb-4 px-4 py-2 bg-red-900/30 text-red-400 rounded-lg border border-red-800 text-sm">
             {error}
           </div>
         )}

@@ -1,4 +1,3 @@
-// src/components/settings/MappingsSettings.jsx
 import React, { useState, useEffect } from 'react';
 import { useCategories } from '../../hooks/useCategories';
 import { useTags } from '../../hooks/useTags';
@@ -121,39 +120,37 @@ const MappingsSettings = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="font-semibold text-lg mb-4">{t('mappings.rules.title')}</h3>
+        <h3 className="font-semibold text-lg text-gray-200 mb-4">{t('mappings.rules.title')}</h3>
         <table className="min-w-full text-sm mb-8">
           <thead>
-            <tr>
-              <th className="text-left p-2">{t('mappings.rules.keyword')}</th>
-              <th className="text-left p-2">{t('mappings.rules.category')}</th>
-              <th className="text-left p-2">{t('mappings.rules.tags')}</th>
-              <th className="text-left p-2">{t('mappings.rules.actions')}</th>
+            <tr className="border-b border-gray-700">
+              <th className="text-left p-2 text-gray-400">{t('mappings.rules.keyword')}</th>
+              <th className="text-left p-2 text-gray-400">{t('mappings.rules.category')}</th>
+              <th className="text-left p-2 text-gray-400">{t('mappings.rules.tags')}</th>
+              <th className="text-left p-2 text-gray-400">{t('mappings.rules.actions')}</th>
             </tr>
           </thead>
           <tbody>
             {rules.length === 0 && (
               <tr>
-                <td colSpan="4" className="p-2">
+                <td colSpan="4" className="p-2 text-gray-500">
                   {t('mappings.rules.noRules')}
                 </td>
               </tr>
             )}
             {rules.map((rule) => (
               editingKeyword === rule.keyword ? (
-                <tr key={rule.keyword}>
-                  <td className="p-2">{rule.keyword}</td>
+                <tr key={rule.keyword} className="border-b border-gray-800">
+                  <td className="p-2 text-gray-300">{rule.keyword}</td>
                   <td className="p-2">
                     <select
                       value={editCategory}
                       onChange={(e) => setEditCategory(e.target.value)}
-                      className="w-full border rounded-lg px-2 py-1 bg-white"
+                      className="w-full border border-gray-700 rounded-md px-2 py-1 bg-gray-800 text-gray-200"
                     >
                       <option value="">{t('mappings.keywordCategory.selectCategory')}</option>
                       {categories.map((c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
+                        <option key={c} value={c}>{c}</option>
                       ))}
                     </select>
                   </td>
@@ -162,45 +159,43 @@ const MappingsSettings = () => {
                       multiple
                       value={editTags}
                       onChange={handleEditTagSelect}
-                      className="w-full border rounded-lg px-2 py-1 bg-white h-20"
+                      className="w-full border border-gray-700 rounded-md px-2 py-1 bg-gray-800 text-gray-200 h-20"
                     >
                       {tags.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
+                        <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
                   </td>
                   <td className="p-2 space-x-2">
                     <button
                       onClick={saveEdit}
-                      className="px-2 py-1 bg-green-500 text-white rounded"
+                      className="px-2 py-1 bg-emerald-600 text-white rounded"
                     >
                       {t('mappings.rules.save')}
                     </button>
                     <button
                       onClick={cancelEdit}
-                      className="px-2 py-1 bg-gray-300 rounded"
+                      className="px-2 py-1 bg-gray-700 text-gray-300 rounded"
                     >
                       {t('mappings.rules.cancel')}
                     </button>
                   </td>
                 </tr>
               ) : (
-                <tr key={rule.keyword}>
-                  <td className="p-2">{rule.keyword}</td>
-                  <td className="p-2">{rule.category || '-'}</td>
-                  <td className="p-2">{rule.tags && rule.tags.length > 0 ? rule.tags.join(', ') : '-'}</td>
+                <tr key={rule.keyword} className="border-b border-gray-800">
+                  <td className="p-2 text-gray-300">{rule.keyword}</td>
+                  <td className="p-2 text-gray-400">{rule.category || '-'}</td>
+                  <td className="p-2 text-gray-400">{rule.tags && rule.tags.length > 0 ? rule.tags.join(', ') : '-'}</td>
                   <td className="p-2 space-x-2">
                     <button
                       onClick={() => startEditRule(rule)}
-                      className="px-2 py-1 bg-blue-500 text-white rounded"
+                      className="px-2 py-1 bg-blue-600 text-white rounded"
                     >
                       {t('mappings.rules.edit')}
                     </button>
                     <button
                       onClick={() => handleDeleteRule(rule.keyword)}
-                      className="px-2 py-1 bg-red-500 text-white rounded"
+                      className="px-2 py-1 bg-red-600 text-white rounded"
                     >
                       {t('mappings.rules.delete')}
                     </button>
@@ -213,83 +208,79 @@ const MappingsSettings = () => {
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-4">{t('mappings.keywordCategory.title')}</h3>
-        <p className="text-gray-600 mb-4">{t('mappings.keywordCategory.description')}</p>
-        <form onSubmit={handleCategorySubmit} className="bg-gray-50 p-4 rounded-xl space-y-4">
+        <h3 className="font-semibold text-lg text-gray-200 mb-4">{t('mappings.keywordCategory.title')}</h3>
+        <p className="text-gray-400 mb-4">{t('mappings.keywordCategory.description')}</p>
+        <form onSubmit={handleCategorySubmit} className="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">{t('mappings.keywordCategory.keyword')}</label>
+            <label className="block text-sm font-medium text-gray-400 mb-1">{t('mappings.keywordCategory.keyword')}</label>
             <input
               type="text"
               value={keywordCat}
               onChange={(e) => setKeywordCat(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2"
+              className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-700 text-gray-200"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">{t('mappings.keywordCategory.category')}</label>
+            <label className="block text-sm font-medium text-gray-400 mb-1">{t('mappings.keywordCategory.category')}</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 bg-white"
+              className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-700 text-gray-200"
             >
               <option value="">{t('mappings.keywordCategory.selectCategory')}</option>
               {categories.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
+                <option key={c} value={c}>{c}</option>
               ))}
             </select>
           </div>
           <button
             type="submit"
             disabled={loadingCat}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             {t('mappings.keywordCategory.apply')}
           </button>
           {categoryResult !== null && (
-            <p className="text-sm text-green-600">{t('mappings.keywordCategory.updated', { count: categoryResult })}</p>
+            <p className="text-sm text-emerald-400">{t('mappings.keywordCategory.updated', { count: categoryResult })}</p>
           )}
         </form>
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-4">{t('mappings.keywordTag.title')}</h3>
-        <p className="text-gray-600 mb-4">{t('mappings.keywordTag.description')}</p>
-        <form onSubmit={handleTagsSubmit} className="bg-gray-50 p-4 rounded-xl space-y-4">
+        <h3 className="font-semibold text-lg text-gray-200 mb-4">{t('mappings.keywordTag.title')}</h3>
+        <p className="text-gray-400 mb-4">{t('mappings.keywordTag.description')}</p>
+        <form onSubmit={handleTagsSubmit} className="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">{t('mappings.keywordTag.keyword')}</label>
+            <label className="block text-sm font-medium text-gray-400 mb-1">{t('mappings.keywordTag.keyword')}</label>
             <input
               type="text"
               value={keywordTags}
               onChange={(e) => setKeywordTags(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2"
+              className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-700 text-gray-200"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">{t('mappings.keywordTag.tags')}</label>
+            <label className="block text-sm font-medium text-gray-400 mb-1">{t('mappings.keywordTag.tags')}</label>
             <select
               multiple
               value={selectedTags}
               onChange={handleTagSelect}
-              className="w-full border rounded-lg px-3 py-2 bg-white h-32"
+              className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-700 text-gray-200 h-32"
             >
               {tags.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
+                <option key={t} value={t}>{t}</option>
               ))}
             </select>
           </div>
           <button
             type="submit"
             disabled={loadingTags}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             {t('mappings.keywordTag.apply')}
           </button>
           {tagsResult !== null && (
-            <p className="text-sm text-green-600">{t('mappings.keywordTag.updated', { count: tagsResult })}</p>
+            <p className="text-sm text-emerald-400">{t('mappings.keywordTag.updated', { count: tagsResult })}</p>
           )}
         </form>
       </div>

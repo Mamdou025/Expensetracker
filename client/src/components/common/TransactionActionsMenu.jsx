@@ -1,4 +1,3 @@
-// src/components/common/TransactionActionsMenu.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { MoreVertical, Tag, Trash2, DollarSign, FileText, Folder, Mail } from 'lucide-react';
 
@@ -13,7 +12,6 @@ const TransactionActionsMenu = ({
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -27,7 +25,7 @@ const TransactionActionsMenu = ({
 
   const handleAction = (action) => {
     setIsOpen(false);
-    
+
     switch(action) {
       case 'edit-amount':
         onStartEdit(transaction, 'amount');
@@ -56,75 +54,70 @@ const TransactionActionsMenu = ({
 
   return (
     <div className="relative" ref={menuRef}>
-      {/* Three dots button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors duration-200"
+        className="p-2 text-gray-500 hover:text-gray-300 hover:bg-gray-800 rounded-full transition-colors duration-200"
         title="Transaction actions"
       >
         <MoreVertical className="w-4 h-4" />
       </button>
 
-      {/* Dropdown menu */}
       {isOpen && (
-        <div 
-          className="absolute top-8 mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50" 
-          style={{ 
-            right: '0px', 
-            transform: 'translateX(calc(-40% + 50px))' 
+        <div
+          className="absolute top-8 mt-1 w-48 bg-gray-800 rounded-lg shadow-lg border border-gray-700 py-2 z-50"
+          style={{
+            right: '0px',
+            transform: 'translateX(calc(-40% + 50px))'
           }}
         >
-          
           <button
             onClick={() => handleAction('edit-amount')}
-            className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
+            className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <DollarSign className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Modifier Montant</span>
+            <DollarSign className="w-4 h-4 text-gray-400" />
+            <span className="font-medium text-gray-200">Modifier Montant</span>
           </button>
 
           <button
             onClick={() => handleAction('edit-description')}
-            className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
+            className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <FileText className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Modifier Description</span>
+            <FileText className="w-4 h-4 text-gray-400" />
+            <span className="font-medium text-gray-200">Modifier Description</span>
           </button>
 
           <button
             onClick={() => handleAction('edit-category')}
-            className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
+            className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Folder className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Modifier Categorie</span>
+            <Folder className="w-4 h-4 text-gray-400" />
+            <span className="font-medium text-gray-200">Modifier Categorie</span>
           </button>
 
           <button
             onClick={() => handleAction('edit-tags')}
-            className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
+            className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Tag className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Gérer les Tags</span>
+            <Tag className="w-4 h-4 text-gray-400" />
+            <span className="font-medium text-gray-200">Gérer les Tags</span>
           </button>
 
           <button
             onClick={() => handleAction('view-email')}
-            className="w-full px-4 py-3 text-left hover:bg-gray-50 flex items-center gap-3 text-sm transition-colors duration-200"
+            className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Mail className="w-4 h-4 text-gray-600" />
-            <span className="font-medium text-gray-900">Voir le Email</span>
+            <Mail className="w-4 h-4 text-gray-400" />
+            <span className="font-medium text-gray-200">Voir le Email</span>
           </button>
 
-          {/* Divider */}
-          <div className="border-t my-2"></div>
+          <div className="border-t border-gray-700 my-2"></div>
 
-          {/* Delete Action */}
           <button
             onClick={() => handleAction('delete')}
-            className="w-full px-4 py-3 text-left hover:bg-red-50 flex items-center gap-3 text-sm transition-colors duration-200"
+            className="w-full px-4 py-3 text-left hover:bg-red-900/30 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Trash2 className="w-4 h-4 text-red-600" />
-            <span className="font-medium text-red-600">Supprimer </span>
+            <Trash2 className="w-4 h-4 text-red-400" />
+            <span className="font-medium text-red-400">Supprimer </span>
           </button>
         </div>
       )}

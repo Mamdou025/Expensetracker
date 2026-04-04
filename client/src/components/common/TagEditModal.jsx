@@ -1,17 +1,16 @@
-// src/components/common/TagEditModal.jsx
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { keywordMappingService } from '../../Services/keywordMappingService';
 
-const TagEditModal = ({ 
-  isOpen, 
-  onClose, 
-  transaction, 
-  allAvailableTags, 
+const TagEditModal = ({
+  isOpen,
+  onClose,
+  transaction,
+  allAvailableTags,
   onSave,
   addTag,
-  removeTag 
+  removeTag
 }) => {
   const [currentTags, setCurrentTags] = useState([]);
   const [newTagName, setNewTagName] = useState('');
@@ -24,13 +23,11 @@ const TagEditModal = ({
         await keywordMappingService.createRule(transaction.description, null, updatedTags);
         alert(t('tagEdit.keywordRuleSuccess'));
       } catch (err) {
-        console.error('Failed to save keyword rule:', err);
         alert(t('tagEdit.keywordRuleError'));
       }
     }
   };
 
-  // Initialize current tags when modal opens
   useEffect(() => {
     if (isOpen && transaction) {
       const transactionTags = Array.isArray(transaction.tags) ? transaction.tags : [];
@@ -40,7 +37,7 @@ const TagEditModal = ({
 
   const handleAddExistingTag = async (tagName) => {
     if (currentTags.includes(tagName)) return;
-    
+
     try {
       setIsLoading(true);
       await addTag(transaction.id, tagName);
@@ -48,7 +45,6 @@ const TagEditModal = ({
       setCurrentTags(updatedTags);
       await promptAndSaveRule(updatedTags);
     } catch (error) {
-      console.error('Failed to add tag:', error);
       alert('Failed to add tag. Please try again.');
     } finally {
       setIsLoading(false);
@@ -63,7 +59,6 @@ const TagEditModal = ({
       setCurrentTags(updatedTags);
       await promptAndSaveRule(updatedTags);
     } catch (error) {
-      console.error('Failed to remove tag:', error);
       alert('Failed to remove tag. Please try again.');
     } finally {
       setIsLoading(false);
@@ -84,7 +79,6 @@ const TagEditModal = ({
       setNewTagName('');
       await promptAndSaveRule(updatedTags);
     } catch (error) {
-      console.error('Failed to add new tag:', error);
       alert('Failed to add new tag. Please try again.');
     } finally {
       setIsLoading(false);
@@ -101,21 +95,20 @@ const TagEditModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
-        
-        {/* Header */}
-        <div className="p-6 border-b bg-gray-50">
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+      <div className="bg-gray-900 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden border border-gray-700">
+
+        <div className="p-6 border-b border-gray-800">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">Gerer les Tags</h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <h2 className="text-xl font-semibold text-gray-100">Gerer les Tags</h2>
+              <p className="text-sm text-gray-400 mt-1">
                 {transaction?.description} • ${transaction?.amount?.toFixed(2)}
               </p>
             </div>
             <button
               onClick={handleClose}
-              className="p-2 hover:bg-gray-200 rounded-full transition-colors duration-200"
+              className="p-2 hover:bg-gray-800 rounded-full transition-colors duration-200 text-gray-400"
               disabled={isLoading}
             >
               <X className="w-5 h-5" />
@@ -123,14 +116,12 @@ const TagEditModal = ({
           </div>
         </div>
 
-        {/* Content */}
         <div className="p-6 max-h-[calc(90vh-140px)] overflow-y-auto">
-          
-          {/* Current Tags */}
+
           <div className="mb-8">
-            <h3 className="font-medium text-gray-900 mb-3">Tags disponibles</h3>
+            <h3 className="font-medium text-gray-200 mb-3">Tags disponibles</h3>
             {currentTags.length === 0 ? (
-              <p className="text-gray-500 text-sm bg-gray-50 p-4 rounded-lg">
+              <p className="text-gray-500 text-sm bg-gray-800 p-4 rounded-lg">
                 Aucun tag n'est associé à cette transaction
               </p>
             ) : (
@@ -138,12 +129,12 @@ const TagEditModal = ({
                 {currentTags.map((tag, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 px-3 py-2 bg-green-100 text-green-800 rounded-full text-sm"
+                    className="flex items-center gap-2 px-3 py-2 bg-emerald-900/30 text-emerald-300 rounded-full text-sm border border-emerald-800"
                   >
                     <span>{tag}</span>
                     <button
                       onClick={() => handleRemoveTag(tag)}
-                      className="hover:bg-green-200 rounded-full p-1 transition-colors duration-200"
+                      className="hover:bg-emerald-800/50 rounded-full p-1 transition-colors duration-200"
                       disabled={isLoading}
                       title="Remove tag"
                     >
@@ -155,16 +146,15 @@ const TagEditModal = ({
             )}
           </div>
 
-          {/* Add New Tag */}
           <div className="mb-8">
-            <h3 className="font-medium text-gray-900 mb-3">Ajouter un nouveau tag</h3>
+            <h3 className="font-medium text-gray-200 mb-3">Ajouter un nouveau tag</h3>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={newTagName}
                 onChange={(e) => setNewTagName(e.target.value)}
                 placeholder="Entrer un nom de tag..."
-                className="flex-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 border border-gray-700 rounded-md px-4 py-2 bg-gray-800 text-gray-200 focus:ring-1 focus:ring-gray-500"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') handleAddNewTag();
                 }}
@@ -173,7 +163,7 @@ const TagEditModal = ({
               <button
                 onClick={handleAddNewTag}
                 disabled={!newTagName.trim() || isLoading}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Ajouter
@@ -181,17 +171,16 @@ const TagEditModal = ({
             </div>
           </div>
 
-          {/* Available Tags */}
           <div>
-            <h3 className="font-medium text-gray-900 mb-3">
-              Tags Disponibles
+            <h3 className="font-medium text-gray-200 mb-3">
+              Tags Disponibles{' '}
               <span className="text-sm text-gray-500 font-normal">
                 ({availableTagsToAdd.length} disponibles)
               </span>
             </h3>
             {availableTagsToAdd.length === 0 ? (
-              <p className="text-gray-500 text-sm bg-gray-50 p-4 rounded-lg">
-                TTous les tags disponibles sont déjà associés à cette transaction.
+              <p className="text-gray-500 text-sm bg-gray-800 p-4 rounded-lg">
+                Tous les tags disponibles sont déjà associés à cette transaction.
               </p>
             ) : (
               <div className="flex flex-wrap gap-2">
@@ -200,7 +189,7 @@ const TagEditModal = ({
                     key={index}
                     onClick={() => handleAddExistingTag(tag)}
                     disabled={isLoading}
-                    className="px-3 py-2 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-blue-100 hover:text-blue-800 transition-colors duration-200 disabled:opacity-50"
+                    className="px-3 py-2 bg-gray-800 text-gray-300 rounded-full text-sm hover:bg-gray-700 hover:text-gray-100 border border-gray-700 transition-colors duration-200 disabled:opacity-50"
                   >
                     + {tag}
                   </button>
@@ -210,18 +199,17 @@ const TagEditModal = ({
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="p-6 border-t bg-gray-50 flex justify-end gap-3">
+        <div className="p-6 border-t border-gray-800 flex justify-end gap-3">
           <button
             onClick={handleClose}
             disabled={isLoading}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50"
+            className="px-6 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-800 transition-colors duration-200 disabled:opacity-50"
           >
             Close
           </button>
           {isLoading && (
-            <div className="flex items-center gap-2 text-blue-600">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+            <div className="flex items-center gap-2 text-blue-400">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
               <span className="text-sm">Enregistrement...</span>
             </div>
           )}

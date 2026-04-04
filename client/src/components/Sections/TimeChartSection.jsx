@@ -62,21 +62,21 @@ const formatDateLabel = (dateStr) => {
       const data = payload[0].payload;
       
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-sm min-w-48 text-sm">
-          <p className="font-semibold mb-2">{formatDateLabel(label)}</p>
+        <div className="bg-gray-800 p-3 border border-gray-700 rounded-lg shadow-lg min-w-48 text-sm">
+          <p className="font-semibold text-gray-200 mb-2">{formatDateLabel(label)}</p>
           
           {showCategoryBreakdown === 'none' ? (
             <>
-              <p className="text-blue-600">{`Total: $${payload[0].value.toFixed(2)}`}</p>
-              <p className="text-gray-600">{`Transactions: ${data.count}`}</p>
+              <p className="text-blue-400">{`Total: $${payload[0].value.toFixed(2)}`}</p>
+              <p className="text-gray-400">{`Transactions: ${data.count}`}</p>
             </>
           ) : (
             <>
-              <p className="text-blue-600 font-medium mb-2">{`Total: $${data.amount.toFixed(2)}`}</p>
-              <p className="text-gray-600 mb-2">{`Transactions: ${data.count}`}</p>
+              <p className="text-blue-400 font-medium mb-2">{`Total: $${data.amount.toFixed(2)}`}</p>
+              <p className="text-gray-400 mb-2">{`Transactions: ${data.count}`}</p>
               
               {data.categories && (
-                <div className="border-t pt-2">
+                <div className="border-t border-gray-700 pt-2">
                   <p className="text-xs text-gray-500 mb-1">Categories:</p>
                   {Object.entries(data.categories).map(([category, amount]) => (
                     <div key={category} className="flex justify-between items-center text-sm">
@@ -87,7 +87,7 @@ const formatDateLabel = (dateStr) => {
                         ></div>
                         <span>{category}</span>
                       </div>
-                      <span className="font-medium">${amount.toFixed(2)}</span>
+                      <span className="font-medium text-gray-300">${amount.toFixed(2)}</span>
                     </div>
                   ))}
                 </div>
@@ -142,15 +142,16 @@ const formatDateLabel = (dateStr) => {
     if (chartType === 'area') {
       return (
         <AreaChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
           <XAxis 
             dataKey="date" 
             tickFormatter={formatDateLabel}
             angle={timeGrouping === 'daily' ? -45 : 0}
             textAnchor={timeGrouping === 'daily' ? 'end' : 'middle'}
             height={timeGrouping === 'daily' ? 60 : 30}
+            tick={{ fill: '#9ca3af' }}
           />
-          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} />
+          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: '#9ca3af' }} />
           <Tooltip content={<CustomTooltip />} />
           
           {showCategoryBreakdown === 'stacked' || showCategoryBreakdown === 'proportional' ? (
@@ -181,15 +182,16 @@ const formatDateLabel = (dateStr) => {
     if (chartType === 'bar') {
       return (
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
           <XAxis 
             dataKey="date" 
             tickFormatter={formatDateLabel}
             angle={timeGrouping === 'daily' ? -45 : 0}
             textAnchor={timeGrouping === 'daily' ? 'end' : 'middle'}
             height={timeGrouping === 'daily' ? 60 : 30}
+            tick={{ fill: '#9ca3af' }}
           />
-          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} />
+          <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: '#9ca3af' }} />
           <Tooltip content={<CustomTooltip />} />
           
           {showCategoryBreakdown === 'stacked' || showCategoryBreakdown === 'proportional' ? (
@@ -204,15 +206,16 @@ const formatDateLabel = (dateStr) => {
     // Line chart
     return (
       <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
         <XAxis 
           dataKey="date" 
           tickFormatter={formatDateLabel}
           angle={timeGrouping === 'daily' ? -45 : 0}
           textAnchor={timeGrouping === 'daily' ? 'end' : 'middle'}
           height={timeGrouping === 'daily' ? 60 : 30}
+          tick={{ fill: '#9ca3af' }}
         />
-        <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} />
+        <YAxis tickFormatter={(value) => showCategoryBreakdown === 'proportional' ? `${value.toFixed(0)}%` : `$${value}`} tick={{ fill: '#9ca3af' }} />
         <Tooltip content={<CustomTooltip />} />
         
         {showCategoryBreakdown === 'stacked' || showCategoryBreakdown === 'proportional' ? (
@@ -280,7 +283,7 @@ const formatDateLabel = (dateStr) => {
                 className="w-4 h-4 rounded"
                 style={{ backgroundColor: color }}
               ></div>
-              <span className="text-sm text-gray-600">{category}</span>
+              <span className="text-sm text-gray-400">{category}</span>
             </div>
           ))}
         </div>
