@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from './ui/Header';
 import { useTranslation } from 'react-i18next';
 import { emailService } from '../Services/emailService';
 import { useTransactions } from '../hooks/useTransactions';
@@ -127,8 +126,7 @@ const EmailExtractionPage = () => {
   const selectedCount = selectedIds.length;
 
   return (
-    <div className="min-h-screen bg-gray-950 p-8 max-w-6xl mx-auto">
-      <Header />
+    <>
       <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
@@ -269,7 +267,7 @@ const EmailExtractionPage = () => {
         onClose={closeEmailModal}
         html={modalHtml}
       />
-    </div>
+    </>
   );
 };
 

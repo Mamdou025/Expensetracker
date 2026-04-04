@@ -6,7 +6,6 @@ import SettingsSection from './Sections/SettingsSection';
 import TimeChartSection from './Sections/TimeChartSection';
 import CategoryChartSection from './Sections/CategoryChartSection';
 import TransactionTable from './Sections/TransactionTable';
-import Header from './ui/Header';
 import QuickStatsSection from './Sections/QuickStatsSection';
 import { categoryService } from '../Services/categoryService';
 import { tagService } from '../Services/tagService';
@@ -404,10 +403,7 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   return (
-    <div className="min-h-screen bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-
-        <Header />
+    <>
 
         {loading && (
           <div className="mb-4 text-center text-sm text-gray-400">Loading transactions...</div>
@@ -518,8 +514,7 @@ const { expandedSections, toggleSection } = useExpandableState({
           removeTag={removeTag}
         />
 
-      </div>
-    </div>
+    </>
   );
 };
 

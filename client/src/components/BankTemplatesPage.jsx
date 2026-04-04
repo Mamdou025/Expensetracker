@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from './ui/Header';
 import { useTranslation } from 'react-i18next';
 import { apiClient } from '../Services/api';
 import { Building2, FileText, Calendar, Columns3, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
@@ -39,8 +38,7 @@ const BankTemplatesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 max-w-6xl mx-auto p-6">
-      <Header />
+    <>
 
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
@@ -176,7 +174,7 @@ const BankTemplatesPage = () => {
           {t('bankTemplates.footerInfo')}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
