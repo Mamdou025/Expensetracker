@@ -1,5 +1,5 @@
-import React from 'react';
-import { Filter } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Filter, X } from 'lucide-react';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTranslation } from 'react-i18next';
 
@@ -11,9 +11,58 @@ const FiltersSection = ({
   onMultiSelectFilter,
   uniqueCategories,
   uniqueTags,
-  uniqueCardTypes
+  uniqueCardTypes,
+  transactions
 }) => {
   const { t } = useTranslation();
+
+  const fmt = (d) => d.toISOString().split('T')[0];
+  const now = new Date();
+  const yr = now.getFullYear();
+  const mo = now.getMonth();
+
+  const availableYears = useMemo(() => {
+    if (!transactions || transactions.length === 0) return [];
+    const years = new Set();
+    transactions.forEach(tx => {
+      if (tx.date) {
+        const y = parseInt(tx.date.substring(0, 4), 10);
+        if (!isNaN(y)) years.add(y);
+      }
+    });
+    return Array.from(years).sort((a, b) => b - a);
+  }, [transactions]);
+
+  const ago12 = new Date(now);
+  ago12.setFullYear(ago12.getFullYear() - 1);
+
+  const presets = [
+    { label: t('filters.presets.thisMonth'), from: fmt(new Date(yr, mo, 1)), to: fmt(new Date(yr, mo + 1, 0)) },
+    { label: t('filters.presets.lastMonth'), from: fmt(new Date(yr, mo - 1, 1)), to: fmt(new Date(yr, mo, 0)) },
+    { label: t('filters.presets.last3Months'), from: fmt(new Date(yr, mo - 2, 1)), to: fmt(now) },
+    { label: t('filters.presets.last6Months'), from: fmt(new Date(yr, mo - 5, 1)), to: fmt(now) },
+    { label: t('filters.presets.ytd'), from: `${yr}-01-01`, to: fmt(now) },
+    { label: t('filters.presets.last12Months'), from: fmt(ago12), to: fmt(now) },
+  ];
+
+  const yearPresets = availableYears.map(y => ({
+    label: String(y), from: `${y}-01-01`, to: `${y}-12-31`
+  }));
+
+  const allPresets = [...presets, ...yearPresets];
+
+  const applyPreset = (from, to) => {
+    onFilterChange('dateFrom', from);
+    onFilterChange('dateTo', to);
+  };
+
+  const clearDates = () => {
+    onFilterChange('dateFrom', '');
+    onFilterChange('dateTo', '');
+  };
+
+  const isActive = (p) => filters.dateFrom === p.from && filters.dateTo === p.to;
+  const hasDates = filters.dateFrom || filters.dateTo;
 
   return (
     <ExpandableSection
@@ -23,6 +72,34 @@ const FiltersSection = ({
       onToggle={onToggle}
       className="mb-4"
     >
+      <div className="mb-5">
+        <label className="block text-sm font-medium text-gray-400 mb-2.5">{t('filters.dateRange')}</label>
+        <div className="flex flex-wrap gap-2">
+          {allPresets.map((p) => (
+            <button
+              key={p.label}
+              onClick={() => applyPreset(p.from, p.to)}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
+                isActive(p)
+                  ? 'nav-active border-transparent'
+                  : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500 hover:text-gray-300'
+              }`}
+            >
+              {p.label}
+            </button>
+          ))}
+          {hasDates && (
+            <button
+              onClick={clearDates}
+              className="px-3 py-1.5 rounded-md text-xs font-medium border border-red-800/50 bg-red-900/20 text-red-400 hover:bg-red-900/40 transition-colors flex items-center gap-1"
+            >
+              <X className="w-3 h-3" />
+              {t('filters.presets.clear')}
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-400 mb-2">{t('filters.dateFrom')}</label>

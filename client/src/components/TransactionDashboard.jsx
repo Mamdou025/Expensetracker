@@ -462,6 +462,7 @@ const { expandedSections, toggleSection } = useExpandableState({
           uniqueCategories={uniqueCategories}
           uniqueTags={uniqueTags}
           uniqueCardTypes={uniqueCardTypes}
+          transactions={transactions}
         />
 
         <TimeChartSection
