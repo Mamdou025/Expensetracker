@@ -34,9 +34,10 @@ def check_duplicate(date, amount, bank, description):
         date_start = (dt - timedelta(days=2)).strftime('%Y-%m-%d')
         date_end = (dt + timedelta(days=2)).strftime('%Y-%m-%d')
 
+        amt = float(amount)
         cursor.execute(
-            "SELECT date, amount, description FROM transactions WHERE amount = ? AND bank = ? AND date BETWEEN ? AND ?",
-            (float(amount), bank, date_start, date_end),
+            "SELECT date, amount, description FROM transactions WHERE ABS(amount - ?) < 0.02 AND bank = ? AND date BETWEEN ? AND ?",
+            (amt, bank, date_start, date_end),
         )
         rows = cursor.fetchall()
         if not rows:
@@ -47,7 +48,7 @@ def check_duplicate(date, amount, bank, description):
             ex_norm = norm_desc(row[2])
             if ex_norm == new_norm:
                 return True
-            if ex_norm in new_norm or new_norm in ex_norm:
+            if ex_norm and new_norm and (ex_norm in new_norm or new_norm in ex_norm):
                 return True
         return False
     except Exception:

@@ -1110,7 +1110,7 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
                     const datePlaceholders = expandedDates.map(() => '?').join(', ');
 
                     db.all(
-                        `SELECT date, amount, bank, description FROM transactions
+                        `SELECT date, amount, bank, description, source_type FROM transactions
                          WHERE date IN (${datePlaceholders})`,
                         expandedDates,
                         (err, existingRows) => {
@@ -1122,6 +1122,8 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
                                 date: row.date,
                                 amount: row.amount,
                                 bank: row.bank,
+                                description: row.description,
+                                source_type: row.source_type || 'unknown',
                                 normDesc: normDesc(row.description),
                             }));
 
@@ -1132,7 +1134,7 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
                                 const tAmount = parseFloat(t.amount);
                                 const tDate = t.date;
 
-                                const isDup = existingList.some(ex => {
+                                const match = existingList.find(ex => {
                                     if (Math.abs(ex.amount - tAmount) > 0.01) return false;
                                     if (ex.bank !== tBank) return false;
                                     const dayDiff = Math.abs(
@@ -1140,12 +1142,23 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
                                     );
                                     if (dayDiff > 2) return false;
                                     if (ex.normDesc === tNorm) return true;
-                                    if (ex.normDesc.includes(tNorm) || tNorm.includes(ex.normDesc)) return true;
+                                    if (ex.normDesc.length > 0 && tNorm.length > 0 && (ex.normDesc.includes(tNorm) || tNorm.includes(ex.normDesc))) return true;
                                     return false;
                                 });
 
-                                t.is_duplicate = isDup;
-                                if (isDup) duplicateCount++;
+                                if (match) {
+                                    t.is_duplicate = true;
+                                    t.existing_match = {
+                                        date: match.date,
+                                        amount: match.amount,
+                                        description: match.description,
+                                        source_type: match.source_type,
+                                        bank: match.bank,
+                                    };
+                                    duplicateCount++;
+                                } else {
+                                    t.is_duplicate = false;
+                                }
                             });
 
                             parsed.duplicate_count = duplicateCount;
