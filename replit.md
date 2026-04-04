@@ -67,6 +67,14 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - **RBC Visa Credit** (`parsers/rbc_credit.py`): handles French-format RBC credit card statements — `DD MON` dates with French month names, amounts in `XX,XX $` format, parenthesized payments `(100,00 $)`, two-date lines (operation + posting), reference number filtering, and right-column noise removal. Validates against statement summary totals.
 - To add a new bank: create `Application/parsers/<bank>_<type>.py` with `detect()` + `parse()` + `metadata()`, import it in `pdf_parser.py`, and add to `TEMPLATE_PARSERS`
 
+## Duplicate Detection
+- **Parse-time detection**: When a PDF is parsed (`POST /api/import-pdf`), the server checks each transaction against existing DB records before sending to the frontend
+- **Matching key**: date + amount + bank + full description (case-insensitive, trimmed)
+- **Document-level check**: Also checks if the same `source_ref` (SHA-256 hash) was already imported — flags all transactions as duplicates
+- **Frontend behavior**: Duplicates are auto-deselected, shown with yellow "Duplicate" badge, and a count banner appears at the top
+- **Safety net**: `import_pdf_confirm.py` re-checks each transaction against the DB before insertion — duplicates are skipped even if the user overrides frontend warnings
+- **Response fields**: `is_duplicate` per transaction, `duplicate_count` and `document_already_imported` at the parse result level; `skipped` and `skipped_transactions` at the confirm result level
+
 ## Transaction Types
 - Each transaction has a `transaction_type` column: `'expense'` (default) or `'income'`
 - PDF parsers return a `direction` field ('withdrawal', 'deposit', 'purchase', 'payment')
