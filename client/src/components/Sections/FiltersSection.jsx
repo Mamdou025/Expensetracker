@@ -100,7 +100,7 @@ const FiltersSection = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-400 mb-2">{t('filters.dateFrom')}</label>
           <input
@@ -156,21 +156,24 @@ const FiltersSection = ({
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">{t('filters.categories')}</label>
-          <div className="max-h-32 overflow-y-auto border border-gray-700 rounded-md p-2 bg-gray-800">
-            {uniqueCategories.map((category) => (
-              <label key={category} className="flex items-center gap-2 text-sm text-gray-300 mb-2">
-                <input
-                  type="checkbox"
-                  checked={filters.categories.includes(category)}
-                  onChange={() => onMultiSelectFilter('categories', category)}
-                  className="rounded border-gray-600"
-                />
-                {category}
-              </label>
-            ))}
-          </div>
+      </div>
+
+      <div className="mt-6">
+        <label className="block text-sm font-medium text-gray-400 mb-3">{t('filters.categories')}</label>
+        <div className="flex flex-wrap gap-2">
+          {uniqueCategories.map((category) => (
+            <button
+              key={category}
+              onClick={() => onMultiSelectFilter('categories', category)}
+              className={`px-3 py-1 rounded-md text-sm border transition-colors ${
+                filters.categories.includes(category)
+                  ? 'nav-active border-transparent'
+                  : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
       </div>
 
