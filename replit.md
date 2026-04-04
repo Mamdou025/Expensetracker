@@ -11,6 +11,13 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - **DB Init:** Python script `Database/Database.py` run via `scripts/init-db.js`
 - **Startup:** `scripts/start-production.js` → init DB → start Express server
 
+## UI Design
+- **Dashboard:** Professional neutral theme — `bg-gray-50` background, compact stat cards, dark nav with icons
+- **Navigation:** Icon-labeled top nav (Dashboard, Email, PDF Import, Bank Templates) with dark active state
+- **Sections:** Collapsible panels with `rounded-lg` borders, uppercase section headers, compact padding
+- **Configuration:** Collapsed by default, tabbed interface (Display, Categories, Tags, Mappings, Transactions)
+- **No debug artifacts:** All `console.log` debug statements removed from frontend code
+
 ## Key Files
 - `package.json` — root orchestrator with build/start scripts
 - `Server/Server.js` — Express API (transactions, tags, categories, keyword rules, email extraction, PDF import)

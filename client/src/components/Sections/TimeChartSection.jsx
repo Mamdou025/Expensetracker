@@ -14,14 +14,6 @@ const TimeChartSection = ({
 }) => {
 
 
-  // Add this at the top of TimeChartSection component
-console.log('📊 Chart Data:', chartData.map(item => ({
-  date: item.date,
-  amount: item.amount,
-  originalDate: new Date(item.date).toISOString()
-})));
-  
-  // Generate category colors dynamically
   const categoryColors = useMemo(() => {
     const colors = [
       '#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6',
@@ -70,7 +62,7 @@ const formatDateLabel = (dateStr) => {
       const data = payload[0].payload;
       
       return (
-        <div className="bg-white p-4 border rounded-xl shadow-lg min-w-48">
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-sm min-w-48 text-sm">
           <p className="font-semibold mb-2">{formatDateLabel(label)}</p>
           
           {showCategoryBreakdown === 'none' ? (
@@ -271,7 +263,7 @@ const formatDateLabel = (dateStr) => {
       icon={BarChart3}
       isExpanded={isExpanded}
       onToggle={onToggle}
-      className="mb-8"
+      className="mb-4"
     >
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">

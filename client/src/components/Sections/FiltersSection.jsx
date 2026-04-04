@@ -22,7 +22,7 @@ const FiltersSection = ({
       icon={Filter}
       isExpanded={isExpanded}
       onToggle={onToggle}
-      className="mb-8"
+      className="mb-4"
     >
       {/* Filter inputs grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
@@ -32,7 +32,7 @@ const FiltersSection = ({
             type="date"
             value={filters.dateFrom}
             onChange={(e) => onFilterChange('dateFrom', e.target.value)}
-            className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
           />
         </div>
         
@@ -42,7 +42,7 @@ const FiltersSection = ({
             type="date"
             value={filters.dateTo}
             onChange={(e) => onFilterChange('dateTo', e.target.value)}
-            className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
           />
         </div>
         
@@ -53,7 +53,7 @@ const FiltersSection = ({
             step="0.01"
             value={filters.amountMin}
             onChange={(e) => onFilterChange('amountMin', e.target.value)}
-            className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
             placeholder="0.00"
           />
         </div>
@@ -65,7 +65,7 @@ const FiltersSection = ({
             step="0.01"
             value={filters.amountMax}
             onChange={(e) => onFilterChange('amountMax', e.target.value)}
-            className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
             placeholder="999.99"
           />
         </div>
@@ -76,14 +76,14 @@ const FiltersSection = ({
             type="text"
             value={filters.keyword}
             onChange={(e) => onFilterChange('keyword', e.target.value)}
-            className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
             placeholder={t('filters.searchPlaceholder')}
           />
         </div>
         
         <div>
           <label className="block text-sm font-medium mb-2">{t('filters.categories')}</label>
-          <div className="max-h-32 overflow-y-auto border rounded-xl p-3 bg-gray-50">
+          <div className="max-h-32 overflow-y-auto border border-gray-200 rounded-md p-2 bg-gray-50">
             {uniqueCategories.map((category) => (
               <label key={category} className="flex items-center gap-2 text-sm mb-2">
                 <input
@@ -107,10 +107,10 @@ const FiltersSection = ({
             <button
               key={tag}
               onClick={() => onMultiSelectFilter('tags', tag)}
-              className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${
+              className={`px-3 py-1 rounded-md text-sm border transition-colors ${
                 filters.tags.includes(tag)
-                  ? 'bg-blue-500 text-white border-blue-500 shadow-lg'
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                  ? 'bg-gray-900 text-white border-gray-900'
+                  : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
               }`}
             >
               {tag}
@@ -127,10 +127,10 @@ const FiltersSection = ({
       <button
         key={bank}
         onClick={() => onMultiSelectFilter('banks', bank)}  // ← CHANGED TO 'banks'
-        className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${
-          filters.banks && filters.banks.includes(bank)      // ← CHANGED TO 'banks'
-            ? 'bg-purple-500 text-white border-purple-500 shadow-lg'
-            : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+        className={`px-3 py-1 rounded-md text-sm border transition-colors ${
+          filters.banks && filters.banks.includes(bank)
+            ? 'bg-gray-900 text-white border-gray-900'
+            : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
         }`}
       >
         {bank}
