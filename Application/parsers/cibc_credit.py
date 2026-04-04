@@ -162,7 +162,7 @@ SKIP_LINES = [
 
 TEMPLATE_META = {
     'id': 'cibc_credit',
-    'bank': 'CIBC',
+    'bank': 'cibc_credit',
     'account_type': 'Visa Credit Card',
     'country': 'Canada',
     'detection_keywords': ['Carte Dividendes CIBC', 'Visa Infinite', 'CIBC'],
@@ -385,7 +385,7 @@ def parse(pages_text, document_id=None, filepath=None):
             'date': op_date,
             'posting_date': post_date,
             'time': None,
-            'bank': 'CIBC',
+            'bank': 'cibc_credit',
             'card_type': 'Credit',
             'category': 'Uncategorized',
             'tags': [],
@@ -399,7 +399,7 @@ def parse(pages_text, document_id=None, filepath=None):
 
     return {
         'template': 'cibc_credit',
-        'bank': 'CIBC',
+        'bank': 'cibc_credit',
         'card_type': 'Credit',
         'card_number': card_number,
         'statement_period': f'{period_start} to {period_end}' if period_start else None,

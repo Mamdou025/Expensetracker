@@ -132,7 +132,7 @@ def _classify_amounts(amounts, prev_balance):
 
 TEMPLATE_META = {
     'id': 'cibc_chequing',
-    'bank': 'CIBC',
+    'bank': 'cibc_debit',
     'account_type': 'Chequing',
     'country': 'Canada',
     'detection_keywords': ['CIBC Account Statement', 'Withdrawals ($)', 'Deposits ($)'],
@@ -235,7 +235,7 @@ def parse(pages_text, document_id=None, filepath=None):
             'normalized_merchant': desc.split(' / ')[0] if ' / ' in desc else desc,
             'date': current_date,
             'time': None,
-            'bank': 'CIBC',
+            'bank': 'cibc_debit',
             'card_type': 'Debit',
             'category': 'Uncategorized',
             'tags': [],
@@ -343,7 +343,7 @@ def parse(pages_text, document_id=None, filepath=None):
 
     return {
         'template': 'cibc_chequing',
-        'bank': 'CIBC',
+        'bank': 'cibc_debit',
         'card_type': 'Debit',
         'account_number': account_number,
         'statement_period': f'{period_start} to {period_end}' if period_start else None,

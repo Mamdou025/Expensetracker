@@ -4,7 +4,7 @@ from datetime import datetime
 
 TEMPLATE_META = {
     'id': 'capital_one_credit',
-    'bank': 'Capital One',
+    'bank': 'capital_one_credit',
     'account_type': 'Mastercard Credit Card',
     'country': 'Canada',
     'detection_keywords': ['Capital One', 'Mastercard', 'capitalone.ca'],
@@ -121,7 +121,7 @@ def _build_tx(desc, raw_line, trans_date, post_date, amount, direction, document
         'date': trans_date,
         'posting_date': post_date,
         'time': None,
-        'bank': 'Capital One',
+        'bank': 'capital_one_credit',
         'card_type': 'Credit',
         'category': 'Uncategorized',
         'tags': [],
@@ -269,7 +269,7 @@ def parse(pages_text, document_id=None, filepath=None):
 
     return {
         'template': 'capital_one_credit',
-        'bank': 'Capital One',
+        'bank': 'capital_one_credit',
         'card_type': 'Credit',
         'card_number': card_number,
         'statement_period': f'{period_start} to {period_end}' if period_start else None,
