@@ -46,6 +46,12 @@ def main():
         trans.setdefault("raw_description", trans.get("description"))
         trans.setdefault("normalized_merchant", trans.get("description"))
 
+        direction = (trans.get("direction") or "").lower().strip()
+        if direction in ("deposit", "payment"):
+            trans["transaction_type"] = "income"
+        else:
+            trans["transaction_type"] = "expense"
+
         insert_result = insert_transaction(trans)
         if isinstance(insert_result, dict) and "error" not in insert_result:
             inserted += 1

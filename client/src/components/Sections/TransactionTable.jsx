@@ -109,8 +109,8 @@ const EditableTransactionRow = ({
             </button>
           </div>
         ) : (
-          <span className="text-gray-900 font-medium">
-            ${transaction.amount.toFixed(2)}
+          <span className={`font-medium ${transaction.transaction_type === 'income' ? 'text-emerald-600' : 'text-gray-900'}`}>
+            {transaction.transaction_type === 'income' ? '+' : ''}${transaction.amount.toFixed(2)}
           </span>
         )}
       </td>

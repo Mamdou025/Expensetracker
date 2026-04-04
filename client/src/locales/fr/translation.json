@@ -25,7 +25,12 @@
   "addTransaction.cancel": "Annuler",
   "quickStats.totalTransactions": "Nombre de transactions",
   "quickStats.totalAmount": "Montant total",
+  "quickStats.totalSpending": "Total dépenses",
+  "quickStats.totalDeposits": "Dépôts / Paiements",
   "quickStats.averageAmount": "Montant moyen",
+  "quickStats.averageExpense": "Moy. dépense",
+  "quickStats.expenses": "dépenses",
+  "quickStats.deposits": "dépôts",
   "categoryChart.title": "Répartition des catégories",
   "transactionTable.transactions": "Transactions",
   "transactionTable.page": "Page",
@@ -110,6 +115,10 @@
   ,"pdfImport.resultErrors": "{{count}} erreurs"
   ,"pdfImport.resultDetails": "Transactions importées"
   ,"pdfImport.resultMore": "...et {{count}} de plus"
+  ,"pdfImport.type": "Type"
+  ,"pdfImport.deposit": "Dépôt"
+  ,"pdfImport.expense": "Dépense"
+  ,"pdfImport.depositNote": "Les dépôts sont importés mais exclus des totaux de dépenses"
   ,"navigation.bankTemplates": "Modèles bancaires"
   ,"bankTemplates.title": "Modèles bancaires"
   ,"bankTemplates.subtitle": "Formats de relevés bancaires pris en charge pour l'import PDF"
