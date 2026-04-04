@@ -16,6 +16,7 @@ const Header = () => {
         <Link to="/" className={linkClasses('/')}>{t('navigation.dashboard')}</Link>
         <Link to="/email-extraction" className={linkClasses('/email-extraction')}>{t('navigation.emailExtraction')}</Link>
         <Link to="/pdf-import" className={linkClasses('/pdf-import')}>{t('navigation.pdfImport')}</Link>
+        <Link to="/bank-templates" className={linkClasses('/bank-templates')}>{t('navigation.bankTemplates')}</Link>
       </nav>
     </div>
   );
