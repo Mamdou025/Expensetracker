@@ -50,7 +50,8 @@ const PDFImportPage = () => {
       setParseResult(result);
       const txns = (result.transactions || []).map((t, i) => ({ ...t, _idx: i }));
       setTransactions(txns);
-      setSelectedIds(new Set(txns.map((t) => t._idx)));
+      const nonDuplicateIds = new Set(txns.filter((t) => !t.is_duplicate).map((t) => t._idx));
+      setSelectedIds(nonDuplicateIds);
     } catch (err) {
       alert(err.message || t('pdfImport.parseFailed'));
     } finally {
@@ -208,16 +209,28 @@ const PDFImportPage = () => {
         </div>
 
         {parseResult && (
-          <div className="mt-4 flex gap-4 text-sm text-gray-600">
-            <span className="bg-blue-50 px-3 py-1 rounded-lg">
-              {t('pdfImport.bank')}: <strong>{parseResult.bank}</strong>
-            </span>
-            <span className="bg-blue-50 px-3 py-1 rounded-lg">
-              {t('pdfImport.cardType')}: <strong>{parseResult.card_type}</strong>
-            </span>
-            <span className="bg-blue-50 px-3 py-1 rounded-lg">
-              {t('pdfImport.found')}: <strong>{parseResult.transactions_found}</strong>
-            </span>
+          <div className="mt-4 space-y-2">
+            <div className="flex gap-4 text-sm text-gray-600">
+              <span className="bg-blue-50 px-3 py-1 rounded-lg">
+                {t('pdfImport.bank')}: <strong>{parseResult.bank}</strong>
+              </span>
+              <span className="bg-blue-50 px-3 py-1 rounded-lg">
+                {t('pdfImport.cardType')}: <strong>{parseResult.card_type}</strong>
+              </span>
+              <span className="bg-blue-50 px-3 py-1 rounded-lg">
+                {t('pdfImport.found')}: <strong>{parseResult.transactions_found}</strong>
+              </span>
+              {parseResult.duplicate_count > 0 && (
+                <span className="bg-yellow-50 text-yellow-700 px-3 py-1 rounded-lg">
+                  {t('pdfImport.duplicatesFound', { count: parseResult.duplicate_count })}
+                </span>
+              )}
+            </div>
+            {parseResult.document_already_imported && (
+              <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded-xl text-sm">
+                {t('pdfImport.documentAlreadyImported')}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -283,7 +296,7 @@ const PDFImportPage = () => {
                   const isDeposit = row.direction === 'deposit' || row.direction === 'payment';
 
                   return (
-                    <tr key={row._idx} className={`${selectedIds.has(row._idx) ? 'bg-blue-50' : ''} ${isDeposit ? 'opacity-60' : ''}`}>
+                    <tr key={row._idx} className={`${selectedIds.has(row._idx) ? 'bg-blue-50' : ''} ${isDeposit ? 'opacity-60' : ''} ${row.is_duplicate ? 'bg-yellow-50/50' : ''}`}>
                       <td className="px-4 py-3">
                         <input
                           type="checkbox"
@@ -328,18 +341,25 @@ const PDFImportPage = () => {
                         )}
                       </td>
                       <td className="px-4 py-3">
-                        {isEditing ? (
-                          <input
-                            type="text"
-                            value={editValues.description}
-                            onChange={(e) =>
-                              setEditValues({ ...editValues, description: e.target.value })
-                            }
-                            className="border rounded px-2 py-1 w-full"
-                          />
-                        ) : (
-                          row.description
-                        )}
+                        <div className="flex items-center gap-2">
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              value={editValues.description}
+                              onChange={(e) =>
+                                setEditValues({ ...editValues, description: e.target.value })
+                              }
+                              className="border rounded px-2 py-1 w-full"
+                            />
+                          ) : (
+                            row.description
+                          )}
+                          {row.is_duplicate && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 whitespace-nowrap">
+                              {t('pdfImport.duplicate')}
+                            </span>
+                          )}
+                        </div>
                       </td>
                       <td className="px-4 py-3 text-xs text-gray-500 max-w-xs truncate" title={row.raw_description}>
                         {row.raw_description}
@@ -432,6 +452,8 @@ const PDFImportPage = () => {
           </div>
           <p className="text-sm text-gray-700">
             {t('pdfImport.resultInserted', { count: importResult.inserted })}
+            {importResult.skipped > 0 &&
+              ` | ${t('pdfImport.resultSkipped', { count: importResult.skipped })}`}
             {importResult.errors > 0 &&
               ` | ${t('pdfImport.resultErrors', { count: importResult.errors })}`}
           </p>

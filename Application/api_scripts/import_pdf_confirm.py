@@ -8,6 +8,25 @@ sys.path.append(os.path.abspath(os.path.join(current_dir, '..', '..')))
 
 from Database.Insert import insert_transaction
 
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
+
+
+def check_duplicate(date, amount, bank, description):
+    conn = connect_db()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "SELECT id FROM transactions WHERE date = ? AND amount = ? AND bank = ? AND LOWER(TRIM(description)) = LOWER(TRIM(?)) LIMIT 1",
+            (date, amount, bank, description),
+        )
+        row = cursor.fetchone()
+        return row is not None
+    finally:
+        conn.close()
+
 
 def main():
     raw = sys.stdin.read()
@@ -27,6 +46,8 @@ def main():
     results = []
     inserted = 0
     errors = 0
+    skipped = 0
+    skipped_list = []
 
     for trans in transactions:
         if not isinstance(trans, dict):
@@ -52,6 +73,21 @@ def main():
         else:
             trans["transaction_type"] = "expense"
 
+        if check_duplicate(
+            trans.get("date", ""),
+            float(trans.get("amount", 0)),
+            trans.get("bank", "Unknown"),
+            trans.get("description", ""),
+        ):
+            skipped += 1
+            skipped_list.append({
+                "description": trans.get("description"),
+                "amount": trans.get("amount"),
+                "date": trans.get("date"),
+                "reason": "duplicate",
+            })
+            continue
+
         insert_result = insert_transaction(trans)
         if isinstance(insert_result, dict) and "error" not in insert_result:
             inserted += 1
@@ -71,6 +107,8 @@ def main():
     print(json.dumps({
         "inserted": inserted,
         "errors": errors,
+        "skipped": skipped,
+        "skipped_transactions": skipped_list,
         "transactions": results,
     }))
 

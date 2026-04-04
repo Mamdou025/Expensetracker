@@ -1064,7 +1064,61 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
             if (parsed.error) {
                 return res.status(400).json(parsed);
             }
-            res.json(parsed);
+
+            const txns = parsed.transactions || [];
+            if (txns.length === 0) {
+                return res.json(parsed);
+            }
+
+            const sourceRef = parsed.document_id || '';
+            db.all(
+                `SELECT source_ref FROM transactions WHERE source_ref = ? LIMIT 1`,
+                [sourceRef],
+                (refErr, refRows) => {
+                    const documentAlreadyImported = !refErr && refRows && refRows.length > 0;
+
+                    if (documentAlreadyImported) {
+                        parsed.document_already_imported = true;
+                        parsed.duplicate_count = txns.length;
+                        txns.forEach(t => { t.is_duplicate = true; });
+                        return res.json(parsed);
+                    }
+
+                    const dates = [...new Set(txns.map(t => t.date))];
+                    const datePlaceholders = dates.map(() => '?').join(', ');
+
+                    db.all(
+                        `SELECT date, amount, bank, description FROM transactions
+                         WHERE date IN (${datePlaceholders})`,
+                        dates,
+                        (err, existingRows) => {
+                            if (err) {
+                                return res.json(parsed);
+                            }
+
+                            const existingSet = new Set();
+                            (existingRows || []).forEach(row => {
+                                const key = `${row.date}|${row.amount}|${row.bank}|${(row.description || '').toLowerCase().trim()}`;
+                                existingSet.add(key);
+                            });
+
+                            let duplicateCount = 0;
+                            txns.forEach(t => {
+                                const key = `${t.date}|${t.amount}|${t.bank || 'Unknown'}|${(t.description || '').toLowerCase().trim()}`;
+                                if (existingSet.has(key)) {
+                                    t.is_duplicate = true;
+                                    duplicateCount++;
+                                } else {
+                                    t.is_duplicate = false;
+                                }
+                            });
+
+                            parsed.duplicate_count = duplicateCount;
+                            res.json(parsed);
+                        }
+                    );
+                }
+            );
         } catch (e) {
             res.status(500).json({ error: 'Failed to parse python output', details: output });
         }
