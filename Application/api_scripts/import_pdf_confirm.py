@@ -1,6 +1,8 @@
 import sys
 import os
 import json
+import re
+from datetime import datetime, timedelta
 
 current_dir = os.path.dirname(__file__)
 sys.path.append(os.path.abspath(os.path.join(current_dir, '..')))
@@ -14,16 +16,42 @@ except ImportError:
     from Database.db_config import connect_db
 
 
+def norm_desc(desc):
+    if not desc:
+        return ''
+    d = desc.lower().strip()
+    d = re.sub(r'^retail purchase\s+\d+\s+', '', d, flags=re.IGNORECASE)
+    d = re.sub(r'^e-transfer\s+\d+\s*', 'e-transfer ', d, flags=re.IGNORECASE)
+    d = re.sub(r'\s+', ' ', d)
+    return d
+
+
 def check_duplicate(date, amount, bank, description):
     conn = connect_db()
     cursor = conn.cursor()
     try:
+        dt = datetime.strptime(date, '%Y-%m-%d')
+        date_start = (dt - timedelta(days=2)).strftime('%Y-%m-%d')
+        date_end = (dt + timedelta(days=2)).strftime('%Y-%m-%d')
+
         cursor.execute(
-            "SELECT id FROM transactions WHERE date = ? AND amount = ? AND bank = ? AND LOWER(TRIM(description)) = LOWER(TRIM(?)) LIMIT 1",
-            (date, amount, bank, description),
+            "SELECT date, amount, description FROM transactions WHERE amount = ? AND bank = ? AND date BETWEEN ? AND ?",
+            (float(amount), bank, date_start, date_end),
         )
-        row = cursor.fetchone()
-        return row is not None
+        rows = cursor.fetchall()
+        if not rows:
+            return False
+
+        new_norm = norm_desc(description)
+        for row in rows:
+            ex_norm = norm_desc(row[2])
+            if ex_norm == new_norm:
+                return True
+            if ex_norm in new_norm or new_norm in ex_norm:
+                return True
+        return False
+    except Exception:
+        return False
     finally:
         conn.close()
 

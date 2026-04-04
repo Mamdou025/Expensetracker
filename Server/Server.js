@@ -1070,6 +1070,21 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
                 return res.json(parsed);
             }
 
+            function normDesc(desc) {
+                if (!desc) return '';
+                let d = desc.toLowerCase().trim();
+                d = d.replace(/^retail purchase\s+\d+\s+/i, '');
+                d = d.replace(/^e-transfer\s+\d+\s*/i, 'e-transfer ');
+                d = d.replace(/\s+/g, ' ');
+                return d;
+            }
+
+            function addDays(dateStr, n) {
+                const dt = new Date(dateStr + 'T00:00:00');
+                dt.setDate(dt.getDate() + n);
+                return dt.toISOString().slice(0, 10);
+            }
+
             const sourceRef = parsed.document_id || '';
             db.all(
                 `SELECT source_ref FROM transactions WHERE source_ref = ? LIMIT 1`,
@@ -1085,32 +1100,52 @@ app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
                     }
 
                     const dates = [...new Set(txns.map(t => t.date))];
-                    const datePlaceholders = dates.map(() => '?').join(', ');
+                    const allDates = new Set();
+                    dates.forEach(d => {
+                        for (let offset = -2; offset <= 2; offset++) {
+                            allDates.add(addDays(d, offset));
+                        }
+                    });
+                    const expandedDates = [...allDates];
+                    const datePlaceholders = expandedDates.map(() => '?').join(', ');
 
                     db.all(
                         `SELECT date, amount, bank, description FROM transactions
                          WHERE date IN (${datePlaceholders})`,
-                        dates,
+                        expandedDates,
                         (err, existingRows) => {
                             if (err) {
                                 return res.json(parsed);
                             }
 
-                            const existingSet = new Set();
-                            (existingRows || []).forEach(row => {
-                                const key = `${row.date}|${row.amount}|${row.bank}|${(row.description || '').toLowerCase().trim()}`;
-                                existingSet.add(key);
-                            });
+                            const existingList = (existingRows || []).map(row => ({
+                                date: row.date,
+                                amount: row.amount,
+                                bank: row.bank,
+                                normDesc: normDesc(row.description),
+                            }));
 
                             let duplicateCount = 0;
                             txns.forEach(t => {
-                                const key = `${t.date}|${t.amount}|${t.bank || 'Unknown'}|${(t.description || '').toLowerCase().trim()}`;
-                                if (existingSet.has(key)) {
-                                    t.is_duplicate = true;
-                                    duplicateCount++;
-                                } else {
-                                    t.is_duplicate = false;
-                                }
+                                const tNorm = normDesc(t.description);
+                                const tBank = t.bank || 'Unknown';
+                                const tAmount = parseFloat(t.amount);
+                                const tDate = t.date;
+
+                                const isDup = existingList.some(ex => {
+                                    if (Math.abs(ex.amount - tAmount) > 0.01) return false;
+                                    if (ex.bank !== tBank) return false;
+                                    const dayDiff = Math.abs(
+                                        (new Date(tDate) - new Date(ex.date)) / 86400000
+                                    );
+                                    if (dayDiff > 2) return false;
+                                    if (ex.normDesc === tNorm) return true;
+                                    if (ex.normDesc.includes(tNorm) || tNorm.includes(ex.normDesc)) return true;
+                                    return false;
+                                });
+
+                                t.is_duplicate = isDup;
+                                if (isDup) duplicateCount++;
                             });
 
                             parsed.duplicate_count = duplicateCount;
