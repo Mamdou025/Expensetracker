@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Filter, X } from 'lucide-react';
+import { Filter } from 'lucide-react';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTranslation } from 'react-i18next';
 
@@ -62,7 +62,6 @@ const FiltersSection = ({
   };
 
   const isActive = (p) => filters.dateFrom === p.from && filters.dateTo === p.to;
-  const hasDates = filters.dateFrom || filters.dateTo;
 
   return (
     <ExpandableSection
@@ -78,7 +77,7 @@ const FiltersSection = ({
           {allPresets.map((p) => (
             <button
               key={p.label}
-              onClick={() => applyPreset(p.from, p.to)}
+              onClick={() => isActive(p) ? clearDates() : applyPreset(p.from, p.to)}
               className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
                 isActive(p)
                   ? 'nav-active border-transparent'
@@ -88,15 +87,6 @@ const FiltersSection = ({
               {p.label}
             </button>
           ))}
-          {hasDates && (
-            <button
-              onClick={clearDates}
-              className="px-3 py-1.5 rounded-md text-xs font-medium border border-red-800/50 bg-red-900/20 text-red-400 hover:bg-red-900/40 transition-colors flex items-center gap-1"
-            >
-              <X className="w-3 h-3" />
-              {t('filters.presets.clear')}
-            </button>
-          )}
         </div>
       </div>
 
