@@ -1,0 +1,42 @@
+I’m deploying and continuing development of a project called **ExpenseTracker**.
+
+It is a **full-stack personal finance app** with this architecture:
+- **Frontend:** React app in `client/`
+- **Backend:** Node/Express API in `Server/`
+- **Data storage:** SQLite database
+- **Processing scripts:** Python scripts in `Application/`
+- **Current deployment target:** Replit Reserved VM
+
+What the app does right now:
+- Connects to Gmail via IMAP
+- Reads bank transaction emails
+- Identifies the bank using sender + keywords
+- Extracts transaction data like amount, description, date, bank, card type
+- Stores transactions in SQLite
+- Exposes them through an Express API
+- Displays them in a React dashboard with filters, tags, categories, charts, and an email extraction queue
+
+Important implementation details:
+- Node backend calls Python scripts with subprocess/spawn
+- The app now has a production-style startup path
+- DB path is environment-driven with `SQLITE_PATH`
+- Email credentials come from env vars: `EMAIL_USER` and `EMAIL_PASS`
+- The app should bind to `HOST=0.0.0.0` and use `PORT`
+- React frontend can be built and served by the backend
+- Replit build command should be: `npm run replit:build`
+- Replit run command should be: `npm start`
+
+My current priority:
+**Help me get the first deployment working cleanly on Replit before we add more features.**
+
+What I need from you:
+1. Inspect the repo structure and understand how Node, Python, React, and SQLite interact
+2. Help me verify the Replit configuration, build path, run path, env vars, and port behavior
+3. Help me fix any deployment/runtime issues that prevent the app from starting correctly on Replit
+4. Do not suggest large rewrites yet
+5. Keep changes minimal, practical, and focused on getting the current app live
+
+Once you inspect the repo, first give me:
+- a short summary of how you understand the app
+- the likely Replit deployment risks
+- the first concrete thing you want to check or fix

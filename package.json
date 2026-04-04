@@ -11,5 +11,16 @@
     "start": "node scripts/start-production.js",
     "start:server": "npm --prefix Server run start",
     "verify:deploy": "node scripts/verify-deploy.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
+  },
+  "overrides": {
+    "nth-check": ">=2.0.1",
+    "serialize-javascript": "7.0.5",
+    "underscore": "1.13.8",
+    "node-forge": "1.4.0"
   }
 }

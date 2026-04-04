@@ -7,14 +7,17 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.21",
     "i18next": "^25.3.1",
     "lucide-react": "^0.513.0",
+    "postcss": "^8.5.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.6.0",
     "react-scripts": "5.0.1",
     "react-router-dom": "^6.21.1",
     "recharts": "^2.15.3",
+    "tailwindcss": "^3.4.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -42,9 +45,12 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.4",
-    "tailwindcss": "^3.4.0",
     "typescript": "4.9.5"
+  },
+  "overrides": {
+    "nth-check": ">=2.0.1",
+    "serialize-javascript": "7.0.5",
+    "underscore": "1.13.8",
+    "node-forge": "1.4.0"
   }
 }

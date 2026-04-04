@@ -1,4 +1,7 @@
-from db_config import connect_db, get_db_path
+try:
+    from db_config import connect_db, get_db_path
+except ImportError:
+    from Database.db_config import connect_db, get_db_path
 
 def fetch_transactions(category=None):
     """

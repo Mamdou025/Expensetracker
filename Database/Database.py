@@ -1,4 +1,7 @@
-from db_config import connect_db, ensure_db_directory, get_db_path
+try:
+    from db_config import connect_db, ensure_db_directory, get_db_path
+except ImportError:
+    from Database.db_config import connect_db, ensure_db_directory, get_db_path
 
 def _check_and_update_columns(cursor):
     """Ensure the transactions table has all required columns."""
@@ -10,6 +13,10 @@ def _check_and_update_columns(cursor):
         "source_type": "TEXT DEFAULT 'manual'",
         "source_ref": "TEXT DEFAULT NULL",
         "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+        "raw_description": "TEXT DEFAULT NULL",
+        "normalized_merchant": "TEXT DEFAULT NULL",
+        "duplicate_status": "TEXT DEFAULT 'unchecked'",
+        "duplicate_group_id": "TEXT DEFAULT NULL",
     }
 
     cursor.execute("PRAGMA table_info(transactions)")
@@ -43,7 +50,11 @@ def create_database():
             category TEXT DEFAULT 'Uncategorized',
             source_type TEXT DEFAULT 'manual',
             source_ref TEXT DEFAULT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            raw_description TEXT DEFAULT NULL,
+            normalized_merchant TEXT DEFAULT NULL,
+            duplicate_status TEXT DEFAULT 'unchecked',
+            duplicate_group_id TEXT DEFAULT NULL
         )
     """)
 

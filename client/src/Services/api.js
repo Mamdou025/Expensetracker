@@ -64,6 +64,14 @@ export const apiClient = {
     return handleResponse(response);
   },
 
+  upload: async (endpoint, formData) => {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      method: 'POST',
+      body: formData,
+    });
+    return handleResponse(response);
+  },
+
   delete: async (endpoint, data = null) => {
     const options = {
       method: 'DELETE',

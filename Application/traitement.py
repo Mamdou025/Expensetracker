@@ -188,4 +188,7 @@ def extract_transaction_data(
         dup = is_duplicate(ordered_data["amount"], ordered_data["date"])
 
     ordered_data["duplicate"] = dup
+    ordered_data["duplicate_status"] = "suspected" if dup else "unchecked"
+    ordered_data["raw_description"] = ordered_data.get("description")
+    ordered_data["normalized_merchant"] = ordered_data.get("description")
     return ordered_data

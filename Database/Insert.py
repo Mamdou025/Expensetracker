@@ -1,6 +1,9 @@
 import logging
 
-from db_config import connect_db
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
 
 # Configure logging if not already done
 if not logging.getLogger().handlers:
@@ -85,23 +88,34 @@ def insert_transaction(ordered_data):
         source_type = ordered_data.get("source_type", "manual")
         source_ref = ordered_data.get("source_ref")
 
-        # ✅ Get or create transaction entry
+        raw_desc = ordered_data["description"]
+        raw_description = ordered_data.get("raw_description", raw_desc)
+        normalized_merchant = ordered_data.get("normalized_merchant", raw_desc)
+        duplicate_status = ordered_data.get("duplicate_status", "unchecked")
+        duplicate_group_id = ordered_data.get("duplicate_group_id")
+
         cursor.execute("""
             INSERT INTO transactions (
-                amount, description, card_type, date, time, bank, full_email, category, source_type, source_ref
+                amount, description, card_type, date, time, bank, full_email, category,
+                source_type, source_ref, raw_description, normalized_merchant,
+                duplicate_status, duplicate_group_id
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             amount,
-            ordered_data["description"],
+            raw_desc,
             card_type,
             ordered_data["date"],
-            ordered_data.get("time", None),  # ✅ Allow NULL time
+            ordered_data.get("time", None),
             ordered_data["bank"],
             ordered_data.get("full_email", "No email content"),
             category,
             source_type,
             source_ref,
+            raw_description,
+            normalized_merchant,
+            duplicate_status,
+            duplicate_group_id,
         ))
 
         # ✅ Get the inserted transaction ID

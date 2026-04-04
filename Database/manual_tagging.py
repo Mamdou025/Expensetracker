@@ -1,6 +1,9 @@
 import sqlite3
 
-from db_config import connect_db
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
 
 def get_all_transactions():
     """Fetch all transactions for selection."""

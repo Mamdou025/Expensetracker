@@ -1,0 +1,64 @@
+Implement the first PDF statement import patch for the current ExpenseTracker codebase.
+
+Goal:
+Add the first working PDF-import pipeline so past bank statement transactions can enter the same normalized transaction system as email transactions.
+
+Important context:
+- The app already supports email-based transaction extraction
+- The transaction schema now supports multi-source fields:
+  - raw_description
+  - normalized_merchant
+  - source_type
+  - source_ref
+  - duplicate_status
+  - duplicate_group_id
+- I want PDF-imported transactions to reuse the same insertion pipeline as much as possible
+
+Scope for this patch:
+1. Add a first backend PDF import flow
+   - accept an uploaded PDF statement
+   - extract text from it
+   - parse transactions into the same normalized transaction shape used by the current pipeline
+   - mark them with:
+     - source_type = "pdf"
+     - source_ref = document identifier / filename / derived document id
+     - duplicate_status = "unchecked" by default unless a current duplicate check already exists
+
+2. Keep the implementation practical and minimal
+   - support one first statement-parsing flow
+   - if bank-specific parsing is needed, make the structure easy to extend
+   - do not build a huge OCR/AI system yet
+   - do not redesign the whole app
+
+3. Add the backend pieces needed for this first import
+   - one upload/import endpoint in Express
+   - one Python script or parser module for PDF extraction/parsing
+   - any lightweight document metadata handling needed
+
+4. Reuse the current normalized insertion path where practical
+   - avoid creating a completely separate transaction model
+   - parsed PDF rows should flow into the same transaction insertion logic as email rows
+
+5. Keep current app behavior working
+   - current email extraction must still work
+   - dashboard must still load
+   - old transactions must remain compatible
+
+Suggested files likely involved:
+- Server/Server.js
+- Application/ (new PDF parser script/module)
+- Database/Insert.py
+- Database/Database.py only if a minimal document metadata table is truly needed
+- minimal frontend wiring only if required for upload entry point
+
+Before editing:
+A. summarize the current ingestion flow and where PDF import should connect
+B. list exact files you will change
+C. explain the smallest safe implementation strategy
+
+After editing:
+1. list files changed
+2. summarize each change
+3. explain the end-to-end PDF import flow
+4. explain what assumptions the first parser makes
+5. tell me the next best patch after this one

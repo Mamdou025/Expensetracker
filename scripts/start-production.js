@@ -33,7 +33,7 @@ function waitForExit(child, failureLabel) {
 async function main() {
   const runtimeEnv = buildRuntimeEnv({
     ...process.env,
-    NODE_ENV: process.env.NODE_ENV || 'production',
+    NODE_ENV: process.env.NODE_ENV || 'development',
   });
 
   validateRuntimeConfig(runtimeEnv, { requireClientBuild: true });
