@@ -32,6 +32,9 @@ def _normalize_queue_item(item):
         trans.setdefault("source_ref", email_payload.get("id") or _source_ref_from_email(email_payload))
         trans.setdefault("full_email", email_payload.get("full_email_html") or email_payload.get("email"))
         trans.setdefault("tags", [])
+        trans.setdefault("raw_description", trans.get("description"))
+        trans.setdefault("normalized_merchant", trans.get("description"))
+        trans.setdefault("duplicate_status", "suspected" if trans.get("duplicate") else "unchecked")
         return trans
 
     # Fallback for legacy callers that only submit the raw email payload.
