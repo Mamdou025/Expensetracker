@@ -3,23 +3,24 @@ import Header from './ui/Header';
 import { useTranslation } from 'react-i18next';
 import { pdfImportService } from '../Services/pdfImportService';
 import { useTransactions } from '../hooks/useTransactions';
-import { Upload, FileText, CheckCircle, XCircle, Trash2, Edit3, X, ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react';
+import { Upload, FileText, CheckCircle, XCircle, Trash2, Edit3, X, ChevronDown, ChevronUp, AlertTriangle, Loader2 } from 'lucide-react';
 
 const PDFImportPage = () => {
   const { t } = useTranslation();
   const fileInputRef = useRef(null);
   const { refreshTransactions } = useTransactions();
 
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [parsing, setParsing] = useState(false);
   const [confirming, setConfirming] = useState(false);
-  const [parseResult, setParseResult] = useState(null);
+  const [parseResults, setParseResults] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [selectedIds, setSelectedIds] = useState(new Set());
   const [importResult, setImportResult] = useState(null);
   const [editingIdx, setEditingIdx] = useState(null);
   const [editValues, setEditValues] = useState({});
   const [expandedDups, setExpandedDups] = useState(new Set());
+  const [progress, setProgress] = useState({ current: 0, total: 0, currentFile: '' });
 
   const toggleDupExpand = (idx) => {
     setExpandedDups((prev) => {
@@ -31,10 +32,10 @@ const PDFImportPage = () => {
   };
 
   const handleFileSelect = (e) => {
-    const selected = e.target.files?.[0];
-    if (selected && selected.type === 'application/pdf') {
-      setFile(selected);
-      setParseResult(null);
+    const selected = Array.from(e.target.files || []).filter(f => f.type === 'application/pdf');
+    if (selected.length > 0) {
+      setFiles(selected);
+      setParseResults([]);
       setTransactions([]);
       setImportResult(null);
     }
@@ -42,30 +43,57 @@ const PDFImportPage = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const dropped = e.dataTransfer.files?.[0];
-    if (dropped && dropped.type === 'application/pdf') {
-      setFile(dropped);
-      setParseResult(null);
+    const dropped = Array.from(e.dataTransfer.files || []).filter(f => f.type === 'application/pdf');
+    if (dropped.length > 0) {
+      setFiles(dropped);
+      setParseResults([]);
       setTransactions([]);
       setImportResult(null);
     }
   };
 
   const handleParse = async () => {
-    if (!file) return;
+    if (files.length === 0) return;
     setParsing(true);
     setImportResult(null);
+    setProgress({ current: 0, total: files.length, currentFile: '' });
+
+    const allTxns = [];
+    const allResults = [];
+    let globalIdx = 0;
+
     try {
-      const result = await pdfImportService.parsePdf(file);
-      setParseResult(result);
-      const txns = (result.transactions || []).map((t, i) => ({ ...t, _idx: i }));
-      setTransactions(txns);
-      const nonDuplicateIds = new Set(txns.filter((t) => !t.is_duplicate).map((t) => t._idx));
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        setProgress({ current: i + 1, total: files.length, currentFile: file.name });
+        try {
+          const result = await pdfImportService.parsePdf(file);
+          result._fileName = file.name;
+          allResults.push(result);
+          const txns = (result.transactions || []).map((txn) => ({
+            ...txn,
+            _idx: globalIdx++,
+            _fileName: file.name,
+          }));
+          allTxns.push(...txns);
+        } catch (err) {
+          allResults.push({
+            _fileName: file.name,
+            error: err.message || t('pdfImport.parseFailed'),
+            transactions: [],
+            transactions_found: 0,
+            duplicate_count: 0,
+          });
+        }
+      }
+
+      setParseResults(allResults);
+      setTransactions(allTxns);
+      const nonDuplicateIds = new Set(allTxns.filter((txn) => !txn.is_duplicate).map((txn) => txn._idx));
       setSelectedIds(nonDuplicateIds);
-    } catch (err) {
-      alert(err.message || t('pdfImport.parseFailed'));
     } finally {
       setParsing(false);
+      setProgress({ current: 0, total: 0, currentFile: '' });
     }
   };
 
@@ -78,16 +106,19 @@ const PDFImportPage = () => {
     });
   };
 
-  const selectAll = () => setSelectedIds(new Set(transactions.map((t) => t._idx)));
+  const selectAll = () => setSelectedIds(new Set(transactions.map((txn) => txn._idx)));
   const clearSelection = () => setSelectedIds(new Set());
+  const selectNonDuplicates = () => {
+    setSelectedIds(new Set(transactions.filter((txn) => !txn.is_duplicate).map((txn) => txn._idx)));
+  };
 
   const removeSelected = () => {
-    setTransactions((prev) => prev.filter((t) => !selectedIds.has(t._idx)));
+    setTransactions((prev) => prev.filter((txn) => !selectedIds.has(txn._idx)));
     setSelectedIds(new Set());
   };
 
   const removeRow = (idx) => {
-    setTransactions((prev) => prev.filter((t) => t._idx !== idx));
+    setTransactions((prev) => prev.filter((txn) => txn._idx !== idx));
     setSelectedIds((prev) => {
       const next = new Set(prev);
       next.delete(idx);
@@ -96,7 +127,7 @@ const PDFImportPage = () => {
   };
 
   const startEdit = (idx) => {
-    const row = transactions.find((t) => t._idx === idx);
+    const row = transactions.find((txn) => txn._idx === idx);
     if (!row) return;
     setEditingIdx(idx);
     setEditValues({
@@ -111,18 +142,18 @@ const PDFImportPage = () => {
   const saveEdit = () => {
     if (editingIdx === null) return;
     setTransactions((prev) =>
-      prev.map((t) =>
-        t._idx === editingIdx
+      prev.map((txn) =>
+        txn._idx === editingIdx
           ? {
-              ...t,
+              ...txn,
               date: editValues.date,
-              amount: parseFloat(editValues.amount) || t.amount,
+              amount: parseFloat(editValues.amount) || txn.amount,
               description: editValues.description,
               normalized_merchant: editValues.description,
               bank: editValues.bank,
               card_type: editValues.card_type,
             }
-          : t
+          : txn
       )
     );
     setEditingIdx(null);
@@ -135,14 +166,14 @@ const PDFImportPage = () => {
   };
 
   const handleConfirm = async () => {
-    const selected = transactions.filter((t) => selectedIds.has(t._idx));
+    const selected = transactions.filter((txn) => selectedIds.has(txn._idx));
     if (selected.length === 0) return;
     setConfirming(true);
     try {
-      const toSend = selected.map(({ _idx, ...rest }) => rest);
+      const toSend = selected.map(({ _idx, _fileName, ...rest }) => rest);
       const result = await pdfImportService.confirmImport(toSend);
       setImportResult(result);
-      setTransactions((prev) => prev.filter((t) => !selectedIds.has(t._idx)));
+      setTransactions((prev) => prev.filter((txn) => !selectedIds.has(txn._idx)));
       setSelectedIds(new Set());
       await refreshTransactions();
     } catch (err) {
@@ -153,17 +184,35 @@ const PDFImportPage = () => {
   };
 
   const reset = () => {
-    setFile(null);
-    setParseResult(null);
+    setFiles([]);
+    setParseResults([]);
     setTransactions([]);
     setSelectedIds(new Set());
     setImportResult(null);
     setEditingIdx(null);
+    setExpandedDups(new Set());
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const allSelected = transactions.length > 0 && selectedIds.size === transactions.length;
   const selectedCount = selectedIds.size;
+  const totalFound = parseResults.reduce((sum, r) => sum + (r.transactions_found || 0), 0);
+  const totalDups = parseResults.reduce((sum, r) => sum + (r.duplicate_count || 0), 0);
+  const successResults = parseResults.filter(r => !r.error);
+  const errorResults = parseResults.filter(r => r.error);
+
+  const fileGroups = [];
+  if (transactions.length > 0) {
+    const grouped = {};
+    transactions.forEach(txn => {
+      const fn = txn._fileName || 'unknown';
+      if (!grouped[fn]) grouped[fn] = [];
+      grouped[fn].push(txn);
+    });
+    Object.entries(grouped).forEach(([fn, txns]) => {
+      fileGroups.push({ fileName: fn, transactions: txns });
+    });
+  }
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -183,17 +232,22 @@ const PDFImportPage = () => {
         >
           <Upload className="w-10 h-10 mx-auto text-gray-400 mb-3" />
           <p className="text-gray-600 mb-1">
-            {file ? file.name : t('pdfImport.dropzone')}
+            {files.length > 0
+              ? t('pdfImport.filesSelected', { count: files.length })
+              : t('pdfImport.dropzone')}
           </p>
-          {file && (
-            <p className="text-sm text-gray-400">
-              {(file.size / 1024).toFixed(1)} KB
-            </p>
+          {files.length > 0 && (
+            <div className="mt-2 text-sm text-gray-400 max-h-24 overflow-y-auto">
+              {files.map((f, i) => (
+                <p key={i}>{f.name} ({(f.size / 1024).toFixed(1)} KB)</p>
+              ))}
+            </div>
           )}
           <input
             ref={fileInputRef}
             type="file"
             accept=".pdf,application/pdf"
+            multiple
             onChange={handleFileSelect}
             className="hidden"
           />
@@ -202,13 +256,17 @@ const PDFImportPage = () => {
         <div className="flex gap-3 mt-4">
           <button
             onClick={handleParse}
-            disabled={!file || parsing}
+            disabled={files.length === 0 || parsing}
             className="px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
-            <FileText className="w-4 h-4" />
-            {parsing ? t('pdfImport.parsing') : t('pdfImport.parse')}
+            {parsing ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
+            {parsing
+              ? t('pdfImport.parsingProgress', { current: progress.current, total: progress.total })
+              : files.length > 1
+                ? t('pdfImport.parseAll', { count: files.length })
+                : t('pdfImport.parse')}
           </button>
-          {(parseResult || file) && (
+          {(parseResults.length > 0 || files.length > 0) && (
             <button
               onClick={reset}
               className="px-6 py-3 border rounded-xl hover:bg-gray-50"
@@ -218,27 +276,55 @@ const PDFImportPage = () => {
           )}
         </div>
 
-        {parseResult && (
+        {parsing && progress.currentFile && (
+          <div className="mt-4">
+            <div className="flex items-center gap-3 text-sm text-gray-600">
+              <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
+              <span>{t('pdfImport.parsingFile', { name: progress.currentFile })}</span>
+            </div>
+            <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(progress.current / progress.total) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {parseResults.length > 0 && (
           <div className="mt-4 space-y-2">
-            <div className="flex gap-4 text-sm text-gray-600">
+            <div className="flex gap-4 text-sm text-gray-600 flex-wrap">
               <span className="bg-blue-50 px-3 py-1 rounded-lg">
-                {t('pdfImport.bank')}: <strong>{parseResult.bank}</strong>
+                {t('pdfImport.filesProcessed', { count: successResults.length })}
               </span>
               <span className="bg-blue-50 px-3 py-1 rounded-lg">
-                {t('pdfImport.cardType')}: <strong>{parseResult.card_type}</strong>
+                {t('pdfImport.found')}: <strong>{totalFound}</strong>
               </span>
-              <span className="bg-blue-50 px-3 py-1 rounded-lg">
-                {t('pdfImport.found')}: <strong>{parseResult.transactions_found}</strong>
-              </span>
-              {parseResult.duplicate_count > 0 && (
+              {totalDups > 0 && (
                 <span className="bg-yellow-50 text-yellow-700 px-3 py-1 rounded-lg">
-                  {t('pdfImport.duplicatesFound', { count: parseResult.duplicate_count })}
+                  {t('pdfImport.duplicatesFound', { count: totalDups })}
+                </span>
+              )}
+              {errorResults.length > 0 && (
+                <span className="bg-red-50 text-red-700 px-3 py-1 rounded-lg">
+                  {t('pdfImport.fileErrors', { count: errorResults.length })}
                 </span>
               )}
             </div>
-            {parseResult.document_already_imported && (
-              <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded-xl text-sm">
-                {t('pdfImport.documentAlreadyImported')}
+
+            {parseResults.length > 1 && (
+              <div className="mt-2 space-y-1">
+                {parseResults.map((r, i) => (
+                  <div key={i} className={`text-xs px-3 py-1.5 rounded-lg flex items-center gap-2 ${r.error ? 'bg-red-50 text-red-700' : 'bg-gray-50 text-gray-600'}`}>
+                    {r.error ? <XCircle className="w-3.5 h-3.5" /> : <CheckCircle className="w-3.5 h-3.5 text-green-600" />}
+                    <span className="font-medium">{r._fileName}</span>
+                    {r.error ? (
+                      <span>— {r.error}</span>
+                    ) : (
+                      <span>— {r.bank} • {r.transactions_found} txns{r.duplicate_count > 0 ? ` • ${r.duplicate_count} dups` : ''}{r.document_already_imported ? ` • ${t('pdfImport.alreadyImported')}` : ''}</span>
+                    )}
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -249,22 +335,26 @@ const PDFImportPage = () => {
         <div className="bg-white p-8 rounded-3xl shadow-xl border mb-8">
           <p className="mb-2 text-sm text-gray-700">
             {t('pdfImport.total')}: {transactions.length} | {t('pdfImport.selected')}: {selectedCount}
+            {files.length > 1 && ` | ${t('pdfImport.fromFiles', { count: fileGroups.length })}`}
           </p>
           {transactions.some(r => r.direction === 'deposit' || r.direction === 'payment') && (
             <p className="mb-4 text-xs text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg inline-block">
               {t('pdfImport.depositNote')}
             </p>
           )}
-          {parseResult && parseResult.duplicate_count > 0 && (
+          {totalDups > 0 && (
             <p className="mb-4 text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg inline-flex items-center gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5" />
               {t('pdfImport.duplicatesReviewNote')}
             </p>
           )}
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between mb-4 flex-wrap gap-2">
             <div className="space-x-2">
               <button onClick={selectAll} className="px-3 py-1 border rounded-xl text-sm">
                 {t('queue.selectAll')}
+              </button>
+              <button onClick={selectNonDuplicates} className="px-3 py-1 border rounded-xl text-sm">
+                {t('pdfImport.selectNonDups')}
               </button>
               <button onClick={clearSelection} className="px-3 py-1 border rounded-xl text-sm">
                 {t('queue.clear')}
@@ -300,9 +390,8 @@ const PDFImportPage = () => {
                   <th className="px-4 py-3">{t('pdfImport.type')}</th>
                   <th className="px-4 py-3">{t('queue.table.amount')}</th>
                   <th className="px-4 py-3">{t('queue.table.description')}</th>
-                  <th className="px-4 py-3">{t('pdfImport.rawDescription')}</th>
+                  {files.length > 1 && <th className="px-4 py-3">{t('pdfImport.file')}</th>}
                   <th className="px-4 py-3">{t('queue.table.bank')}</th>
-                  <th className="px-4 py-3">{t('pdfImport.cardType')}</th>
                   <th className="px-4 py-3">{t('transactionTable.actions')}</th>
                 </tr>
               </thead>
@@ -313,7 +402,7 @@ const PDFImportPage = () => {
                   const isDup = row.is_duplicate;
                   const hasMatch = row.is_duplicate && row.existing_match;
                   const isExpanded = expandedDups.has(row._idx);
-                  const colCount = 9;
+                  const colCount = files.length > 1 ? 8 : 7;
 
                   let dateDiffDays = 0;
                   let descDiffers = false;
@@ -380,7 +469,7 @@ const PDFImportPage = () => {
                               className="border rounded px-2 py-1 w-full"
                             />
                           ) : (
-                            row.description
+                            <span className="truncate max-w-xs" title={row.description}>{row.description}</span>
                           )}
                           {isDup && hasMatch && (
                             <button
@@ -400,9 +489,11 @@ const PDFImportPage = () => {
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-xs text-gray-500 max-w-xs truncate" title={row.raw_description}>
-                        {row.raw_description}
-                      </td>
+                      {files.length > 1 && (
+                        <td className="px-4 py-3 text-xs text-gray-500 max-w-[120px] truncate" title={row._fileName}>
+                          {row._fileName}
+                        </td>
+                      )}
                       <td className="px-4 py-3">
                         {isEditing ? (
                           <input
@@ -413,20 +504,6 @@ const PDFImportPage = () => {
                           />
                         ) : (
                           row.bank
-                        )}
-                      </td>
-                      <td className="px-4 py-3">
-                        {isEditing ? (
-                          <input
-                            type="text"
-                            value={editValues.card_type}
-                            onChange={(e) =>
-                              setEditValues({ ...editValues, card_type: e.target.value })
-                            }
-                            className="border rounded px-2 py-1 w-24"
-                          />
-                        ) : (
-                          row.card_type
                         )}
                       </td>
                       <td className="px-4 py-3">
