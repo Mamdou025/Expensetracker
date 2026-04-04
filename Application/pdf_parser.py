@@ -7,13 +7,16 @@ from datetime import datetime
 try:
     from parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
     from parsers.rbc_credit import detect as detect_rbc_credit, parse as parse_rbc_credit, metadata as meta_rbc_credit
+    from parsers.neo_credit import detect as detect_neo_credit, parse as parse_neo_credit, metadata as meta_neo_credit
 except ImportError:
     from Application.parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
     from Application.parsers.rbc_credit import detect as detect_rbc_credit, parse as parse_rbc_credit, metadata as meta_rbc_credit
+    from Application.parsers.neo_credit import detect as detect_neo_credit, parse as parse_neo_credit, metadata as meta_neo_credit
 
 TEMPLATE_PARSERS = [
     (detect_cibc_chequing, parse_cibc_chequing, meta_cibc_chequing),
     (detect_rbc_credit, parse_rbc_credit, meta_rbc_credit),
+    (detect_neo_credit, parse_neo_credit, meta_neo_credit),
 ]
 
 
@@ -153,7 +156,7 @@ def parse_pdf_statement(filepath):
 
     for detect_fn, parse_fn, _meta_fn in TEMPLATE_PARSERS:
         if detect_fn(full_text):
-            result = parse_fn(pages_text, document_id=document_id)
+            result = parse_fn(pages_text, document_id=document_id, filepath=filepath)
             if result and result.get('transactions_found', 0) > 0:
                 result['document_id'] = document_id
                 result['total_pages'] = len(pages_text)
