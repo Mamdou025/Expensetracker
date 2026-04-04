@@ -1,9 +1,8 @@
-// src/components/Settings/TagManager.jsx
 import React, { useState } from 'react';
 import { Trash2, AlertTriangle, Plus } from 'lucide-react';
 
-const TagManager = ({ 
-  tags, 
+const TagManager = ({
+  tags,
   onRefreshTags,
   onCreateTag,
   onDeleteTag
@@ -19,8 +18,7 @@ const TagManager = ({
       const result = await onDeleteTag(tagName);
       await onRefreshTags();
       setShowDeleteConfirm(null);
-      
-      // Show success message with transaction count
+
       if (result.updatedTransactions > 0) {
         alert(`Tag deleted! ${result.updatedTransactions} transactions were updated.`);
       } else {
@@ -35,7 +33,7 @@ const TagManager = ({
 
   const handleCreateTag = async () => {
     if (!newTagName.trim()) return;
-    
+
     try {
       setIsLoading(true);
       await onCreateTag(newTagName.trim());
@@ -53,10 +51,10 @@ const TagManager = ({
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold text-lg">Gérer les balises</h3>
+        <h3 className="font-semibold text-lg text-gray-200">Gérer les balises</h3>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
           disabled={isLoading}
         >
           <Plus className="w-4 h-4" />
@@ -64,17 +62,16 @@ const TagManager = ({
         </button>
       </div>
 
-      {/* Add New Tag Form */}
       {showAddForm && (
-        <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-          <h4 className="font-medium text-blue-900 mb-3">Creer un Nouveau Tag</h4>
+        <div className="bg-blue-900/20 p-4 rounded-lg border border-blue-800">
+          <h4 className="font-medium text-blue-300 mb-3">Creer un Nouveau Tag</h4>
           <div className="flex gap-3">
             <input
               type="text"
               value={newTagName}
               onChange={(e) => setNewTagName(e.target.value)}
               placeholder="Enter tag name..."
-              className="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 border border-gray-700 rounded-md px-3 py-2 bg-gray-800 text-gray-200 focus:ring-1 focus:ring-blue-500"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleCreateTag();
                 if (e.key === 'Escape') {
@@ -87,7 +84,7 @@ const TagManager = ({
             <button
               onClick={handleCreateTag}
               disabled={!newTagName.trim() || isLoading}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               Create
             </button>
@@ -96,7 +93,7 @@ const TagManager = ({
                 setNewTagName('');
                 setShowAddForm(false);
               }}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+              className="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-800 transition-colors duration-200"
               disabled={isLoading}
             >
               Cancel
@@ -105,14 +102,13 @@ const TagManager = ({
         </div>
       )}
 
-      {/* Tags Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tags.map((tag) => {
           const tagName = tag.name || tag;
           return (
-            <div key={tagName} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border">
+            <div key={tagName} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg border border-gray-700">
               <div>
-                <span className="font-medium">{tagName}</span>
+                <span className="font-medium text-gray-200">{tagName}</span>
                 {tag.transaction_count && (
                   <div className="text-xs text-gray-500">
                     {tag.transaction_count} transactions
@@ -122,7 +118,7 @@ const TagManager = ({
               <div className="flex gap-2">
                 <button
                   onClick={() => setShowDeleteConfirm(tagName)}
-                  className="text-red-600 hover:text-red-800 hover:bg-red-100 p-2 rounded transition-colors duration-200"
+                  className="text-red-400 hover:text-red-300 hover:bg-red-900/30 p-2 rounded transition-colors duration-200"
                   disabled={isLoading}
                   title="Delete tag from all transactions"
                 >
@@ -136,36 +132,35 @@ const TagManager = ({
 
       {tags.length === 0 && !isLoading && (
         <div className="text-center text-gray-500 py-8">
-          <p>Aucune balise trouvée. Créez une balise ou attribuez-en une aux transactions pour les voir ici !</p>
+          <p>Aucune balise trouvée. Créez une balise ou attribuez-en une aux transactions pour les voir ici !</p>
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div className="bg-gray-900 rounded-lg shadow-2xl p-6 max-w-md w-full mx-4 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <AlertTriangle className="w-6 h-6 text-red-500" />
-              <h3 className="text-lg font-semibold">Supprimer le Tag</h3>
+              <AlertTriangle className="w-6 h-6 text-red-400" />
+              <h3 className="text-lg font-semibold text-gray-200">Supprimer le Tag</h3>
             </div>
-            <p className="text-gray-600 mb-6">
-              Êtes-vous sûr de vouloir supprimer "<strong>{showDeleteConfirm}</strong>"? 
+            <p className="text-gray-400 mb-6">
+              Êtes-vous sûr de vouloir supprimer "<strong className="text-gray-200">{showDeleteConfirm}</strong>"?
               <br />
-              <span className="text-sm text-red-600 mt-2 block">
+              <span className="text-sm text-red-400 mt-2 block">
                 Cela supprimera la balise de toutes les transactions l'utilisant.
               </span>
             </p>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDeleteConfirm(null)}
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                className="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-800 transition-colors duration-200"
                 disabled={isLoading}
               >
                 Annuler
               </button>
               <button
                 onClick={() => handleDeleteTag(showDeleteConfirm)}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 disabled:opacity-50 flex items-center gap-2"
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 disabled:opacity-50 flex items-center gap-2"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -182,7 +177,7 @@ const TagManager = ({
 
       {isLoading && (
         <div className="text-center text-gray-500">
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto mb-2"></div>
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-400 mx-auto mb-2"></div>
           Traitement...
         </div>
       )}

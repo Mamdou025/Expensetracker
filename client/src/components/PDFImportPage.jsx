@@ -215,29 +215,29 @@ const PDFImportPage = () => {
   }
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-950 p-8 max-w-6xl mx-auto">
       <Header />
 
-      <div className="bg-white p-8 rounded-3xl shadow-xl border mb-8">
-        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-          <FileText className="w-5 h-5" />
+      <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 mb-8">
+        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-100">
+          <FileText className="w-5 h-5 text-gray-400" />
           {t('pdfImport.title')}
         </h2>
 
         <div
-          className="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-blue-400 transition-colors cursor-pointer"
+          className="border-2 border-dashed border-gray-700 rounded-lg p-8 text-center hover:border-gray-500 transition-colors cursor-pointer"
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
           onClick={() => fileInputRef.current?.click()}
         >
-          <Upload className="w-10 h-10 mx-auto text-gray-400 mb-3" />
-          <p className="text-gray-600 mb-1">
+          <Upload className="w-10 h-10 mx-auto text-gray-500 mb-3" />
+          <p className="text-gray-400 mb-1">
             {files.length > 0
               ? t('pdfImport.filesSelected', { count: files.length })
               : t('pdfImport.dropzone')}
           </p>
           {files.length > 0 && (
-            <div className="mt-2 text-sm text-gray-400 max-h-24 overflow-y-auto">
+            <div className="mt-2 text-sm text-gray-500 max-h-24 overflow-y-auto">
               {files.map((f, i) => (
                 <p key={i}>{f.name} ({(f.size / 1024).toFixed(1)} KB)</p>
               ))}
@@ -257,7 +257,7 @@ const PDFImportPage = () => {
           <button
             onClick={handleParse}
             disabled={files.length === 0 || parsing}
-            className="px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             {parsing ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
             {parsing
@@ -269,7 +269,7 @@ const PDFImportPage = () => {
           {(parseResults.length > 0 || files.length > 0) && (
             <button
               onClick={reset}
-              className="px-6 py-3 border rounded-xl hover:bg-gray-50"
+              className="px-6 py-3 border border-gray-700 text-gray-300 rounded-lg hover:bg-gray-800"
             >
               {t('pdfImport.reset')}
             </button>
@@ -278,11 +278,11 @@ const PDFImportPage = () => {
 
         {parsing && progress.currentFile && (
           <div className="mt-4">
-            <div className="flex items-center gap-3 text-sm text-gray-600">
+            <div className="flex items-center gap-3 text-sm text-gray-400">
               <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
               <span>{t('pdfImport.parsingFile', { name: progress.currentFile })}</span>
             </div>
-            <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+            <div className="mt-2 w-full bg-gray-800 rounded-full h-2">
               <div
                 className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${(progress.current / progress.total) * 100}%` }}
@@ -293,20 +293,20 @@ const PDFImportPage = () => {
 
         {parseResults.length > 0 && (
           <div className="mt-4 space-y-2">
-            <div className="flex gap-4 text-sm text-gray-600 flex-wrap">
-              <span className="bg-blue-50 px-3 py-1 rounded-lg">
+            <div className="flex gap-4 text-sm text-gray-400 flex-wrap">
+              <span className="bg-blue-900/30 text-blue-300 px-3 py-1 rounded-lg">
                 {t('pdfImport.filesProcessed', { count: successResults.length })}
               </span>
-              <span className="bg-blue-50 px-3 py-1 rounded-lg">
+              <span className="bg-blue-900/30 text-blue-300 px-3 py-1 rounded-lg">
                 {t('pdfImport.found')}: <strong>{totalFound}</strong>
               </span>
               {totalDups > 0 && (
-                <span className="bg-yellow-50 text-yellow-700 px-3 py-1 rounded-lg">
+                <span className="bg-amber-900/30 text-amber-300 px-3 py-1 rounded-lg">
                   {t('pdfImport.duplicatesFound', { count: totalDups })}
                 </span>
               )}
               {errorResults.length > 0 && (
-                <span className="bg-red-50 text-red-700 px-3 py-1 rounded-lg">
+                <span className="bg-red-900/30 text-red-300 px-3 py-1 rounded-lg">
                   {t('pdfImport.fileErrors', { count: errorResults.length })}
                 </span>
               )}
@@ -315,8 +315,8 @@ const PDFImportPage = () => {
             {parseResults.length > 1 && (
               <div className="mt-2 space-y-1">
                 {parseResults.map((r, i) => (
-                  <div key={i} className={`text-xs px-3 py-1.5 rounded-lg flex items-center gap-2 ${r.error ? 'bg-red-50 text-red-700' : 'bg-gray-50 text-gray-600'}`}>
-                    {r.error ? <XCircle className="w-3.5 h-3.5" /> : <CheckCircle className="w-3.5 h-3.5 text-green-600" />}
+                  <div key={i} className={`text-xs px-3 py-1.5 rounded-lg flex items-center gap-2 ${r.error ? 'bg-red-900/20 text-red-400' : 'bg-gray-800 text-gray-400'}`}>
+                    {r.error ? <XCircle className="w-3.5 h-3.5" /> : <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />}
                     <span className="font-medium">{r._fileName}</span>
                     {r.error ? (
                       <span>— {r.error}</span>
@@ -332,41 +332,41 @@ const PDFImportPage = () => {
       </div>
 
       {transactions.length > 0 && (
-        <div className="bg-white p-8 rounded-3xl shadow-xl border mb-8">
-          <p className="mb-2 text-sm text-gray-700">
+        <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 mb-8">
+          <p className="mb-2 text-sm text-gray-400">
             {t('pdfImport.total')}: {transactions.length} | {t('pdfImport.selected')}: {selectedCount}
             {files.length > 1 && ` | ${t('pdfImport.fromFiles', { count: fileGroups.length })}`}
           </p>
           {transactions.some(r => r.direction === 'deposit' || r.direction === 'payment') && (
-            <p className="mb-4 text-xs text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg inline-block">
+            <p className="mb-4 text-xs text-emerald-400 bg-emerald-900/20 px-3 py-1.5 rounded-lg inline-block">
               {t('pdfImport.depositNote')}
             </p>
           )}
           {totalDups > 0 && (
-            <p className="mb-4 text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg inline-flex items-center gap-1.5">
+            <p className="mb-4 text-xs text-amber-300 bg-amber-900/20 px-3 py-1.5 rounded-lg inline-flex items-center gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5" />
               {t('pdfImport.duplicatesReviewNote')}
             </p>
           )}
           <div className="flex justify-between mb-4 flex-wrap gap-2">
             <div className="space-x-2">
-              <button onClick={selectAll} className="px-3 py-1 border rounded-xl text-sm">
+              <button onClick={selectAll} className="px-3 py-1 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-gray-800">
                 {t('queue.selectAll')}
               </button>
-              <button onClick={selectNonDuplicates} className="px-3 py-1 border rounded-xl text-sm">
+              <button onClick={selectNonDuplicates} className="px-3 py-1 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-gray-800">
                 {t('pdfImport.selectNonDups')}
               </button>
-              <button onClick={clearSelection} className="px-3 py-1 border rounded-xl text-sm">
+              <button onClick={clearSelection} className="px-3 py-1 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-gray-800">
                 {t('queue.clear')}
               </button>
-              <button onClick={removeSelected} className="px-3 py-1 border rounded-xl text-sm text-red-600">
+              <button onClick={removeSelected} className="px-3 py-1 border border-gray-700 text-red-400 rounded-lg text-sm hover:bg-gray-800">
                 {t('queue.remove')}
               </button>
             </div>
             <button
               onClick={handleConfirm}
               disabled={selectedCount === 0 || confirming}
-              className="px-6 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <CheckCircle className="w-4 h-4" />
               {confirming
@@ -376,26 +376,26 @@ const PDFImportPage = () => {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-left text-sm">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-800 text-left text-sm">
+              <thead className="bg-gray-800/50">
                 <tr>
-                  <th className="px-4 py-3">
+                  <th className="px-4 py-3 text-gray-400">
                     <input
                       type="checkbox"
                       checked={allSelected}
                       onChange={() => (allSelected ? clearSelection() : selectAll())}
                     />
                   </th>
-                  <th className="px-4 py-3">{t('queue.table.date')}</th>
-                  <th className="px-4 py-3">{t('pdfImport.type')}</th>
-                  <th className="px-4 py-3">{t('queue.table.amount')}</th>
-                  <th className="px-4 py-3">{t('queue.table.description')}</th>
-                  {files.length > 1 && <th className="px-4 py-3">{t('pdfImport.file')}</th>}
-                  <th className="px-4 py-3">{t('queue.table.bank')}</th>
-                  <th className="px-4 py-3">{t('transactionTable.actions')}</th>
+                  <th className="px-4 py-3 text-gray-400">{t('queue.table.date')}</th>
+                  <th className="px-4 py-3 text-gray-400">{t('pdfImport.type')}</th>
+                  <th className="px-4 py-3 text-gray-400">{t('queue.table.amount')}</th>
+                  <th className="px-4 py-3 text-gray-400">{t('queue.table.description')}</th>
+                  {files.length > 1 && <th className="px-4 py-3 text-gray-400">{t('pdfImport.file')}</th>}
+                  <th className="px-4 py-3 text-gray-400">{t('queue.table.bank')}</th>
+                  <th className="px-4 py-3 text-gray-400">{t('transactionTable.actions')}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-800">
                 {transactions.map((row) => {
                   const isEditing = editingIdx === row._idx;
                   const isDeposit = row.direction === 'deposit' || row.direction === 'payment';
@@ -413,7 +413,7 @@ const PDFImportPage = () => {
 
                   return (
                     <React.Fragment key={row._idx}>
-                    <tr className={`${selectedIds.has(row._idx) ? 'bg-blue-50' : ''} ${isDeposit ? 'opacity-60' : ''} ${isDup ? 'bg-amber-50/60' : ''}`}>
+                    <tr className={`${selectedIds.has(row._idx) ? 'bg-blue-900/20' : ''} ${isDeposit ? 'opacity-60' : ''} ${isDup ? 'bg-amber-900/10' : ''} text-gray-300`}>
                       <td className="px-4 py-3">
                         <input
                           type="checkbox"
@@ -427,7 +427,7 @@ const PDFImportPage = () => {
                             type="date"
                             value={editValues.date}
                             onChange={(e) => setEditValues({ ...editValues, date: e.target.value })}
-                            className="border rounded px-2 py-1 w-36"
+                            className="border border-gray-600 rounded px-2 py-1 w-36 bg-gray-800 text-gray-200"
                           />
                         ) : (
                           row.date
@@ -435,23 +435,23 @@ const PDFImportPage = () => {
                       </td>
                       <td className="px-4 py-3">
                         {isDeposit ? (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-400">
                             {t('pdfImport.deposit')}
                           </span>
                         ) : (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-900/30 text-red-400">
                             {t('pdfImport.expense')}
                           </span>
                         )}
                       </td>
-                      <td className={`px-4 py-3 ${isDeposit ? 'text-emerald-600' : ''}`}>
+                      <td className={`px-4 py-3 ${isDeposit ? 'text-emerald-400' : ''}`}>
                         {isEditing ? (
                           <input
                             type="number"
                             step="0.01"
                             value={editValues.amount}
                             onChange={(e) => setEditValues({ ...editValues, amount: e.target.value })}
-                            className="border rounded px-2 py-1 w-24"
+                            className="border border-gray-600 rounded px-2 py-1 w-24 bg-gray-800 text-gray-200"
                           />
                         ) : (
                           <>{isDeposit ? '+' : ''}{Number(row.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</>
@@ -466,7 +466,7 @@ const PDFImportPage = () => {
                               onChange={(e) =>
                                 setEditValues({ ...editValues, description: e.target.value })
                               }
-                              className="border rounded px-2 py-1 w-full"
+                              className="border border-gray-600 rounded px-2 py-1 w-full bg-gray-800 text-gray-200"
                             />
                           ) : (
                             <span className="truncate max-w-xs" title={row.description}>{row.description}</span>
@@ -474,7 +474,7 @@ const PDFImportPage = () => {
                           {isDup && hasMatch && (
                             <button
                               onClick={() => toggleDupExpand(row._idx)}
-                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 whitespace-nowrap hover:bg-amber-200 transition-colors cursor-pointer"
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-900/30 text-amber-300 whitespace-nowrap hover:bg-amber-900/50 transition-colors cursor-pointer"
                             >
                               <AlertTriangle className="w-3 h-3" />
                               {t('pdfImport.duplicate')}
@@ -482,7 +482,7 @@ const PDFImportPage = () => {
                             </button>
                           )}
                           {isDup && !hasMatch && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 whitespace-nowrap">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-900/30 text-amber-300 whitespace-nowrap">
                               <AlertTriangle className="w-3 h-3" />
                               {t('pdfImport.duplicate')}
                             </span>
@@ -490,7 +490,7 @@ const PDFImportPage = () => {
                         </div>
                       </td>
                       {files.length > 1 && (
-                        <td className="px-4 py-3 text-xs text-gray-500 max-w-[120px] truncate" title={row._fileName}>
+                        <td className="px-4 py-3 text-xs text-gray-500 max-w-[120px] truncate"  title={row._fileName}>
                           {row._fileName}
                         </td>
                       )}
@@ -500,7 +500,7 @@ const PDFImportPage = () => {
                             type="text"
                             value={editValues.bank}
                             onChange={(e) => setEditValues({ ...editValues, bank: e.target.value })}
-                            className="border rounded px-2 py-1 w-28"
+                            className="border border-gray-600 rounded px-2 py-1 w-28 bg-gray-800 text-gray-200"
                           />
                         ) : (
                           row.bank
@@ -512,14 +512,14 @@ const PDFImportPage = () => {
                             <>
                               <button
                                 onClick={saveEdit}
-                                className="p-1 text-green-600 hover:text-green-800"
+                                className="p-1 text-emerald-400 hover:text-emerald-300"
                                 title={t('mappings.rules.save')}
                               >
                                 <CheckCircle className="w-4 h-4" />
                               </button>
                               <button
                                 onClick={cancelEdit}
-                                className="p-1 text-gray-600 hover:text-gray-800"
+                                className="p-1 text-gray-400 hover:text-gray-300"
                                 title={t('mappings.rules.cancel')}
                               >
                                 <X className="w-4 h-4" />
@@ -529,14 +529,14 @@ const PDFImportPage = () => {
                             <>
                               <button
                                 onClick={() => startEdit(row._idx)}
-                                className="p-1 text-blue-600 hover:text-blue-800"
+                                className="p-1 text-blue-400 hover:text-blue-300"
                                 title={t('mappings.rules.edit')}
                               >
                                 <Edit3 className="w-4 h-4" />
                               </button>
                               <button
                                 onClick={() => removeRow(row._idx)}
-                                className="p-1 text-red-600 hover:text-red-800"
+                                className="p-1 text-red-400 hover:text-red-300"
                                 title={t('queue.table.remove')}
                               >
                                 <Trash2 className="w-4 h-4" />
@@ -547,38 +547,38 @@ const PDFImportPage = () => {
                       </td>
                     </tr>
                     {hasMatch && isExpanded && (
-                      <tr className="bg-amber-50/40">
+                      <tr className="bg-amber-900/10">
                         <td colSpan={colCount} className="px-4 py-3">
-                          <div className="ml-8 border border-amber-200 rounded-xl p-4 bg-white/80">
-                            <p className="text-xs font-semibold text-amber-800 mb-2 flex items-center gap-1.5">
+                          <div className="ml-8 border border-amber-800/30 rounded-lg p-4 bg-gray-800/80">
+                            <p className="text-xs font-semibold text-amber-300 mb-2 flex items-center gap-1.5">
                               <AlertTriangle className="w-3.5 h-3.5" />
                               {t('pdfImport.existingMatch')}
                             </p>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                               <div>
                                 <p className="text-xs text-gray-500 mb-1">PDF ({t('pdfImport.source')}: pdf)</p>
-                                <p><strong>{row.date}</strong> &mdash; {Number(row.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</p>
-                                <p className="text-gray-700 mt-0.5">{row.description}</p>
+                                <p className="text-gray-200"><strong>{row.date}</strong> &mdash; {Number(row.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</p>
+                                <p className="text-gray-400 mt-0.5">{row.description}</p>
                               </div>
                               <div>
                                 <p className="text-xs text-gray-500 mb-1">{t('pdfImport.existingMatch')} ({t('pdfImport.source')}: {row.existing_match.source_type})</p>
-                                <p><strong>{row.existing_match.date}</strong> &mdash; {Number(row.existing_match.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</p>
-                                <p className="text-gray-700 mt-0.5">{row.existing_match.description}</p>
+                                <p className="text-gray-200"><strong>{row.existing_match.date}</strong> &mdash; {Number(row.existing_match.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</p>
+                                <p className="text-gray-400 mt-0.5">{row.existing_match.description}</p>
                               </div>
                             </div>
                             <div className="mt-2 flex gap-2 flex-wrap">
                               {dateDiffDays > 0 ? (
-                                <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-orange-900/30 text-orange-300">
                                   {t('pdfImport.dateDiff', { days: dateDiffDays })}
                                 </span>
                               ) : null}
                               {descDiffers ? (
-                                <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700">
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-orange-900/30 text-orange-300">
                                   {t('pdfImport.descDiff')}
                                 </span>
                               ) : null}
                               {dateDiffDays === 0 && !descDiffers && (
-                                <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700">
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-red-900/30 text-red-400">
                                   {t('pdfImport.exactMatch')}
                                 </span>
                               )}
@@ -597,18 +597,18 @@ const PDFImportPage = () => {
       )}
 
       {importResult && (
-        <div className="bg-white p-8 rounded-3xl shadow-xl border mb-8">
+        <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 mb-8">
           <div className="flex items-center gap-3 mb-4">
             {importResult.errors === 0 ? (
-              <CheckCircle className="w-6 h-6 text-green-600" />
+              <CheckCircle className="w-6 h-6 text-emerald-400" />
             ) : (
-              <XCircle className="w-6 h-6 text-yellow-600" />
+              <XCircle className="w-6 h-6 text-amber-400" />
             )}
-            <h3 className="text-lg font-semibold">
+            <h3 className="text-lg font-semibold text-gray-100">
               {t('pdfImport.resultTitle')}
             </h3>
           </div>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-400">
             {t('pdfImport.resultInserted', { count: importResult.inserted })}
             {importResult.skipped > 0 &&
               ` | ${t('pdfImport.resultSkipped', { count: importResult.skipped })}`}
@@ -616,7 +616,7 @@ const PDFImportPage = () => {
               ` | ${t('pdfImport.resultErrors', { count: importResult.errors })}`}
           </p>
           {importResult.transactions && importResult.transactions.length > 0 && (
-            <div className="mt-3 text-sm text-gray-600">
+            <div className="mt-3 text-sm text-gray-400">
               <p className="font-medium mb-1">{t('pdfImport.resultDetails')}:</p>
               <ul className="list-disc pl-5 space-y-0.5">
                 {importResult.transactions.slice(0, 10).map((txn, i) => (

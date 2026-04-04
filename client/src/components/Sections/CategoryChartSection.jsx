@@ -14,10 +14,10 @@ const CategoryChartSection = ({
   const PieTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-sm text-sm">
-          <p className="font-semibold">{payload[0].name}</p>
-          <p className="text-blue-600">{`Amount: $${payload[0].value.toFixed(2)}`}</p>
-          <p className="text-gray-600">{`Transactions: ${payload[0].payload.count}`}</p>
+        <div className="bg-gray-800 p-3 border border-gray-700 rounded-lg shadow-lg text-sm">
+          <p className="font-semibold text-gray-200">{payload[0].name}</p>
+          <p className="text-blue-400">{`Amount: $${payload[0].value.toFixed(2)}`}</p>
+          <p className="text-gray-400">{`Transactions: ${payload[0].payload.count}`}</p>
         </div>
       );
     }

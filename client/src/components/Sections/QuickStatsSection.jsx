@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next';
 
 const StatCard = ({ icon: Icon, label, value, subtitle }) => {
   return (
-    <div className="bg-white px-5 py-4 rounded-lg border border-gray-200 shadow-sm">
+    <div className="bg-gray-900 px-5 py-4 rounded-lg border border-gray-800">
       <div className="flex items-center gap-3">
-        <div className="p-2 bg-gray-50 rounded-md">
-          <Icon className="w-5 h-5 text-gray-500" />
+        <div className="p-2 bg-gray-800 rounded-md">
+          <Icon className="w-5 h-5 text-gray-400" />
         </div>
         <div className="min-w-0">
           <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">{label}</p>
-          <p className="text-xl font-semibold text-gray-900 mt-0.5">{value}</p>
-          {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
+          <p className="text-xl font-semibold text-gray-100 mt-0.5">{value}</p>
+          {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
         </div>
       </div>
     </div>
