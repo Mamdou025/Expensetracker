@@ -64,7 +64,8 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - Each template has a `detect(full_text)` function and a `parse(pages_text, document_id)` function
 - `pdf_parser.py` tries template parsers first (via `TEMPLATE_PARSERS` list); falls back to generic line-by-line parsing
 - **CIBC Chequing** (`parsers/cibc_chequing.py`): handles `Mon DD` dates (year from header), Withdrawals/Deposits/Balance columns, multi-line descriptions, FX conversion lines, and service charges. Validates totals against account summary.
-- To add a new bank: create `Application/parsers/<bank>_<type>.py` with `detect()` + `parse()`, import it in `pdf_parser.py`, and add to `TEMPLATE_PARSERS`
+- **RBC Visa Credit** (`parsers/rbc_credit.py`): handles French-format RBC credit card statements — `DD MON` dates with French month names, amounts in `XX,XX $` format, parenthesized payments `(100,00 $)`, two-date lines (operation + posting), reference number filtering, and right-column noise removal. Validates against statement summary totals.
+- To add a new bank: create `Application/parsers/<bank>_<type>.py` with `detect()` + `parse()` + `metadata()`, import it in `pdf_parser.py`, and add to `TEMPLATE_PARSERS`
 
 ## Important Notes
 - Email extraction features require EMAIL_USER and EMAIL_PASS secrets
