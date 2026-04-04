@@ -6,16 +6,19 @@ from datetime import datetime
 
 try:
     from parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
+    from parsers.cibc_credit import detect as detect_cibc_credit, parse as parse_cibc_credit, metadata as meta_cibc_credit
     from parsers.rbc_credit import detect as detect_rbc_credit, parse as parse_rbc_credit, metadata as meta_rbc_credit
     from parsers.neo_credit import detect as detect_neo_credit, parse as parse_neo_credit, metadata as meta_neo_credit
     from parsers.neo_credit_world_elite import detect as detect_neo_we, parse as parse_neo_we, metadata as meta_neo_we
 except ImportError:
     from Application.parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
+    from Application.parsers.cibc_credit import detect as detect_cibc_credit, parse as parse_cibc_credit, metadata as meta_cibc_credit
     from Application.parsers.rbc_credit import detect as detect_rbc_credit, parse as parse_rbc_credit, metadata as meta_rbc_credit
     from Application.parsers.neo_credit import detect as detect_neo_credit, parse as parse_neo_credit, metadata as meta_neo_credit
     from Application.parsers.neo_credit_world_elite import detect as detect_neo_we, parse as parse_neo_we, metadata as meta_neo_we
 
 TEMPLATE_PARSERS = [
+    (detect_cibc_credit, parse_cibc_credit, meta_cibc_credit),
     (detect_cibc_chequing, parse_cibc_chequing, meta_cibc_chequing),
     (detect_rbc_credit, parse_rbc_credit, meta_rbc_credit),
     (detect_neo_we, parse_neo_we, meta_neo_we),
