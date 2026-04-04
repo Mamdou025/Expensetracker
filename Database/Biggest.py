@@ -1,6 +1,9 @@
 import sqlite3
 
-from db_config import connect_db
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
 
 def get_top_100_transactions():
     # ✅ Connect to the database

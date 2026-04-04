@@ -1,4 +1,7 @@
-from db_config import connect_db, ensure_db_directory, get_db_path
+try:
+    from db_config import connect_db, ensure_db_directory, get_db_path
+except ImportError:
+    from Database.db_config import connect_db, ensure_db_directory, get_db_path
 
 def _check_and_update_columns(cursor):
     """Ensure the transactions table has all required columns."""

@@ -1,6 +1,9 @@
 import sqlite3
 
-from db_config import connect_db
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
 
 def delete_all_data():
     """Deletes all transactions, tags, and their relationships permanently."""
