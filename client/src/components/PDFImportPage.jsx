@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import Header from './ui/Header';
 import { useTranslation } from 'react-i18next';
 import { pdfImportService } from '../Services/pdfImportService';
 import { useTransactions } from '../hooks/useTransactions';
@@ -215,8 +214,7 @@ const PDFImportPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 p-8 max-w-6xl mx-auto">
-      <Header />
+    <>
 
       <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 mb-8">
         <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-100">
@@ -632,7 +630,7 @@ const PDFImportPage = () => {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
