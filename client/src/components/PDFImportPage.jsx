@@ -224,9 +224,14 @@ const PDFImportPage = () => {
 
       {transactions.length > 0 && (
         <div className="bg-white p-8 rounded-3xl shadow-xl border mb-8">
-          <p className="mb-4 text-sm text-gray-700">
+          <p className="mb-2 text-sm text-gray-700">
             {t('pdfImport.total')}: {transactions.length} | {t('pdfImport.selected')}: {selectedCount}
           </p>
+          {transactions.some(r => r.direction === 'deposit' || r.direction === 'payment') && (
+            <p className="mb-4 text-xs text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg inline-block">
+              {t('pdfImport.depositNote')}
+            </p>
+          )}
           <div className="flex justify-between mb-4">
             <div className="space-x-2">
               <button onClick={selectAll} className="px-3 py-1 border rounded-xl text-sm">
@@ -263,6 +268,7 @@ const PDFImportPage = () => {
                     />
                   </th>
                   <th className="px-4 py-3">{t('queue.table.date')}</th>
+                  <th className="px-4 py-3">{t('pdfImport.type')}</th>
                   <th className="px-4 py-3">{t('queue.table.amount')}</th>
                   <th className="px-4 py-3">{t('queue.table.description')}</th>
                   <th className="px-4 py-3">{t('pdfImport.rawDescription')}</th>
@@ -274,9 +280,10 @@ const PDFImportPage = () => {
               <tbody className="divide-y divide-gray-200">
                 {transactions.map((row) => {
                   const isEditing = editingIdx === row._idx;
+                  const isDeposit = row.direction === 'deposit' || row.direction === 'payment';
 
                   return (
-                    <tr key={row._idx} className={selectedIds.has(row._idx) ? 'bg-blue-50' : ''}>
+                    <tr key={row._idx} className={`${selectedIds.has(row._idx) ? 'bg-blue-50' : ''} ${isDeposit ? 'opacity-60' : ''}`}>
                       <td className="px-4 py-3">
                         <input
                           type="checkbox"
@@ -297,6 +304,17 @@ const PDFImportPage = () => {
                         )}
                       </td>
                       <td className="px-4 py-3">
+                        {isDeposit ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+                            {t('pdfImport.deposit')}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                            {t('pdfImport.expense')}
+                          </span>
+                        )}
+                      </td>
+                      <td className={`px-4 py-3 ${isDeposit ? 'text-emerald-600' : ''}`}>
                         {isEditing ? (
                           <input
                             type="number"
@@ -306,7 +324,7 @@ const PDFImportPage = () => {
                             className="border rounded px-2 py-1 w-24"
                           />
                         ) : (
-                          Number(row.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })
+                          <>{isDeposit ? '+' : ''}{Number(row.amount).toLocaleString(undefined, { style: 'currency', currency: 'CAD' })}</>
                         )}
                       </td>
                       <td className="px-4 py-3">

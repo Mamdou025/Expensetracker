@@ -93,14 +93,15 @@ def insert_transaction(ordered_data):
         normalized_merchant = ordered_data.get("normalized_merchant", raw_desc)
         duplicate_status = ordered_data.get("duplicate_status", "unchecked")
         duplicate_group_id = ordered_data.get("duplicate_group_id")
+        transaction_type = ordered_data.get("transaction_type", "expense")
 
         cursor.execute("""
             INSERT INTO transactions (
                 amount, description, card_type, date, time, bank, full_email, category,
                 source_type, source_ref, raw_description, normalized_merchant,
-                duplicate_status, duplicate_group_id
+                duplicate_status, duplicate_group_id, transaction_type
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             amount,
             raw_desc,
@@ -116,6 +117,7 @@ def insert_transaction(ordered_data):
             normalized_merchant,
             duplicate_status,
             duplicate_group_id,
+            transaction_type,
         ))
 
         # ✅ Get the inserted transaction ID

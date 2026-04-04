@@ -49,11 +49,12 @@ const db = new sqlite3.Database(dbPath, (err) => {
 app.get('/api/transactions', (req, res) => {
     const query = `
         SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
+               t.transaction_type,
                COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
         FROM transactions t
         LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
         LEFT JOIN tags g ON tt.tag_id = g.id
-        GROUP BY t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category
+        GROUP BY t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category, t.transaction_type
         ORDER BY t.date DESC;
     `;
 
@@ -71,6 +72,7 @@ app.get('/api/transactions/category/:category', (req, res) => {
     const category = req.params.category;
     const query = `
         SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
+               t.transaction_type,
                COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
         FROM transactions t
         LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
@@ -93,6 +95,7 @@ app.get('/api/transactions/tag/:tag', (req, res) => {
     const tagName = req.params.tag;
     const query = `
         SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
+               t.transaction_type,
                COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
         FROM transactions t
         JOIN transaction_tags tt ON t.id = tt.transaction_id

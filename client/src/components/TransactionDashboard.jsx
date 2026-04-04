@@ -179,11 +179,17 @@ const filteredTransactions = useMemo(() => {
 
 
   const quickStats = useMemo(() => {
-    const totalAmount = filteredTransactions.reduce((sum, t) => sum + t.amount, 0);
-    const avgAmount = filteredTransactions.length > 0 ? totalAmount / filteredTransactions.length : 0;
+    const expenses = filteredTransactions.filter(t => t.transaction_type !== 'income');
+    const income = filteredTransactions.filter(t => t.transaction_type === 'income');
+    const totalExpenses = expenses.reduce((sum, t) => sum + t.amount, 0);
+    const totalIncome = income.reduce((sum, t) => sum + t.amount, 0);
+    const avgAmount = expenses.length > 0 ? totalExpenses / expenses.length : 0;
     return {
       count: filteredTransactions.length,
-      total: totalAmount,
+      expenseCount: expenses.length,
+      incomeCount: income.length,
+      total: totalExpenses,
+      totalIncome: totalIncome,
       average: avgAmount
     };
   }, [filteredTransactions]);
@@ -214,7 +220,8 @@ const getTimeKey = (date, grouping) => {
   }
 };
 
-  const dateGroups = filteredTransactions.reduce((acc, transaction) => {
+  const expenseTransactions = filteredTransactions.filter(t => t.transaction_type !== 'income');
+  const dateGroups = expenseTransactions.reduce((acc, transaction) => {
     const timeKey = getTimeKey(transaction.date, timeGrouping);
     
     if (!acc[timeKey]) {
@@ -222,7 +229,7 @@ const getTimeKey = (date, grouping) => {
         date: timeKey, 
         amount: 0, 
         count: 0,
-        categories: {} // For category breakdown
+        categories: {}
       };
     }
     
@@ -263,7 +270,8 @@ console.log(`🔍 DEBUG - Time grouping: ${timeGrouping}`);
 
 
   const pieChartData = useMemo(() => {
-    const categoryGroups = filteredTransactions.reduce((acc, transaction) => {
+    const expensesOnly = filteredTransactions.filter(t => t.transaction_type !== 'income');
+    const categoryGroups = expensesOnly.reduce((acc, transaction) => {
       const category = transaction.category;
       if (!acc[category]) {
         acc[category] = { name: category, value: 0, count: 0 };

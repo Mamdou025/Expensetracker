@@ -67,6 +67,14 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - **RBC Visa Credit** (`parsers/rbc_credit.py`): handles French-format RBC credit card statements — `DD MON` dates with French month names, amounts in `XX,XX $` format, parenthesized payments `(100,00 $)`, two-date lines (operation + posting), reference number filtering, and right-column noise removal. Validates against statement summary totals.
 - To add a new bank: create `Application/parsers/<bank>_<type>.py` with `detect()` + `parse()` + `metadata()`, import it in `pdf_parser.py`, and add to `TEMPLATE_PARSERS`
 
+## Transaction Types
+- Each transaction has a `transaction_type` column: `'expense'` (default) or `'income'`
+- PDF parsers return a `direction` field ('withdrawal', 'deposit', 'purchase', 'payment')
+- During PDF import confirmation, `direction` is mapped: deposit/payment → `income`, withdrawal/purchase → `expense`
+- Dashboard stats, time charts, and category pie charts only count `expense` transactions in spending totals
+- Deposits are shown with green styling and `+` prefix in both the transaction table and PDF preview
+- Existing transactions default to `expense` when the column is added via schema migration
+
 ## Important Notes
 - Email extraction features require EMAIL_USER and EMAIL_PASS secrets
 - Server node_modules in `Server/` are separate from root — sqlite3 native module must match platform

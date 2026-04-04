@@ -25,7 +25,12 @@
   "addTransaction.cancel": "Cancel",
   "quickStats.totalTransactions": "Total Transactions",
   "quickStats.totalAmount": "Total Amount",
+  "quickStats.totalSpending": "Total Spending",
+  "quickStats.totalDeposits": "Deposits / Payments",
   "quickStats.averageAmount": "Average Amount",
+  "quickStats.averageExpense": "Avg. Expense",
+  "quickStats.expenses": "expenses",
+  "quickStats.deposits": "deposits",
   "categoryChart.title": "Categories Distribution",
   "transactionTable.transactions": "Transactions",
   "transactionTable.page": "Page",
@@ -110,6 +115,10 @@
   ,"pdfImport.resultErrors": "{{count}} errors"
   ,"pdfImport.resultDetails": "Imported transactions"
   ,"pdfImport.resultMore": "...and {{count}} more"
+  ,"pdfImport.type": "Type"
+  ,"pdfImport.deposit": "Deposit"
+  ,"pdfImport.expense": "Expense"
+  ,"pdfImport.depositNote": "Deposits are imported but excluded from spending totals"
   ,"navigation.bankTemplates": "Bank Templates"
   ,"bankTemplates.title": "Bank Templates"
   ,"bankTemplates.subtitle": "Supported bank statement formats for PDF import"

@@ -17,6 +17,7 @@ def _check_and_update_columns(cursor):
         "normalized_merchant": "TEXT DEFAULT NULL",
         "duplicate_status": "TEXT DEFAULT 'unchecked'",
         "duplicate_group_id": "TEXT DEFAULT NULL",
+        "transaction_type": "TEXT DEFAULT 'expense'",
     }
 
     cursor.execute("PRAGMA table_info(transactions)")
@@ -54,7 +55,8 @@ def create_database():
             raw_description TEXT DEFAULT NULL,
             normalized_merchant TEXT DEFAULT NULL,
             duplicate_status TEXT DEFAULT 'unchecked',
-            duplicate_group_id TEXT DEFAULT NULL
+            duplicate_group_id TEXT DEFAULT NULL,
+            transaction_type TEXT DEFAULT 'expense'
         )
     """)
 
