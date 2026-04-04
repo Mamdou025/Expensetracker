@@ -27,10 +27,15 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 ## Environment Variables
 - `PORT` — server port (default 5000)
 - `HOST` — bind address (default 0.0.0.0)
+- `NODE_ENV` — `development` (workspace default) or `production` (deployment)
 - `SQLITE_PATH` — path to SQLite DB (default Database/transactions.db)
-- `EMAIL_USER` — Gmail address for IMAP (optional for basic operation)
-- `EMAIL_PASS` — Gmail app password for IMAP (optional for basic operation)
+- `EMAIL_USER` — Gmail address for IMAP (**required in production**, optional in development)
+- `EMAIL_PASS` — Gmail app password for IMAP (**required in production**, optional in development)
 - `PYTHON_CMD` — Python binary name (default python3)
+
+## Environment Modes
+- **Workspace (development):** `NODE_ENV` defaults to `development`. Email credentials are optional — the app starts without them and email features are simply disabled. Set via `.replit` `[userenv.shared]`.
+- **Deployment (production):** `NODE_ENV=production` is set via `.replit` `[userenv.production]`. Email credentials are **strictly required** — startup will fail if `EMAIL_USER` or `EMAIL_PASS` is missing. Set these as Replit Secrets before deploying.
 
 ## Build & Run
 - Build: `npm --prefix client run build`

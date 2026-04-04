@@ -31,12 +31,25 @@ function waitForExit(child, failureLabel) {
 }
 
 async function main() {
+  const nodeEnv = process.env.NODE_ENV || 'development';
+  const isProduction = nodeEnv === 'production';
+
   const runtimeEnv = buildRuntimeEnv({
     ...process.env,
-    NODE_ENV: process.env.NODE_ENV || 'development',
+    NODE_ENV: nodeEnv,
   });
 
-  validateRuntimeConfig(runtimeEnv, { requireClientBuild: true });
+  console.log(`[startup] NODE_ENV=${nodeEnv}`);
+
+  validateRuntimeConfig(runtimeEnv, {
+    requireClientBuild: true,
+    requireProductionEmailCredentials: isProduction,
+  });
+
+  if (!isProduction && (!runtimeEnv.EMAIL_USER || !runtimeEnv.EMAIL_PASS)) {
+    console.log('[startup] Running without email credentials (development mode — email features disabled)');
+  }
+
   ensureSqliteDirectory(runtimeEnv.SQLITE_PATH);
   console.log(`[startup] Using SQLite database at ${runtimeEnv.SQLITE_PATH}`);
 
