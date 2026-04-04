@@ -25,15 +25,26 @@ CIBC_CATEGORIES = [
     'Épicerie',
     'Services publics',
     'Voyages',
+    'Services professionnels ou services',
     'Services professionnels',
+    'Santé et éducation',
     'Santé',
     'Éducation',
     'Assurance',
     'Télécommunications',
+    'Dépenses personnelles et dépenses du',
+    'Dépenses personnelles',
+    'Hôtels, divertissement et loisirs',
+    'Autres opérations',
 ]
 
 STATEMENT_PERIOD_RE = re.compile(
     r'(\d{1,2})\s+([\wéûôàâêë]+)\s+(\d{4})\s+au\s+(\d{1,2})\s*([\wéûôàâêë]+)\s+(\d{4})',
+    re.IGNORECASE,
+)
+
+STATEMENT_PERIOD_SHARED_YEAR_RE = re.compile(
+    r'(\d{1,2})\s+([\wéûôàâêë]+)\s+au\s+(\d{1,2})\s*([\wéûôàâêë]+)\s+(\d{4})',
     re.IGNORECASE,
 )
 
@@ -158,6 +169,17 @@ SKIP_LINES = [
     'Intérêts',
     'Frais',
     '0000450',
+    'financiers',
+    'ménage',
+    'Rapport de dépenses',
+    'IntelliCrédit',
+    'Ce mois-ci',
+    'Depuis le début',
+    'Budget',
+    'Différence',
+    'Préparé à l',
+    '780100',
+    '188-',
 ]
 
 TEMPLATE_META = {
@@ -258,15 +280,25 @@ def parse(pages_text, document_id=None, filepath=None):
     full_text = '\n'.join(pages_text)
 
     period_match = STATEMENT_PERIOD_RE.search(full_text)
-    if not period_match:
-        return None
-
-    start_day = period_match.group(1)
-    start_month_str = period_match.group(2)
-    start_year = int(period_match.group(3))
-    end_day = period_match.group(4)
-    end_month_str = period_match.group(5)
-    end_year = int(period_match.group(6))
+    if period_match:
+        start_day = period_match.group(1)
+        start_month_str = period_match.group(2)
+        start_year = int(period_match.group(3))
+        end_day = period_match.group(4)
+        end_month_str = period_match.group(5)
+        end_year = int(period_match.group(6))
+    else:
+        period_match = STATEMENT_PERIOD_SHARED_YEAR_RE.search(full_text)
+        if not period_match:
+            return None
+        start_day = period_match.group(1)
+        start_month_str = period_match.group(2)
+        end_day = period_match.group(3)
+        end_month_str = period_match.group(4)
+        end_year = int(period_match.group(5))
+        start_month_num = _resolve_month(start_month_str) or 1
+        end_month_num_tmp = _resolve_month(end_month_str) or 12
+        start_year = end_year if start_month_num <= end_month_num_tmp else end_year - 1
 
     period_start = _resolve_date(start_day, start_month_str, start_year)
     period_end = _resolve_date(end_day, end_month_str, end_year)
@@ -326,6 +358,9 @@ def parse(pages_text, document_id=None, filepath=None):
             current_section = None
             continue
         elif 'Votre centre de message' in line:
+            current_section = None
+            continue
+        elif 'Rapport de dépenses' in line or 'IntelliCrédit' in line:
             current_section = None
             continue
 
