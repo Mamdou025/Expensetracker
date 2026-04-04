@@ -57,9 +57,16 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - **Python:** beautifulsoup4, PyYAML, pdfplumber (PDF text extraction)
 - **Node (Server/):** express, cors, sqlite3, multer (file uploads)
 
+## Template-Based PDF Parsing
+- Bank-specific template parsers live in `Application/parsers/`
+- Each template has a `detect(full_text)` function and a `parse(pages_text, document_id)` function
+- `pdf_parser.py` tries template parsers first (via `TEMPLATE_PARSERS` list); falls back to generic line-by-line parsing
+- **CIBC Chequing** (`parsers/cibc_chequing.py`): handles `Mon DD` dates (year from header), Withdrawals/Deposits/Balance columns, multi-line descriptions, FX conversion lines, and service charges. Validates totals against account summary.
+- To add a new bank: create `Application/parsers/<bank>_<type>.py` with `detect()` + `parse()`, import it in `pdf_parser.py`, and add to `TEMPLATE_PARSERS`
+
 ## Important Notes
 - Email extraction features require EMAIL_USER and EMAIL_PASS secrets
 - Server node_modules in `Server/` are separate from root — sqlite3 native module must match platform
 - The app gracefully starts without email credentials; email features just won't work
 - PDF imports use `source_type="pdf"` and a SHA-256-based `source_ref` for document traceability
-- The PDF parser supports common date formats (YYYY-MM-DD, MM/DD/YYYY, DD/MM/YYYY, Mon DD YYYY) and amount patterns ($XX.XX)
+- The generic PDF parser supports common date formats (YYYY-MM-DD, MM/DD/YYYY, DD/MM/YYYY, Mon DD YYYY) and amount patterns ($XX.XX)

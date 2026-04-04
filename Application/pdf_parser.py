@@ -4,6 +4,15 @@ import hashlib
 import pdfplumber
 from datetime import datetime
 
+try:
+    from parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing
+except ImportError:
+    from Application.parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing
+
+TEMPLATE_PARSERS = [
+    (detect_cibc_chequing, parse_cibc_chequing),
+]
+
 
 DATE_PATTERNS = [
     (re.compile(r'(\d{4}[-/]\d{2}[-/]\d{2})'), '%Y-%m-%d'),
@@ -122,13 +131,23 @@ def parse_pdf_statement(filepath):
     document_id = _compute_document_id(filepath, file_bytes)
     with pdfplumber.open(filepath) as pdf:
         full_text = ""
+        pages_text = []
         page_lines = []
 
         for page in pdf.pages:
             text = page.extract_text() or ""
             full_text += text + "\n"
+            pages_text.append(text)
             for line in text.split('\n'):
                 page_lines.append(line.strip())
+
+    for detect_fn, parse_fn in TEMPLATE_PARSERS:
+        if detect_fn(full_text):
+            result = parse_fn(pages_text, document_id=document_id)
+            if result and result.get('transactions_found', 0) > 0:
+                result['document_id'] = document_id
+                result['total_pages'] = len(pages_text)
+                return result
 
     bank = _detect_bank(full_text)
     card_type = _detect_card_type(full_text)
