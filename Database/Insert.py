@@ -1,6 +1,9 @@
 import logging
 
-from db_config import connect_db
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
 
 # Configure logging if not already done
 if not logging.getLogger().handlers:

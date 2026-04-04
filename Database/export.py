@@ -2,7 +2,10 @@ import sqlite3
 import json
 import os
 
-from db_config import connect_db
+try:
+    from db_config import connect_db
+except ImportError:
+    from Database.db_config import connect_db
 
 def export_database_to_json():
     base_dir = os.path.abspath(os.path.dirname(__file__))
