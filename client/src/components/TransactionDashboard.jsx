@@ -43,7 +43,13 @@ const {
 const [transactions, setTransactions] = useState([]);
 
 React.useEffect(() => {
-  setTransactions(realTransactions);
+  const parsed = realTransactions.map(t => ({
+    ...t,
+    tags: typeof t.tags === 'string' && t.tags.length > 0
+      ? t.tags.split(',').map(s => s.trim()).filter(Boolean)
+      : Array.isArray(t.tags) ? t.tags : []
+  }));
+  setTransactions(parsed);
 }, [realTransactions]);
 
 React.useEffect(() => {
