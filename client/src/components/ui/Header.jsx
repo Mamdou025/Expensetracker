@@ -15,6 +15,7 @@ const Header = () => {
       <nav className="space-x-2">
         <Link to="/" className={linkClasses('/')}>{t('navigation.dashboard')}</Link>
         <Link to="/email-extraction" className={linkClasses('/email-extraction')}>{t('navigation.emailExtraction')}</Link>
+        <Link to="/pdf-import" className={linkClasses('/pdf-import')}>{t('navigation.pdfImport')}</Link>
       </nav>
     </div>
   );

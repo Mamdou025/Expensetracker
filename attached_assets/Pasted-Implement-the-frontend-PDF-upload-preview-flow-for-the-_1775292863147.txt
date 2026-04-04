@@ -1,0 +1,62 @@
+Implement the frontend PDF upload + preview flow for the current ExpenseTracker codebase.
+
+Goal:
+Make the new PDF import backend usable from the React app by adding a practical upload → preview → confirm workflow.
+
+Important context:
+- Backend PDF import endpoints already exist:
+  - POST /api/import-pdf
+  - POST /api/import-pdf/confirm
+- The parser returns preview transactions
+- Confirming inserts them through the same transaction insertion path as email imports
+- The app is already deployed and working on Replit
+- Keep this patch focused and practical
+
+What I want in the frontend:
+1. Add a PDF import entry point in the app UI
+   - either as a new page/route or a section integrated into the existing extraction workflow
+   - it must be easy to find and use
+
+2. Add a PDF upload flow
+   - user selects a PDF
+   - frontend sends it to POST /api/import-pdf
+   - receives the parsed preview result
+
+3. Add a preview screen for parsed PDF transactions
+   - show parsed rows clearly in a table/list
+   - show at least:
+     - date
+     - amount
+     - raw description
+     - bank
+     - card type
+   - allow the user to remove unwanted rows before confirmation
+   - if practical, allow lightweight editing of obvious fields before confirm
+
+4. Add a confirm import action
+   - sends the approved transactions to POST /api/import-pdf/confirm
+   - reports success/failure clearly
+   - refreshes the dashboard data after successful import
+
+5. Keep current app behavior working
+   - dashboard still works
+   - email extraction still works
+   - no major redesign of the whole frontend
+
+Likely frontend files involved:
+- client/src/App.js
+- client/src/components/EmailExtractionPage.jsx or a new PDFImportPage component
+- client/src/Services/api.js / transactionService.js / a new pdfImportService.js
+- any small shared components needed
+
+Before editing:
+A. summarize the current frontend structure and the safest place to add PDF import
+B. list exact files to change
+C. explain the smallest safe implementation strategy
+
+After editing:
+1. list files changed
+2. summarize each change
+3. explain the user flow from upload to confirm
+4. mention any limitations of this first UI
+5. tell me the next best patch after this one
