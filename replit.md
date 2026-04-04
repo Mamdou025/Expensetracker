@@ -23,6 +23,8 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - `Application/pdf_parser.py` — PDF statement text extraction and transaction line parser
 - `Application/api_scripts/parse_pdf.py` — CLI wrapper for PDF parser (called by Express)
 - `Application/api_scripts/import_pdf_confirm.py` — CLI wrapper for confirming/inserting parsed PDF transactions
+- `Application/api_scripts/list_pdf_templates.py` — CLI wrapper returning template metadata as JSON
+- `client/src/components/BankTemplatesPage.jsx` — UI page listing all registered bank templates
 
 ## Environment Variables
 - `PORT` — server port (default 5000)

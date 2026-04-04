@@ -5,13 +5,20 @@ import pdfplumber
 from datetime import datetime
 
 try:
-    from parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing
+    from parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
 except ImportError:
-    from Application.parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing
+    from Application.parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
 
 TEMPLATE_PARSERS = [
-    (detect_cibc_chequing, parse_cibc_chequing),
+    (detect_cibc_chequing, parse_cibc_chequing, meta_cibc_chequing),
 ]
+
+
+def get_all_template_metadata():
+    results = []
+    for _detect_fn, _parse_fn, meta_fn in TEMPLATE_PARSERS:
+        results.append(meta_fn())
+    return results
 
 
 DATE_PATTERNS = [
@@ -141,7 +148,7 @@ def parse_pdf_statement(filepath):
             for line in text.split('\n'):
                 page_lines.append(line.strip())
 
-    for detect_fn, parse_fn in TEMPLATE_PARSERS:
+    for detect_fn, parse_fn, _meta_fn in TEMPLATE_PARSERS:
         if detect_fn(full_text):
             result = parse_fn(pages_text, document_id=document_id)
             if result and result.get('transactions_found', 0) > 0:

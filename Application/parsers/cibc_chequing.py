@@ -130,6 +130,37 @@ def _classify_amounts(amounts, prev_balance):
     return None, None, None
 
 
+TEMPLATE_META = {
+    'id': 'cibc_chequing',
+    'bank': 'CIBC',
+    'account_type': 'Chequing',
+    'country': 'Canada',
+    'detection_keywords': ['CIBC Account Statement', 'Withdrawals ($)', 'Deposits ($)'],
+    'fields_extracted': [
+        'statement_period',
+        'account_number',
+        'opening_balance',
+        'closing_balance',
+        'total_withdrawals',
+        'total_deposits',
+    ],
+    'transaction_fields': [
+        'date',
+        'description',
+        'amount',
+        'direction',
+        'balance',
+    ],
+    'date_format': 'Mon DD (year inferred from header)',
+    'columns': ['Withdrawals', 'Deposits', 'Balance'],
+    'notes': 'Handles multi-line descriptions, FX conversion lines, service charges, and year-rollover for Dec/Jan statements.',
+}
+
+
+def metadata():
+    return TEMPLATE_META
+
+
 def detect(full_text):
     return (
         'CIBC Account Statement' in full_text

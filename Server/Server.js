@@ -994,6 +994,37 @@ const pdfUpload = multer({
     },
 });
 
+app.get('/api/pdf-templates', (req, res) => {
+    const script = path.join(__dirname, '../Application/api_scripts/list_pdf_templates.py');
+    const py = spawn(pythonCmd, [script], {
+        env: { ...process.env, PYTHONIOENCODING: 'utf-8' },
+    });
+
+    let stdout = '';
+    let stderr = '';
+    py.stdout.on('data', (d) => (stdout += d.toString()));
+    py.stderr.on('data', (d) => (stderr += d.toString()));
+
+    py.on('close', (code) => {
+        if (code !== 0) {
+            console.error('pdf-templates script failed:', stderr);
+            return res.status(500).json({ error: 'Failed to load templates' });
+        }
+        try {
+            const templates = JSON.parse(stdout);
+            res.json({ templates });
+        } catch (e) {
+            console.error('Failed to parse templates JSON:', e.message);
+            res.status(500).json({ error: 'Invalid template data' });
+        }
+    });
+
+    py.on('error', (err) => {
+        console.error('Failed to start pdf-templates script:', err);
+        res.status(500).json({ error: 'Failed to start template listing' });
+    });
+});
+
 app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No PDF file uploaded' });
