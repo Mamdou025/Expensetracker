@@ -6,6 +6,7 @@ import TransactionDashboard from './components/TransactionDashboard';
 import EmailExtractionPage from './components/EmailExtractionPage';
 import PDFImportPage from './components/PDFImportPage';
 import BankTemplatesPage from './components/BankTemplatesPage';
+import ChatPage from './components/ChatPage';
 import './index.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path="/email-extraction" element={<EmailExtractionPage />} />
               <Route path="/pdf-import" element={<PDFImportPage />} />
               <Route path="/bank-templates" element={<BankTemplatesPage />} />
+              <Route path="/chat" element={<ChatPage />} />
             </Routes>
           </div>
         </div>

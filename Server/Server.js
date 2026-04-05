@@ -1215,6 +1215,163 @@ app.post('/api/import-pdf/confirm', (req, res) => {
     py.stdin.end();
 });
 
+const OpenAI = require('openai');
+const openaiClient = new OpenAI({
+    apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+    baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+});
+
+function queryDb(sql, params = []) {
+    return new Promise((resolve, reject) => {
+        db.all(sql, params, (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
+async function gatherFinancialContext() {
+    const [summary, categories, banks, tags, recentTxns, monthlySpending] = await Promise.all([
+        queryDb(`SELECT 
+            COUNT(*) as total_transactions,
+            ROUND(SUM(CASE WHEN transaction_type='expense' THEN amount ELSE 0 END),2) as total_expenses,
+            ROUND(SUM(CASE WHEN transaction_type='income' THEN amount ELSE 0 END),2) as total_income,
+            MIN(date) as earliest_date,
+            MAX(date) as latest_date
+            FROM transactions`),
+        queryDb(`SELECT category, COUNT(*) as count, ROUND(SUM(amount),2) as total 
+            FROM transactions WHERE transaction_type='expense' 
+            GROUP BY category ORDER BY total DESC LIMIT 20`),
+        queryDb(`SELECT bank, COUNT(*) as count, ROUND(SUM(amount),2) as total 
+            FROM transactions GROUP BY bank ORDER BY total DESC`),
+        queryDb(`SELECT g.tag_name, COUNT(*) as count, ROUND(SUM(t.amount),2) as total
+            FROM transaction_tags tt
+            JOIN tags g ON tt.tag_id = g.id
+            JOIN transactions t ON tt.transaction_id = t.id
+            GROUP BY g.tag_name ORDER BY total DESC`),
+        queryDb(`SELECT date, amount, description, bank, category, transaction_type
+            FROM transactions ORDER BY date DESC LIMIT 30`),
+        queryDb(`SELECT strftime('%Y-%m', date) as month, 
+            ROUND(SUM(CASE WHEN transaction_type='expense' THEN amount ELSE 0 END),2) as expenses,
+            ROUND(SUM(CASE WHEN transaction_type='income' THEN amount ELSE 0 END),2) as income
+            FROM transactions GROUP BY month ORDER BY month DESC LIMIT 12`),
+    ]);
+
+    return `FINANCIAL DATABASE SUMMARY:
+${JSON.stringify(summary[0])}
+
+TOP SPENDING CATEGORIES:
+${JSON.stringify(categories)}
+
+BANKS/ACCOUNTS:
+${JSON.stringify(banks)}
+
+TAGS:
+${JSON.stringify(tags)}
+
+MONTHLY SPENDING (last 12 months):
+${JSON.stringify(monthlySpending)}
+
+RECENT TRANSACTIONS (last 30):
+${JSON.stringify(recentTxns)}`;
+}
+
+app.post('/api/chat', async (req, res) => {
+    try {
+        const { message, history = [] } = req.body;
+        if (!message) return res.status(400).json({ error: 'Message is required' });
+
+        const financialContext = await gatherFinancialContext();
+
+        let additionalData = '';
+        const lowerMsg = message.toLowerCase();
+
+        if (lowerMsg.includes('subscri') || lowerMsg.includes('abonn') || lowerMsg.includes('recurring')) {
+            const recurring = await queryDb(`SELECT description, COUNT(*) as occurrences, ROUND(AVG(amount),2) as avg_amount, bank
+                FROM transactions WHERE transaction_type='expense'
+                GROUP BY description HAVING COUNT(*) >= 3
+                ORDER BY occurrences DESC LIMIT 20`);
+            additionalData += `\nRECURRING TRANSACTIONS:\n${JSON.stringify(recurring)}`;
+        }
+
+        if (lowerMsg.includes('merchant') || lowerMsg.includes('store') || lowerMsg.includes('where') || lowerMsg.includes('magasin')) {
+            const merchants = await queryDb(`SELECT description, COUNT(*) as visits, ROUND(SUM(amount),2) as total_spent
+                FROM transactions WHERE transaction_type='expense'
+                GROUP BY description ORDER BY total_spent DESC LIMIT 20`);
+            additionalData += `\nTOP MERCHANTS:\n${JSON.stringify(merchants)}`;
+        }
+
+        if (lowerMsg.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\b/i)) {
+            const allMonthly = await queryDb(`SELECT strftime('%Y-%m', date) as month, category,
+                ROUND(SUM(amount),2) as total
+                FROM transactions WHERE transaction_type='expense'
+                GROUP BY month, category ORDER BY month DESC, total DESC`);
+            additionalData += `\nMONTHLY CATEGORY BREAKDOWN:\n${JSON.stringify(allMonthly)}`;
+        }
+
+        if (lowerMsg.includes('interest') || lowerMsg.includes('intérêt') || lowerMsg.includes('interet')) {
+            const interest = await queryDb(`SELECT date, amount, description, bank
+                FROM transactions t
+                JOIN transaction_tags tt ON t.id = tt.transaction_id
+                JOIN tags g ON tt.tag_id = g.id
+                WHERE g.tag_name = 'Interest'
+                ORDER BY date DESC`);
+            additionalData += `\nINTEREST CHARGES:\n${JSON.stringify(interest)}`;
+        }
+
+        if (lowerMsg.includes('rent') || lowerMsg.includes('loyer')) {
+            const rent = await queryDb(`SELECT date, amount, description, bank
+                FROM transactions WHERE category = 'Rent'
+                ORDER BY date DESC`);
+            additionalData += `\nRENT PAYMENTS:\n${JSON.stringify(rent)}`;
+        }
+
+        const systemPrompt = `You are a smart personal finance assistant analyzing a user's transaction data. You have access to their complete financial database.
+
+Answer questions clearly and concisely. Use numbers and dates when relevant. Give actionable insights when appropriate. If the user asks in French, respond in French.
+
+${financialContext}
+${additionalData}
+
+Important: All amounts are in Canadian dollars (CAD). When showing amounts, use $ symbol. Format dates nicely. Round amounts to 2 decimal places.`;
+
+        const messages = [
+            { role: 'system', content: systemPrompt },
+            ...history.map(h => ({ role: h.role, content: h.content })),
+            { role: 'user', content: message },
+        ];
+
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+
+        const stream = await openaiClient.chat.completions.create({
+            model: 'gpt-5-mini',
+            messages,
+            stream: true,
+            max_completion_tokens: 8192,
+        });
+
+        for await (const chunk of stream) {
+            const content = chunk.choices[0]?.delta?.content || '';
+            if (content) {
+                res.write(`data: ${JSON.stringify({ content })}\n\n`);
+            }
+        }
+
+        res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
+        res.end();
+    } catch (error) {
+        console.error('Chat error:', error);
+        if (res.headersSent) {
+            res.write(`data: ${JSON.stringify({ error: 'Chat failed' })}\n\n`);
+            res.end();
+        } else {
+            res.status(500).json({ error: 'Chat failed', details: error.message });
+        }
+    }
+});
+
 const clientBuildPath = getClientBuildPath();
 const clientIndexPath = path.join(clientBuildPath, 'index.html');
 if (fs.existsSync(clientIndexPath)) {
