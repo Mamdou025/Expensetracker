@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Mail, FileUp, Building2, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, Mail, FileUp, Building2, MessageCircle, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const Header = () => {
@@ -14,6 +14,7 @@ const Header = () => {
     { path: '/email-extraction', label: t('navigation.emailExtraction'), icon: Mail },
     { path: '/pdf-import', label: t('navigation.pdfImport'), icon: FileUp },
     { path: '/bank-templates', label: t('navigation.bankTemplates'), icon: Building2 },
+    { path: '/chat', label: t('navigation.chat'), icon: MessageCircle },
   ];
 
   return (

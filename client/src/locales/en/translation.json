@@ -148,6 +148,7 @@
   ,"pdfImport.exactMatch": "Exact match"
   ,"pdfImport.duplicatesReviewNote": "Potential duplicates are unchecked. Expand to compare with existing transaction, then check to import if not a duplicate."
   ,"navigation.bankTemplates": "Bank Templates"
+  ,"navigation.chat": "Assistant"
   ,"bankTemplates.title": "Bank Templates"
   ,"bankTemplates.subtitle": "Supported bank statement formats for PDF import"
   ,"bankTemplates.loading": "Loading templates..."

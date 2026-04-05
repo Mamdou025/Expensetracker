@@ -148,6 +148,7 @@
   ,"pdfImport.exactMatch": "Correspondance exacte"
   ,"pdfImport.duplicatesReviewNote": "Les doublons potentiels sont décochés. Développez pour comparer avec la transaction existante, puis cochez pour importer si ce n'est pas un doublon."
   ,"navigation.bankTemplates": "Modèles bancaires"
+  ,"navigation.chat": "Assistant"
   ,"bankTemplates.title": "Modèles bancaires"
   ,"bankTemplates.subtitle": "Formats de relevés bancaires pris en charge pour l'import PDF"
   ,"bankTemplates.loading": "Chargement des modèles..."
