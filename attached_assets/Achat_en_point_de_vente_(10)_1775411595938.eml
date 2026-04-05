@@ -1,0 +1,201 @@
+Received: from DB9PR01MB7308.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:21b::8) by VE1PR01MB12340.eurprd01.prod.exchangelabs.com with
+ HTTPS; Sat, 4 Apr 2026 07:06:35 +0000
+Received: from SJ0PR05CA0093.namprd05.prod.outlook.com (2603:10b6:a03:334::8)
+ by DB9PR01MB7308.eurprd01.prod.exchangelabs.com (2603:10a6:10:21b::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Sat, 4 Apr
+ 2026 07:06:34 +0000
+Received: from SJ5PEPF000001F5.namprd05.prod.outlook.com
+ (2603:10b6:a03:334:cafe::56) by SJ0PR05CA0093.outlook.office365.com
+ (2603:10b6:a03:334::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.21 via Frontend Transport; Sat,
+ 4 Apr 2026 07:06:33 +0000
+Authentication-Results: spf=pass (sender IP is 67.231.151.8)
+ smtp.mailfrom=cibc.com; dkim=pass (signature was verified)
+ header.d=cibc.com;dmarc=pass action=none header.from=cibc.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of cibc.com designates
+ 67.231.151.8 as permitted sender) receiver=protection.outlook.com;
+ client-ip=67.231.151.8; helo=mx0d-00146707.pphosted.com; pr=E
+Received: from mx0d-00146707.pphosted.com (67.231.151.8) by
+ SJ5PEPF000001F5.mail.protection.outlook.com (10.167.242.73) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
+ via Frontend Transport; Sat, 4 Apr 2026 07:06:32 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:416972284DF2B216FDD76BA10AD9A6192AD9F413B1821E83C691CB899995C663;UpperCasedChecksum:6D61BF2FAC10128E5CE833316A66434AE22360A74C8AFA120121159AE3B1CB4C;SizeAsReceived:3809;Count:28
+Received: from pps.filterd (m0342871.ppops.net [127.0.0.1])
+	by mx0c-00146707.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6344vShi2461458
+	for <MAMADOU.FALL@OUTLOOK.COM>; Sat, 4 Apr 2026 03:06:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cibc.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:reply-to:subject:to; s=dkim-cibc-4-19-2022; bh=WZ2
+	H6/Cdyz/WxF5DJfoSv5RcJugdPCqGyiJKDIH1+pA=; b=ZjkcT/TcCuVI/EualN5
+	gUTDZubuJSlCxSiRbi+j6Y9cVHVo/gBQMirBeP088aLENimX1jiU6NvXt9XsihQn
+	fJ9Fy7KXjKO39NeUjtvBgwrtnPw6+F8jdbG0WXhCnbm6vWWbFo0wP9/2R0F9muO3
+	96+yOo/q+9Q5csA7Y/bh2GtUQaoTE2p1IZL3EEucGRdC3uAEJsB0gH8SX7BCA1SW
+	CX+VLDsCeIyvTlUAlbaZDpTk3dGa/S3a1S9MbXBRgK3X1ZIoMjyWM4k2gbewANXt
+	qWv1Y7oqsx03P+rsYeGB4JaRsbPVB9X938JwaHg/dUjSt6CwYliX6uKXC87iHN4x
+	R5Q==
+Received: from cb4225422.dcc.cloud1.cibc.com (199-198-251-96.cibc.com [199.198.251.96])
+	by mx0c-00146707.pphosted.com (PPS) with ESMTPS id 4dav21gb5w-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <MAMADOU.FALL@OUTLOOK.COM>; Sat, 04 Apr 2026 03:06:31 -0400 (EDT)
+Received: from pps.filterd (cb4225422.dcc.cloud1.cibc.com [127.0.0.1])
+	by cb4225422.dcc.cloud1.cibc.com (8.18.1.7/8.18.1.7) with ESMTP id 63469YGT021857
+	for <MAMADOU.FALL@OUTLOOK.COM>; Sat, 4 Apr 2026 03:06:31 -0400
+Received: from epsp-ab-email-service-7847d66c-db7xp ([10.77.246.20])
+	by cb4225422.dcc.cloud1.cibc.com (PPS) with ESMTPS id 4daucvrcpd-74
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <MAMADOU.FALL@OUTLOOK.COM>; Sat, 04 Apr 2026 03:06:31 -0400 (EDT)
+Message-ID: <msg.1775286391277.vertxmail.927789@epsp-ab-email-service-7847d66c-db7xp>
+Date: Sat, 04 Apr 2026 03:06:31 -0400 (EDT)
+Subject: Achat en point de vente
+From: Services bancaires CIBC <Mailbox.noreply@cibc.com>
+To: MAMADOU.FALL@OUTLOOK.COM
+Cc:
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Alert-ID: 13449250158
+Reply-To: Mailbox.noreply@cibc.com
+proofpoint_smtprelay_capture: Yes
+proofpoint_smtprelay_IP: 10.77.246.20
+proofpoint_smtprelay_server: [10.77.246.20]
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA0MDA2MSBTYWx0ZWRfX93pfWJKRv+bz
+ 0Aoq/4iah+Mt64/hsHTKZ5V3/t7Jr/+xBo4WSXrN9cq17GTVK2MR5GUZ7E7j9FZRZe1I7ecZdQ2
+ j3Iw3AkYu0mgJcyBHxspMbYTH0mNHmNAqkjxTe3QIrZ4JiFD6BY+zokeaPvJLp9UPCQh7poDxns
+ tMTLI5h61VftzvUBrMIgj0nFLSK1D32K/0ZLzXLUD8Nte633CmTS915xCS7gm9a6HT7nVXqKmUQ
+ E/ZHRxwRede3+9cOzk2zib4slGQtRt8XLM5Zl2FV6DaKhifLB47PMH0a7cOeUcY11oEi+i+7h0Z
+ 0PfFhXzP/VkACL8VLgWxi2hFrVVZDeCiwv6dklfuiM69cM2Fy6q0D0ssMgcvmQHc1uiA0LWBT62
+ px/zErVLSE7u5IVCq7LYPx6BYAoJI3Y05XVTitqcL2pdX40ZqmEragGO/5EN4VOWnfKcSwCL2kV
+ ECCNMsvXjaS/iBzahqg==
+X-Proofpoint-GUID: myOxszuYlamRY754Z3LQkCss-PmNXgW0
+X-Authority-Analysis: v=2.4 cv=LdwxKzfi c=1 sm=1 tr=0 ts=69d0b877 cx=c_pps
+ a=jy/oODFj0l+AxlhDOzFahA==:117 a=jy/oODFj0l+AxlhDOzFahA==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=L-xuAdXoSGqhI1Yvf4I2:22 a=yR0zFe_9d01lCw5sSBWG:22 a=aRdSA169JvyhXCp4_FgA:9
+ a=zJJgJrR4LD4A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: myOxszuYlamRY754Z3LQkCss-PmNXgW0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-03_07,2026-04-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=default_outbound_notspam
+ policy=default_outbound score=0 clxscore=1015 spamscore=0 phishscore=0
+ malwarescore=0 bulkscore=0 adultscore=0 suspectscore=0 priorityscore=1501
+ impostorscore=0 lowpriorityscore=0 classifier=typeunknown authscore=0 authtc=
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2603050001 definitions=main-2604040061
+X-IncomingHeaderCount: 28
+Return-Path: prvs=65549530be=mailbox.noreply@cibc.com
+X-MS-Exchange-Organization-ExpirationStartTime: 04 Apr 2026 07:06:33.1310
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: da697a04-6e5b-4815-a3d7-08de9218b414
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F5:EE_|DB9PR01MB7308:EE_|VE1PR01MB12340:EE_
+X-MS-Exchange-Organization-AuthSource: SJ5PEPF000001F5.namprd05.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 4/4/2026 5:55:58 AM
+X-MS-Office365-Filtering-Correlation-Id: da697a04-6e5b-4815-a3d7-08de9218b414
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 67.231.151.8
+X-SID-PRA: MAILBOX.NOREPLY@CIBC.COM
+X-SID-Result: PASS
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:1444111002|58200799021|47200799024|461199028|68400799013|6019299003|20103052901057|20103052903057|12800799019|29090799004|20103052904057|20103052914048|56899033|1360799030|1370799030|1380799030|3412199025|440099028|30041999003|26104999006;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2026 07:06:32.8732
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: da697a04-6e5b-4815-a3d7-08de9218b414
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F5.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR01MB7308
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:02.8493432
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9769.009
+Importance: high
+X-Priority: 1
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000311)(920221119095)(90000117)(920221120095)(90012020)(91020020)(91040095)(9050020)(9100341)(944500132)(4810010)(4910033)(9575002)(10195002)(9320005)(120001)(1110175);
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0wO0Q9MTtHRD0xO1NDTD0z
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?Nyt5MWRGR1dyazAwcmlMbFlEODJHUjVmei94ZE5IU09GUi80WDYya1F1aVFu?=
+ =?utf-8?B?UjFucTF4SzBHZTZhbEhVcUM4RVhtWm9MajRmT1RGZlBoZ1A0ZVplQU9Sc0ds?=
+ =?utf-8?B?S2E5KzFSZHFKN3pLVGpJeEZRMk94dXBiODdMaElKRWJGM2hEM0VvOVVPcnNi?=
+ =?utf-8?B?QjdzTFlKTkEzU0hOVmNJenVXSm9tckptU2pBVWFMSS9xZkFVUTdieHZQL0ll?=
+ =?utf-8?B?TU1yaGdScHV1aDg4ejVpKzhMcDRYbnh4ekVTa2liVHI4WXN3dkx1aGdnWTZp?=
+ =?utf-8?B?eEFickkyb1dyVVRNUWNUalM2UEpnVGJkdlpnZy9leldhbENRRnk3eXNPVU8r?=
+ =?utf-8?B?cWNCdGRhMnh4UzRLTnNkL2Nza1NkSWlpQ20yQysyblAyZ09KNVBCMEY3WSs2?=
+ =?utf-8?B?Y01tM0VsSFRCY1c5Q3pSUnN0VSswUm9lVHp6WXZwN0xuOEJhM2tyT1p2azhn?=
+ =?utf-8?B?a1lKWFRpclUvYzc0VDNqZkZPeTRHQVUzNmtKQWdUN1oySThoajdtcDF1eEV4?=
+ =?utf-8?B?elN1N3pENzdrWkhlRkhQRHdtVmFTMVFpckI3T1JZVCtEb3ArQVVPWFNyWDQv?=
+ =?utf-8?B?Sno0Q0lkeEtuZ2Myd3p4RGxnd0kxSyt5Y3lmYUlTVkplZ3RlS0RpYXZtaVNF?=
+ =?utf-8?B?aFZyd2Z2NGJaMmxydDREWktXVGp1RzZNaEhOY0l6MVQ4aE1pTkVGdDlUV01m?=
+ =?utf-8?B?TzJ0TXJjQ0pRbjAraElnY2lTblZZQjNUNmUxVEVpc0swc3ZLY1VHOEN3dFMz?=
+ =?utf-8?B?UjFNenNUSGVYNVhKYlBrZjdtL0daTG1NbmZQTXg0RmpldkhBVEhPWEQ3Qjht?=
+ =?utf-8?B?UmlNRkpLV0RPQXJLT2kybUVacTNmRVd0SDQxYlRhZFpoTVpxZnNIMTdUcTdX?=
+ =?utf-8?B?RVBVYTlTc25zMFpKZlZ6T1MwTWxyUFB4aWVJKyt4U2FhYUN4OTh1Wmo5VENl?=
+ =?utf-8?B?Q3pjUHJvZFBLN2UyTkd3K0VCUzJEVWJyUFMrallBRm1hSXF0akt6MTNKQ0o4?=
+ =?utf-8?B?R3VrVlJoaFZPZkxwcEJ6eFMxdDN1RjVVWHc5RU00WlV6NGdTUUFkakRWOXVW?=
+ =?utf-8?B?VFBubXYrVW5XRjBKeHVweU9wcCt3S3k4V2xuSnpzV2YwN2RscE1lb2RsZ1FL?=
+ =?utf-8?B?OEQ2cUxyNnZ2UmptYyt6K0R0ck1Oand5ZTF3WmpwVVoxbXB5RXY5d3Jmc1Vm?=
+ =?utf-8?B?WmtJUmFWTk1mQWd3RCsyNk5sTU1xaWdRVUptRXFsM0NlM2tld1I4VWc1Y1Zs?=
+ =?utf-8?B?K1grVW5DaGtvckFnbmlrOGZBeFV6YkNaWGZidkc3b2VwNk1paFNNVlIrcGti?=
+ =?utf-8?B?VWFJcjg1ckREb3JqMFgzMnJ2aGpKL0x4azNRYURsUXQwSFJ5bXJSSWxqeDhw?=
+ =?utf-8?B?N3NYb1J0WFRjYzFRSFZKR0FBeDI4SUM5WTFaVDVYMk5iWVZndWNWZ2drZExy?=
+ =?utf-8?B?eFVyOHNuSTFod1Nyc2NpWlkyVk1LeXRNRnFDWkFKYXgxQTFWQ292bi9Cc3BO?=
+ =?utf-8?B?WUw1aGRNU05zUXorTytULzAxZ0cvZjlyTkRwMzA2UTl1a3d2SitqWVliRWFM?=
+ =?utf-8?B?bzAzMFg0Yks0dmJUbytSeXZVaFppSGRaL1BOYWt4blpZYmErdWFTeDVPRkRs?=
+ =?utf-8?B?U3k1NE9VeWdmUml3RDlkZHNFYlZVUzZHNG9BZzZhMjRRYWVjbmVrVnF2c2cw?=
+ =?utf-8?B?S3hNaTFmQkU3ZlJXNDVVbGVSSFZRSVpyQXhrekVMTU9XVzBTcjd6VFVlVVpj?=
+ =?utf-8?B?TDRPdHZvd2FwdVFOdVM4elhHOVNBY0FHQ0h3M1ZDYXFEZWg5bmJMZCtZdS9k?=
+ =?utf-8?B?SmcxOUtodTlEWTIrRDdtSmZSQWVRd3JhZzJtbS85Z0VjeEhEN1pMTFFNcEJJ?=
+ =?utf-8?B?NDI2NThqclFMcVFNeGowQ1AzaDVVWG5jRXRKZ0NjQnhOVDFOUHdCTTE4T3c4?=
+ =?utf-8?B?SUJNZWNqSWJjVSt5bldtOXp3djhWSkpTdG5WMEJIZlh5ZXRxVDFrUWYrSVFI?=
+ =?utf-8?B?alpYMFJoNTVkWUFSL0htSnpnZmlrUnR3cjI2Q1N6Rm5vcmZwMFZqS1RRWEJW?=
+ =?utf-8?B?bVRuNmsrSklLM2N4b20yWHF6eGdnRlY3c3F2ZG13bkY3SS8wanVxZ1JnZnpu?=
+ =?utf-8?B?U1ErdFJEWk9jcTdBcFZYeDdCK1UvbTF6MEllV2RKUHZMQmJpSTJOQ1h6U3Nz?=
+ =?utf-8?B?VTNtcW5OV3dIYUhjVmJaejZDbGxPR1VxMUdDN2hzS285dk4ydnFoR1Y2TVlT?=
+ =?utf-8?B?aCtyN1dkTDkzNFEvRW9Eb2hET2VtRkhJRUYrOHNUYm9sNTdQUmhoUCtHcHVv?=
+ =?utf-8?B?eDVZdkFqTzJDSUxVWnlGWGg2WHdzVElrcDJPSjZiQUxYbmFPQVJ6b1BmM29l?=
+ =?utf-8?B?bkF5N3I4RlhrUjZCS1ZRNHB1T1JUZzJVanF2dkl6dlZGRXA5cmNhblp1Vjcv?=
+ =?utf-8?B?S1d2UXlxTWJsSlRNR2RpSE5oM1RnYnFIUTF1ekt5dDNIRnZiTXY4WTNweHhi?=
+ =?utf-8?B?LzQ4NGxiN2paaGJZc2tOTThKdmhuMENhWm9PaHBoNlIrb3B3Y1kyRXNEdlZZ?=
+ =?utf-8?B?TWJlbXFOQUY1OEVHQUhkNnExNW1oVkRHRHZ6ZkJ2TlgwK3B6NkkzVWpSOHlV?=
+ =?utf-8?B?ZXdqTkJ5b2UwYVVJeXVKTTZyNUVpeWs0MWNnT1JDM2lrRXkvVmdrNEIyRTFH?=
+ =?utf-8?Q?sFQq?=
+MIME-Version: 1.0
+
+<?xml version=3D"1.0" encoding=3D"ISO-8859-1"?><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><b=
+ody><p>Bonjour&nbsp;Mamadou&nbsp;Fall,
+     =20
+   =20
+     =20
+    </p><p>Un achat Internet a =C3=A9t=C3=A9 effectu=C3=A9 =C3=A0 l'aide de=
+ la carte de d=C3=A9bit dont le num=C3=A9ro se termine par&nbsp;8781. =20
+    </p><p>Voici les d=C3=A9tails :</p><p>Num=C3=A9ro de compte :&nbsp;6594=
+<br>
+      Lieu de l'achat :&nbsp;REMITLY* H19B4 VANCOUVER CA<br>
+      Montant de l'achat :&nbsp;300,00&nbsp;$<br>
+      Montant du seuil :&nbsp;1,00&nbsp;$<br></p><p>Si vous n'avez pas effe=
+ctu=C3=A9 cet achat, veuillez appeler Services bancaires t=C3=A9l=C3=A9phon=
+iques CIBC au 1 888 337-2422. </p><p>Cordialement,
+    <br>La Banque CIBC</p><p>La Banque CIBC s'engage =C3=A0 prot=C3=A9ger v=
+os renseignements personnels. Nous n'allons pas inclure de renseignements p=
+ersonnels =C3=A0 votre sujet dans des messages en dehors de Services bancai=
+res en direct ou mobiles car le courrier =C3=A9lectronique n'est pas un mod=
+e de communication s=C3=A9curis=C3=A9.<br>Veuillez ne pas r=C3=A9pondre au =
+pr=C3=A9sent courriel.<br>Si vous avez re=C3=A7u ce message par erreur, veu=
+illez ouvrir une session sur CIBC en direct. S=C3=A9lectionnez Nous contact=
+er, puis Commencez =C3=A0 clavarder, pour vous connecter =C3=A0 notre assis=
+tant virtuel ou =C3=A0 un repr=C3=A9sentant CIBC. <br>Si vous ne souhaitez =
+plus recevoir ces alertes, ouvrez une session Services bancaires CIBC, alle=
+z =C3=A0 la section G=C3=A9rer mes alertes et d=C3=A9sactivez la fonction.<=
+/p></body></html>
