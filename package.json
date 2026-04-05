@@ -7,7 +7,7 @@
     "postinstall": "npm run install:server && npm run install:client",
     "init:db": "node scripts/init-db.js",
     "build": "npm --prefix client run build",
-    "replit:build": "npm install && python -m pip install --break-system-packages -r requirements.txt && npm run build && npm run verify:deploy",
+    "replit:build": "npm install && node scripts/install-python-deps.js && npm run build && npm run verify:deploy",
     "start": "node scripts/start-production.js",
     "start:server": "npm --prefix Server run start",
     "verify:deploy": "node scripts/verify-deploy.js"
