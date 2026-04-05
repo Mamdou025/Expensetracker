@@ -158,7 +158,7 @@ def extract_transaction_data(
                 description_match = re.search(regex_patterns["description"], email_text)
 
             extracted_data["amount"] = (
-                amount_match.group(1).replace(",", ".") if amount_match else None
+                amount_match.group(1).replace(" ", "").replace(",", ".") if amount_match else None
             )
             extracted_data["description"] = (
                 description_match.group(1).strip() if description_match else None

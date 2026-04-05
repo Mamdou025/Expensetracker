@@ -3,15 +3,36 @@ banks:
     sender: "mailbox.noreply@cibc.com"
     keywords: ["Achat en point de vente", "achat international"]
     regex: 
-      amount: "Montant de l'achat\\s*:\\s*(\\d+[,.]\\d{2})\\$"
-      description: "Lieu de l'achat\\s*:\\s*([A-Za-z0-9#&\\- ]+)\\r?\\n"
+      amount: "Montant de l'achat\\s*:\\s*(\\d+[,.]\\d{2})\\s*\\$"
+      description: "Lieu de l'achat\\s*:\\s*([A-Za-z0-9#&\\*\\-/ ]+)"
 
   cibc_credit:
     sender: "mailbox.noreply@cibc.com"
     keywords: ["Nouvel achat avec votre carte de"]
     regex:
-      amount: "achat de\\s*\\$?([0-9]+[,.][0-9]{2})\\$?"
-      description: "achat de\\s*\\$?[0-9]+[,.][0-9]{2}\\$?\\s*([A-Za-z0-9#&\\- ]+)\\s+avec votre"
+      amount: "achat de\\s*(\\d+[,.][0-9]{2})\\s*\\$?"
+      description: "achat de\\s*\\d+[,.][0-9]{2}\\s*\\$?\\s+(?:à|a)\\s+([A-Za-z0-9.,#&\\-/ ]+?)\\s+avec votre"
+
+  cibc_credit_preauth:
+    sender: "mailbox.noreply@cibc.com"
+    keywords: ["paiement préautorisé avec votre carte"]
+    regex:
+      amount: "préautorisé de\\s*([0-9]+[\\s ]?[0-9]*[,.]\\d{2})\\s*\\$"
+      description: "\\$\\s+de\\s+([A-Za-z0-9.,#&\\-/ ]+?)\\s+sur votre"
+
+  cibc_credit_refund:
+    sender: "mailbox.noreply@cibc.com"
+    keywords: ["remboursement porté à votre carte"]
+    regex:
+      amount: "crédit de\\s*([0-9]+[\\s ]?[0-9]*[,.]\\d{2})\\s*\\$"
+      description: "\\$\\s+de\\s+([A-Za-z0-9.,#&\\-/ ]+?)\\s+à votre"
+
+  cibc_interac:
+    sender: "mailbox.noreply@cibc.com"
+    keywords: ["Virement INTERAC"]
+    regex:
+      amount: "Montant\\s*:\\s*([0-9]+[\\s ]?[0-9]*[,.]\\d{2})\\s*\\$"
+      description: "Nom du contact\\s*:\\s*([A-Za-z0-9éèàçÉÈÀÇ#&\\- ]+)"
 
   capital_one_credit:
     sender: "capitalone@notification.capitalone.com"
