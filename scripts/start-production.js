@@ -34,9 +34,14 @@ async function main() {
   const nodeEnv = process.env.NODE_ENV || 'development';
   const isProduction = nodeEnv === 'production';
 
+  const vendorDir = path.join(getRepoRoot(), 'python_vendor');
+  const existingPythonPath = process.env.PYTHONPATH || '';
+  const pythonPath = existingPythonPath ? `${vendorDir}:${existingPythonPath}` : vendorDir;
+
   const runtimeEnv = buildRuntimeEnv({
     ...process.env,
     NODE_ENV: nodeEnv,
+    PYTHONPATH: pythonPath,
   });
 
   console.log(`[startup] NODE_ENV=${nodeEnv}`);
