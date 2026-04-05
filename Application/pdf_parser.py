@@ -12,6 +12,7 @@ try:
     from parsers.neo_credit_world_elite import detect as detect_neo_we, parse as parse_neo_we, metadata as meta_neo_we
     from parsers.mbna_credit import detect as detect_mbna_credit, parse as parse_mbna_credit, metadata as meta_mbna_credit
     from parsers.capital_one_credit import detect as detect_cap1_credit, parse as parse_cap1_credit, metadata as meta_cap1_credit
+    from parsers.triangle_credit import detect as detect_triangle_credit, parse as parse_triangle_credit, metadata as meta_triangle_credit
 except ImportError:
     from Application.parsers.cibc_chequing import detect as detect_cibc_chequing, parse as parse_cibc_chequing, metadata as meta_cibc_chequing
     from Application.parsers.cibc_credit import detect as detect_cibc_credit, parse as parse_cibc_credit, metadata as meta_cibc_credit
@@ -20,6 +21,7 @@ except ImportError:
     from Application.parsers.neo_credit_world_elite import detect as detect_neo_we, parse as parse_neo_we, metadata as meta_neo_we
     from Application.parsers.mbna_credit import detect as detect_mbna_credit, parse as parse_mbna_credit, metadata as meta_mbna_credit
     from Application.parsers.capital_one_credit import detect as detect_cap1_credit, parse as parse_cap1_credit, metadata as meta_cap1_credit
+    from Application.parsers.triangle_credit import detect as detect_triangle_credit, parse as parse_triangle_credit, metadata as meta_triangle_credit
 
 TEMPLATE_PARSERS = [
     (detect_cibc_credit, parse_cibc_credit, meta_cibc_credit),
@@ -29,6 +31,7 @@ TEMPLATE_PARSERS = [
     (detect_neo_credit, parse_neo_credit, meta_neo_credit),
     (detect_mbna_credit, parse_mbna_credit, meta_mbna_credit),
     (detect_cap1_credit, parse_cap1_credit, meta_cap1_credit),
+    (detect_triangle_credit, parse_triangle_credit, meta_triangle_credit),
 ]
 
 
