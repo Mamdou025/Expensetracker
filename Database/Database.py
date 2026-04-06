@@ -97,6 +97,22 @@ def create_database():
         )
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS chat_usage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT DEFAULT (datetime('now')),
+            model TEXT NOT NULL,
+            prompt_tokens INTEGER DEFAULT 0,
+            completion_tokens INTEGER DEFAULT 0,
+            total_tokens INTEGER DEFAULT 0,
+            user_message TEXT,
+            response_length INTEGER DEFAULT 0,
+            duration_ms INTEGER DEFAULT 0,
+            context_queries TEXT DEFAULT NULL,
+            estimated_cost REAL DEFAULT 0
+        )
+    """)
+
     conn.commit()
     conn.close()
     print(f"✅ SQLite database and tables created successfully at {db_path}!")

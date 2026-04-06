@@ -42,6 +42,19 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.error('❌ Échec de la connexion à la base de données:', err.message);
     } else {
         console.log('✅ Connecté à la base de données SQLite à:', dbPath);
+        db.run(`CREATE TABLE IF NOT EXISTS chat_usage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT DEFAULT (datetime('now')),
+            model TEXT NOT NULL,
+            prompt_tokens INTEGER DEFAULT 0,
+            completion_tokens INTEGER DEFAULT 0,
+            total_tokens INTEGER DEFAULT 0,
+            user_message TEXT,
+            response_length INTEGER DEFAULT 0,
+            duration_ms INTEGER DEFAULT 0,
+            context_queries TEXT DEFAULT NULL,
+            estimated_cost REAL DEFAULT 0
+        )`);
     }
 });
 
@@ -1341,26 +1354,67 @@ Important: All amounts are in Canadian dollars (CAD). When showing amounts, use 
             { role: 'user', content: message },
         ];
 
+        const contextQueries = [];
+        if (additionalData.includes('RECURRING')) contextQueries.push('recurring');
+        if (additionalData.includes('MERCHANTS')) contextQueries.push('merchants');
+        if (additionalData.includes('MONTHLY CATEGORY')) contextQueries.push('monthly_breakdown');
+        if (additionalData.includes('INTEREST')) contextQueries.push('interest');
+        if (additionalData.includes('RENT')) contextQueries.push('rent');
+
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
 
+        const startTime = Date.now();
+        const modelName = 'gpt-5-mini';
+
         const stream = await openaiClient.chat.completions.create({
-            model: 'gpt-5-mini',
+            model: modelName,
             messages,
             stream: true,
+            stream_options: { include_usage: true },
             max_completion_tokens: 8192,
         });
 
+        let responseLength = 0;
+        let usageData = null;
+
         for await (const chunk of stream) {
-            const content = chunk.choices[0]?.delta?.content || '';
+            const content = chunk.choices?.[0]?.delta?.content || '';
             if (content) {
+                responseLength += content.length;
                 res.write(`data: ${JSON.stringify({ content })}\n\n`);
+            }
+            if (chunk.usage) {
+                usageData = chunk.usage;
             }
         }
 
-        res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
+        const durationMs = Date.now() - startTime;
+        const promptTokens = usageData?.prompt_tokens || 0;
+        const completionTokens = usageData?.completion_tokens || 0;
+        const totalTokens = usageData?.total_tokens || (promptTokens + completionTokens);
+        const estimatedCost = (promptTokens * 0.00015 + completionTokens * 0.0006) / 1000;
+
+        const usageInfo = {
+            prompt_tokens: promptTokens,
+            completion_tokens: completionTokens,
+            total_tokens: totalTokens,
+            duration_ms: durationMs,
+            model: modelName,
+            estimated_cost: estimatedCost,
+        };
+
+        res.write(`data: ${JSON.stringify({ done: true, usage: usageInfo })}\n\n`);
         res.end();
+
+        db.run(
+            `INSERT INTO chat_usage (model, prompt_tokens, completion_tokens, total_tokens, user_message, response_length, duration_ms, context_queries, estimated_cost)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [modelName, promptTokens, completionTokens, totalTokens, message.substring(0, 500), responseLength, durationMs, contextQueries.join(','), estimatedCost],
+            (err) => { if (err) console.error('Failed to log chat usage:', err.message); }
+        );
+
     } catch (error) {
         console.error('Chat error:', error);
         if (res.headersSent) {
@@ -1370,6 +1424,90 @@ Important: All amounts are in Canadian dollars (CAD). When showing amounts, use 
             res.status(500).json({ error: 'Chat failed', details: error.message });
         }
     }
+});
+
+app.get('/api/chat/usage', async (req, res) => {
+    try {
+        const [summary, daily, byModel, recentSessions, hourly] = await Promise.all([
+            queryDb(`SELECT
+                COUNT(*) as total_requests,
+                COALESCE(SUM(prompt_tokens), 0) as total_prompt_tokens,
+                COALESCE(SUM(completion_tokens), 0) as total_completion_tokens,
+                COALESCE(SUM(total_tokens), 0) as total_tokens,
+                ROUND(AVG(total_tokens), 0) as avg_tokens_per_request,
+                ROUND(AVG(duration_ms), 0) as avg_duration_ms,
+                ROUND(SUM(estimated_cost), 6) as total_estimated_cost,
+                COALESCE(SUM(response_length), 0) as total_response_chars,
+                MIN(timestamp) as first_usage,
+                MAX(timestamp) as last_usage
+                FROM chat_usage`),
+            queryDb(`SELECT
+                date(timestamp) as day,
+                COUNT(*) as requests,
+                SUM(total_tokens) as tokens,
+                SUM(prompt_tokens) as prompt_tokens,
+                SUM(completion_tokens) as completion_tokens,
+                ROUND(SUM(estimated_cost), 6) as cost,
+                ROUND(AVG(duration_ms), 0) as avg_duration
+                FROM chat_usage
+                GROUP BY day ORDER BY day DESC LIMIT 30`),
+            queryDb(`SELECT
+                model,
+                COUNT(*) as requests,
+                SUM(total_tokens) as tokens,
+                ROUND(SUM(estimated_cost), 6) as cost
+                FROM chat_usage GROUP BY model`),
+            queryDb(`SELECT
+                id, timestamp, model, prompt_tokens, completion_tokens, total_tokens,
+                user_message, response_length, duration_ms, context_queries, estimated_cost
+                FROM chat_usage ORDER BY id DESC LIMIT 50`),
+            queryDb(`SELECT
+                strftime('%H', timestamp) as hour,
+                COUNT(*) as requests,
+                SUM(total_tokens) as tokens
+                FROM chat_usage GROUP BY hour ORDER BY hour`),
+        ]);
+
+        const thisMonth = await queryDb(`SELECT
+            COUNT(*) as requests,
+            COALESCE(SUM(total_tokens), 0) as tokens,
+            ROUND(SUM(estimated_cost), 6) as cost
+            FROM chat_usage
+            WHERE strftime('%Y-%m', timestamp) = strftime('%Y-%m', 'now')`);
+
+        const today = await queryDb(`SELECT
+            COUNT(*) as requests,
+            COALESCE(SUM(total_tokens), 0) as tokens,
+            ROUND(SUM(estimated_cost), 6) as cost
+            FROM chat_usage
+            WHERE date(timestamp) = date('now')`);
+
+        const contextStats = await queryDb(`SELECT
+            context_queries, COUNT(*) as count
+            FROM chat_usage WHERE context_queries IS NOT NULL AND context_queries != ''
+            GROUP BY context_queries ORDER BY count DESC LIMIT 10`);
+
+        res.json({
+            summary: summary[0],
+            today: today[0],
+            thisMonth: thisMonth[0],
+            daily,
+            byModel,
+            recentSessions,
+            hourly,
+            contextStats,
+        });
+    } catch (error) {
+        console.error('Usage stats error:', error);
+        res.status(500).json({ error: 'Failed to fetch usage stats' });
+    }
+});
+
+app.delete('/api/chat/usage', (req, res) => {
+    db.run('DELETE FROM chat_usage', function(err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ deleted: this.changes });
+    });
 });
 
 const clientBuildPath = getClientBuildPath();
