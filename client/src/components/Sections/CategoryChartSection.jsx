@@ -3,13 +3,7 @@ import { PieChart as PieChartIcon } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTranslation } from 'react-i18next';
-
-const COLORS = [
-  '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6',
-  '#06B6D4', '#F97316', '#84CC16', '#EC4899', '#6366F1',
-  '#14B8A6', '#F87171', '#34D399', '#FBBF24', '#A78BFA',
-  '#0EA5E9', '#D946EF', '#22D3EE', '#FB923C', '#A3E635'
-];
+import { getCategoryColor } from '../../utils/categoryColors';
 
 const CategoryChartSection = ({ 
   isExpanded, 
@@ -62,7 +56,7 @@ const CategoryChartSection = ({
                 stroke="none"
               >
                 {sortedData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={getCategoryColor(entry.name, index)} />
                 ))}
               </Pie>
               <Tooltip content={<PieTooltip />} />
@@ -77,7 +71,7 @@ const CategoryChartSection = ({
               <div key={entry.name} className="flex items-center gap-2 min-w-0">
                 <span
                   className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                  style={{ backgroundColor: getCategoryColor(entry.name, index) }}
                 />
                 <span className="text-gray-300 truncate">{entry.name}</span>
                 <span className="text-gray-500 flex-shrink-0 ml-auto">{pct}%</span>
