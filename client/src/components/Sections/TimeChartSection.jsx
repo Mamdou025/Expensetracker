@@ -1,9 +1,9 @@
-// src/components/Sections/TimeChartSection.jsx
 import React, { useMemo } from 'react';
 import { BarChart3 } from 'lucide-react';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTheme } from '../../contexts/ThemeContext';
+import { getCategoryColor } from '../../utils/categoryColors';
 
 const TimeChartSection = ({ 
   isExpanded, 
@@ -18,12 +18,6 @@ const TimeChartSection = ({
   const tickColor = theme === 'light' ? '#6b7280' : '#9ca3af';
 
   const categoryColors = useMemo(() => {
-    const colors = [
-      '#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6',
-      '#06B6D4', '#F97316', '#84CC16', '#EC4899', '#6366F1',
-      '#14B8A6', '#F87171', '#34D399', '#FBBF24', '#A78BFA'
-    ];
-    
     const categories = new Set();
     chartData.forEach(item => {
       if (item.categories) {
@@ -33,7 +27,7 @@ const TimeChartSection = ({
     
     const categoryColorMap = {};
     Array.from(categories).forEach((category, index) => {
-      categoryColorMap[category] = colors[index % colors.length];
+      categoryColorMap[category] = getCategoryColor(category, index);
     });
     
     return categoryColorMap;
