@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Filter } from 'lucide-react';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTranslation } from 'react-i18next';
+import { getCategoryColor } from '../../utils/categoryColors';
 
 const FiltersSection = ({
   isExpanded,
@@ -151,19 +152,25 @@ const FiltersSection = ({
       <div className="mt-6">
         <label className="block text-sm font-medium text-gray-400 mb-3">{t('filters.categories')}</label>
         <div className="flex flex-wrap gap-2">
-          {uniqueCategories.map((category) => (
-            <button
-              key={category}
-              onClick={() => onMultiSelectFilter('categories', category)}
-              className={`px-3 py-1 rounded-md text-sm border transition-colors ${
-                filters.categories.includes(category)
-                  ? 'nav-active border-transparent'
-                  : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+          {uniqueCategories.map((category, i) => {
+            const color = getCategoryColor(category, i);
+            const isActive = filters.categories.includes(category);
+            return (
+              <button
+                key={category}
+                onClick={() => onMultiSelectFilter('categories', category)}
+                className={`px-3 py-1 rounded-md text-sm border transition-colors flex items-center gap-1.5 ${
+                  isActive
+                    ? 'border-transparent'
+                    : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500'
+                }`}
+                style={isActive ? { backgroundColor: color + '25', color: color, borderColor: color + '60' } : {}}
+              >
+                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
+                {category}
+              </button>
+            );
+          })}
         </div>
       </div>
 

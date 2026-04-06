@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TransactionActionsMenu from '../common/TransactionActionsMenu';
 import EmailViewerModal from '../common/EmailViewerModal';
 import { useTranslation } from 'react-i18next';
+import { getCategoryColor } from '../../utils/categoryColors';
 
 const FixedTransactionActionsMenu = (props) => {
   return (
@@ -167,13 +168,16 @@ const EditableTransactionRow = ({
           </div>
         ) : (
           <span
-            className={`px-3 py-1 text-xs rounded-full ${
-              transaction.category
-                ? filters.categories.includes(transaction.category)
-                  ? 'bg-blue-900/40 text-blue-300 ring-1 ring-blue-700'
-                  : 'bg-gray-800 text-gray-300'
-                : 'bg-red-900/30 text-red-400'
-            }`}
+            className="px-3 py-1 text-xs rounded-full"
+            style={transaction.category ? (() => {
+              const c = getCategoryColor(transaction.category, 0);
+              const isFiltered = filters.categories.includes(transaction.category);
+              return {
+                backgroundColor: c + (isFiltered ? '30' : '18'),
+                color: c,
+                boxShadow: isFiltered ? `inset 0 0 0 1px ${c}50` : 'none',
+              };
+            })() : { backgroundColor: 'rgba(239,68,68,0.15)', color: '#f87171' }}
           >
             {transaction.category || 'No Category'}
           </span>
