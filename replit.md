@@ -100,6 +100,14 @@ Full-stack personal finance app that connects to Gmail via IMAP, reads bank tran
 - Deposits are shown with green styling and `+` prefix in both the transaction table and PDF preview
 - Existing transactions default to `expense` when the column is added via schema migration
 
+## AI Chat Usage Tracking
+- **Database:** `chat_usage` table stores per-request metrics: model, prompt/completion/total tokens, user message preview, response length, duration, context enrichment queries, estimated cost
+- **Server:** `/api/chat` endpoint captures streaming usage via `stream_options: { include_usage: true }`, logs to DB after each response, sends usage info to frontend in the final SSE event
+- **API:** `GET /api/chat/usage` returns detailed stats (all-time summary, today, this month, daily breakdown, hourly heatmap, context enrichment stats, recent 50 messages); `DELETE /api/chat/usage` clears history
+- **Frontend:** `ChatUsagePanel.jsx` — modal accessed via chart icon in chat header; shows all-time stats (requests, tokens, cost, duration, avg tokens/req, response chars), today/month summaries, current session per-message breakdown with token bar visualization, collapsible daily/hourly/context/history sections
+- **Session tracking:** Per-message usage displayed inline below the last assistant message (tokens, duration, model); session totals shown in header button
+- **i18n:** Full EN/FR translations for all usage labels
+
 ## Important Notes
 - Email extraction features require EMAIL_USER and EMAIL_PASS secrets
 - Server node_modules in `Server/` are separate from root — sqlite3 native module must match platform

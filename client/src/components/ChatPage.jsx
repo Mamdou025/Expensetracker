@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Send, Loader2, Trash2, MessageCircle } from 'lucide-react';
+import { Send, Loader2, Trash2, MessageCircle, BarChart3 } from 'lucide-react';
+import ChatUsagePanel from './ChatUsagePanel';
 
 const SUGGESTED_QUESTIONS = [
   "How much did I spend this month?",
@@ -18,6 +19,9 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showUsage, setShowUsage] = useState(false);
+  const [sessionUsage, setSessionUsage] = useState([]);
+  const [lastUsage, setLastUsage] = useState(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -33,6 +37,7 @@ const ChatPage = () => {
     setMessages(newMessages);
     setInput('');
     setIsLoading(true);
+    setLastUsage(null);
 
     const assistantMsg = { role: 'assistant', content: '' };
     setMessages([...newMessages, assistantMsg]);
@@ -73,6 +78,10 @@ const ChatPage = () => {
                 return updated;
               });
             }
+            if (data.done && data.usage) {
+              setLastUsage(data.usage);
+              setSessionUsage(prev => [...prev, data.usage]);
+            }
           } catch (e) {}
         }
       }
@@ -100,6 +109,8 @@ const ChatPage = () => {
   const clearChat = () => {
     setMessages([]);
     setInput('');
+    setSessionUsage([]);
+    setLastUsage(null);
   };
 
   const formatMessage = (content) => {
@@ -116,6 +127,8 @@ const ChatPage = () => {
     });
   };
 
+  const sessionTokens = sessionUsage.reduce((a, u) => a + (u.total_tokens || 0), 0);
+
   return (
     <div className="flex flex-col" style={{ height: 'calc(100vh - 120px)' }}>
       <div className="flex items-center justify-between mb-4">
@@ -125,15 +138,27 @@ const ChatPage = () => {
             {t('chat.title', 'Financial Assistant')}
           </h2>
         </div>
-        {messages.length > 0 && (
+        <div className="flex items-center gap-2">
           <button
-            onClick={clearChat}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-lg transition-colors"
+            onClick={() => setShowUsage(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-gray-800 rounded-lg transition-colors"
+            title={t('chatUsage.title', 'AI Usage Tracking')}
           >
-            <Trash2 className="w-3.5 h-3.5" />
-            {t('chat.clear', 'Clear')}
+            <BarChart3 className="w-3.5 h-3.5" />
+            {sessionTokens > 0 && (
+              <span className="text-xs tabular-nums">{sessionTokens.toLocaleString()} tok</span>
+            )}
           </button>
-        )}
+          {messages.length > 0 && (
+            <button
+              onClick={clearChat}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-lg transition-colors"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              {t('chat.clear', 'Clear')}
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="flex-1 overflow-y-auto rounded-xl border border-gray-800 bg-gray-900/50 p-4 space-y-4 mb-4">
@@ -160,26 +185,32 @@ const ChatPage = () => {
           </div>
         ) : (
           messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'bg-blue-600 text-white rounded-br-md'
-                    : 'bg-gray-800 text-gray-200 rounded-bl-md border border-gray-700'
-                }`}
-              >
-                {msg.role === 'assistant' && msg.content === '' && isLoading ? (
-                  <div className="flex items-center gap-2 text-gray-400">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>{t('chat.thinking', 'Analyzing...')}</span>
-                  </div>
-                ) : (
-                  <div className="whitespace-pre-wrap">{formatMessage(msg.content)}</div>
-                )}
+            <div key={i}>
+              <div className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    msg.role === 'user'
+                      ? 'bg-blue-600 text-white rounded-br-md'
+                      : 'bg-gray-800 text-gray-200 rounded-bl-md border border-gray-700'
+                  }`}
+                >
+                  {msg.role === 'assistant' && msg.content === '' && isLoading ? (
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{t('chat.thinking', 'Analyzing...')}</span>
+                    </div>
+                  ) : (
+                    <div className="whitespace-pre-wrap">{formatMessage(msg.content)}</div>
+                  )}
+                </div>
               </div>
+              {msg.role === 'assistant' && !isLoading && i === messages.length - 1 && lastUsage && (
+                <div className="flex justify-start mt-1 ml-1">
+                  <span className="text-[10px] text-gray-600 tabular-nums">
+                    {lastUsage.total_tokens?.toLocaleString()} tokens &middot; {(lastUsage.duration_ms / 1000).toFixed(1)}s &middot; {lastUsage.model}
+                  </span>
+                </div>
+              )}
             </div>
           ))
         )}
@@ -209,6 +240,12 @@ const ChatPage = () => {
           )}
         </button>
       </div>
+
+      <ChatUsagePanel
+        visible={showUsage}
+        onClose={() => setShowUsage(false)}
+        sessionUsage={sessionUsage}
+      />
     </div>
   );
 };
