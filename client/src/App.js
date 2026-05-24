@@ -7,6 +7,7 @@ import TransactionDashboard from './components/TransactionDashboard';
 import EmailExtractionPage from './components/EmailExtractionPage';
 import PDFImportPage from './components/PDFImportPage';
 import BankTemplatesPage from './components/BankTemplatesPage';
+import ConnectedAccountsPage from './components/ConnectedAccountsPage';
 import ChatPage from './components/ChatPage';
 import LandingPage from './components/LandingPage';
 import './index.css';
@@ -52,6 +53,9 @@ const AppShell = () => (
         } />
         <Route path="/bank-templates" element={
           <ProtectedRoute><BankTemplatesPage /></ProtectedRoute>
+        } />
+        <Route path="/accounts" element={
+          <ProtectedRoute><ConnectedAccountsPage /></ProtectedRoute>
         } />
         <Route path="/chat" element={
           <ProtectedRoute><ChatPage /></ProtectedRoute>
