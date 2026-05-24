@@ -15,7 +15,29 @@ const {
     getRepoRoot,
     validateRuntimeConfig,
 } = require('./runtimeConfig');
-const { setupAuth, requireAuth, requireOwner, OWNER_EMAIL } = require('./auth');
+const {
+    setupAuth, requireAuth, requireOwner, OWNER_EMAIL,
+    getOrCreateForwardingToken, getUserByForwardingToken,
+} = require('./auth');
+const { encryptString, decryptString } = require('./crypto');
+
+const FORWARDING_DOMAIN = (process.env.FORWARDING_DOMAIN || 'exptracker.app').toLowerCase();
+const FORWARDING_LOCAL_PREFIX = 'inbox+';
+// Token format must match getOrCreateForwardingToken() — 32 hex chars.
+const FORWARDING_ADDRESS_RE = new RegExp(
+    `^inbox\\+([a-f0-9]{32})@${FORWARDING_DOMAIN.replace(/\./g, '\\.')}$`
+);
+
+function buildForwardingAddress(token) {
+    return `${FORWARDING_LOCAL_PREFIX}${token}@${FORWARDING_DOMAIN}`;
+}
+
+function parseTokenFromRecipient(to) {
+    if (!to) return null;
+    const recipient = Array.isArray(to) ? to[0] : to;
+    const m = String(recipient).trim().toLowerCase().match(FORWARDING_ADDRESS_RE);
+    return m ? m[1] : null;
+}
 
 const app = express();
 const runtimeEnv = buildRuntimeEnv(process.env);
@@ -58,10 +80,82 @@ function queryDb(sql, params = []) {
 async function startServer() {
     await setupAuth(app, db);
 
+    // ---------- Inbound email webhook (Cloudflare Email Worker → here) ----------
+    // Registered BEFORE the requireAuth middleware because the Worker is not
+    // an authenticated user — it proves itself via the shared INBOUND_EMAIL_SECRET
+    // header. The address format is `inbox+<userId>@exptracker.app`.
+    app.post('/api/inbound-email', async (req, res) => {
+        const expected = process.env.INBOUND_EMAIL_SECRET;
+        const provided = req.get('X-Webhook-Secret') || '';
+        // Pad both to the same length so timingSafeEqual never throws and the
+        // length itself isn't a side-channel.
+        const expectedBuf = Buffer.from(expected || '');
+        const providedBuf = Buffer.alloc(expectedBuf.length);
+        Buffer.from(provided).copy(providedBuf);
+        const secretOk = !!expected &&
+            require('crypto').timingSafeEqual(expectedBuf, providedBuf) &&
+            provided.length === expected.length;
+        if (!secretOk) return res.status(401).json({ error: 'invalid webhook secret' });
+
+        const { to, from, subject, raw } = req.body || {};
+        const token = parseTokenFromRecipient(to);
+        if (!token) {
+            // Don't log the full recipient to avoid leaking other users' addresses
+            // if Cloudflare ever batches deliveries; log a redacted hint instead.
+            console.warn('Inbound email rejected: recipient does not match forwarding format');
+            return res.status(400).json({ error: 'cannot route: bad recipient address' });
+        }
+        try {
+            const user = await getUserByForwardingToken(token);
+            if (!user) {
+                console.warn('Inbound email rejected: unknown forwarding token');
+                return res.status(404).json({ error: 'unknown recipient' });
+            }
+            const encryptedBody = encryptString(typeof raw === 'string' ? raw : JSON.stringify(raw || ''));
+            db.run(
+                `INSERT INTO email_samples
+                    (user_id, bank_name, sender, subject, received_at, body_text, body_html,
+                     status, source, is_encrypted)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    user.id, null, from || null, subject || null,
+                    new Date().toISOString(),
+                    encryptedBody, null,
+                    'received', 'email_forward', 1,
+                ],
+                function (err) {
+                    if (err) {
+                        console.error('Failed to store inbound email:', err.message);
+                        return res.status(500).json({ error: 'storage failed' });
+                    }
+                    console.log(`📨 Inbound email stored for user ${user.id} (id=${this.lastID})`);
+                    res.json({ ok: true, id: this.lastID });
+                }
+            );
+        } catch (e) {
+            console.error('Inbound email handler error:', e.message);
+            res.status(500).json({ error: 'internal error' });
+        }
+    });
+
     // All /api/* routes below require an authenticated user. The setupAuth call
     // above already registered /api/login, /api/callback, /api/logout, and
     // /api/auth/user, so those are exempt.
     app.use('/api', requireAuth);
+
+    // Per-user forwarding address (the address users put into their Gmail filter).
+    app.get('/api/forwarding-address', async (req, res) => {
+        try {
+            const token = await getOrCreateForwardingToken(req.userId);
+            res.json({
+                address: buildForwardingAddress(token),
+                domain: FORWARDING_DOMAIN,
+            });
+        } catch (e) {
+            console.error('forwarding-address error:', e.message);
+            res.status(500).json({ error: 'Could not allocate forwarding address' });
+        }
+    });
 
     // ===== Transactions =====
     app.get('/api/transactions', (req, res) => {
@@ -632,6 +726,15 @@ async function startServer() {
             (err, row) => {
                 if (err) return res.status(500).json({ error: err.message });
                 if (!row) return res.status(404).json({ error: 'Sample not found' });
+                try {
+                    if (row.is_encrypted) {
+                        row.body_text = decryptString(row.body_text);
+                        row.body_html = decryptString(row.body_html);
+                    }
+                } catch (e) {
+                    console.error('Failed to decrypt email sample', row.id, e.message);
+                    return res.status(500).json({ error: 'decryption failed' });
+                }
                 res.json(row);
             }
         );
