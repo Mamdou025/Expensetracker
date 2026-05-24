@@ -36,6 +36,33 @@ async function ensureAuthTables() {
   // In case the users table existed from the previous OIDC iteration, add the
   // password_hash column.
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash VARCHAR`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS forwarding_token VARCHAR UNIQUE`);
+}
+
+// Returns the user's opaque forwarding token, generating one if it doesn't
+// exist yet. This token is what shows up in the per-user forwarding email
+// address, so it MUST be high-entropy and not derivable from the user id.
+async function getOrCreateForwardingToken(userId) {
+  const existing = await pool.query(
+    'SELECT forwarding_token FROM users WHERE id = $1',
+    [userId]
+  );
+  if (existing.rows[0]?.forwarding_token) return existing.rows[0].forwarding_token;
+  const token = crypto.randomBytes(16).toString('hex'); // 32 hex chars
+  await pool.query(
+    'UPDATE users SET forwarding_token = $1 WHERE id = $2',
+    [token, userId]
+  );
+  return token;
+}
+
+async function getUserByForwardingToken(token) {
+  if (!token || typeof token !== 'string') return null;
+  const r = await pool.query(
+    'SELECT id, email FROM users WHERE forwarding_token = $1',
+    [token]
+  );
+  return r.rows[0] || null;
 }
 
 async function getUserById(id) {
@@ -226,4 +253,7 @@ const requireOwner = (req, res, next) => {
   next();
 };
 
-module.exports = { setupAuth, requireAuth, requireOwner, OWNER_EMAIL };
+module.exports = {
+  setupAuth, requireAuth, requireOwner, OWNER_EMAIL,
+  getOrCreateForwardingToken, getUserByForwardingToken,
+};

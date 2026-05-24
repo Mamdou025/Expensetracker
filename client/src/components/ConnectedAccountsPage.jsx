@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Loader2, Trash2, X, Search, ArrowLeft, FileUp, Mail, Lock, Check, Building2 } from 'lucide-react';
+import { Plus, Loader2, Trash2, X, Search, ArrowLeft, FileUp, Mail, Lock, Check, Building2, Copy, Shield } from 'lucide-react';
 import { apiClient } from '../Services/api';
 import { CANADIAN_BANKS, PRODUCT_LABELS, findBank, logoUrl } from '../data/banks';
 
@@ -22,16 +22,45 @@ const BankIcon = ({ bank, size = 'md' }) => {
   );
 };
 
-const INGEST_METHODS = [
+const buildIngestMethods = (forwardingAddress) => [
   { id: 'pdf', label: 'Upload PDF statements', icon: FileUp, available: true,
     desc: 'Drag and drop monthly statements from this bank to import transactions.' },
-  { id: 'email_forward', label: 'Forward transaction emails', icon: Mail, available: false,
+  { id: 'email_forward', label: 'Forward transaction emails', icon: Mail,
+    available: !!forwardingAddress,
+    unavailableReason: 'Forwarding address is not available right now.',
     desc: 'Get a unique forwarding address — set a Gmail filter to send bank notifications to it.' },
   { id: 'gmail_oauth', label: 'Connect Gmail directly', icon: Lock, available: false,
+    unavailableReason: 'Coming soon',
     desc: 'Sign in with Google so we can poll your inbox for bank emails. (Coming after Google sign-in is enabled.)' },
 ];
 
-const AddBankWizard = ({ onClose, onSaved, existingBankIds }) => {
+const ForwardingAddressBox = ({ address }) => {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(address); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch {}
+  };
+  return (
+    <div className="mt-3 rounded-lg border border-blue-900/60 bg-blue-950/30 p-3 space-y-2">
+      <div className="text-xs text-blue-200 font-medium flex items-center gap-1.5">
+        <Shield size={12} /> Your private forwarding address
+      </div>
+      <div className="flex items-center gap-2">
+        <code className="flex-1 text-xs bg-gray-900 border border-gray-800 rounded px-2 py-1.5 text-gray-100 truncate">{address}</code>
+        <button type="button" onClick={copy}
+          className="text-xs px-2 py-1.5 rounded bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-1">
+          <Copy size={12} /> {copied ? 'Copied' : 'Copy'}
+        </button>
+      </div>
+      <div className="text-[11px] text-gray-400 leading-relaxed">
+        In Gmail (or your email app), create a filter for messages from this bank's sender address
+        (e.g. <code className="text-gray-300">notify@cibc.com</code>) and forward them to the address above.
+        We never see your password and only receive what you forward.
+      </div>
+    </div>
+  );
+};
+
+const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress }) => {
   const [step, setStep] = useState(1);
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState(null);
@@ -47,6 +76,10 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds }) => {
 
   const submit = async () => {
     if (!selected) return;
+    if (method === 'email_forward' && !forwardingAddress) {
+      setError('Forwarding address is not available — please try again in a moment.');
+      return;
+    }
     setSaving(true); setError(null);
     try {
       await apiClient.post('/api/user-bank-accounts', {
@@ -166,27 +199,37 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds }) => {
             <div>
               <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">How should we get transactions?</label>
               <div className="space-y-2">
-                {INGEST_METHODS.map((m) => {
+                {buildIngestMethods(forwardingAddress).map((m) => {
                   const Icon = m.icon;
                   const disabled = !m.available;
+                  const active = method === m.id && !disabled;
                   return (
-                    <button key={m.id} type="button"
-                      disabled={disabled}
-                      onClick={() => setMethod(m.id)}
-                      className={`w-full text-left p-3 rounded-lg border flex items-start gap-3 transition-colors ${
-                        method === m.id && !disabled
-                          ? 'border-blue-500 bg-blue-600/10'
-                          : 'border-gray-800 hover:border-gray-700'
-                      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                      <Icon size={16} className="text-gray-400 mt-0.5" />
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm text-gray-100 flex items-center gap-2">
-                          {m.label}
-                          {disabled && <span className="text-[10px] uppercase bg-gray-800 text-gray-500 px-1.5 py-0.5 rounded">Coming soon</span>}
+                    <div key={m.id}>
+                      <button type="button"
+                        disabled={disabled}
+                        onClick={() => setMethod(m.id)}
+                        className={`w-full text-left p-3 rounded-lg border flex items-start gap-3 transition-colors ${
+                          active
+                            ? 'border-blue-500 bg-blue-600/10'
+                            : 'border-gray-800 hover:border-gray-700'
+                        } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                        <Icon size={16} className="text-gray-400 mt-0.5" />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-gray-100 flex items-center gap-2">
+                            {m.label}
+                            {disabled && (
+                              <span className="text-[10px] uppercase bg-gray-800 text-gray-500 px-1.5 py-0.5 rounded">
+                                {m.unavailableReason || 'Unavailable'}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-500 mt-0.5">{m.desc}</div>
                         </div>
-                        <div className="text-xs text-gray-500 mt-0.5">{m.desc}</div>
-                      </div>
-                    </button>
+                      </button>
+                      {active && m.id === 'email_forward' && forwardingAddress && (
+                        <ForwardingAddressBox address={forwardingAddress} />
+                      )}
+                    </div>
                   );
                 })}
               </div>
@@ -215,11 +258,19 @@ const ConnectedAccountsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [adding, setAdding] = useState(false);
+  const [forwardingAddress, setForwardingAddress] = useState(null);
 
   const load = useCallback(async () => {
     try {
-      const data = await apiClient.get('/api/user-bank-accounts');
+      const [data, fwd] = await Promise.all([
+        apiClient.get('/api/user-bank-accounts'),
+        apiClient.get('/api/forwarding-address').catch((err) => {
+          console.warn('Forwarding address fetch failed:', err?.message);
+          return null;
+        }),
+      ]);
       setAccounts(data.accounts || []);
+      setForwardingAddress(fwd?.address || null);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -309,6 +360,9 @@ const ConnectedAccountsPage = () => {
                     </Link>
                   )}
                 </div>
+                {a.ingest_method === 'email_forward' && forwardingAddress && (
+                  <ForwardingAddressBox address={forwardingAddress} />
+                )}
               </div>
             );
           })}
@@ -320,6 +374,7 @@ const ConnectedAccountsPage = () => {
           onClose={() => setAdding(false)}
           onSaved={load}
           existingBankIds={existingBankIds}
+          forwardingAddress={forwardingAddress}
         />
       )}
     </>

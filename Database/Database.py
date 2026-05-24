@@ -171,6 +171,9 @@ def create_database():
             body_html TEXT,
             status TEXT DEFAULT 'pending',
             notes TEXT,
+            source TEXT DEFAULT 'manual',
+            is_encrypted INTEGER DEFAULT 0,
+            user_bank_account_id INTEGER,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
@@ -178,6 +181,15 @@ def create_database():
         CREATE INDEX IF NOT EXISTS idx_email_samples_user_id
         ON email_samples(user_id);
     """)
+    # Migrate older databases that pre-date these columns.
+    cursor.execute("PRAGMA table_info(email_samples)")
+    es_cols = {row[1] for row in cursor.fetchall()}
+    if 'source' not in es_cols:
+        cursor.execute("ALTER TABLE email_samples ADD COLUMN source TEXT DEFAULT 'manual'")
+    if 'is_encrypted' not in es_cols:
+        cursor.execute("ALTER TABLE email_samples ADD COLUMN is_encrypted INTEGER DEFAULT 0")
+    if 'user_bank_account_id' not in es_cols:
+        cursor.execute("ALTER TABLE email_samples ADD COLUMN user_bank_account_id INTEGER")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS user_bank_accounts (
