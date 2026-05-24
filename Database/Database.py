@@ -3,6 +3,7 @@ try:
 except ImportError:
     from Database.db_config import connect_db, ensure_db_directory, get_db_path
 
+
 def _check_and_update_columns(cursor):
     """Ensure the transactions table has all required columns."""
     required = {
@@ -18,6 +19,7 @@ def _check_and_update_columns(cursor):
         "duplicate_status": "TEXT DEFAULT 'unchecked'",
         "duplicate_group_id": "TEXT DEFAULT NULL",
         "transaction_type": "TEXT DEFAULT 'expense'",
+        "user_id": "TEXT DEFAULT NULL",
     }
 
     cursor.execute("PRAGMA table_info(transactions)")
@@ -30,6 +32,54 @@ def _check_and_update_columns(cursor):
             )
             print(f"➡️ Added missing column '{col}' to transactions table")
 
+
+def _ensure_keyword_rules_user_id(cursor):
+    """Migrate keyword_rules to have a user_id column and composite uniqueness."""
+    cursor.execute("PRAGMA table_info(keyword_rules)")
+    cols = {row[1]: row for row in cursor.fetchall()}
+    if not cols:
+        cursor.execute("""
+            CREATE TABLE keyword_rules (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT,
+                keyword TEXT NOT NULL,
+                category TEXT,
+                tags TEXT,
+                UNIQUE(user_id, keyword)
+            )
+        """)
+        return
+    if "user_id" in cols and "id" in cols:
+        return
+
+    # Need to rebuild the table to drop the keyword PK and add user_id + id.
+    cursor.execute("ALTER TABLE keyword_rules RENAME TO keyword_rules_old")
+    cursor.execute("""
+        CREATE TABLE keyword_rules (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
+            keyword TEXT NOT NULL,
+            category TEXT,
+            tags TEXT,
+            UNIQUE(user_id, keyword)
+        )
+    """)
+    cursor.execute("""
+        INSERT INTO keyword_rules (user_id, keyword, category, tags)
+        SELECT NULL, keyword, category, tags FROM keyword_rules_old
+    """)
+    cursor.execute("DROP TABLE keyword_rules_old")
+    print("➡️ Migrated keyword_rules to include user_id")
+
+
+def _ensure_chat_usage_user_id(cursor):
+    cursor.execute("PRAGMA table_info(chat_usage)")
+    existing = {row[1] for row in cursor.fetchall()}
+    if "user_id" not in existing:
+        cursor.execute("ALTER TABLE chat_usage ADD COLUMN user_id TEXT DEFAULT NULL")
+        print("➡️ Added user_id column to chat_usage")
+
+
 def create_database():
     db_path = get_db_path()
     ensure_db_directory(db_path)
@@ -37,7 +87,6 @@ def create_database():
     conn = connect_db(db_path)
     cursor = conn.cursor()
 
-    # ✅ Create transactions table --test Mamadou 1234
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -56,20 +105,22 @@ def create_database():
             normalized_merchant TEXT DEFAULT NULL,
             duplicate_status TEXT DEFAULT 'unchecked',
             duplicate_group_id TEXT DEFAULT NULL,
-            transaction_type TEXT DEFAULT 'expense'
+            transaction_type TEXT DEFAULT 'expense',
+            user_id TEXT DEFAULT NULL
         )
     """)
 
-    # Ensure new columns exist when upgrading from older schemas
     _check_and_update_columns(cursor)
 
-    # ✅ Create index to speed up queries on amount and date
     cursor.execute("""
         CREATE INDEX IF NOT EXISTS idx_amount_date
         ON transactions(amount, date);
     """)
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_transactions_user_id
+        ON transactions(user_id);
+    """)
 
-    # ✅ Create tags table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tags (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,7 +128,6 @@ def create_database():
         )
     """)
 
-    # ✅ Create transaction_tags table (Many-to-Many relationship)
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS transaction_tags (
             transaction_id INTEGER NOT NULL,
@@ -88,14 +138,7 @@ def create_database():
         )
     """)
 
-    # ✅ Create keyword_rules table for automatic categorization and tagging
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS keyword_rules (
-            keyword TEXT PRIMARY KEY,
-            category TEXT,
-            tags TEXT
-        )
-    """)
+    _ensure_keyword_rules_user_id(cursor)
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS chat_usage (
@@ -109,13 +152,17 @@ def create_database():
             response_length INTEGER DEFAULT 0,
             duration_ms INTEGER DEFAULT 0,
             context_queries TEXT DEFAULT NULL,
-            estimated_cost REAL DEFAULT 0
+            estimated_cost REAL DEFAULT 0,
+            user_id TEXT DEFAULT NULL
         )
     """)
 
+    _ensure_chat_usage_user_id(cursor)
+
     conn.commit()
     conn.close()
-    print(f"✅ SQLite database and tables created successfully at {db_path}!")
+    print(f"✅ SQLite database and tables created/migrated successfully at {db_path}!")
+
 
 if __name__ == "__main__":
     create_database()

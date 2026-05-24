@@ -15,6 +15,7 @@ const {
     getRepoRoot,
     validateRuntimeConfig,
 } = require('./runtimeConfig');
+const { setupAuth, requireAuth, requireOwner, OWNER_EMAIL } = require('./auth');
 
 const app = express();
 const runtimeEnv = buildRuntimeEnv(process.env);
@@ -25,1252 +26,672 @@ const host = getHost(runtimeEnv);
 const pythonCmd = getPythonCommand(runtimeEnv);
 const repoRoot = getRepoRoot();
 const dbPath = runtimeEnv.SQLITE_PATH;
-const childProcessEnv = {
-    ...runtimeEnv,
-    SQLITE_PATH: dbPath,
-};
+const baseChildEnv = { ...runtimeEnv, SQLITE_PATH: dbPath };
+
+function childEnvForUser(userId) {
+    return { ...baseChildEnv, APP_USER_ID: userId || '' };
+}
 
 process.env.SQLITE_PATH = dbPath;
 ensureSqliteDirectory(dbPath);
 
 app.use(cors());
-// Increase JSON payload limit to handle larger request bodies
-app.use(express.json({ limit: '10mb' })); // ✅ Allow JSON request body parsing
+app.use(express.json({ limit: '10mb' }));
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error('❌ Échec de la connexion à la base de données:', err.message);
     } else {
         console.log('✅ Connecté à la base de données SQLite à:', dbPath);
-        db.run(`CREATE TABLE IF NOT EXISTS chat_usage (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp TEXT DEFAULT (datetime('now')),
-            model TEXT NOT NULL,
-            prompt_tokens INTEGER DEFAULT 0,
-            completion_tokens INTEGER DEFAULT 0,
-            total_tokens INTEGER DEFAULT 0,
-            user_message TEXT,
-            response_length INTEGER DEFAULT 0,
-            duration_ms INTEGER DEFAULT 0,
-            context_queries TEXT DEFAULT NULL,
-            estimated_cost REAL DEFAULT 0
-        )`);
     }
-});
-
-// ✅ FIXED: Fetch all transactions with their tags
-app.get('/api/transactions', (req, res) => {
-    const query = `
-        SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
-               t.transaction_type,
-               COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
-        FROM transactions t
-        LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
-        LEFT JOIN tags g ON tt.tag_id = g.id
-        GROUP BY t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category, t.transaction_type
-        ORDER BY t.date DESC;
-    `;
-
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// ✅ Fetch transactions by category
-app.get('/api/transactions/category/:category', (req, res) => {
-    const category = req.params.category;
-    const query = `
-        SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
-               t.transaction_type,
-               COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
-        FROM transactions t
-        LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
-        LEFT JOIN tags g ON tt.tag_id = g.id
-        WHERE t.category = ?
-        GROUP BY t.id;
-    `;
-
-    db.all(query, [category], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// ✅ Fetch transactions by a specific tag
-app.get('/api/transactions/tag/:tag', (req, res) => {
-    const tagName = req.params.tag;
-    const query = `
-        SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
-               t.transaction_type,
-               COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
-        FROM transactions t
-        JOIN transaction_tags tt ON t.id = tt.transaction_id
-        JOIN tags g ON tt.tag_id = g.id
-        WHERE g.tag_name = ?
-        GROUP BY t.id;
-    `;
-
-    db.all(query, [tagName], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// ➕ Add a new transaction and return matched keyword rules
-app.post('/api/transactions', async (req, res) => {
-    try {
-        const { amount, description, card_type, date, bank, category = 'Uncategorized', tags = [] } = req.body;
-
-        const applyQuery = `
-            SELECT keyword, category, tags FROM keyword_rules
-            WHERE ? LIKE '%' || keyword || '%' COLLATE NOCASE
-        `;
-
-        const rules = await new Promise((resolve, reject) => {
-            db.all(applyQuery, [description], (err, rows) => {
-                if (err) reject(err);
-                else resolve(rows);
-            });
-        });
-
-        let finalCategory = category;
-        const tagSet = new Set(Array.isArray(tags) ? tags : [tags]);
-        const matchedRules = [];
-
-        for (const rule of rules) {
-            matchedRules.push({
-                keyword: rule.keyword,
-                category: rule.category || null,
-                tags: rule.tags ? rule.tags.split(',').map(t => t.trim()).filter(Boolean) : []
-            });
-
-            if (rule.category) finalCategory = rule.category;
-            if (rule.tags) {
-                for (const t of rule.tags.split(',')) {
-                    if (t.trim()) tagSet.add(t.trim());
-                }
-            }
-        }
-
-        const insertQuery = `INSERT INTO transactions (amount, description, card_type, date, bank, category)
-                             VALUES (?, ?, ?, ?, ?, ?)`;
-        const transactionId = await new Promise((resolve, reject) => {
-            db.run(insertQuery, [amount, description, card_type, date, bank, finalCategory], function(err){
-                if (err) reject(err);
-                else resolve(this.lastID);
-            });
-        });
-
-        const tagsArray = Array.from(tagSet);
-        for (const tag of tagsArray) {
-            await new Promise((resolve, reject) => {
-                db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], function(err){
-                    if (err) reject(err); else resolve();
-                });
-            });
-            const tagId = await new Promise((resolve, reject) => {
-                db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => {
-                    if (err) reject(err); else resolve(row.id);
-                });
-            });
-            await new Promise((resolve, reject) => {
-                db.run('INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)', [transactionId, tagId], (err) => {
-                    if (err) reject(err); else resolve();
-                });
-            });
-        }
-
-        res.json({
-            id: transactionId,
-            amount,
-            description,
-            card_type,
-            date,
-            bank,
-            category: finalCategory,
-            tags: tagsArray,
-            applied_rules: matchedRules
-        });
-    } catch (error) {
-        console.error('Error inserting transaction:', error);
-        res.status(500).json({ error: 'Failed to insert transaction' });
-    }
-});
-
-// ✅ Fetch all tags and their associated transactions
-app.get('/api/tags', (req, res) => {
-    const query = `
-        SELECT g.tag_name AS tag, 
-               GROUP_CONCAT(t.description, ', ') AS transactions
-        FROM tags g
-        JOIN transaction_tags tt ON g.id = tt.tag_id
-        JOIN transactions t ON tt.transaction_id = t.id
-        GROUP BY g.tag_name;
-    `;
-
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// ✅ Fetch tags for a specific transaction
-app.get('/api/transactions/:id/tags', (req, res) => {
-    const { id } = req.params;
-    const query = `SELECT tag_name FROM tags 
-                   JOIN transaction_tags ON tags.id = transaction_tags.tag_id
-                   WHERE transaction_tags.transaction_id = ?`;
-
-    db.all(query, [id], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows.map(row => row.tag_name));
-    });
-});
-
-// ✅ Add a tag to a transaction
-app.post('/api/transactions/:id/tags', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { tag } = req.body;
-
-        if (!tag) {
-            return res.status(400).json({ error: "Tag is required" });
-        }
-
-        // Check if tag exists
-        const checkTagQuery = "SELECT id FROM tags WHERE tag_name = ?";
-        const tagExists = await new Promise((resolve, reject) => {
-            db.get(checkTagQuery, [tag], (err, row) => {
-                if (err) reject(err);
-                resolve(row);
-            });
-        });
-
-        let tagId;
-        if (!tagExists) {
-            // Insert new tag if it doesn't exist
-            const insertTagQuery = "INSERT INTO tags (tag_name) VALUES (?)";
-            tagId = await new Promise((resolve, reject) => {
-                db.run(insertTagQuery, [tag], function (err) {
-                    if (err) reject(err);
-                    resolve(this.lastID);
-                });
-            });
-        } else {
-            tagId = tagExists.id;
-        }
-
-        // Link tag to transaction idempotently
-        const insertTagLinkQuery = "INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)";
-        const linkChanges = await new Promise((resolve, reject) => {
-            db.run(insertTagLinkQuery, [id, tagId], function (err) {
-                if (err) reject(err);
-                else resolve(this.changes);
-            });
-        });
-
-        res.json({
-            message: linkChanges ? "Tag added successfully" : "Tag already linked to transaction",
-            alreadyLinked: linkChanges === 0
-        });
-    } catch (error) {
-        console.error("Error adding tag:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-});
-
-// ✅ Remove a tag from a transaction
-app.delete('/api/transactions/:id/tags', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { tag } = req.body;
-
-        if (!tag) {
-            return res.status(400).json({ error: "Tag is required" });
-        }
-
-        const deleteTagQuery = `
-            DELETE FROM transaction_tags 
-            WHERE transaction_id = ? AND tag_id = (SELECT id FROM tags WHERE tag_name = ?)
-        `;
-
-        await new Promise((resolve, reject) => {
-            db.run(deleteTagQuery, [id, tag], function (err) {
-                if (err) reject(err);
-                resolve();
-            });
-        });
-
-        res.json({ message: "Tag removed successfully" });
-    } catch (error) {
-        console.error("Error removing tag:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-});
-
-// ✅ Delete a tag from the tags table
-app.delete('/api/tags/:tagName', (req, res) => {
-    const { tagName } = req.params;
-
-    const deleteTagQuery = `
-        DELETE FROM tags WHERE tag_name = ?;
-    `;
-
-    db.run(deleteTagQuery, [tagName], function (err) {
-        if (err) {
-            console.error("❌ Failed to delete tag:", err);
-            res.status(500).json({ error: "Failed to delete tag" });
-            return;
-        }
-
-        res.json({ message: `✅ Tag '${tagName}' deleted successfully` });
-    });
-});
-
-
-// Make sure this endpoint exists in your server.js:
-app.put('/api/transactions/:id/category', (req, res) => {
-    const { id } = req.params;
-    const { category } = req.body;
-
-    console.log('🔄 Updating transaction category:', { id, category }); // Add debug log
-
-    const query = 'UPDATE transactions SET category = ? WHERE id = ?';
-
-    db.run(query, [category, id], function (err) {
-        if (err) {
-            console.error('❌ Database error:', err);
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        if (this.changes === 0) {
-            console.log('❌ Transaction not found:', id);
-            res.status(404).json({ error: "Transaction not found" });
-            return;
-        }
-        console.log('✅ Category updated successfully');
-        res.json({ message: `✅ Transaction ID ${id} updated to category '${category}'` });
-    });
-});
-
-// Add these new endpoints to your server.js:
-
-// Dashboard summary stats
-app.get('/api/dashboard/stats', (req, res) => {
-    const query = `
-        SELECT
-            COUNT(*) AS totalTransactions,
-            COALESCE(SUM(amount), 0) AS totalAmount,
-            COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS totalIncome,
-            COALESCE(SUM(CASE WHEN amount < 0 THEN ABS(amount) ELSE 0 END), 0) AS totalExpense,
-            COALESCE(AVG(amount), 0) AS avgTransaction
-        FROM transactions
-    `;
-
-    db.get(query, [], (err, row) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-
-        const stats = {
-            totalTransactions: Number(row?.totalTransactions || 0),
-            totalAmount: Number(row?.totalAmount || 0),
-            totalIncome: Number(row?.totalIncome || 0),
-            totalExpense: Number(row?.totalExpense || 0),
-            avgTransaction: Number(row?.avgTransaction || 0)
-        };
-
-        res.json(stats);
-    });
-});
-
-// Monthly spending data for charts
-app.get('/api/dashboard/monthly-spending', (req, res) => {
-    const query = `
-        SELECT 
-            strftime('%Y-%m', date) as month,
-            SUM(amount) as total_amount,
-            COUNT(*) as transaction_count
-        FROM transactions 
-        GROUP BY strftime('%Y-%m', date)
-        ORDER BY month DESC 
-        LIMIT 12
-    `;
-    
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// Add to server.js:
-app.get('/api/analytics/category-breakdown', (req, res) => {
-    const { startDate, endDate } = req.query;
-    
-    let query = `
-        SELECT 
-            category,
-            COUNT(*) as transaction_count,
-            SUM(ABS(amount)) as total_amount,
-            AVG(ABS(amount)) as avg_amount
-        FROM transactions 
-    `;
-    
-    const params = [];
-    if (startDate && endDate) {
-        query += " WHERE date BETWEEN ? AND ?";
-        params.push(startDate, endDate);
-    }
-    
-    query += " GROUP BY category ORDER BY total_amount DESC";
-    
-    db.all(query, params, (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-// Get all categories with stats
-app.get('/api/categories', (req, res) => {
-    const query = `
-        SELECT 
-            category as name,
-            COUNT(*) as transaction_count,
-            SUM(ABS(amount)) as total_amount
-        FROM transactions 
-        WHERE category IS NOT NULL
-        GROUP BY category
-    `;
-    
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// Get all tags with stats  
-app.get('/api/tags/stats', (req, res) => {
-    const query = `
-        SELECT 
-            g.tag_name as name,
-            COUNT(tt.transaction_id) as usage_count,
-            SUM(ABS(t.amount)) as total_amount
-        FROM tags g
-        LEFT JOIN transaction_tags tt ON g.id = tt.tag_id
-        LEFT JOIN transactions t ON tt.transaction_id = t.id
-        GROUP BY g.tag_name
-        ORDER BY usage_count DESC
-    `;
-    
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// ✅ Keyword-based categorization rules
-// Get all keyword rules
-app.get('/api/keyword-rules', (req, res) => {
-    const query = `SELECT keyword, category, tags FROM keyword_rules`;
-
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-
-        // Convert comma-separated tags to arrays for client convenience
-        const formatted = rows.map(row => ({
-            keyword: row.keyword,
-            category: row.category,
-            tags: row.tags ? row.tags.split(',').map(t => t.trim()).filter(Boolean) : []
-        }));
-
-        res.json(formatted);
-    });
-});
-
-// Add a new keyword rule
-app.post('/api/keyword-rules', (req, res) => {
-    const { keyword, category, tags } = req.body;
-
-    if (!keyword || typeof keyword !== 'string' || !keyword.trim()) {
-        return res.status(400).json({ error: 'Keyword is required' });
-    }
-
-    const tagsStr = Array.isArray(tags) ? tags.join(',') : (typeof tags === 'string' ? tags : null);
-
-    const query = `INSERT INTO keyword_rules (keyword, category, tags) VALUES (?, ?, ?)`;
-    db.run(query, [keyword.trim(), category || null, tagsStr], function (err) {
-        if (err) {
-            if (err.message.includes('UNIQUE')) {
-                return res.status(409).json({ error: 'Keyword rule already exists' });
-            }
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(201).json({ message: 'Rule created', keyword });
-    });
-});
-
-// Update an existing keyword rule
-app.put('/api/keyword-rules/:keyword', (req, res) => {
-    const { keyword } = req.params;
-    const { category, tags } = req.body;
-
-    const updates = [];
-    const params = [];
-
-    if (category !== undefined) {
-        updates.push('category = ?');
-        params.push(category);
-    }
-    if (tags !== undefined) {
-        const tagsStr = Array.isArray(tags) ? tags.join(',') : tags;
-        updates.push('tags = ?');
-        params.push(tagsStr);
-    }
-
-    if (updates.length === 0) {
-        return res.status(400).json({ error: 'Category or tags required' });
-    }
-
-    params.push(keyword);
-    const query = `UPDATE keyword_rules SET ${updates.join(', ')} WHERE keyword = ?`;
-
-    db.run(query, params, function (err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (this.changes === 0) {
-            return res.status(404).json({ error: 'Keyword rule not found' });
-        }
-        res.json({ message: 'Rule updated' });
-    });
-});
-
-// Delete a keyword rule
-app.delete('/api/keyword-rules/:keyword', (req, res) => {
-    const { keyword } = req.params;
-    const query = `DELETE FROM keyword_rules WHERE keyword = ?`;
-
-    db.run(query, [keyword], function (err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (this.changes === 0) {
-            return res.status(404).json({ error: 'Keyword rule not found' });
-        }
-        res.json({ message: 'Rule deleted' });
-    });
-});
-
-// Extract emails within a date range and return preliminary transaction data
-app.post('/api/extract-emails', (req, res) => {
-    const { startDate, endDate } = req.body;
-    if (!startDate || !endDate) {
-        return res.status(400).json({ error: 'startDate and endDate required' });
-    }
-
-    // Convert YYYY-MM-DD to DD-Mon-YYYY for the Python script
-    function formatDate(iso) {
-        const [y, m, d] = iso.split('-');
-        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        return `${d}-${months[parseInt(m, 10) - 1]}-${y}`;
-    }
-
-    const formattedStart = formatDate(startDate);
-    const formattedEnd = formatDate(endDate);
-
-    const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
-    const py = spawn(pythonCmd, [script, formattedStart, formattedEnd], {
-        cwd: repoRoot,
-        env: childProcessEnv,
-    });
-
-    py.on('error', (err) => {
-        console.error('❌ Failed to start extract-emails script:', err);
-        if (!res.headersSent) {
-            res.status(500).json({ error: err.message });
-        }
-    });
-
-    let output = '';
-    let errOutput = '';
-    py.stdout.on('data', (data) => { output += data; });
-    py.stderr.on('data', (data) => { errOutput += data; });
-    py.on('close', (code) => {
-        if (code !== 0) {
-            return res.status(500).json({ error: errOutput || 'Python script error' });
-        }
-        try {
-            const parsed = JSON.parse(output);
-
-            // Filter out emails where the extracted amount is missing
-            const filtered = parsed.filter(item => {
-                const amt = parseFloat(item?.transaction?.amount);
-                return !isNaN(amt);
-            });
-
-            res.json(filtered);
-        } catch (e) {
-            res.status(500).json({ error: 'Failed to parse python output', details: output });
-        }
-    });
-});
-
-// Process a batch of emails into transactions
-app.post('/api/process-queue', (req, res) => {
-    const emails = req.body.emails;
-    if (!Array.isArray(emails)) {
-        return res.status(400).json({ error: 'emails array required' });
-    }
-
-    const script = path.join(__dirname, '../Application/api_scripts/process_queue.py');
-    const py = spawn(pythonCmd, [script], {
-        cwd: repoRoot,
-        env: childProcessEnv,
-    });
-
-    py.on('error', (err) => {
-        console.error('❌ Failed to start process-queue script:', err);
-        if (!res.headersSent) {
-            res.status(500).json({ error: err.message });
-        }
-    });
-
-    let output = '';
-    let errOutput = '';
-    py.stdout.on('data', (data) => { output += data; });
-    py.stderr.on('data', (data) => { errOutput += data; });
-    py.on('close', (code) => {
-        if (code !== 0) {
-            return res.status(500).json({ error: errOutput || 'Python script error' });
-        }
-        try {
-            const parsed = JSON.parse(output);
-            res.json(parsed);
-        } catch (e) {
-            res.status(500).json({ error: 'Failed to parse python output', details: output });
-        }
-    });
-
-    py.stdin.write(JSON.stringify(emails));
-    py.stdin.end();
-});
-
-// Retrieve stored full email for a transaction
-app.get('/api/transactions/:id/email', (req, res) => {
-    const { id } = req.params;
-    db.get('SELECT full_email FROM transactions WHERE id = ?', [id], (err, row) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (!row) {
-            return res.status(404).json({ error: 'Transaction not found' });
-        }
-        res.json({ full_email: row.full_email });
-    });
-});
-
-// ✅ Update transaction amount
-app.put('/api/transactions/:id/amount', (req, res) => {
-    const { id } = req.params;
-    const { amount } = req.body;
-
-    const query = 'UPDATE transactions SET amount = ? WHERE id = ?';
-
-    db.run(query, [amount, id], function (err) {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        if (this.changes === 0) {
-            res.status(404).json({ error: "Transaction not found" });
-            return;
-        }
-        res.json({ message: `✅ Transaction ID ${id} amount updated to ${amount}` });
-    });
-});
-
-// ✅ Update transaction description
-app.put('/api/transactions/:id/description', (req, res) => {
-    const { id } = req.params;
-    const { description } = req.body;
-
-    const query = 'UPDATE transactions SET description = ? WHERE id = ?';
-
-    db.run(query, [description, id], function (err) {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        if (this.changes === 0) {
-            res.status(404).json({ error: "Transaction not found" });
-            return;
-        }
-        res.json({ message: `✅ Transaction ID ${id} description updated` });
-    });
-});
-
-// ✅ Delete a transaction
-app.delete('/api/transactions/:id', (req, res) => {
-    const { id } = req.params;
-
-    // Remove any tag links first
-    db.run('DELETE FROM transaction_tags WHERE transaction_id = ?', [id], function (err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-
-        // Now delete the transaction itself
-        db.run('DELETE FROM transactions WHERE id = ?', [id], function (err2) {
-            if (err2) {
-                return res.status(500).json({ error: err2.message });
-            }
-            if (this.changes === 0) {
-                return res.status(404).json({ error: "Transaction not found" });
-            }
-            res.json({ message: `✅ Transaction ID ${id} deleted` });
-        });
-    });
-});
-
-
-
-// Add these endpoints to your server.js
-
-// ✅ Add a new category
-app.post('/api/categories', (req, res) => {
-    const { name } = req.body;
-    
-    if (!name) {
-        return res.status(400).json({ error: "Category name is required" });
-    }
-    
-    // Check if category already exists by checking existing transactions
-    const checkQuery = "SELECT COUNT(*) as count FROM transactions WHERE category = ?";
-    
-    db.get(checkQuery, [name], (err, row) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        
-        if (row.count > 0) {
-            res.status(400).json({ error: "Category already exists" });
-            return;
-        }
-        
-        res.json({ message: `✅ Category '${name}' is ready to use` });
-    });
-});
-
-// ✅ Delete a category (and update transactions)
-app.delete('/api/categories/:categoryName', (req, res) => {
-    const { categoryName } = req.params;
-    
-    // Update all transactions with this category to have no category
-    const updateQuery = "UPDATE transactions SET category = NULL WHERE category = ?";
-    
-    db.run(updateQuery, [categoryName], function (err) {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        
-        res.json({ 
-            message: `✅ Category '${categoryName}' deleted and ${this.changes} transactions updated`,
-            updatedTransactions: this.changes
-        });
-    });
-});
-
-// ✅ Add a new tag
-app.post('/api/tags', (req, res) => {
-    const { name } = req.body;
-    
-    if (!name) {
-        return res.status(400).json({ error: "Tag name is required" });
-    }
-    
-    // Check if tag already exists
-    const checkQuery = "SELECT id FROM tags WHERE tag_name = ?";
-    
-    db.get(checkQuery, [name], (err, row) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        
-        if (row) {
-            res.status(400).json({ error: "Tag already exists" });
-            return;
-        }
-        
-        // Insert new tag
-        const insertQuery = "INSERT INTO tags (tag_name) VALUES (?)";
-        
-        db.run(insertQuery, [name], function (err) {
-            if (err) {
-                res.status(500).json({ error: err.message });
-                return;
-            }
-            
-            res.json({ 
-                message: `✅ Tag '${name}' created successfully`,
-                tagId: this.lastID
-            });
-        });
-    });
-});
-
-// Apply a category to all transactions matching a keyword in the description
-app.post('/api/apply-keyword-category', async (req, res) => {
-    const { keyword, category } = req.body;
-
-    if (!keyword || !category) {
-        return res.status(400).json({ error: "keyword and category are required" });
-    }
-
-    const like = `%${keyword}%`;
-
-    try {
-        // Begin transaction
-        await new Promise((resolve, reject) => {
-            db.run('BEGIN TRANSACTION', err => (err ? reject(err) : resolve()));
-        });
-
-        // Update matching transactions
-        const updatedTransactions = await new Promise((resolve, reject) => {
-            db.run(
-                "UPDATE transactions SET category = ? WHERE description LIKE ?",
-                [category, like],
-                function (err) {
-                    if (err) reject(err);
-                    else resolve(this.changes);
-                }
-            );
-        });
-
-        // Store keyword rule
-        await new Promise((resolve, reject) => {
-            db.run(
-                'INSERT OR REPLACE INTO keyword_rules (keyword, category, tags) VALUES (?, ?, ?)',
-                [keyword, category, null],
-                err => (err ? reject(err) : resolve())
-            );
-        });
-
-        // Commit transaction
-        await new Promise((resolve, reject) => {
-            db.run('COMMIT', err => (err ? reject(err) : resolve()));
-        });
-
-        res.json({
-            message: `✅ ${updatedTransactions} transactions updated to category '${category}'`,
-            updatedTransactions,
-            ruleStored: true
-        });
-    } catch (error) {
-        console.error('Error applying keyword category:', error);
-        await new Promise(resolve => db.run('ROLLBACK', () => resolve()));
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
-// Apply tags to all transactions matching a keyword in the description
-app.post('/api/apply-keyword-tags', async (req, res) => {
-    try {
-        const { keyword, tags } = req.body;
-
-        if (!keyword || !Array.isArray(tags)) {
-            return res.status(400).json({ error: "keyword and tags array are required" });
-        }
-
-        const like = `%${keyword}%`;
-
-        // Begin transaction
-        await new Promise((resolve, reject) => {
-            db.run('BEGIN TRANSACTION', err => (err ? reject(err) : resolve()));
-        });
-
-        // Get matching transaction IDs
-        const transactions = await new Promise((resolve, reject) => {
-            db.all('SELECT id FROM transactions WHERE description LIKE ?', [like], (err, rows) => {
-                if (err) reject(err);
-                else resolve(rows.map(r => r.id));
-            });
-        });
-
-        for (const tag of tags) {
-            await new Promise((resolve, reject) => {
-                db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], err => {
-                    if (err) reject(err);
-                    else resolve();
-                });
-            });
-
-            const tagRow = await new Promise((resolve, reject) => {
-                db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => {
-                    if (err) reject(err);
-                    else resolve(row);
-                });
-            });
-
-            const tagId = tagRow.id;
-
-            for (const tId of transactions) {
-                await new Promise((resolve, reject) => {
-                    db.run(
-                        'INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)',
-                        [tId, tagId],
-                        err => {
-                            if (err) reject(err);
-                            else resolve();
-                        }
-                    );
-                });
-            }
-        }
-
-        // Store keyword rule
-        await new Promise((resolve, reject) => {
-            db.run(
-                'INSERT OR REPLACE INTO keyword_rules (keyword, category, tags) VALUES (?, ?, ?)',
-                [keyword, null, tags.join(',')],
-                err => (err ? reject(err) : resolve())
-            );
-        });
-
-        // Commit transaction
-        await new Promise((resolve, reject) => {
-            db.run('COMMIT', err => (err ? reject(err) : resolve()));
-        });
-
-        res.json({
-            message: `✅ Tags applied to ${transactions.length} transactions`,
-            updatedTransactions: transactions.length,
-            ruleStored: true
-        });
-    } catch (error) {
-        console.error("Error applying keyword tags:", error);
-        await new Promise(resolve => db.run('ROLLBACK', () => resolve()));
-        res.status(500).json({ error: "Internal server error" });
-    }
-});
-
-
-const uploadsDir = path.join(repoRoot, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-}
-
-const pdfUpload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => cb(null, uploadsDir),
-        filename: (req, file, cb) => {
-            const uniqueName = `${Date.now()}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
-            cb(null, uniqueName);
-        },
-    }),
-    limits: { fileSize: 20 * 1024 * 1024 },
-    fileFilter: (req, file, cb) => {
-        if (file.mimetype === 'application/pdf') {
-            cb(null, true);
-        } else {
-            cb(new Error('Only PDF files are accepted'));
-        }
-    },
-});
-
-app.get('/api/pdf-templates', (req, res) => {
-    const script = path.join(__dirname, '../Application/api_scripts/list_pdf_templates.py');
-    const py = spawn(pythonCmd, [script], {
-        env: { ...process.env, PYTHONIOENCODING: 'utf-8' },
-    });
-
-    let stdout = '';
-    let stderr = '';
-    py.stdout.on('data', (d) => (stdout += d.toString()));
-    py.stderr.on('data', (d) => (stderr += d.toString()));
-
-    py.on('close', (code) => {
-        if (code !== 0) {
-            console.error('pdf-templates script failed:', stderr);
-            return res.status(500).json({ error: 'Failed to load templates' });
-        }
-        try {
-            const templates = JSON.parse(stdout);
-            res.json({ templates });
-        } catch (e) {
-            console.error('Failed to parse templates JSON:', e.message);
-            res.status(500).json({ error: 'Invalid template data' });
-        }
-    });
-
-    py.on('error', (err) => {
-        console.error('Failed to start pdf-templates script:', err);
-        res.status(500).json({ error: 'Failed to start template listing' });
-    });
-});
-
-app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'No PDF file uploaded' });
-    }
-
-    const filepath = req.file.path;
-    const script = path.join(__dirname, '../Application/api_scripts/parse_pdf.py');
-    const py = spawn(pythonCmd, [script], {
-        cwd: repoRoot,
-        env: childProcessEnv,
-    });
-
-    py.on('error', (err) => {
-        console.error('Failed to start parse-pdf script:', err);
-        if (!res.headersSent) {
-            res.status(500).json({ error: err.message });
-        }
-    });
-
-    let output = '';
-    let errOutput = '';
-    py.stdout.on('data', (data) => { output += data; });
-    py.stderr.on('data', (data) => { errOutput += data; });
-    py.on('close', (code) => {
-        try {
-            fs.unlinkSync(filepath);
-        } catch (_) {}
-
-        if (code !== 0) {
-            return res.status(500).json({ error: errOutput || 'PDF parsing error' });
-        }
-        try {
-            const parsed = JSON.parse(output);
-            if (parsed.error) {
-                return res.status(400).json(parsed);
-            }
-
-            const txns = parsed.transactions || [];
-            if (txns.length === 0) {
-                return res.json(parsed);
-            }
-
-            function normDesc(desc) {
-                if (!desc) return '';
-                let d = desc.toLowerCase().trim();
-                d = d.replace(/^retail purchase\s+\d+\s+/i, '');
-                d = d.replace(/^e-transfer\s+\d+\s*/i, 'e-transfer ');
-                d = d.replace(/\s+/g, ' ');
-                return d;
-            }
-
-            function addDays(dateStr, n) {
-                const dt = new Date(dateStr + 'T00:00:00');
-                dt.setDate(dt.getDate() + n);
-                return dt.toISOString().slice(0, 10);
-            }
-
-            const sourceRef = parsed.document_id || '';
-            db.all(
-                `SELECT source_ref FROM transactions WHERE source_ref = ? LIMIT 1`,
-                [sourceRef],
-                (refErr, refRows) => {
-                    const documentAlreadyImported = !refErr && refRows && refRows.length > 0;
-
-                    if (documentAlreadyImported) {
-                        parsed.document_already_imported = true;
-                        parsed.duplicate_count = txns.length;
-                        txns.forEach(t => { t.is_duplicate = true; });
-                        return res.json(parsed);
-                    }
-
-                    const dates = [...new Set(txns.map(t => t.date))];
-                    const allDates = new Set();
-                    dates.forEach(d => {
-                        for (let offset = -2; offset <= 2; offset++) {
-                            allDates.add(addDays(d, offset));
-                        }
-                    });
-                    const expandedDates = [...allDates];
-                    const datePlaceholders = expandedDates.map(() => '?').join(', ');
-
-                    db.all(
-                        `SELECT date, amount, bank, description, source_type FROM transactions
-                         WHERE date IN (${datePlaceholders})`,
-                        expandedDates,
-                        (err, existingRows) => {
-                            if (err) {
-                                return res.json(parsed);
-                            }
-
-                            const existingList = (existingRows || []).map(row => ({
-                                date: row.date,
-                                amount: row.amount,
-                                bank: row.bank,
-                                description: row.description,
-                                source_type: row.source_type || 'unknown',
-                                normDesc: normDesc(row.description),
-                            }));
-
-                            let duplicateCount = 0;
-                            txns.forEach(t => {
-                                const tNorm = normDesc(t.description);
-                                const tBank = t.bank || 'Unknown';
-                                const tAmount = parseFloat(t.amount);
-                                const tDate = t.date;
-
-                                const match = existingList.find(ex => {
-                                    if (Math.abs(ex.amount - tAmount) > 0.01) return false;
-                                    if (ex.bank !== tBank) return false;
-                                    const dayDiff = Math.abs(
-                                        (new Date(tDate) - new Date(ex.date)) / 86400000
-                                    );
-                                    if (dayDiff > 2) return false;
-                                    if (ex.normDesc === tNorm) return true;
-                                    if (ex.normDesc.length > 0 && tNorm.length > 0 && (ex.normDesc.includes(tNorm) || tNorm.includes(ex.normDesc))) return true;
-                                    return false;
-                                });
-
-                                if (match) {
-                                    t.is_duplicate = true;
-                                    t.existing_match = {
-                                        date: match.date,
-                                        amount: match.amount,
-                                        description: match.description,
-                                        source_type: match.source_type,
-                                        bank: match.bank,
-                                    };
-                                    duplicateCount++;
-                                } else {
-                                    t.is_duplicate = false;
-                                }
-                            });
-
-                            parsed.duplicate_count = duplicateCount;
-                            res.json(parsed);
-                        }
-                    );
-                }
-            );
-        } catch (e) {
-            res.status(500).json({ error: 'Failed to parse python output', details: output });
-        }
-    });
-
-    py.stdin.write(JSON.stringify({ filepath }));
-    py.stdin.end();
-});
-
-app.post('/api/import-pdf/confirm', (req, res) => {
-    const { transactions } = req.body;
-    if (!Array.isArray(transactions) || transactions.length === 0) {
-        return res.status(400).json({ error: 'transactions array required' });
-    }
-
-    const script = path.join(__dirname, '../Application/api_scripts/import_pdf_confirm.py');
-    const py = spawn(pythonCmd, [script], {
-        cwd: repoRoot,
-        env: childProcessEnv,
-    });
-
-    py.on('error', (err) => {
-        console.error('Failed to start import-pdf-confirm script:', err);
-        if (!res.headersSent) {
-            res.status(500).json({ error: err.message });
-        }
-    });
-
-    let output = '';
-    let errOutput = '';
-    py.stdout.on('data', (data) => { output += data; });
-    py.stderr.on('data', (data) => { errOutput += data; });
-    py.on('close', (code) => {
-        if (code !== 0) {
-            return res.status(500).json({ error: errOutput || 'Import confirmation error' });
-        }
-        try {
-            const parsed = JSON.parse(output);
-            res.json(parsed);
-        } catch (e) {
-            res.status(500).json({ error: 'Failed to parse python output', details: output });
-        }
-    });
-
-    py.stdin.write(JSON.stringify(transactions));
-    py.stdin.end();
-});
-
-const OpenAI = require('openai');
-const openaiClient = new OpenAI({
-    apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
-    baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
 });
 
 function queryDb(sql, params = []) {
     return new Promise((resolve, reject) => {
-        db.all(sql, params, (err, rows) => {
-            if (err) reject(err);
-            else resolve(rows);
-        });
+        db.all(sql, params, (err, rows) => (err ? reject(err) : resolve(rows)));
     });
 }
 
-async function gatherFinancialContext() {
-    const [summary, categories, banks, tags, recentTxns, monthlySpending] = await Promise.all([
-        queryDb(`SELECT 
-            COUNT(*) as total_transactions,
-            ROUND(SUM(CASE WHEN transaction_type='expense' THEN amount ELSE 0 END),2) as total_expenses,
-            ROUND(SUM(CASE WHEN transaction_type='income' THEN amount ELSE 0 END),2) as total_income,
-            MIN(date) as earliest_date,
-            MAX(date) as latest_date
-            FROM transactions`),
-        queryDb(`SELECT category, COUNT(*) as count, ROUND(SUM(amount),2) as total 
-            FROM transactions WHERE transaction_type='expense' 
-            GROUP BY category ORDER BY total DESC LIMIT 20`),
-        queryDb(`SELECT bank, COUNT(*) as count, ROUND(SUM(amount),2) as total 
-            FROM transactions GROUP BY bank ORDER BY total DESC`),
-        queryDb(`SELECT g.tag_name, COUNT(*) as count, ROUND(SUM(t.amount),2) as total
-            FROM transaction_tags tt
-            JOIN tags g ON tt.tag_id = g.id
-            JOIN transactions t ON tt.transaction_id = t.id
-            GROUP BY g.tag_name ORDER BY total DESC`),
-        queryDb(`SELECT date, amount, description, bank, category, transaction_type
-            FROM transactions ORDER BY date DESC LIMIT 30`),
-        queryDb(`SELECT strftime('%Y-%m', date) as month, 
-            ROUND(SUM(CASE WHEN transaction_type='expense' THEN amount ELSE 0 END),2) as expenses,
-            ROUND(SUM(CASE WHEN transaction_type='income' THEN amount ELSE 0 END),2) as income
-            FROM transactions GROUP BY month ORDER BY month DESC LIMIT 12`),
-    ]);
+async function startServer() {
+    await setupAuth(app, db);
 
-    return `FINANCIAL DATABASE SUMMARY:
+    // All /api/* routes below require an authenticated user. The setupAuth call
+    // above already registered /api/login, /api/callback, /api/logout, and
+    // /api/auth/user, so those are exempt.
+    app.use('/api', requireAuth);
+
+    // ===== Transactions =====
+    app.get('/api/transactions', (req, res) => {
+        const query = `
+            SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
+                   t.transaction_type,
+                   COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
+            FROM transactions t
+            LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
+            LEFT JOIN tags g ON tt.tag_id = g.id
+            WHERE t.user_id = ?
+            GROUP BY t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category, t.transaction_type
+            ORDER BY t.date DESC;
+        `;
+        db.all(query, [req.userId], (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows);
+        });
+    });
+
+    app.get('/api/transactions/category/:category', (req, res) => {
+        const category = req.params.category;
+        const query = `
+            SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
+                   t.transaction_type,
+                   COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
+            FROM transactions t
+            LEFT JOIN transaction_tags tt ON t.id = tt.transaction_id
+            LEFT JOIN tags g ON tt.tag_id = g.id
+            WHERE t.category = ? AND t.user_id = ?
+            GROUP BY t.id;
+        `;
+        db.all(query, [category, req.userId], (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows);
+        });
+    });
+
+    app.get('/api/transactions/tag/:tag', (req, res) => {
+        const tagName = req.params.tag;
+        const query = `
+            SELECT t.id, t.amount, t.description, t.card_type, t.date, t.time, t.bank, t.category,
+                   t.transaction_type,
+                   COALESCE(GROUP_CONCAT(g.tag_name, ', '), '') AS tags
+            FROM transactions t
+            JOIN transaction_tags tt ON t.id = tt.transaction_id
+            JOIN tags g ON tt.tag_id = g.id
+            WHERE g.tag_name = ? AND t.user_id = ?
+            GROUP BY t.id;
+        `;
+        db.all(query, [tagName, req.userId], (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows);
+        });
+    });
+
+    app.post('/api/transactions', async (req, res) => {
+        try {
+            const { amount, description, card_type, date, bank, category = 'Uncategorized', tags = [] } = req.body;
+            const rules = await queryDb(
+                `SELECT keyword, category, tags FROM keyword_rules
+                 WHERE user_id IS ? AND ? LIKE '%' || keyword || '%' COLLATE NOCASE`,
+                [req.userId, description]
+            );
+
+            let finalCategory = category;
+            const tagSet = new Set(Array.isArray(tags) ? tags : [tags]);
+            const matchedRules = [];
+
+            for (const rule of rules) {
+                matchedRules.push({
+                    keyword: rule.keyword,
+                    category: rule.category || null,
+                    tags: rule.tags ? rule.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
+                });
+                if (rule.category) finalCategory = rule.category;
+                if (rule.tags) {
+                    for (const t of rule.tags.split(',')) if (t.trim()) tagSet.add(t.trim());
+                }
+            }
+
+            const transactionId = await new Promise((resolve, reject) => {
+                db.run(
+                    `INSERT INTO transactions (amount, description, card_type, date, bank, category, user_id)
+                     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                    [amount, description, card_type, date, bank, finalCategory, req.userId],
+                    function (err) { err ? reject(err) : resolve(this.lastID); }
+                );
+            });
+
+            const tagsArray = Array.from(tagSet);
+            for (const tag of tagsArray) {
+                await new Promise((resolve, reject) => {
+                    db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], (err) => err ? reject(err) : resolve());
+                });
+                const tagId = await new Promise((resolve, reject) => {
+                    db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => err ? reject(err) : resolve(row.id));
+                });
+                await new Promise((resolve, reject) => {
+                    db.run('INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)',
+                        [transactionId, tagId], (err) => err ? reject(err) : resolve());
+                });
+            }
+
+            res.json({
+                id: transactionId, amount, description, card_type, date, bank,
+                category: finalCategory, tags: tagsArray, applied_rules: matchedRules,
+            });
+        } catch (error) {
+            console.error('Error inserting transaction:', error);
+            res.status(500).json({ error: 'Failed to insert transaction' });
+        }
+    });
+
+    // ===== Tags =====
+    app.get('/api/tags', (req, res) => {
+        // Only return tags actually used by this user's transactions
+        const query = `
+            SELECT g.tag_name AS tag,
+                   GROUP_CONCAT(t.description, ', ') AS transactions
+            FROM tags g
+            JOIN transaction_tags tt ON g.id = tt.tag_id
+            JOIN transactions t ON tt.transaction_id = t.id
+            WHERE t.user_id = ?
+            GROUP BY g.tag_name;
+        `;
+        db.all(query, [req.userId], (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows);
+        });
+    });
+
+    app.get('/api/transactions/:id/tags', (req, res) => {
+        const { id } = req.params;
+        // Verify ownership of the transaction first
+        db.get('SELECT id FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], (err, row) => {
+            if (err) return res.status(500).json({ error: err.message });
+            if (!row) return res.status(404).json({ error: 'Transaction not found' });
+            db.all(
+                `SELECT tag_name FROM tags
+                 JOIN transaction_tags ON tags.id = transaction_tags.tag_id
+                 WHERE transaction_tags.transaction_id = ?`,
+                [id],
+                (e2, rows) => {
+                    if (e2) return res.status(500).json({ error: e2.message });
+                    res.json(rows.map(r => r.tag_name));
+                }
+            );
+        });
+    });
+
+    app.post('/api/transactions/:id/tags', async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { tag } = req.body;
+            if (!tag) return res.status(400).json({ error: 'Tag is required' });
+
+            const owns = await new Promise((resolve, reject) => {
+                db.get('SELECT id FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], (e, r) => e ? reject(e) : resolve(!!r));
+            });
+            if (!owns) return res.status(404).json({ error: 'Transaction not found' });
+
+            const tagExists = await new Promise((resolve, reject) => {
+                db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (err, row) => err ? reject(err) : resolve(row));
+            });
+
+            let tagId;
+            if (!tagExists) {
+                tagId = await new Promise((resolve, reject) => {
+                    db.run('INSERT INTO tags (tag_name) VALUES (?)', [tag], function (err) { err ? reject(err) : resolve(this.lastID); });
+                });
+            } else {
+                tagId = tagExists.id;
+            }
+
+            const linkChanges = await new Promise((resolve, reject) => {
+                db.run('INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)', [id, tagId], function (err) {
+                    err ? reject(err) : resolve(this.changes);
+                });
+            });
+            res.json({
+                message: linkChanges ? 'Tag added successfully' : 'Tag already linked to transaction',
+                alreadyLinked: linkChanges === 0,
+            });
+        } catch (error) {
+            console.error('Error adding tag:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+
+    app.delete('/api/transactions/:id/tags', async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { tag } = req.body;
+            if (!tag) return res.status(400).json({ error: 'Tag is required' });
+            const owns = await new Promise((resolve, reject) => {
+                db.get('SELECT id FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], (e, r) => e ? reject(e) : resolve(!!r));
+            });
+            if (!owns) return res.status(404).json({ error: 'Transaction not found' });
+            await new Promise((resolve, reject) => {
+                db.run(
+                    `DELETE FROM transaction_tags
+                     WHERE transaction_id = ? AND tag_id = (SELECT id FROM tags WHERE tag_name = ?)`,
+                    [id, tag],
+                    (err) => err ? reject(err) : resolve()
+                );
+            });
+            res.json({ message: 'Tag removed successfully' });
+        } catch (error) {
+            console.error('Error removing tag:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+
+    app.delete('/api/tags/:tagName', (req, res) => {
+        const { tagName } = req.params;
+        // Only remove the link from this user's transactions. Tag stays in the
+        // global tags table since other users may use it.
+        const query = `
+            DELETE FROM transaction_tags
+            WHERE tag_id = (SELECT id FROM tags WHERE tag_name = ?)
+              AND transaction_id IN (SELECT id FROM transactions WHERE user_id = ?)
+        `;
+        db.run(query, [tagName, req.userId], function (err) {
+            if (err) return res.status(500).json({ error: 'Failed to remove tag links' });
+            res.json({ message: `✅ Tag '${tagName}' removed from your transactions`, changes: this.changes });
+        });
+    });
+
+    // ===== Updates / Delete =====
+    app.put('/api/transactions/:id/category', (req, res) => {
+        const { id } = req.params;
+        const { category } = req.body;
+        db.run('UPDATE transactions SET category = ? WHERE id = ? AND user_id = ?', [category, id, req.userId], function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            if (this.changes === 0) return res.status(404).json({ error: 'Transaction not found' });
+            res.json({ message: `✅ Transaction ID ${id} updated to category '${category}'` });
+        });
+    });
+
+    app.put('/api/transactions/:id/amount', (req, res) => {
+        const { id } = req.params;
+        const { amount } = req.body;
+        db.run('UPDATE transactions SET amount = ? WHERE id = ? AND user_id = ?', [amount, id, req.userId], function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            if (this.changes === 0) return res.status(404).json({ error: 'Transaction not found' });
+            res.json({ message: 'Updated' });
+        });
+    });
+
+    app.put('/api/transactions/:id/description', (req, res) => {
+        const { id } = req.params;
+        const { description } = req.body;
+        db.run('UPDATE transactions SET description = ? WHERE id = ? AND user_id = ?', [description, id, req.userId], function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            if (this.changes === 0) return res.status(404).json({ error: 'Transaction not found' });
+            res.json({ message: 'Updated' });
+        });
+    });
+
+    app.delete('/api/transactions/:id', (req, res) => {
+        const { id } = req.params;
+        db.get('SELECT id FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], (err, row) => {
+            if (err) return res.status(500).json({ error: err.message });
+            if (!row) return res.status(404).json({ error: 'Transaction not found' });
+            db.serialize(() => {
+                db.run('DELETE FROM transaction_tags WHERE transaction_id = ?', [id]);
+                db.run('DELETE FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], function (e2) {
+                    if (e2) return res.status(500).json({ error: e2.message });
+                    res.json({ message: 'Deleted' });
+                });
+            });
+        });
+    });
+
+    // ===== Dashboard / Analytics =====
+    app.get('/api/dashboard/stats', (req, res) => {
+        const query = `
+            SELECT
+                COUNT(*) AS totalTransactions,
+                COALESCE(SUM(amount), 0) AS totalAmount,
+                COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS totalIncome,
+                COALESCE(SUM(CASE WHEN amount < 0 THEN ABS(amount) ELSE 0 END), 0) AS totalExpense,
+                COALESCE(AVG(amount), 0) AS avgTransaction
+            FROM transactions WHERE user_id = ?`;
+        db.get(query, [req.userId], (err, row) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({
+                totalTransactions: Number(row?.totalTransactions || 0),
+                totalAmount: Number(row?.totalAmount || 0),
+                totalIncome: Number(row?.totalIncome || 0),
+                totalExpense: Number(row?.totalExpense || 0),
+                avgTransaction: Number(row?.avgTransaction || 0),
+            });
+        });
+    });
+
+    app.get('/api/dashboard/monthly-spending', (req, res) => {
+        db.all(
+            `SELECT strftime('%Y-%m', date) as month, SUM(amount) as total_amount, COUNT(*) as transaction_count
+             FROM transactions WHERE user_id = ?
+             GROUP BY strftime('%Y-%m', date) ORDER BY month DESC LIMIT 12`,
+            [req.userId],
+            (err, rows) => err ? res.status(500).json({ error: err.message }) : res.json(rows)
+        );
+    });
+
+    app.get('/api/analytics/category-breakdown', (req, res) => {
+        const { startDate, endDate } = req.query;
+        let q = `SELECT category, COUNT(*) as transaction_count, SUM(ABS(amount)) as total_amount, AVG(ABS(amount)) as avg_amount
+                 FROM transactions WHERE user_id = ?`;
+        const params = [req.userId];
+        if (startDate && endDate) { q += ' AND date BETWEEN ? AND ?'; params.push(startDate, endDate); }
+        q += ' GROUP BY category ORDER BY total_amount DESC';
+        db.all(q, params, (err, rows) => err ? res.status(500).json({ error: err.message }) : res.json(rows));
+    });
+
+    app.get('/api/categories', (req, res) => {
+        db.all(
+            `SELECT category as name, COUNT(*) as transaction_count, SUM(ABS(amount)) as total_amount
+             FROM transactions WHERE category IS NOT NULL AND user_id = ?
+             GROUP BY category`,
+            [req.userId],
+            (err, rows) => err ? res.status(500).json({ error: err.message }) : res.json(rows)
+        );
+    });
+
+    app.get('/api/tags/stats', (req, res) => {
+        db.all(
+            `SELECT g.tag_name as name, COUNT(tt.transaction_id) as usage_count, SUM(ABS(t.amount)) as total_amount
+             FROM tags g
+             JOIN transaction_tags tt ON g.id = tt.tag_id
+             JOIN transactions t ON tt.transaction_id = t.id
+             WHERE t.user_id = ?
+             GROUP BY g.tag_name ORDER BY usage_count DESC`,
+            [req.userId],
+            (err, rows) => err ? res.status(500).json({ error: err.message }) : res.json(rows)
+        );
+    });
+
+    // ===== Keyword rules (per user) =====
+    app.get('/api/keyword-rules', (req, res) => {
+        db.all('SELECT keyword, category, tags FROM keyword_rules WHERE user_id IS ?', [req.userId], (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(rows.map(r => ({
+                keyword: r.keyword,
+                category: r.category,
+                tags: r.tags ? r.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
+            })));
+        });
+    });
+
+    app.post('/api/keyword-rules', (req, res) => {
+        const { keyword, category, tags } = req.body;
+        if (!keyword || typeof keyword !== 'string' || !keyword.trim()) {
+            return res.status(400).json({ error: 'Keyword is required' });
+        }
+        const tagsStr = Array.isArray(tags) ? tags.join(',') : (typeof tags === 'string' ? tags : null);
+        db.run(
+            'INSERT INTO keyword_rules (user_id, keyword, category, tags) VALUES (?, ?, ?, ?)',
+            [req.userId, keyword.trim(), category || null, tagsStr],
+            function (err) {
+                if (err) {
+                    if (err.message.includes('UNIQUE')) return res.status(409).json({ error: 'Keyword rule already exists' });
+                    return res.status(500).json({ error: err.message });
+                }
+                res.status(201).json({ message: 'Rule created', keyword });
+            }
+        );
+    });
+
+    app.put('/api/keyword-rules/:keyword', (req, res) => {
+        const { keyword } = req.params;
+        const { category, tags } = req.body;
+        const updates = [];
+        const params = [];
+        if (category !== undefined) { updates.push('category = ?'); params.push(category); }
+        if (tags !== undefined) {
+            const tagsStr = Array.isArray(tags) ? tags.join(',') : tags;
+            updates.push('tags = ?'); params.push(tagsStr);
+        }
+        if (updates.length === 0) return res.status(400).json({ error: 'Category or tags required' });
+        params.push(keyword, req.userId);
+        db.run(`UPDATE keyword_rules SET ${updates.join(', ')} WHERE keyword = ? AND user_id IS ?`, params, function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            if (this.changes === 0) return res.status(404).json({ error: 'Keyword rule not found' });
+            res.json({ message: 'Rule updated' });
+        });
+    });
+
+    app.delete('/api/keyword-rules/:keyword', (req, res) => {
+        const { keyword } = req.params;
+        db.run('DELETE FROM keyword_rules WHERE keyword = ? AND user_id IS ?', [keyword, req.userId], function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            if (this.changes === 0) return res.status(404).json({ error: 'Keyword rule not found' });
+            res.json({ message: 'Rule deleted' });
+        });
+    });
+
+    // ===== Email extraction — owner only (uses owner's Gmail credentials) =====
+    app.post('/api/extract-emails', requireOwner, (req, res) => {
+        const { startDate, endDate } = req.body;
+        if (!startDate || !endDate) return res.status(400).json({ error: 'startDate and endDate required' });
+
+        function formatDate(iso) {
+            const [y, m, d] = iso.split('-');
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            return `${d}-${months[parseInt(m, 10) - 1]}-${y}`;
+        }
+        const script = path.join(__dirname, '../Application/api_scripts/extract_emails.py');
+        const py = spawn(pythonCmd, [script, formatDate(startDate), formatDate(endDate)], {
+            cwd: repoRoot, env: childEnvForUser(req.userId),
+        });
+        py.on('error', (err) => { if (!res.headersSent) res.status(500).json({ error: err.message }); });
+        let output = '', errOutput = '';
+        py.stdout.on('data', (d) => { output += d; });
+        py.stderr.on('data', (d) => { errOutput += d; });
+        py.on('close', (code) => {
+            if (code !== 0) return res.status(500).json({ error: errOutput || 'Python script error' });
+            try {
+                const parsed = JSON.parse(output);
+                const filtered = parsed.filter(item => !isNaN(parseFloat(item?.transaction?.amount)));
+                res.json(filtered);
+            } catch (e) {
+                res.status(500).json({ error: 'Failed to parse python output', details: output });
+            }
+        });
+    });
+
+    app.post('/api/process-queue', requireOwner, (req, res) => {
+        const emails = req.body.emails;
+        if (!Array.isArray(emails)) return res.status(400).json({ error: 'emails array required' });
+        const script = path.join(__dirname, '../Application/api_scripts/process_queue.py');
+        const py = spawn(pythonCmd, [script], { cwd: repoRoot, env: childEnvForUser(req.userId) });
+        py.on('error', (err) => { if (!res.headersSent) res.status(500).json({ error: err.message }); });
+        let output = '', errOutput = '';
+        py.stdout.on('data', (d) => { output += d; });
+        py.stderr.on('data', (d) => { errOutput += d; });
+        py.on('close', (code) => {
+            if (code !== 0) return res.status(500).json({ error: errOutput || 'Python script error' });
+            try { res.json(JSON.parse(output)); }
+            catch (e) { res.status(500).json({ error: 'Failed to parse python output', details: output }); }
+        });
+        py.stdin.write(JSON.stringify(emails));
+        py.stdin.end();
+    });
+
+    // ===== PDF Import =====
+    const uploadsDir = path.join(repoRoot, 'uploads');
+    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+    const pdfUpload = multer({
+        storage: multer.diskStorage({
+            destination: uploadsDir,
+            filename: (req, file, cb) => cb(null, `${Date.now()}_${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')}`),
+        }),
+        limits: { fileSize: 20 * 1024 * 1024 },
+        fileFilter: (req, file, cb) => {
+            if (file.mimetype === 'application/pdf') cb(null, true);
+            else cb(new Error('Only PDF files are accepted'));
+        },
+    });
+
+    app.get('/api/pdf-templates', (req, res) => {
+        const script = path.join(__dirname, '../Application/api_scripts/list_pdf_templates.py');
+        const py = spawn(pythonCmd, [script], { env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+        let stdout = '', stderr = '';
+        py.stdout.on('data', (d) => stdout += d.toString());
+        py.stderr.on('data', (d) => stderr += d.toString());
+        py.on('close', (code) => {
+            if (code !== 0) {
+                console.error('pdf-templates script failed:', stderr);
+                return res.status(500).json({ error: 'Failed to load templates' });
+            }
+            try { res.json({ templates: JSON.parse(stdout) }); }
+            catch (e) { res.status(500).json({ error: 'Invalid template data' }); }
+        });
+        py.on('error', (err) => res.status(500).json({ error: 'Failed to start template listing' }));
+    });
+
+    app.post('/api/import-pdf', pdfUpload.single('file'), (req, res) => {
+        if (!req.file) return res.status(400).json({ error: 'No PDF file uploaded' });
+        const filepath = req.file.path;
+        const script = path.join(__dirname, '../Application/api_scripts/parse_pdf.py');
+        const py = spawn(pythonCmd, [script], { cwd: repoRoot, env: childEnvForUser(req.userId) });
+        py.on('error', (err) => { if (!res.headersSent) res.status(500).json({ error: err.message }); });
+        let output = '', errOutput = '';
+        py.stdout.on('data', (d) => { output += d; });
+        py.stderr.on('data', (d) => { errOutput += d; });
+        py.on('close', (code) => {
+            try { fs.unlinkSync(filepath); } catch (_) {}
+            if (code !== 0) return res.status(500).json({ error: errOutput || 'PDF parsing error' });
+            try {
+                const parsed = JSON.parse(output);
+                if (parsed.error) return res.status(400).json(parsed);
+                const txns = parsed.transactions || [];
+                if (txns.length === 0) return res.json(parsed);
+
+                function normDesc(desc) {
+                    if (!desc) return '';
+                    let d = desc.toLowerCase().trim();
+                    d = d.replace(/^retail purchase\s+\d+\s+/i, '');
+                    d = d.replace(/^e-transfer\s+\d+\s*/i, 'e-transfer ');
+                    d = d.replace(/\s+/g, ' ');
+                    return d;
+                }
+                function addDays(dateStr, n) {
+                    const dt = new Date(dateStr + 'T00:00:00');
+                    dt.setDate(dt.getDate() + n);
+                    return dt.toISOString().slice(0, 10);
+                }
+
+                const sourceRef = parsed.document_id || '';
+                db.all(
+                    `SELECT source_ref FROM transactions WHERE source_ref = ? AND user_id = ? LIMIT 1`,
+                    [sourceRef, req.userId],
+                    (refErr, refRows) => {
+                        const documentAlreadyImported = !refErr && refRows && refRows.length > 0;
+                        if (documentAlreadyImported) {
+                            parsed.document_already_imported = true;
+                            parsed.duplicate_count = txns.length;
+                            txns.forEach(t => { t.is_duplicate = true; });
+                            return res.json(parsed);
+                        }
+                        const dates = [...new Set(txns.map(t => t.date))];
+                        const allDates = new Set();
+                        dates.forEach(d => {
+                            for (let offset = -2; offset <= 2; offset++) allDates.add(addDays(d, offset));
+                        });
+                        const expandedDates = [...allDates];
+                        const datePlaceholders = expandedDates.map(() => '?').join(', ');
+                        db.all(
+                            `SELECT date, amount, bank, description, source_type FROM transactions
+                             WHERE date IN (${datePlaceholders}) AND user_id = ?`,
+                            [...expandedDates, req.userId],
+                            (err, existingRows) => {
+                                if (err) return res.json(parsed);
+                                const existingList = (existingRows || []).map(row => ({
+                                    date: row.date, amount: row.amount, bank: row.bank,
+                                    description: row.description, source_type: row.source_type || 'unknown',
+                                    normDesc: normDesc(row.description),
+                                }));
+                                let duplicateCount = 0;
+                                txns.forEach(t => {
+                                    const tNorm = normDesc(t.description);
+                                    const tBank = t.bank || 'Unknown';
+                                    const tAmount = parseFloat(t.amount);
+                                    const tDate = t.date;
+                                    const match = existingList.find(ex => {
+                                        if (Math.abs(ex.amount - tAmount) > 0.01) return false;
+                                        if (ex.bank !== tBank) return false;
+                                        const dayDiff = Math.abs((new Date(tDate) - new Date(ex.date)) / 86400000);
+                                        if (dayDiff > 2) return false;
+                                        if (ex.normDesc === tNorm) return true;
+                                        if (ex.normDesc.length > 0 && tNorm.length > 0 &&
+                                            (ex.normDesc.includes(tNorm) || tNorm.includes(ex.normDesc))) return true;
+                                        return false;
+                                    });
+                                    if (match) {
+                                        t.is_duplicate = true;
+                                        t.existing_match = { date: match.date, amount: match.amount,
+                                            description: match.description, source_type: match.source_type, bank: match.bank };
+                                        duplicateCount++;
+                                    } else {
+                                        t.is_duplicate = false;
+                                    }
+                                });
+                                parsed.duplicate_count = duplicateCount;
+                                res.json(parsed);
+                            }
+                        );
+                    }
+                );
+            } catch (e) {
+                res.status(500).json({ error: 'Failed to parse python output', details: output });
+            }
+        });
+        py.stdin.write(JSON.stringify({ filepath }));
+        py.stdin.end();
+    });
+
+    app.post('/api/import-pdf/confirm', (req, res) => {
+        const { transactions } = req.body;
+        if (!Array.isArray(transactions) || transactions.length === 0) {
+            return res.status(400).json({ error: 'transactions array required' });
+        }
+        const script = path.join(__dirname, '../Application/api_scripts/import_pdf_confirm.py');
+        const py = spawn(pythonCmd, [script], { cwd: repoRoot, env: childEnvForUser(req.userId) });
+        py.on('error', (err) => { if (!res.headersSent) res.status(500).json({ error: err.message }); });
+        let output = '', errOutput = '';
+        py.stdout.on('data', (d) => { output += d; });
+        py.stderr.on('data', (d) => { errOutput += d; });
+        py.on('close', (code) => {
+            if (code !== 0) return res.status(500).json({ error: errOutput || 'Import confirmation error' });
+            try { res.json(JSON.parse(output)); }
+            catch (e) { res.status(500).json({ error: 'Failed to parse python output', details: output }); }
+        });
+        py.stdin.write(JSON.stringify(transactions));
+        py.stdin.end();
+    });
+
+    // ===== Chat (uses authenticated user's data context) =====
+    const OpenAI = require('openai');
+    const openaiClient = new OpenAI({
+        apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+        baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+    });
+
+    async function gatherFinancialContext(userId) {
+        const [summary, categories, banks, tags, recentTxns, monthlySpending] = await Promise.all([
+            queryDb(`SELECT COUNT(*) as total_transactions,
+                ROUND(SUM(CASE WHEN transaction_type='expense' THEN amount ELSE 0 END),2) as total_expenses,
+                ROUND(SUM(CASE WHEN transaction_type='income' THEN amount ELSE 0 END),2) as total_income,
+                MIN(date) as earliest_date, MAX(date) as latest_date
+                FROM transactions WHERE user_id = ?`, [userId]),
+            queryDb(`SELECT category, COUNT(*) as count, ROUND(SUM(amount),2) as total
+                FROM transactions WHERE transaction_type='expense' AND user_id = ?
+                GROUP BY category ORDER BY total DESC LIMIT 20`, [userId]),
+            queryDb(`SELECT bank, COUNT(*) as count, ROUND(SUM(amount),2) as total
+                FROM transactions WHERE user_id = ? GROUP BY bank ORDER BY total DESC`, [userId]),
+            queryDb(`SELECT g.tag_name, COUNT(*) as count, ROUND(SUM(t.amount),2) as total
+                FROM transaction_tags tt
+                JOIN tags g ON tt.tag_id = g.id
+                JOIN transactions t ON tt.transaction_id = t.id
+                WHERE t.user_id = ?
+                GROUP BY g.tag_name ORDER BY total DESC`, [userId]),
+            queryDb(`SELECT date, amount, description, bank, category, transaction_type
+                FROM transactions WHERE user_id = ? ORDER BY date DESC LIMIT 30`, [userId]),
+            queryDb(`SELECT strftime('%Y-%m', date) as month,
+                ROUND(SUM(CASE WHEN transaction_type='expense' THEN amount ELSE 0 END),2) as expenses,
+                ROUND(SUM(CASE WHEN transaction_type='income' THEN amount ELSE 0 END),2) as income
+                FROM transactions WHERE user_id = ? GROUP BY month ORDER BY month DESC LIMIT 12`, [userId]),
+        ]);
+        return `FINANCIAL DATABASE SUMMARY:
 ${JSON.stringify(summary[0])}
 
 TOP SPENDING CATEGORIES:
@@ -1287,59 +708,51 @@ ${JSON.stringify(monthlySpending)}
 
 RECENT TRANSACTIONS (last 30):
 ${JSON.stringify(recentTxns)}`;
-}
+    }
 
-app.post('/api/chat', async (req, res) => {
-    try {
-        const { message, history = [] } = req.body;
-        if (!message) return res.status(400).json({ error: 'Message is required' });
+    app.post('/api/chat', async (req, res) => {
+        try {
+            const { message, history = [] } = req.body;
+            if (!message) return res.status(400).json({ error: 'Message is required' });
+            const financialContext = await gatherFinancialContext(req.userId);
+            let additionalData = '';
+            const lowerMsg = message.toLowerCase();
 
-        const financialContext = await gatherFinancialContext();
+            if (lowerMsg.includes('subscri') || lowerMsg.includes('abonn') || lowerMsg.includes('recurring')) {
+                const recurring = await queryDb(`SELECT description, COUNT(*) as occurrences, ROUND(AVG(amount),2) as avg_amount, bank
+                    FROM transactions WHERE transaction_type='expense' AND user_id = ?
+                    GROUP BY description HAVING COUNT(*) >= 3 ORDER BY occurrences DESC LIMIT 20`, [req.userId]);
+                additionalData += `\nRECURRING TRANSACTIONS:\n${JSON.stringify(recurring)}`;
+            }
+            if (lowerMsg.includes('merchant') || lowerMsg.includes('store') || lowerMsg.includes('where') || lowerMsg.includes('magasin')) {
+                const merchants = await queryDb(`SELECT description, COUNT(*) as visits, ROUND(SUM(amount),2) as total_spent
+                    FROM transactions WHERE transaction_type='expense' AND user_id = ?
+                    GROUP BY description ORDER BY total_spent DESC LIMIT 20`, [req.userId]);
+                additionalData += `\nTOP MERCHANTS:\n${JSON.stringify(merchants)}`;
+            }
+            if (lowerMsg.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\b/i)) {
+                const allMonthly = await queryDb(`SELECT strftime('%Y-%m', date) as month, category, ROUND(SUM(amount),2) as total
+                    FROM transactions WHERE transaction_type='expense' AND user_id = ?
+                    GROUP BY month, category ORDER BY month DESC, total DESC`, [req.userId]);
+                additionalData += `\nMONTHLY CATEGORY BREAKDOWN:\n${JSON.stringify(allMonthly)}`;
+            }
+            if (lowerMsg.includes('interest') || lowerMsg.includes('intérêt') || lowerMsg.includes('interet')) {
+                const interest = await queryDb(`SELECT date, amount, description, bank
+                    FROM transactions t
+                    JOIN transaction_tags tt ON t.id = tt.transaction_id
+                    JOIN tags g ON tt.tag_id = g.id
+                    WHERE g.tag_name = 'Interest' AND t.user_id = ?
+                    ORDER BY date DESC`, [req.userId]);
+                additionalData += `\nINTEREST CHARGES:\n${JSON.stringify(interest)}`;
+            }
+            if (lowerMsg.includes('rent') || lowerMsg.includes('loyer')) {
+                const rent = await queryDb(`SELECT date, amount, description, bank
+                    FROM transactions WHERE category = 'Rent' AND user_id = ?
+                    ORDER BY date DESC`, [req.userId]);
+                additionalData += `\nRENT PAYMENTS:\n${JSON.stringify(rent)}`;
+            }
 
-        let additionalData = '';
-        const lowerMsg = message.toLowerCase();
-
-        if (lowerMsg.includes('subscri') || lowerMsg.includes('abonn') || lowerMsg.includes('recurring')) {
-            const recurring = await queryDb(`SELECT description, COUNT(*) as occurrences, ROUND(AVG(amount),2) as avg_amount, bank
-                FROM transactions WHERE transaction_type='expense'
-                GROUP BY description HAVING COUNT(*) >= 3
-                ORDER BY occurrences DESC LIMIT 20`);
-            additionalData += `\nRECURRING TRANSACTIONS:\n${JSON.stringify(recurring)}`;
-        }
-
-        if (lowerMsg.includes('merchant') || lowerMsg.includes('store') || lowerMsg.includes('where') || lowerMsg.includes('magasin')) {
-            const merchants = await queryDb(`SELECT description, COUNT(*) as visits, ROUND(SUM(amount),2) as total_spent
-                FROM transactions WHERE transaction_type='expense'
-                GROUP BY description ORDER BY total_spent DESC LIMIT 20`);
-            additionalData += `\nTOP MERCHANTS:\n${JSON.stringify(merchants)}`;
-        }
-
-        if (lowerMsg.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\b/i)) {
-            const allMonthly = await queryDb(`SELECT strftime('%Y-%m', date) as month, category,
-                ROUND(SUM(amount),2) as total
-                FROM transactions WHERE transaction_type='expense'
-                GROUP BY month, category ORDER BY month DESC, total DESC`);
-            additionalData += `\nMONTHLY CATEGORY BREAKDOWN:\n${JSON.stringify(allMonthly)}`;
-        }
-
-        if (lowerMsg.includes('interest') || lowerMsg.includes('intérêt') || lowerMsg.includes('interet')) {
-            const interest = await queryDb(`SELECT date, amount, description, bank
-                FROM transactions t
-                JOIN transaction_tags tt ON t.id = tt.transaction_id
-                JOIN tags g ON tt.tag_id = g.id
-                WHERE g.tag_name = 'Interest'
-                ORDER BY date DESC`);
-            additionalData += `\nINTEREST CHARGES:\n${JSON.stringify(interest)}`;
-        }
-
-        if (lowerMsg.includes('rent') || lowerMsg.includes('loyer')) {
-            const rent = await queryDb(`SELECT date, amount, description, bank
-                FROM transactions WHERE category = 'Rent'
-                ORDER BY date DESC`);
-            additionalData += `\nRENT PAYMENTS:\n${JSON.stringify(rent)}`;
-        }
-
-        const systemPrompt = `You are a smart personal finance assistant analyzing a user's transaction data. You have access to their complete financial database.
+            const systemPrompt = `You are a smart personal finance assistant analyzing a user's transaction data. You have access to their complete financial database.
 
 Answer questions clearly and concisely. Use numbers and dates when relevant. Give actionable insights when appropriate. If the user asks in French, respond in French.
 
@@ -1348,186 +761,139 @@ ${additionalData}
 
 Important: All amounts are in Canadian dollars (CAD). When showing amounts, use $ symbol. Format dates nicely. Round amounts to 2 decimal places.`;
 
-        const messages = [
-            { role: 'system', content: systemPrompt },
-            ...history.map(h => ({ role: h.role, content: h.content })),
-            { role: 'user', content: message },
-        ];
+            const messages = [
+                { role: 'system', content: systemPrompt },
+                ...history.map(h => ({ role: h.role, content: h.content })),
+                { role: 'user', content: message },
+            ];
 
-        const contextQueries = [];
-        if (additionalData.includes('RECURRING')) contextQueries.push('recurring');
-        if (additionalData.includes('MERCHANTS')) contextQueries.push('merchants');
-        if (additionalData.includes('MONTHLY CATEGORY')) contextQueries.push('monthly_breakdown');
-        if (additionalData.includes('INTEREST')) contextQueries.push('interest');
-        if (additionalData.includes('RENT')) contextQueries.push('rent');
+            const contextQueries = [];
+            if (additionalData.includes('RECURRING')) contextQueries.push('recurring');
+            if (additionalData.includes('MERCHANTS')) contextQueries.push('merchants');
+            if (additionalData.includes('MONTHLY CATEGORY')) contextQueries.push('monthly_breakdown');
+            if (additionalData.includes('INTEREST')) contextQueries.push('interest');
+            if (additionalData.includes('RENT')) contextQueries.push('rent');
 
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
+            res.setHeader('Content-Type', 'text/event-stream');
+            res.setHeader('Cache-Control', 'no-cache');
+            res.setHeader('Connection', 'keep-alive');
 
-        const startTime = Date.now();
-        const modelName = 'gpt-5-mini';
+            const startTime = Date.now();
+            const modelName = 'gpt-5-mini';
+            const stream = await openaiClient.chat.completions.create({
+                model: modelName, messages, stream: true,
+                stream_options: { include_usage: true }, max_completion_tokens: 8192,
+            });
 
-        const stream = await openaiClient.chat.completions.create({
-            model: modelName,
-            messages,
-            stream: true,
-            stream_options: { include_usage: true },
-            max_completion_tokens: 8192,
-        });
-
-        let responseLength = 0;
-        let usageData = null;
-
-        for await (const chunk of stream) {
-            const content = chunk.choices?.[0]?.delta?.content || '';
-            if (content) {
-                responseLength += content.length;
-                res.write(`data: ${JSON.stringify({ content })}\n\n`);
+            let responseLength = 0, usageData = null;
+            for await (const chunk of stream) {
+                const content = chunk.choices?.[0]?.delta?.content || '';
+                if (content) {
+                    responseLength += content.length;
+                    res.write(`data: ${JSON.stringify({ content })}\n\n`);
+                }
+                if (chunk.usage) usageData = chunk.usage;
             }
-            if (chunk.usage) {
-                usageData = chunk.usage;
-            }
-        }
 
-        const durationMs = Date.now() - startTime;
-        const promptTokens = usageData?.prompt_tokens || 0;
-        const completionTokens = usageData?.completion_tokens || 0;
-        const totalTokens = usageData?.total_tokens || (promptTokens + completionTokens);
-        const estimatedCost = (promptTokens * 0.00015 + completionTokens * 0.0006) / 1000;
+            const durationMs = Date.now() - startTime;
+            const promptTokens = usageData?.prompt_tokens || 0;
+            const completionTokens = usageData?.completion_tokens || 0;
+            const totalTokens = usageData?.total_tokens || (promptTokens + completionTokens);
+            const estimatedCost = (promptTokens * 0.00015 + completionTokens * 0.0006) / 1000;
 
-        const usageInfo = {
-            prompt_tokens: promptTokens,
-            completion_tokens: completionTokens,
-            total_tokens: totalTokens,
-            duration_ms: durationMs,
-            model: modelName,
-            estimated_cost: estimatedCost,
-        };
-
-        res.write(`data: ${JSON.stringify({ done: true, usage: usageInfo })}\n\n`);
-        res.end();
-
-        db.run(
-            `INSERT INTO chat_usage (model, prompt_tokens, completion_tokens, total_tokens, user_message, response_length, duration_ms, context_queries, estimated_cost)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [modelName, promptTokens, completionTokens, totalTokens, message.substring(0, 500), responseLength, durationMs, contextQueries.join(','), estimatedCost],
-            (err) => { if (err) console.error('Failed to log chat usage:', err.message); }
-        );
-
-    } catch (error) {
-        console.error('Chat error:', error);
-        if (res.headersSent) {
-            res.write(`data: ${JSON.stringify({ error: 'Chat failed' })}\n\n`);
+            res.write(`data: ${JSON.stringify({ done: true, usage: {
+                prompt_tokens: promptTokens, completion_tokens: completionTokens,
+                total_tokens: totalTokens, duration_ms: durationMs, model: modelName, estimated_cost: estimatedCost,
+            }})}\n\n`);
             res.end();
-        } else {
-            res.status(500).json({ error: 'Chat failed', details: error.message });
+
+            db.run(
+                `INSERT INTO chat_usage (model, prompt_tokens, completion_tokens, total_tokens, user_message, response_length, duration_ms, context_queries, estimated_cost, user_id)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [modelName, promptTokens, completionTokens, totalTokens, message.substring(0, 500), responseLength, durationMs, contextQueries.join(','), estimatedCost, req.userId],
+                (err) => { if (err) console.error('Failed to log chat usage:', err.message); }
+            );
+        } catch (error) {
+            console.error('Chat error:', error);
+            if (res.headersSent) {
+                res.write(`data: ${JSON.stringify({ error: 'Chat failed' })}\n\n`);
+                res.end();
+            } else {
+                res.status(500).json({ error: 'Chat failed', details: error.message });
+            }
         }
-    }
-});
-
-app.get('/api/chat/usage', async (req, res) => {
-    try {
-        const [summary, daily, byModel, recentSessions, hourly] = await Promise.all([
-            queryDb(`SELECT
-                COUNT(*) as total_requests,
-                COALESCE(SUM(prompt_tokens), 0) as total_prompt_tokens,
-                COALESCE(SUM(completion_tokens), 0) as total_completion_tokens,
-                COALESCE(SUM(total_tokens), 0) as total_tokens,
-                ROUND(AVG(total_tokens), 0) as avg_tokens_per_request,
-                ROUND(AVG(duration_ms), 0) as avg_duration_ms,
-                ROUND(SUM(estimated_cost), 6) as total_estimated_cost,
-                COALESCE(SUM(response_length), 0) as total_response_chars,
-                MIN(timestamp) as first_usage,
-                MAX(timestamp) as last_usage
-                FROM chat_usage`),
-            queryDb(`SELECT
-                date(timestamp) as day,
-                COUNT(*) as requests,
-                SUM(total_tokens) as tokens,
-                SUM(prompt_tokens) as prompt_tokens,
-                SUM(completion_tokens) as completion_tokens,
-                ROUND(SUM(estimated_cost), 6) as cost,
-                ROUND(AVG(duration_ms), 0) as avg_duration
-                FROM chat_usage
-                GROUP BY day ORDER BY day DESC LIMIT 30`),
-            queryDb(`SELECT
-                model,
-                COUNT(*) as requests,
-                SUM(total_tokens) as tokens,
-                ROUND(SUM(estimated_cost), 6) as cost
-                FROM chat_usage GROUP BY model`),
-            queryDb(`SELECT
-                id, timestamp, model, prompt_tokens, completion_tokens, total_tokens,
-                user_message, response_length, duration_ms, context_queries, estimated_cost
-                FROM chat_usage ORDER BY id DESC LIMIT 50`),
-            queryDb(`SELECT
-                strftime('%H', timestamp) as hour,
-                COUNT(*) as requests,
-                SUM(total_tokens) as tokens
-                FROM chat_usage GROUP BY hour ORDER BY hour`),
-        ]);
-
-        const thisMonth = await queryDb(`SELECT
-            COUNT(*) as requests,
-            COALESCE(SUM(total_tokens), 0) as tokens,
-            ROUND(SUM(estimated_cost), 6) as cost
-            FROM chat_usage
-            WHERE strftime('%Y-%m', timestamp) = strftime('%Y-%m', 'now')`);
-
-        const today = await queryDb(`SELECT
-            COUNT(*) as requests,
-            COALESCE(SUM(total_tokens), 0) as tokens,
-            ROUND(SUM(estimated_cost), 6) as cost
-            FROM chat_usage
-            WHERE date(timestamp) = date('now')`);
-
-        const contextStats = await queryDb(`SELECT
-            context_queries, COUNT(*) as count
-            FROM chat_usage WHERE context_queries IS NOT NULL AND context_queries != ''
-            GROUP BY context_queries ORDER BY count DESC LIMIT 10`);
-
-        res.json({
-            summary: summary[0],
-            today: today[0],
-            thisMonth: thisMonth[0],
-            daily,
-            byModel,
-            recentSessions,
-            hourly,
-            contextStats,
-        });
-    } catch (error) {
-        console.error('Usage stats error:', error);
-        res.status(500).json({ error: 'Failed to fetch usage stats' });
-    }
-});
-
-app.delete('/api/chat/usage', (req, res) => {
-    db.run('DELETE FROM chat_usage', function(err) {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ deleted: this.changes });
     });
-});
 
-const clientBuildPath = getClientBuildPath();
-const clientIndexPath = path.join(clientBuildPath, 'index.html');
-if (fs.existsSync(clientIndexPath)) {
-    app.use(express.static(clientBuildPath));
-    app.get('*', (req, res, next) => {
-        if (req.path.startsWith('/api/')) {
-            return next();
+    app.get('/api/chat/usage', async (req, res) => {
+        try {
+            const uid = req.userId;
+            const [summary, daily, byModel, recentSessions, hourly] = await Promise.all([
+                queryDb(`SELECT COUNT(*) as total_requests,
+                    COALESCE(SUM(prompt_tokens), 0) as total_prompt_tokens,
+                    COALESCE(SUM(completion_tokens), 0) as total_completion_tokens,
+                    COALESCE(SUM(total_tokens), 0) as total_tokens,
+                    ROUND(AVG(total_tokens), 0) as avg_tokens_per_request,
+                    ROUND(AVG(duration_ms), 0) as avg_duration_ms,
+                    ROUND(SUM(estimated_cost), 6) as total_estimated_cost,
+                    COALESCE(SUM(response_length), 0) as total_response_chars,
+                    MIN(timestamp) as first_usage, MAX(timestamp) as last_usage
+                    FROM chat_usage WHERE user_id = ?`, [uid]),
+                queryDb(`SELECT date(timestamp) as day, COUNT(*) as requests,
+                    SUM(total_tokens) as tokens, SUM(prompt_tokens) as prompt_tokens,
+                    SUM(completion_tokens) as completion_tokens,
+                    ROUND(SUM(estimated_cost), 6) as cost, ROUND(AVG(duration_ms), 0) as avg_duration
+                    FROM chat_usage WHERE user_id = ? GROUP BY day ORDER BY day DESC LIMIT 30`, [uid]),
+                queryDb(`SELECT model, COUNT(*) as requests, SUM(total_tokens) as tokens,
+                    ROUND(SUM(estimated_cost), 6) as cost
+                    FROM chat_usage WHERE user_id = ? GROUP BY model`, [uid]),
+                queryDb(`SELECT id, timestamp, model, prompt_tokens, completion_tokens, total_tokens,
+                    user_message, response_length, duration_ms, context_queries, estimated_cost
+                    FROM chat_usage WHERE user_id = ? ORDER BY id DESC LIMIT 50`, [uid]),
+                queryDb(`SELECT strftime('%H', timestamp) as hour, COUNT(*) as requests, SUM(total_tokens) as tokens
+                    FROM chat_usage WHERE user_id = ? GROUP BY hour ORDER BY hour`, [uid]),
+            ]);
+            const thisMonth = await queryDb(`SELECT COUNT(*) as requests,
+                COALESCE(SUM(total_tokens), 0) as tokens, ROUND(SUM(estimated_cost), 6) as cost
+                FROM chat_usage WHERE user_id = ? AND strftime('%Y-%m', timestamp) = strftime('%Y-%m', 'now')`, [uid]);
+            const today = await queryDb(`SELECT COUNT(*) as requests,
+                COALESCE(SUM(total_tokens), 0) as tokens, ROUND(SUM(estimated_cost), 6) as cost
+                FROM chat_usage WHERE user_id = ? AND date(timestamp) = date('now')`, [uid]);
+            const contextStats = await queryDb(`SELECT context_queries, COUNT(*) as count
+                FROM chat_usage WHERE user_id = ? AND context_queries IS NOT NULL AND context_queries != ''
+                GROUP BY context_queries ORDER BY count DESC LIMIT 10`, [uid]);
+            res.json({ summary: summary[0], today: today[0], thisMonth: thisMonth[0], daily, byModel, recentSessions, hourly, contextStats });
+        } catch (error) {
+            console.error('Usage stats error:', error);
+            res.status(500).json({ error: 'Failed to fetch usage stats' });
         }
+    });
 
-        return res.sendFile(clientIndexPath);
+    app.delete('/api/chat/usage', (req, res) => {
+        db.run('DELETE FROM chat_usage WHERE user_id = ?', [req.userId], function (err) {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ deleted: this.changes });
+        });
+    });
+
+    // ===== Static React build (must be last) =====
+    const clientBuildPath = getClientBuildPath();
+    const clientIndexPath = path.join(clientBuildPath, 'index.html');
+    if (fs.existsSync(clientIndexPath)) {
+        app.use(express.static(clientBuildPath));
+        app.get('*', (req, res, next) => {
+            if (req.path.startsWith('/api/')) return next();
+            return res.sendFile(clientIndexPath);
+        });
+    }
+
+    app.listen(port, host, () => {
+        console.log(`Serveur actif sur ${host}:${port}`);
+        console.log(`Base SQLite active: ${dbPath}`);
+        if (fs.existsSync(clientIndexPath)) console.log(`Client React servi depuis: ${clientBuildPath}`);
     });
 }
 
-// ✅ Start the server
-app.listen(port, host, () => {
-    console.log(`Serveur actif sur ${host}:${port}`);
-    console.log(`Base SQLite active: ${dbPath}`);
-    if (fs.existsSync(clientIndexPath)) {
-        console.log(`Client React servi depuis: ${clientBuildPath}`);
-    }
+startServer().catch((err) => {
+    console.error('❌ Failed to start server:', err);
+    process.exit(1);
 });

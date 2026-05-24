@@ -2,14 +2,16 @@
 import { useState, useEffect } from 'react';
 import { transactionService } from '../Services/transactionService';
 
-export const useTransactions = () => {
+export const useTransactions = ({ enabled = true } = {}) => {
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!enabled) { setLoading(false); return; }
     loadTransactions();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled]);
 
   const loadTransactions = async () => {
     try {

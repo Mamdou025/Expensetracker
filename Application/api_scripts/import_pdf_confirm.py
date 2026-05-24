@@ -4,6 +4,8 @@ import json
 import re
 from datetime import datetime, timedelta
 
+APP_USER_ID = os.environ.get("APP_USER_ID")
+
 current_dir = os.path.dirname(__file__)
 sys.path.append(os.path.abspath(os.path.join(current_dir, '..')))
 sys.path.append(os.path.abspath(os.path.join(current_dir, '..', '..')))
@@ -36,8 +38,8 @@ def check_duplicate(date, amount, bank, description):
 
         amt = float(amount)
         cursor.execute(
-            "SELECT date, amount, description FROM transactions WHERE ABS(amount - ?) < 0.02 AND bank = ? AND date BETWEEN ? AND ?",
-            (amt, bank, date_start, date_end),
+            "SELECT date, amount, description FROM transactions WHERE ABS(amount - ?) < 0.02 AND bank = ? AND date BETWEEN ? AND ? AND user_id IS ?",
+            (amt, bank, date_start, date_end, APP_USER_ID),
         )
         rows = cursor.fetchall()
         if not rows:
@@ -95,6 +97,8 @@ def main():
         trans.setdefault("tags", [])
         trans.setdefault("raw_description", trans.get("description"))
         trans.setdefault("normalized_merchant", trans.get("description"))
+
+        trans["user_id"] = APP_USER_ID
 
         direction = (trans.get("direction") or "").lower().strip()
         if direction in ("deposit", "payment"):

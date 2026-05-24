@@ -16,11 +16,20 @@ import { useTags } from '../hooks/useTags';
 import { transactionService } from '../Services/transactionService';
 
 
-const TransactionDashboard = ({ demoMode = false }) => {
+const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
 
-  const realTx = useTransactions();
-  const realCats = useCategories();
-  const realTagsHook = useTags();
+  // When the parent already forces demo mode (e.g. logged-out landing page),
+  // skip the real data hooks' network calls so we don't hit protected /api
+  // endpoints from unauthenticated visitors. Hooks are still called every
+  // render to honor the Rules of Hooks; the `enabled` flag short-circuits them.
+  const realTx = useTransactions({ enabled: !demoModeProp });
+  const realCats = useCategories({ enabled: !demoModeProp });
+  const realTagsHook = useTags({ enabled: !demoModeProp });
+
+  // Auto-enable the sample-data preview when an authenticated user has no real
+  // transactions yet, so the dashboard isn't empty out of the box.
+  const autoDemo = !demoModeProp && !realTx.loading && (realTx.transactions?.length === 0);
+  const demoMode = demoModeProp || autoDemo;
 
   const initialMockTransactions = useMemo(
     () =>
@@ -483,9 +492,10 @@ const TransactionDashboard = ({ demoMode = false }) => {
 
   return (
     <>
-        {demoMode && (
-          <div className="mb-4 px-4 py-2 bg-blue-900/30 text-blue-300 rounded-lg border border-blue-800 text-sm">
-            Demo view — showing sample data. Visit <code className="font-mono">/me</code> for your real dashboard.
+        {demoMode && !demoModeProp && (
+          <div className="mb-4 px-4 py-2 bg-blue-900/20 text-blue-300 rounded-lg border border-blue-800/60 text-sm">
+            You haven't added any transactions yet — showing sample data so you can explore.
+            Head to <strong>PDF Import</strong> to load your first statement.
           </div>
         )}
 
