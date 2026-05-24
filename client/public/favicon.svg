@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0b0f17"/>
+  <text x="50%" y="50%" dy="0.36em" text-anchor="middle"
+    font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    font-weight="800" font-size="34" letter-spacing="-1">
+    <tspan fill="#34d399">[</tspan><tspan fill="#f3f4f6">xt</tspan><tspan fill="#34d399">]</tspan>
+  </text>
+</svg>
