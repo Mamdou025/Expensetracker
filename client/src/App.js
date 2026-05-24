@@ -17,7 +17,8 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
             <Header />
             <Routes>
-              <Route path="/" element={<TransactionDashboard />} />
+              <Route path="/" element={<TransactionDashboard demoMode={true} />} />
+              <Route path="/me" element={<TransactionDashboard demoMode={false} />} />
               <Route path="/email-extraction" element={<EmailExtractionPage />} />
               <Route path="/pdf-import" element={<PDFImportPage />} />
               <Route path="/bank-templates" element={<BankTemplatesPage />} />
