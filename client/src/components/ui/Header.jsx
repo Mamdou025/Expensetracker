@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Mail, FileUp, Wallet, MessageCircle, Sun, Moon, LogOut } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
+import Logo from './Logo';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -46,7 +47,13 @@ const Header = () => {
   return (
     <header className="mb-6 border-b border-gray-800 pb-4">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <h1 className="text-2xl font-semibold text-gray-100 tracking-tight">{t('header.title')}</h1>
+        <Link
+          to="/"
+          aria-label="exptrackr — home"
+          className="flex items-baseline gap-3 hover:opacity-90 transition-opacity"
+        >
+          <Logo size="lg" />
+        </Link>
         <div className="flex items-center gap-2 flex-wrap">
           <nav className="flex gap-1 flex-wrap">
             {navItems.map(({ path, label, icon: Icon }) => {

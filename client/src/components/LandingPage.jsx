@@ -1,7 +1,8 @@
 import React from 'react';
-import { Sparkles, ShieldCheck, BarChart3, Upload } from 'lucide-react';
+import { ShieldCheck, BarChart3, Upload } from 'lucide-react';
 import TransactionDashboard from './TransactionDashboard';
 import AuthForm from './AuthForm';
+import Logo from './ui/Logo';
 
 const LandingPage = () => {
   return (
@@ -9,9 +10,11 @@ const LandingPage = () => {
       <section className="rounded-2xl border border-gray-800 bg-gray-900 px-6 py-10 sm:px-10 sm:py-14">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-xs font-medium border border-blue-800 mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              Personal finance, organized
+            <div className="inline-flex items-center gap-3 mb-4">
+              <Logo variant="full" size="md" />
+              <span className="text-xs text-gray-500 font-mono uppercase tracking-widest">
+                personal finance, organized
+              </span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-semibold text-gray-100 mb-3 tracking-tight">
               Track every dollar across every account.
