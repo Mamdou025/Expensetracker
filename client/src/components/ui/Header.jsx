@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Mail, FileUp, Building2, MessageCircle, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, Mail, FileUp, Building2, MessageCircle, Sun, Moon, User } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const Header = () => {
@@ -11,6 +11,7 @@ const Header = () => {
 
   const navItems = [
     { path: '/', label: t('navigation.dashboard'), icon: LayoutDashboard },
+    { path: '/me', label: 'My Data', icon: User },
     { path: '/email-extraction', label: t('navigation.emailExtraction'), icon: Mail },
     { path: '/pdf-import', label: t('navigation.pdfImport'), icon: FileUp },
     { path: '/bank-templates', label: t('navigation.bankTemplates'), icon: Building2 },

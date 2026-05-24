@@ -8,43 +8,62 @@ import TimeChartSection from './Sections/TimeChartSection';
 import CategoryChartSection from './Sections/CategoryChartSection';
 import TransactionTable from './Sections/TransactionTable';
 import QuickStatsSection from './Sections/QuickStatsSection';
+import { categoryService } from '../Services/categoryService';
+import { tagService } from '../Services/tagService';
 import TagEditModal from './common/TagEditModal';
+import { useCategories } from '../hooks/useCategories';
+import { useTags } from '../hooks/useTags';
+import { transactionService } from '../Services/transactionService';
 
 
-const TransactionDashboard = () => {
+const TransactionDashboard = ({ demoMode = false }) => {
 
-// Front page intentionally shows template/demo data only.
-// No real API calls — all mutations stay in local state.
-const loading = false;
-const error = null;
+  const realTx = useTransactions();
+  const realCats = useCategories();
+  const realTagsHook = useTags();
 
-const initialMockTransactions = React.useMemo(
-  () =>
-    generateMockData().map(t => ({
+  const initialMockTransactions = useMemo(
+    () =>
+      generateMockData().map(t => ({
+        ...t,
+        tags: typeof t.tags === 'string' && t.tags.length > 0
+          ? t.tags.split(',').map(s => s.trim()).filter(Boolean)
+          : Array.isArray(t.tags) ? t.tags : []
+      })),
+    []
+  );
+
+  const loading = demoMode ? false : realTx.loading;
+  const error = demoMode ? null : realTx.error;
+
+  const realTransactions = realTx.transactions;
+  const realCategories = realCats.categories;
+  const refreshCategories = realCats.refreshCategories;
+  const realTags = realTagsHook.tags;
+  const refreshTags = realTagsHook.refreshTags;
+
+  const addTag = demoMode ? async () => {} : realTx.addTag;
+  const removeTag = demoMode ? async () => {} : realTx.removeTag;
+
+  const [transactions, setTransactions] = useState(
+    demoMode ? initialMockTransactions : []
+  );
+
+  React.useEffect(() => {
+    if (demoMode) {
+      setTransactions(initialMockTransactions);
+      return;
+    }
+    const parsed = realTransactions.map(t => ({
       ...t,
       tags: typeof t.tags === 'string' && t.tags.length > 0
         ? t.tags.split(',').map(s => s.trim()).filter(Boolean)
         : Array.isArray(t.tags) ? t.tags : []
-    })),
-  []
-);
+    }));
+    setTransactions(parsed);
+  }, [demoMode, realTransactions, initialMockTransactions]);
 
-const [transactions, setTransactions] = useState(initialMockTransactions);
-
-React.useEffect(() => {
-  const cats = [...new Set(initialMockTransactions.map(t => t.category).filter(Boolean))];
-  const tgs = [...new Set(initialMockTransactions.flatMap(t => t.tags || []).filter(Boolean))];
-  setLocalCategories(cats);
-  setLocalTags(tgs);
-}, [initialMockTransactions]);
-
-const noop = () => {};
-const refreshCategories = noop;
-const refreshTags = noop;
-const addTag = async () => {};
-const removeTag = async () => {};
-
-const { expandedSections, toggleSection } = useExpandableState({
+  const { expandedSections, toggleSection } = useExpandableState({
     settings: false,
     filters: true,
     timeChart: true,
@@ -89,6 +108,23 @@ const { expandedSections, toggleSection } = useExpandableState({
     tags: [],
     banks: []
   });
+
+  React.useEffect(() => {
+    if (demoMode) {
+      const cats = [...new Set(initialMockTransactions.map(t => t.category).filter(Boolean))];
+      const tgs = [...new Set(initialMockTransactions.flatMap(t => t.tags || []).filter(Boolean))];
+      setLocalCategories(cats);
+      setLocalTags(tgs);
+    } else {
+      setLocalCategories(Array.isArray(realCategories) ? realCategories : []);
+    }
+  }, [demoMode, realCategories, initialMockTransactions]);
+
+  React.useEffect(() => {
+    if (!demoMode) {
+      setLocalTags(Array.isArray(realTags) ? realTags : []);
+    }
+  }, [demoMode, realTags]);
 
   const uniqueCategories = [...new Set(transactions.map(t => t.category).filter(Boolean))];
   const uniqueTags = [...new Set(transactions.flatMap(t => (Array.isArray(t.tags) ? t.tags : [])).filter(Boolean))];
@@ -238,7 +274,7 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleSaveTagChanges = async (updatedTags) => {
-    if (editingTagsForTransaction) {
+    if (demoMode && editingTagsForTransaction) {
       setTransactions(prev => prev.map(t =>
         t.id === editingTagsForTransaction.id ? { ...t, tags: updatedTags } : t
       ));
@@ -267,14 +303,30 @@ const { expandedSections, toggleSection } = useExpandableState({
       return;
     }
 
-    setTransactions(prev => prev.map(t => {
-      if (t.id !== transaction.id) return t;
-      if (field === 'amount') return { ...t, amount: parseFloat(newValue) };
-      return { ...t, [field]: newValue };
-    }));
+    if (demoMode) {
+      setTransactions(prev => prev.map(t => {
+        if (t.id !== transaction.id) return t;
+        if (field === 'amount') return { ...t, amount: parseFloat(newValue) };
+        return { ...t, [field]: newValue };
+      }));
+      setEditingTransaction(null);
+      setEditValues({});
+      return;
+    }
 
-    setEditingTransaction(null);
-    setEditValues({});
+    try {
+      if (field === 'category') {
+        await realTx.updateCategory(transaction.id, newValue);
+      } else if (field === 'amount') {
+        await realTx.updateAmount(transaction.id, parseFloat(newValue));
+      } else if (field === 'description') {
+        await realTx.updateDescription(transaction.id, newValue);
+      }
+      setEditingTransaction(null);
+      setEditValues({});
+    } catch (err) {
+      alert('Failed to update transaction. Please try again.');
+    }
   };
 
   const handleCancelEdit = () => {
@@ -298,7 +350,16 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleDeleteTransaction = async (transactionId) => {
-    setTransactions(prev => prev.filter(t => t.id !== transactionId));
+    if (demoMode) {
+      setTransactions(prev => prev.filter(t => t.id !== transactionId));
+      return;
+    }
+    try {
+      await realTx.deleteTransaction(transactionId);
+      alert('Transaction deleted successfully!');
+    } catch (err) {
+      alert('Failed to delete transaction. Please try again.');
+    }
   };
 
   const handleAddItem = (type) => {
@@ -337,45 +398,96 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleAddTransaction = async () => {
-    const newId = Math.max(0, ...transactions.map(t => t.id || 0)) + 1;
-    const created = {
-      ...newTransaction,
-      id: newId,
-      amount: parseFloat(newTransaction.amount) || 0,
-      tags: typeof newTransaction.tags === 'string' && newTransaction.tags.length > 0
-        ? newTransaction.tags.split(',').map(s => s.trim()).filter(Boolean)
-        : []
-    };
-    setTransactions(prev => [created, ...prev]);
-    setNewTransaction({
-      amount: '',
-      description: '',
-      card_type: 'Debit',
-      date: new Date().toISOString().split('T')[0],
-      bank: '',
-      category: '',
-      tags: ''
-    });
-    setShowAddTransaction(false);
+    if (demoMode) {
+      const newId = Math.max(0, ...transactions.map(t => t.id || 0)) + 1;
+      const created = {
+        ...newTransaction,
+        id: newId,
+        amount: parseFloat(newTransaction.amount) || 0,
+        tags: typeof newTransaction.tags === 'string' && newTransaction.tags.length > 0
+          ? newTransaction.tags.split(',').map(s => s.trim()).filter(Boolean)
+          : []
+      };
+      setTransactions(prev => [created, ...prev]);
+      setNewTransaction({
+        amount: '',
+        description: '',
+        card_type: 'Debit',
+        date: new Date().toISOString().split('T')[0],
+        bank: '',
+        category: '',
+        tags: ''
+      });
+      setShowAddTransaction(false);
+      return;
+    }
+    try {
+      const result = await transactionService.create(newTransaction);
+      if (result.applied_rules && result.applied_rules.length > 0) {
+        const msg = result.applied_rules
+          .map(r => `${r.keyword} → ${r.category || ''}${Array.isArray(r.tags) && r.tags.length ? ' [' + r.tags.join(', ') + ']' : ''}`)
+          .join('\n');
+        alert(`Applied rules:\n${msg}`);
+      }
+      setTransactions(prev => [result, ...prev]);
+      setNewTransaction({
+        amount: '',
+        description: '',
+        card_type: 'Debit',
+        date: new Date().toISOString().split('T')[0],
+        bank: '',
+        category: '',
+        tags: ''
+      });
+      setShowAddTransaction(false);
+    } catch (err) {
+      alert('Failed to add transaction');
+    }
   };
 
   const handleDeleteCategory = async (categoryName) => {
-    setLocalCategories(prev => prev.filter(c => c !== categoryName));
-    return { success: true };
+    if (demoMode) {
+      setLocalCategories(prev => prev.filter(c => c !== categoryName));
+      return { success: true };
+    }
+    try {
+      return await categoryService.delete(categoryName);
+    } catch (err) {
+      throw err;
+    }
   };
 
   const handleDeleteTag = async (tagName) => {
-    setLocalTags(prev => prev.filter(t => t !== tagName));
-    return { success: true };
+    if (demoMode) {
+      setLocalTags(prev => prev.filter(t => t !== tagName));
+      return { success: true };
+    }
+    try {
+      return await tagService.delete(tagName);
+    } catch (err) {
+      throw err;
+    }
   };
 
   const handleCreateTag = async (tagName) => {
-    setLocalTags(prev => prev.includes(tagName) ? prev : [...prev, tagName]);
-    return { success: true };
+    if (demoMode) {
+      setLocalTags(prev => prev.includes(tagName) ? prev : [...prev, tagName]);
+      return { success: true };
+    }
+    try {
+      return await tagService.create(tagName);
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
     <>
+        {demoMode && (
+          <div className="mb-4 px-4 py-2 bg-blue-900/30 text-blue-300 rounded-lg border border-blue-800 text-sm">
+            Demo view — showing sample data. Visit <code className="font-mono">/me</code> for your real dashboard.
+          </div>
+        )}
 
         {loading && (
           <div className="mb-4 text-center text-sm text-gray-400">Loading transactions...</div>
