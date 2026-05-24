@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Mail, FileUp, Building2, Wallet, MessageCircle, Sun, Moon, LogOut } from 'lucide-react';
+import { LayoutDashboard, Mail, FileUp, Wallet, MessageCircle, Sun, Moon, LogOut } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -16,7 +16,6 @@ const Header = () => {
     { path: '/accounts', label: 'My banks', icon: Wallet, requiresAuth: true },
     { path: '/pdf-import', label: t('navigation.pdfImport'), icon: FileUp, requiresAuth: true },
     { path: '/email-extraction', label: t('navigation.emailExtraction'), icon: Mail, requiresAuth: true, ownerOnly: true },
-    { path: '/bank-templates', label: t('navigation.bankTemplates'), icon: Building2, requiresAuth: true, ownerOnly: true },
     { path: '/chat', label: t('navigation.chat'), icon: MessageCircle, requiresAuth: true },
   ].filter(item => {
     if (item.ownerOnly) return isOwner;

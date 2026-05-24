@@ -6,7 +6,6 @@ import Header from './components/ui/Header';
 import TransactionDashboard from './components/TransactionDashboard';
 import EmailExtractionPage from './components/EmailExtractionPage';
 import PDFImportPage from './components/PDFImportPage';
-import BankTemplatesPage from './components/BankTemplatesPage';
 import ConnectedAccountsPage from './components/ConnectedAccountsPage';
 import ChatPage from './components/ChatPage';
 import LandingPage from './components/LandingPage';
@@ -51,9 +50,7 @@ const AppShell = () => (
         <Route path="/pdf-import" element={
           <ProtectedRoute><PDFImportPage /></ProtectedRoute>
         } />
-        <Route path="/bank-templates" element={
-          <ProtectedRoute><BankTemplatesPage /></ProtectedRoute>
-        } />
+        <Route path="/bank-templates" element={<Navigate to="/accounts" replace />} />
         <Route path="/accounts" element={
           <ProtectedRoute><ConnectedAccountsPage /></ProtectedRoute>
         } />
