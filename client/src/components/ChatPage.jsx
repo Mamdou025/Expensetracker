@@ -4,14 +4,14 @@ import { Send, Loader2, Trash2, MessageCircle, BarChart3 } from 'lucide-react';
 import ChatUsagePanel from './ChatUsagePanel';
 
 const SUGGESTED_QUESTIONS = [
-  "How much did I spend this month?",
-  "What are my top spending categories?",
-  "Show me my recurring subscriptions",
-  "How much rent have I paid this year?",
-  "What are my interest charges?",
-  "Which bank do I spend the most on?",
-  "Compare my spending month over month",
-  "Where do I spend the most money?",
+  "Combien ai-je dépensé ce mois-ci ?",
+  "Quelles sont mes principales catégories de dépenses ?",
+  "Montre-moi mes abonnements récurrents",
+  "Combien de loyer ai-je payé cette année ?",
+  "Quels sont mes frais d'intérêt ?",
+  "Sur quelle banque est-ce que je dépense le plus ?",
+  "Compare mes dépenses d'un mois à l'autre",
+  "Où est-ce que je dépense le plus d'argent ?",
 ];
 
 const ChatPage = () => {
@@ -90,7 +90,7 @@ const ChatPage = () => {
         const updated = [...prev];
         updated[updated.length - 1] = {
           role: 'assistant',
-          content: 'Sorry, something went wrong. Please try again.',
+          content: "Désolé, une erreur s'est produite. Veuillez réessayer.",
         };
         return updated;
       });
@@ -135,18 +135,18 @@ const ChatPage = () => {
         <div className="flex items-center gap-2">
           <MessageCircle className="w-5 h-5 text-blue-400" />
           <h2 className="text-lg font-semibold text-gray-100">
-            {t('chat.title', 'Financial Assistant')}
+            {t('chat.title', 'Assistant financier')}
           </h2>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowUsage(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-gray-800 rounded-lg transition-colors"
-            title={t('chatUsage.title', 'AI Usage Tracking')}
+            title={t('chatUsage.title', "Suivi de l'utilisation IA")}
           >
             <BarChart3 className="w-3.5 h-3.5" />
             {sessionTokens > 0 && (
-              <span className="text-xs tabular-nums">{sessionTokens.toLocaleString()} tok</span>
+              <span className="text-xs tabular-nums">{sessionTokens.toLocaleString()} jet.</span>
             )}
           </button>
           {messages.length > 0 && (
@@ -155,7 +155,7 @@ const ChatPage = () => {
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-lg transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              {t('chat.clear', 'Clear')}
+              {t('chat.clear', 'Effacer')}
             </button>
           )}
         </div>
@@ -166,10 +166,10 @@ const ChatPage = () => {
           <div className="flex flex-col items-center justify-center h-full text-center">
             <MessageCircle className="w-12 h-12 text-gray-700 mb-4" />
             <h3 className="text-lg font-medium text-gray-300 mb-2">
-              {t('chat.welcome', 'Ask me anything about your finances')}
+              {t('chat.welcome', 'Posez-moi n\'importe quelle question sur vos finances')}
             </h3>
             <p className="text-sm text-gray-500 mb-6 max-w-md">
-              {t('chat.welcomeDesc', 'I can analyze your transactions, find spending patterns, track subscriptions, and give you insights about your money.')}
+              {t('chat.welcomeDesc', 'Je peux analyser vos transactions, repérer vos habitudes de dépense, suivre vos abonnements et vous donner un aperçu de vos finances.')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-lg w-full">
               {SUGGESTED_QUESTIONS.slice(0, 6).map((q, i) => (
@@ -197,7 +197,7 @@ const ChatPage = () => {
                   {msg.role === 'assistant' && msg.content === '' && isLoading ? (
                     <div className="flex items-center gap-2 text-gray-400">
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{t('chat.thinking', 'Analyzing...')}</span>
+                      <span>{t('chat.thinking', 'Analyse en cours…')}</span>
                     </div>
                   ) : (
                     <div className="whitespace-pre-wrap">{formatMessage(msg.content)}</div>
@@ -207,7 +207,7 @@ const ChatPage = () => {
               {msg.role === 'assistant' && !isLoading && i === messages.length - 1 && lastUsage && (
                 <div className="flex justify-start mt-1 ml-1">
                   <span className="text-[10px] text-gray-600 tabular-nums">
-                    {lastUsage.total_tokens?.toLocaleString()} tokens &middot; {(lastUsage.duration_ms / 1000).toFixed(1)}s &middot; {lastUsage.model}
+                    {lastUsage.total_tokens?.toLocaleString()} jetons &middot; {(lastUsage.duration_ms / 1000).toFixed(1)}s &middot; {lastUsage.model}
                   </span>
                 </div>
               )}
@@ -223,7 +223,7 @@ const ChatPage = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={t('chat.placeholder', 'Ask about your spending, categories, trends...')}
+          placeholder={t('chat.placeholder', 'Posez une question sur vos dépenses, catégories, tendances…')}
           className="flex-1 resize-none rounded-xl border border-gray-700 bg-gray-800 px-4 py-3 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           rows={1}
           disabled={isLoading}

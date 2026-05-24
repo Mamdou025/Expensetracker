@@ -43,7 +43,7 @@ const TransactionActionsMenu = ({
         if (onViewEmail) onViewEmail(transaction);
         break;
       case 'delete':
-        if (window.confirm('Are you sure you want to delete this transaction?')) {
+        if (window.confirm('Voulez-vous vraiment supprimer cette transaction ?')) {
           onDeleteTransaction(transaction.id);
         }
         break;
@@ -57,7 +57,7 @@ const TransactionActionsMenu = ({
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 text-gray-500 hover:text-gray-300 hover:bg-gray-800 rounded-full transition-colors duration-200"
-        title="Transaction actions"
+        title="Actions sur la transaction"
       >
         <MoreVertical className="w-4 h-4" />
       </button>
@@ -107,7 +107,7 @@ const TransactionActionsMenu = ({
             className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
             <Mail className="w-4 h-4 text-gray-400" />
-            <span className="font-medium text-gray-200">Voir le Email</span>
+            <span className="font-medium text-gray-200">Voir le courriel</span>
           </button>
 
           <div className="border-t border-gray-700 my-2"></div>

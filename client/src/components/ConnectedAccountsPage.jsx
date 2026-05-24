@@ -70,7 +70,7 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
   }, [sample.id]);
 
   const handleDelete = async () => {
-    if (!window.confirm('Delete this email sample?')) return;
+    if (!window.confirm('Supprimer cet exemple de courriel ?')) return;
     try {
       await apiClient.delete(`/api/email-samples/${sample.id}`);
       onDeleted(sample.id);
@@ -84,9 +84,9 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
         onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-3 p-4 border-b border-gray-800">
           <div className="min-w-0">
-            <div className="text-sm font-semibold text-gray-100 truncate">{sample.subject || '(no subject)'}</div>
+            <div className="text-sm font-semibold text-gray-100 truncate">{sample.subject || '(sans objet)'}</div>
             <div className="text-xs text-gray-500 mt-0.5 truncate">
-              From {sample.sender || 'unknown'} · {formatDate(sample.received_at || sample.created_at)}
+              De {sample.sender || 'expéditeur inconnu'} · {formatDate(sample.received_at || sample.created_at)}
             </div>
           </div>
           <button onClick={onClose} className="p-1.5 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
@@ -95,16 +95,16 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
         </div>
         <div className="flex items-center gap-2 px-4 pt-3">
           <button onClick={() => setTab('text')} disabled={!full?.body_text}
-            className={`px-3 py-1 text-xs rounded-md ${tab === 'text' ? 'nav-active' : 'text-gray-400 hover:text-gray-200'} disabled:opacity-40`}>Plain text</button>
+            className={`px-3 py-1 text-xs rounded-md ${tab === 'text' ? 'nav-active' : 'text-gray-400 hover:text-gray-200'} disabled:opacity-40`}>Texte brut</button>
           <button onClick={() => setTab('html')} disabled={!full?.body_html}
-            className={`px-3 py-1 text-xs rounded-md ${tab === 'html' ? 'nav-active' : 'text-gray-400 hover:text-gray-200'} disabled:opacity-40`}>Rendered HTML</button>
+            className={`px-3 py-1 text-xs rounded-md ${tab === 'html' ? 'nav-active' : 'text-gray-400 hover:text-gray-200'} disabled:opacity-40`}>HTML rendu</button>
         </div>
         <div className="flex-1 overflow-auto p-4">
           {loading && <div className="flex justify-center py-10"><Loader2 className="animate-spin text-blue-500" size={20} /></div>}
           {error && <div className="text-red-400 text-sm">{error}</div>}
           {full && tab === 'text' && (
             <pre className="text-xs text-gray-300 whitespace-pre-wrap font-mono bg-gray-950 border border-gray-800 rounded-md p-3">
-              {full.body_text || '(no plain text body)'}
+              {full.body_text || '(aucun corps en texte brut)'}
             </pre>
           )}
           {full && tab === 'html' && (
@@ -116,11 +116,11 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
         <div className="flex items-center justify-between gap-2 p-3 border-t border-gray-800">
           <button onClick={handleDelete}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md text-red-300 hover:bg-red-900/30 border border-red-900/50">
-            <Trash2 size={13} /> Delete
+            <Trash2 size={13} /> Supprimer
           </button>
-          <button disabled title="Coming soon"
+          <button disabled title="Bientôt disponible"
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md bg-blue-600/50 text-white cursor-not-allowed">
-            <Wand2 size={13} /> Create model from this email (coming soon)
+            <Wand2 size={13} /> Créer un modèle à partir de ce courriel (bientôt)
           </button>
         </div>
       </div>
@@ -136,7 +136,7 @@ const SampleUploadModal = ({ onClose, onSaved }) => {
   const submit = async (e) => {
     e.preventDefault();
     if (!form.body_text.trim() && !form.body_html.trim()) {
-      setError('Paste the email body (text or HTML).');
+      setError('Collez le contenu du courriel (texte ou HTML).');
       return;
     }
     setSaving(true); setError(null);
@@ -152,7 +152,7 @@ const SampleUploadModal = ({ onClose, onSaved }) => {
         className="bg-gray-900 border border-gray-800 rounded-xl w-full max-w-2xl max-h-[85vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between p-4 border-b border-gray-800">
-          <div className="text-sm font-semibold text-gray-100">Add an email sample</div>
+          <div className="text-sm font-semibold text-gray-100">Ajouter un exemple de courriel</div>
           <button type="button" onClick={onClose} className="p-1.5 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
             <X size={16} />
           </button>
@@ -160,44 +160,44 @@ const SampleUploadModal = ({ onClose, onSaved }) => {
         <div className="flex-1 overflow-auto p-4 space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Bank name (optional)</label>
+              <label className="block text-xs text-gray-400 mb-1">Nom de la banque (facultatif)</label>
               <input type="text" value={form.bank_name} onChange={(e) => set('bank_name', e.target.value)}
                 className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm" />
             </div>
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Received date (optional)</label>
+              <label className="block text-xs text-gray-400 mb-1">Date de réception (facultatif)</label>
               <input type="date" value={form.received_at} onChange={(e) => set('received_at', e.target.value)}
                 className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm" />
             </div>
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Sender (optional)</label>
+            <label className="block text-xs text-gray-400 mb-1">Expéditeur (facultatif)</label>
             <input type="text" value={form.sender} onChange={(e) => set('sender', e.target.value)} placeholder="notifications@bank.com"
               className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm" />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Subject (optional)</label>
+            <label className="block text-xs text-gray-400 mb-1">Objet (facultatif)</label>
             <input type="text" value={form.subject} onChange={(e) => set('subject', e.target.value)}
               className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm" />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Plain text body</label>
+            <label className="block text-xs text-gray-400 mb-1">Corps en texte brut</label>
             <textarea rows={6} value={form.body_text} onChange={(e) => set('body_text', e.target.value)}
               className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-xs font-mono" />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">HTML body (optional)</label>
+            <label className="block text-xs text-gray-400 mb-1">Corps HTML (facultatif)</label>
             <textarea rows={4} value={form.body_html} onChange={(e) => set('body_html', e.target.value)}
               className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-xs font-mono" />
           </div>
           {error && <div className="text-red-400 text-xs">{error}</div>}
         </div>
         <div className="flex justify-end gap-2 p-3 border-t border-gray-800">
-          <button type="button" onClick={onClose} className="px-3 py-1.5 text-xs rounded-md text-gray-300 hover:bg-gray-800">Cancel</button>
+          <button type="button" onClick={onClose} className="px-3 py-1.5 text-xs rounded-md text-gray-300 hover:bg-gray-800">Annuler</button>
           <button type="submit" disabled={saving}
             className="px-3 py-1.5 text-xs rounded-md bg-blue-600 hover:bg-blue-500 text-white font-medium flex items-center gap-1.5 disabled:opacity-60">
             {saving && <Loader2 size={12} className="animate-spin" />}
-            Save sample
+            Enregistrer l'exemple
           </button>
         </div>
       </form>
@@ -224,15 +224,15 @@ const BankIcon = ({ bank, size = 'md' }) => {
 };
 
 const buildIngestMethods = (forwardingAddress) => [
-  { id: 'pdf', label: 'Upload PDF statements', icon: FileUp, available: true,
-    desc: 'Drag and drop monthly statements from this bank to import transactions.' },
-  { id: 'email_forward', label: 'Forward transaction emails', icon: Mail,
+  { id: 'pdf', label: 'Importer des relevés PDF', icon: FileUp, available: true,
+    desc: 'Glissez-déposez vos relevés mensuels de cette banque pour importer les transactions.' },
+  { id: 'email_forward', label: 'Faire suivre les courriels de transactions', icon: Mail,
     available: !!forwardingAddress,
-    unavailableReason: 'Forwarding address is not available right now.',
-    desc: 'Get a unique forwarding address — set a Gmail filter to send bank notifications to it.' },
-  { id: 'gmail_oauth', label: 'Connect Gmail directly', icon: Lock, available: false,
-    unavailableReason: 'Coming soon',
-    desc: 'Sign in with Google so we can poll your inbox for bank emails. (Coming after Google sign-in is enabled.)' },
+    unavailableReason: "Adresse de réacheminement indisponible pour l'instant.",
+    desc: 'Obtenez une adresse de réacheminement personnelle — créez un filtre Gmail pour y envoyer les notifications bancaires.' },
+  { id: 'gmail_oauth', label: 'Connecter Gmail directement', icon: Lock, available: false,
+    unavailableReason: 'Bientôt disponible',
+    desc: 'Connectez-vous avec Google pour que nous puissions consulter votre boîte de réception. (Disponible une fois Google activé.)' },
 ];
 
 const ForwardingAddressBox = ({ address }) => {
@@ -243,19 +243,19 @@ const ForwardingAddressBox = ({ address }) => {
   return (
     <div className="mt-3 rounded-lg border border-blue-900/60 bg-blue-950/30 p-3 space-y-2">
       <div className="text-xs text-blue-200 font-medium flex items-center gap-1.5">
-        <Shield size={12} /> Your private forwarding address
+        <Shield size={12} /> Votre adresse de réacheminement privée
       </div>
       <div className="flex items-center gap-2">
         <code className="flex-1 text-xs bg-gray-900 border border-gray-800 rounded px-2 py-1.5 text-gray-100 truncate">{address}</code>
         <button type="button" onClick={copy}
           className="text-xs px-2 py-1.5 rounded bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-1">
-          <Copy size={12} /> {copied ? 'Copied' : 'Copy'}
+          <Copy size={12} /> {copied ? 'Copié' : 'Copier'}
         </button>
       </div>
       <div className="text-[11px] text-gray-400 leading-relaxed">
-        In Gmail (or your email app), create a filter for messages from this bank's sender address
-        (e.g. <code className="text-gray-300">notify@cibc.com</code>) and forward them to the address above.
-        We never see your password and only receive what you forward.
+        Dans Gmail (ou votre application courriel), créez un filtre pour les messages provenant de l'adresse de la banque
+        (ex. <code className="text-gray-300">notify@cibc.com</code>) et faites-les suivre à l'adresse ci-dessus.
+        Nous ne voyons jamais votre mot de passe — uniquement ce que vous nous réacheminez.
       </div>
     </div>
   );
@@ -278,7 +278,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
   const submit = async () => {
     if (!selected) return;
     if (method === 'email_forward' && !forwardingAddress) {
-      setError('Forwarding address is not available — please try again in a moment.');
+      setError("Adresse de réacheminement indisponible — veuillez réessayer dans un instant.");
       return;
     }
     setSaving(true); setError(null);
@@ -313,8 +313,8 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
               </button>
             )}
             <div className="text-sm font-semibold text-gray-100">
-              {step === 1 && 'Pick your bank'}
-              {step === 2 && `Set up ${selected?.name || 'account'}`}
+              {step === 1 && 'Choisissez votre banque'}
+              {step === 2 && `Configurer ${selected?.name || 'le compte'}`}
             </div>
           </div>
           <button onClick={onClose} className="p-1.5 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
@@ -330,7 +330,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Search Canadian banks…"
+                  placeholder="Rechercher une banque canadienne…"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="w-full pl-9 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -339,7 +339,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
             </div>
             <div className="flex-1 overflow-auto p-2">
               {filtered.length === 0 && (
-                <div className="text-center text-sm text-gray-500 py-8">No matches.</div>
+                <div className="text-center text-sm text-gray-500 py-8">Aucun résultat.</div>
               )}
               <div className="grid sm:grid-cols-2 gap-2">
                 {filtered.map((b) => {
@@ -352,7 +352,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium text-gray-100 truncate">{b.name}</div>
                         <div className="text-xs text-gray-500">
-                          {b.products.length} product{b.products.length !== 1 ? 's' : ''}
+                          {b.products.length} produit{b.products.length !== 1 ? 's' : ''}
                         </div>
                       </div>
                       {already && <Check size={14} className="text-emerald-400 shrink-0" />}
@@ -370,12 +370,12 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
               <BankIcon bank={selected} size="lg" />
               <div>
                 <div className="text-base font-semibold text-gray-100">{selected.name}</div>
-                <div className="text-xs text-gray-500">Configure how we'll import transactions</div>
+                <div className="text-xs text-gray-500">Configurez la façon d'importer vos transactions</div>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Product</label>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Produit</label>
               <div className="flex flex-wrap gap-2">
                 {selected.products.map((p) => (
                   <button key={p} type="button" onClick={() => setProduct(p)}
@@ -391,14 +391,14 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Nickname (optional)</label>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Surnom (facultatif)</label>
               <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)}
-                placeholder={`e.g. ${selected.name} ${product ? PRODUCT_LABELS[product] : ''} *1234`}
+                placeholder={`ex. ${selected.name} ${product ? PRODUCT_LABELS[product] : ''} *1234`}
                 className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm" />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">How should we get transactions?</label>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Comment récupérer les transactions ?</label>
               <div className="space-y-2">
                 {buildIngestMethods(forwardingAddress).map((m) => {
                   const Icon = m.icon;
@@ -420,7 +420,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
                             {m.label}
                             {disabled && (
                               <span className="text-[10px] uppercase bg-gray-800 text-gray-500 px-1.5 py-0.5 rounded">
-                                {m.unavailableReason || 'Unavailable'}
+                                {m.unavailableReason || 'Indisponible'}
                               </span>
                             )}
                           </div>
@@ -440,11 +440,11 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
 
             <div className="flex justify-end gap-2 pt-2">
               <button onClick={onClose}
-                className="px-3 py-1.5 text-xs rounded-md text-gray-300 hover:bg-gray-800">Cancel</button>
+                className="px-3 py-1.5 text-xs rounded-md text-gray-300 hover:bg-gray-800">Annuler</button>
               <button onClick={submit} disabled={saving || !product}
                 className="px-3 py-1.5 text-xs rounded-md bg-blue-600 hover:bg-blue-500 text-white font-medium flex items-center gap-1.5 disabled:opacity-60">
                 {saving && <Loader2 size={12} className="animate-spin" />}
-                Connect account
+                Connecter le compte
               </button>
             </div>
           </div>
@@ -507,7 +507,7 @@ const ConnectedAccountsPage = () => {
   const onSampleDeleted = (id) => setSamples((prev) => prev.filter((s) => s.id !== id));
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Disconnect this account? Existing transactions are kept.')) return;
+    if (!window.confirm('Déconnecter ce compte ? Les transactions existantes seront conservées.')) return;
     try {
       await apiClient.delete(`/api/user-bank-accounts/${id}`);
       setAccounts((prev) => prev.filter(a => a.id !== id));
@@ -522,16 +522,64 @@ const ConnectedAccountsPage = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
             <Building2 size={24} className="text-gray-400" />
-            Connected accounts
+            Mes comptes connectés
           </h2>
           <p className="text-gray-500 mt-1 text-sm">
-            Add the banks and credit cards you want to track. You can have multiple accounts at the same bank.
+            Ajoutez les banques et cartes de crédit que vous souhaitez suivre. Vous pouvez avoir plusieurs comptes dans la même banque.
           </p>
         </div>
         <button onClick={() => setAdding(true)}
+          aria-label="Ajouter une banque"
           className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium">
-          <Plus size={14} /> Add bank
+          <Plus size={14} /> Ajouter une banque
         </button>
+      </div>
+
+      <div className="mb-6 rounded-xl border border-gray-800 bg-gray-900 p-5">
+        <div className="flex items-center gap-2 mb-3">
+          <Wand2 size={16} className="text-blue-400" />
+          <h3 className="text-sm font-semibold text-gray-200 uppercase tracking-wide">
+            Deux façons d'alimenter vos transactions
+          </h3>
+        </div>
+        <p className="text-xs text-gray-500 mb-4">
+          Pour chaque banque ajoutée, choisissez comment exptrackr récupère vos opérations. Vous pouvez combiner les deux méthodes selon vos comptes.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <div className="rounded-lg border border-gray-800 bg-gray-800/40 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-md bg-blue-600/20 text-blue-300 flex items-center justify-center">
+                <FileUp size={16} />
+              </div>
+              <div className="text-sm font-semibold text-gray-100">1. Importer des relevés PDF</div>
+            </div>
+            <p className="text-xs text-gray-400 leading-relaxed mb-3">
+              Téléchargez les relevés mensuels (PDF) téléchargés depuis votre banque. exptrackr lit le document, détecte automatiquement la banque, et extrait chaque transaction avec la date, le montant et la description.
+            </p>
+            <Link to="/pdf-import"
+              className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md bg-blue-600 hover:bg-blue-500 text-white">
+              <FileUp size={12} /> Aller à l'import PDF
+            </Link>
+          </div>
+          <div className="rounded-lg border border-gray-800 bg-gray-800/40 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-md bg-emerald-600/20 text-emerald-300 flex items-center justify-center">
+                <Mail size={16} />
+              </div>
+              <div className="text-sm font-semibold text-gray-100">2. Faire suivre vos courriels</div>
+            </div>
+            <p className="text-xs text-gray-400 leading-relaxed mb-3">
+              Chaque utilisateur reçoit une adresse de réacheminement privée (<code className="text-gray-300">votre-id@exptracker.app</code>). Créez un filtre Gmail qui transfère les notifications de la banque vers cette adresse — chaque courriel devient automatiquement une transaction.
+            </p>
+            {forwardingAddress ? (
+              <ForwardingAddressBox address={forwardingAddress} />
+            ) : (
+              <div className="text-[11px] text-gray-500 italic">
+                Votre adresse apparaîtra ici une fois disponible.
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {loading && <div className="flex justify-center py-16"><Loader2 className="animate-spin text-blue-500" size={28} /></div>}
@@ -542,11 +590,11 @@ const ConnectedAccountsPage = () => {
       {!loading && !error && accounts.length === 0 && (
         <div className="bg-gray-900 border border-gray-800 border-dashed rounded-xl p-10 text-center">
           <Building2 size={36} className="mx-auto text-gray-600 mb-3" />
-          <h3 className="text-base font-semibold text-gray-200">No accounts connected yet</h3>
-          <p className="text-sm text-gray-500 mt-1 mb-4">Start by adding a bank or credit card you'd like to track.</p>
+          <h3 className="text-base font-semibold text-gray-200">Aucun compte connecté pour l'instant</h3>
+          <p className="text-sm text-gray-500 mt-1 mb-4">Commencez par ajouter une banque ou une carte de crédit à suivre.</p>
           <button onClick={() => setAdding(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium">
-            <Plus size={14} /> Add your first bank
+            <Plus size={14} /> Ajouter ma première banque
           </button>
         </div>
       )}
@@ -575,14 +623,14 @@ const ConnectedAccountsPage = () => {
                 </div>
                 <div className="flex items-center justify-between pt-2 border-t border-gray-800">
                   <span className="text-xs text-gray-500 flex items-center gap-1.5">
-                    {a.ingest_method === 'pdf' && <><FileUp size={12} /> PDF statements</>}
-                    {a.ingest_method === 'email_forward' && <><Mail size={12} /> Email forwarding</>}
+                    {a.ingest_method === 'pdf' && <><FileUp size={12} /> Relevés PDF</>}
+                    {a.ingest_method === 'email_forward' && <><Mail size={12} /> Courriels réacheminés</>}
                     {a.ingest_method === 'gmail_oauth' && <><Lock size={12} /> Gmail</>}
                   </span>
                   {a.ingest_method === 'pdf' && (
                     <Link to="/pdf-import"
                       className="text-xs px-2 py-1 rounded-md text-blue-300 hover:bg-blue-900/30 border border-blue-900/50">
-                      Import statement
+                      Importer un relevé
                     </Link>
                   )}
                 </div>
@@ -600,12 +648,12 @@ const ConnectedAccountsPage = () => {
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide flex items-center gap-2">
               <Building2 size={16} className="text-gray-500" />
-              Supported banks &amp; parsers
+              Banques et analyseurs pris en charge
             </h3>
-            <span className="text-xs text-gray-500">{supportedBanks.length} banks</span>
+            <span className="text-xs text-gray-500">{supportedBanks.length} banques</span>
           </div>
           <p className="text-xs text-gray-500 mb-3">
-            These are the banks we can already parse statements and emails from. Pick any of them when you click <b>Add bank</b>.
+            Voici les banques dont nous savons déjà lire les relevés et les courriels. Choisissez-en une lorsque vous cliquez sur <b>Ajouter une banque</b>.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {supportedBanks.map((b) => (
@@ -628,17 +676,17 @@ const ConnectedAccountsPage = () => {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Inbox size={18} className="text-gray-400" />
-                <h3 className="text-base font-semibold text-gray-100">Forwarded email samples</h3>
+                <h3 className="text-base font-semibold text-gray-100">Exemples de courriels réacheminés</h3>
                 <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full">{samples.length}</span>
               </div>
               <button onClick={() => setUploadingSample(true)}
                 className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md bg-blue-600 hover:bg-blue-500 text-white">
-                <Plus size={12} /> Paste sample
+                <Plus size={12} /> Coller un exemple
               </button>
             </div>
             {samples.length === 0 ? (
               <div className="text-sm text-gray-500 text-center py-6">
-                No samples yet. Forward a bank email to your private address above, or click <b>Paste sample</b> to add one manually.
+                Aucun exemple pour l'instant. Faites suivre un courriel bancaire à votre adresse privée ci-dessus, ou cliquez sur <b>Coller un exemple</b> pour en ajouter un manuellement.
               </div>
             ) : (
               <ul className="divide-y divide-gray-800">
@@ -648,15 +696,15 @@ const ConnectedAccountsPage = () => {
                       className="w-full flex items-center gap-3 py-2.5 px-1 text-left hover:bg-gray-800/40 rounded-md">
                       <ParserBankLogo bank={s.bank_name || s.sender || '?'} size={9} />
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm text-gray-100 truncate">{s.subject || '(no subject)'}</div>
+                        <div className="text-sm text-gray-100 truncate">{s.subject || '(sans objet)'}</div>
                         <div className="text-xs text-gray-500 truncate">
-                          {s.sender || 'unknown sender'} · {formatDate(s.received_at || s.created_at)}
+                          {s.sender || 'expéditeur inconnu'} · {formatDate(s.received_at || s.created_at)}
                           {s.bank_name && <> · <span className="text-gray-400">{s.bank_name}</span></>}
                         </div>
                       </div>
                       <span className={`text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded ${
                         s.status === 'modeled' ? 'bg-emerald-900/40 text-emerald-300' : 'bg-amber-900/30 text-amber-300'
-                      }`}>{s.status || 'pending'}</span>
+                      }`}>{s.status === 'modeled' ? 'modélisé' : 'en attente'}</span>
                       <ChevronRight size={14} className="text-gray-600" />
                     </button>
                   </li>

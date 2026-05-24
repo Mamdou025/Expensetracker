@@ -234,7 +234,7 @@ const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
       acc[timeKey].count += 1;
 
       if (showCategoryBreakdown !== 'none') {
-        const category = transaction.category || 'Uncategorized';
+        const category = transaction.category || 'Sans catégorie';
         if (!acc[timeKey].categories[category]) {
           acc[timeKey].categories[category] = 0;
         }
@@ -334,7 +334,7 @@ const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
       setEditingTransaction(null);
       setEditValues({});
     } catch (err) {
-      alert('Failed to update transaction. Please try again.');
+      alert('Échec de la mise à jour de la transaction. Veuillez réessayer.');
     }
   };
 
@@ -365,9 +365,9 @@ const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
     }
     try {
       await realTx.deleteTransaction(transactionId);
-      alert('Transaction deleted successfully!');
+      alert('Transaction supprimée avec succès.');
     } catch (err) {
-      alert('Failed to delete transaction. Please try again.');
+      alert('Échec de la suppression de la transaction. Veuillez réessayer.');
     }
   };
 
@@ -436,7 +436,7 @@ const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
         const msg = result.applied_rules
           .map(r => `${r.keyword} → ${r.category || ''}${Array.isArray(r.tags) && r.tags.length ? ' [' + r.tags.join(', ') + ']' : ''}`)
           .join('\n');
-        alert(`Applied rules:\n${msg}`);
+        alert(`Règles appliquées :\n${msg}`);
       }
       setTransactions(prev => [result, ...prev]);
       setNewTransaction({
@@ -450,7 +450,7 @@ const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
       });
       setShowAddTransaction(false);
     } catch (err) {
-      alert('Failed to add transaction');
+      alert("Échec de l'ajout de la transaction.");
     }
   };
 
@@ -494,13 +494,13 @@ const TransactionDashboard = ({ demoMode: demoModeProp = false }) => {
     <>
         {demoMode && !demoModeProp && (
           <div className="mb-4 px-4 py-2 bg-blue-900/20 text-blue-300 rounded-lg border border-blue-800/60 text-sm">
-            You haven't added any transactions yet — showing sample data so you can explore.
-            Head to <strong>PDF Import</strong> to load your first statement.
+            Vous n'avez pas encore ajouté de transactions — données d'exemple affichées pour explorer l'interface.
+            Allez dans <strong>Importer PDF</strong> pour charger votre premier relevé.
           </div>
         )}
 
         {loading && (
-          <div className="mb-4 text-center text-sm text-gray-400">Loading transactions...</div>
+          <div className="mb-4 text-center text-sm text-gray-400">Chargement des transactions…</div>
         )}
 
         {error && (
