@@ -1,64 +1,48 @@
 import React, { useState, useMemo } from 'react';
 import { useTransactions } from '../hooks/useTransactions';
 import { useExpandableState } from '../hooks/useExpandableState';
+import generateMockData from './utils/mockData';
 import FiltersSection from './Sections/FiltersSection';
 import SettingsSection from './Sections/SettingsSection';
 import TimeChartSection from './Sections/TimeChartSection';
 import CategoryChartSection from './Sections/CategoryChartSection';
 import TransactionTable from './Sections/TransactionTable';
 import QuickStatsSection from './Sections/QuickStatsSection';
-import { categoryService } from '../Services/categoryService';
-import { tagService } from '../Services/tagService';
 import TagEditModal from './common/TagEditModal';
-import { useCategories } from '../hooks/useCategories';
-import { useTags } from '../hooks/useTags';
-import { transactionService } from '../Services/transactionService';
-import { transformTransactionFromApi } from '../Services/transformers';
 
 
 const TransactionDashboard = () => {
 
-const {
-  transactions: realTransactions,
-  loading,
-  error,
-  addTag,
-  removeTag,
-  updateCategory,
-  updateAmount,
-  updateDescription,
-  deleteTransaction
-} = useTransactions();
+// Front page intentionally shows template/demo data only.
+// No real API calls — all mutations stay in local state.
+const loading = false;
+const error = null;
 
-const {
-  categories: realCategories,
-  refreshCategories
-} = useCategories();
+const initialMockTransactions = React.useMemo(
+  () =>
+    generateMockData().map(t => ({
+      ...t,
+      tags: typeof t.tags === 'string' && t.tags.length > 0
+        ? t.tags.split(',').map(s => s.trim()).filter(Boolean)
+        : Array.isArray(t.tags) ? t.tags : []
+    })),
+  []
+);
 
-const {
-  tags: realTags,
-  refreshTags
-} = useTags();
-
-const [transactions, setTransactions] = useState([]);
+const [transactions, setTransactions] = useState(initialMockTransactions);
 
 React.useEffect(() => {
-  const parsed = realTransactions.map(t => ({
-    ...t,
-    tags: typeof t.tags === 'string' && t.tags.length > 0
-      ? t.tags.split(',').map(s => s.trim()).filter(Boolean)
-      : Array.isArray(t.tags) ? t.tags : []
-  }));
-  setTransactions(parsed);
-}, [realTransactions]);
+  const cats = [...new Set(initialMockTransactions.map(t => t.category).filter(Boolean))];
+  const tgs = [...new Set(initialMockTransactions.flatMap(t => t.tags || []).filter(Boolean))];
+  setLocalCategories(cats);
+  setLocalTags(tgs);
+}, [initialMockTransactions]);
 
-React.useEffect(() => {
-  setLocalCategories(Array.isArray(realCategories) ? realCategories : []);
-}, [realCategories]);
-
-React.useEffect(() => {
-  setLocalTags(Array.isArray(realTags) ? realTags : []);
-}, [realTags]);
+const noop = () => {};
+const refreshCategories = noop;
+const refreshTags = noop;
+const addTag = async () => {};
+const removeTag = async () => {};
 
 const { expandedSections, toggleSection } = useExpandableState({
     settings: false,
@@ -254,6 +238,11 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleSaveTagChanges = async (updatedTags) => {
+    if (editingTagsForTransaction) {
+      setTransactions(prev => prev.map(t =>
+        t.id === editingTagsForTransaction.id ? { ...t, tags: updatedTags } : t
+      ));
+    }
     setShowTagModal(false);
     setEditingTagsForTransaction(null);
   };
@@ -268,28 +257,24 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleSaveEdit = async (transaction, field) => {
-    try {
-      const newValue = editValues[field];
+    const newValue = editValues[field];
 
-      if (field === 'category') {
-        await updateCategory(transaction.id, newValue);
-      } else if (field === 'amount') {
-        await updateAmount(transaction.id, parseFloat(newValue));
-      } else if (field === 'description') {
-        await updateDescription(transaction.id, newValue);
-      } else if (field === 'tags') {
-        setEditingTagsForTransaction(transaction);
-        setShowTagModal(true);
-        setEditingTransaction(null);
-        setEditValues({});
-        return;
-      }
-
+    if (field === 'tags') {
+      setEditingTagsForTransaction(transaction);
+      setShowTagModal(true);
       setEditingTransaction(null);
       setEditValues({});
-    } catch (err) {
-      alert('Failed to update transaction. Please try again.');
+      return;
     }
+
+    setTransactions(prev => prev.map(t => {
+      if (t.id !== transaction.id) return t;
+      if (field === 'amount') return { ...t, amount: parseFloat(newValue) };
+      return { ...t, [field]: newValue };
+    }));
+
+    setEditingTransaction(null);
+    setEditValues({});
   };
 
   const handleCancelEdit = () => {
@@ -313,12 +298,7 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleDeleteTransaction = async (transactionId) => {
-    try {
-      await deleteTransaction(transactionId);
-      alert('Transaction deleted successfully!');
-    } catch (err) {
-      alert('Failed to delete transaction. Please try again.');
-    }
+    setTransactions(prev => prev.filter(t => t.id !== transactionId));
   };
 
   const handleAddItem = (type) => {
@@ -357,55 +337,41 @@ const { expandedSections, toggleSection } = useExpandableState({
   };
 
   const handleAddTransaction = async () => {
-    try {
-      const result = await transactionService.create(newTransaction);
-      if (result.applied_rules && result.applied_rules.length > 0) {
-        const msg = result.applied_rules
-          .map(r => `${r.keyword} → ${r.category || ''}${Array.isArray(r.tags) && r.tags.length ? ' [' + r.tags.join(', ') + ']' : ''}`)
-          .join('\n');
-        alert(`Applied rules:\n${msg}`);
-      }
-      setTransactions(prev => [result, ...prev]);
-      setNewTransaction({
-        amount: '',
-        description: '',
-        card_type: 'Debit',
-        date: new Date().toISOString().split('T')[0],
-        bank: '',
-        category: '',
-        tags: ''
-      });
-      setShowAddTransaction(false);
-    } catch (err) {
-      alert('Failed to add transaction');
-    }
+    const newId = Math.max(0, ...transactions.map(t => t.id || 0)) + 1;
+    const created = {
+      ...newTransaction,
+      id: newId,
+      amount: parseFloat(newTransaction.amount) || 0,
+      tags: typeof newTransaction.tags === 'string' && newTransaction.tags.length > 0
+        ? newTransaction.tags.split(',').map(s => s.trim()).filter(Boolean)
+        : []
+    };
+    setTransactions(prev => [created, ...prev]);
+    setNewTransaction({
+      amount: '',
+      description: '',
+      card_type: 'Debit',
+      date: new Date().toISOString().split('T')[0],
+      bank: '',
+      category: '',
+      tags: ''
+    });
+    setShowAddTransaction(false);
   };
 
   const handleDeleteCategory = async (categoryName) => {
-    try {
-      const result = await categoryService.delete(categoryName);
-      return result;
-    } catch (err) {
-      throw err;
-    }
+    setLocalCategories(prev => prev.filter(c => c !== categoryName));
+    return { success: true };
   };
 
   const handleDeleteTag = async (tagName) => {
-    try {
-      const result = await tagService.delete(tagName);
-      return result;
-    } catch (err) {
-      throw err;
-    }
+    setLocalTags(prev => prev.filter(t => t !== tagName));
+    return { success: true };
   };
 
   const handleCreateTag = async (tagName) => {
-    try {
-      const result = await tagService.create(tagName);
-      return result;
-    } catch (err) {
-      throw err;
-    }
+    setLocalTags(prev => prev.includes(tagName) ? prev : [...prev, tagName]);
+    return { success: true };
   };
 
   return (
