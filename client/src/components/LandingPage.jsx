@@ -8,9 +8,9 @@ const LandingPage = () => {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-2xl border border-gray-800 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 px-6 py-10 sm:px-10 sm:py-14">
+      <section className="rounded-2xl border border-gray-800 bg-gray-900 px-6 py-10 sm:px-10 sm:py-14">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-medium border border-blue-500/30 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-xs font-medium border border-blue-800 mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             Personal finance, organized
           </div>
@@ -39,7 +39,7 @@ const LandingPage = () => {
             { icon: BarChart3, title: 'See the trends', body: 'Time charts, category breakdowns, and a chat assistant.' },
             { icon: ShieldCheck, title: 'Your data, your account', body: 'Every transaction is scoped to your signed-in account.' },
           ].map(({ icon: Icon, title, body }) => (
-            <div key={title} className="rounded-lg border border-gray-800 bg-gray-900/40 p-4">
+            <div key={title} className="rounded-lg border border-gray-800 bg-gray-800/50 p-4">
               <Icon className="w-5 h-5 text-blue-400 mb-2" />
               <div className="text-sm font-semibold text-gray-200 mb-1">{title}</div>
               <div className="text-xs text-gray-500 leading-relaxed">{body}</div>
@@ -48,7 +48,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <div className="rounded-lg border border-blue-800/60 bg-blue-900/20 text-blue-200 text-sm px-4 py-3 flex items-center justify-between flex-wrap gap-3">
+      <div className="rounded-lg border border-blue-800 bg-blue-900/20 text-blue-300 text-sm px-4 py-3 flex items-center justify-between flex-wrap gap-3">
         <div>
           <strong className="font-semibold">Preview mode</strong> — these are sample transactions so you can explore the interface.
           Sign in to replace them with your own real data.
