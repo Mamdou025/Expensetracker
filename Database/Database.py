@@ -179,6 +179,25 @@ def create_database():
         ON email_samples(user_id);
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS user_bank_accounts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT NOT NULL,
+            bank_id TEXT NOT NULL,
+            bank_name TEXT NOT NULL,
+            product TEXT,
+            nickname TEXT,
+            ingest_method TEXT DEFAULT 'pdf',
+            status TEXT DEFAULT 'active',
+            settings_json TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_user_bank_accounts_user_id
+        ON user_bank_accounts(user_id);
+    """)
+
     conn.commit()
     conn.close()
     print(f"✅ SQLite database and tables created/migrated successfully at {db_path}!")

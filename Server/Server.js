@@ -531,6 +531,83 @@ async function startServer() {
         });
     });
 
+    // ---------- User bank accounts (per-user connected institutions) ----------
+    app.get('/api/user-bank-accounts', (req, res) => {
+        db.all(
+            `SELECT id, bank_id, bank_name, product, nickname, ingest_method, status, settings_json, created_at
+             FROM user_bank_accounts WHERE user_id = ?
+             ORDER BY datetime(created_at) DESC`,
+            [req.userId],
+            (err, rows) => {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({ accounts: rows.map(r => ({
+                    ...r,
+                    settings: r.settings_json ? JSON.parse(r.settings_json) : null,
+                })) });
+            }
+        );
+    });
+
+    app.post('/api/user-bank-accounts', (req, res) => {
+        const { bank_id, bank_name, product, nickname, ingest_method, settings } = req.body || {};
+        if (!bank_id || !bank_name) {
+            return res.status(400).json({ error: 'bank_id and bank_name are required' });
+        }
+        const method = ingest_method || 'pdf';
+        if (!['pdf', 'email_forward', 'gmail_oauth'].includes(method)) {
+            return res.status(400).json({ error: 'invalid ingest_method' });
+        }
+        db.run(
+            `INSERT INTO user_bank_accounts
+                (user_id, bank_id, bank_name, product, nickname, ingest_method, settings_json)
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [
+                req.userId, bank_id, bank_name,
+                product || null, nickname || null, method,
+                settings ? JSON.stringify(settings) : null,
+            ],
+            function (err) {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({ id: this.lastID });
+            }
+        );
+    });
+
+    app.patch('/api/user-bank-accounts/:id', (req, res) => {
+        const allowed = ['product', 'nickname', 'ingest_method', 'status'];
+        const updates = [], values = [];
+        for (const k of allowed) {
+            if (k in (req.body || {})) { updates.push(`${k} = ?`); values.push(req.body[k]); }
+        }
+        if ('settings' in (req.body || {})) {
+            updates.push('settings_json = ?');
+            values.push(req.body.settings ? JSON.stringify(req.body.settings) : null);
+        }
+        if (!updates.length) return res.status(400).json({ error: 'No fields to update' });
+        values.push(req.params.id, req.userId);
+        db.run(
+            `UPDATE user_bank_accounts SET ${updates.join(', ')} WHERE id = ? AND user_id = ?`,
+            values,
+            function (err) {
+                if (err) return res.status(500).json({ error: err.message });
+                if (!this.changes) return res.status(404).json({ error: 'Account not found' });
+                res.json({ ok: true });
+            }
+        );
+    });
+
+    app.delete('/api/user-bank-accounts/:id', (req, res) => {
+        db.run(
+            `DELETE FROM user_bank_accounts WHERE id = ? AND user_id = ?`,
+            [req.params.id, req.userId],
+            function (err) {
+                if (err) return res.status(500).json({ error: err.message });
+                if (!this.changes) return res.status(404).json({ error: 'Account not found' });
+                res.json({ ok: true });
+            }
+        );
+    });
+
     // ---------- Email samples (forwarded bank emails awaiting a parser) ----------
     app.get('/api/email-samples', (req, res) => {
         db.all(
