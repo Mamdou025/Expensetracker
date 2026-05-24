@@ -524,6 +524,13 @@ async function startServer() {
         },
     });
 
+    app.get('/api/inbox-info', requireOwner, (req, res) => {
+        res.json({
+            address: process.env.EMAIL_USER || null,
+            configured: !!process.env.EMAIL_USER,
+        });
+    });
+
     app.get('/api/pdf-templates', (req, res) => {
         const script = path.join(__dirname, '../Application/api_scripts/list_pdf_templates.py');
         const py = spawn(pythonCmd, [script], { env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
