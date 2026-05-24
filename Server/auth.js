@@ -1,13 +1,14 @@
+const crypto = require('crypto');
 const session = require('express-session');
-const passport = require('passport');
-const memoize = require('memoizee');
 const connectPg = require('connect-pg-simple');
 const { Pool } = require('pg');
-
-let openidClient = null;
-let OpenidStrategy = null;
+const bcrypt = require('bcryptjs');
 
 const OWNER_EMAIL = 'fallmamadou151@gmail.com';
+
+// Precomputed dummy hash used to keep login timing constant whether or not the
+// account exists, preventing user-enumeration via response-time analysis.
+const DUMMY_HASH = bcrypt.hashSync('not-a-real-password-placeholder', 12);
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -23,7 +24,8 @@ async function ensureAuthTables() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
       id VARCHAR PRIMARY KEY,
-      email VARCHAR UNIQUE,
+      email VARCHAR UNIQUE NOT NULL,
+      password_hash VARCHAR,
       first_name VARCHAR,
       last_name VARCHAR,
       profile_image_url VARCHAR,
@@ -31,25 +33,36 @@ async function ensureAuthTables() {
       updated_at TIMESTAMP DEFAULT NOW()
     )
   `);
+  // In case the users table existed from the previous OIDC iteration, add the
+  // password_hash column.
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash VARCHAR`);
 }
 
-async function getUser(id) {
-  const r = await pool.query('SELECT id, email, first_name, last_name, profile_image_url FROM users WHERE id = $1', [id]);
+async function getUserById(id) {
+  const r = await pool.query(
+    'SELECT id, email, first_name, last_name, profile_image_url FROM users WHERE id = $1',
+    [id]
+  );
   return r.rows[0] || null;
 }
 
-async function upsertUser(u) {
-  await pool.query(
-    `INSERT INTO users (id, email, first_name, last_name, profile_image_url, updated_at)
-     VALUES ($1, $2, $3, $4, $5, NOW())
-     ON CONFLICT (id) DO UPDATE SET
-       email = EXCLUDED.email,
-       first_name = EXCLUDED.first_name,
-       last_name = EXCLUDED.last_name,
-       profile_image_url = EXCLUDED.profile_image_url,
-       updated_at = NOW()`,
-    [u.id, u.email || null, u.firstName || null, u.lastName || null, u.profileImageUrl || null]
+async function getUserByEmail(email) {
+  const r = await pool.query(
+    'SELECT id, email, password_hash, first_name, last_name, profile_image_url FROM users WHERE LOWER(email) = LOWER($1)',
+    [email]
   );
+  return r.rows[0] || null;
+}
+
+async function createUser({ email, password, firstName, lastName }) {
+  const id = crypto.randomUUID();
+  const hash = await bcrypt.hash(password, 12);
+  await pool.query(
+    `INSERT INTO users (id, email, password_hash, first_name, last_name)
+     VALUES ($1, $2, $3, $4, $5)`,
+    [id, email, hash, firstName || null, lastName || null]
+  );
+  return { id, email, first_name: firstName || null, last_name: lastName || null };
 }
 
 function claimOwnerRowsIfNeeded(sqliteDb, userId, email) {
@@ -65,22 +78,6 @@ function claimOwnerRowsIfNeeded(sqliteDb, userId, email) {
       if (err) console.error('Owner claim (chat_usage) failed:', err.message);
     });
   });
-}
-
-let _getOidcConfig = null;
-function getOidcConfig() {
-  if (!_getOidcConfig) {
-    _getOidcConfig = memoize(
-      async () => {
-        return await openidClient.discovery(
-          new URL(process.env.ISSUER_URL || 'https://replit.com/oidc'),
-          process.env.REPL_ID
-        );
-      },
-      { maxAge: 3600 * 1000 }
-    );
-  }
-  return _getOidcConfig();
 }
 
 function buildSessionMiddleware() {
@@ -99,153 +96,129 @@ function buildSessionMiddleware() {
     }
     console.warn('⚠️  SESSION_SECRET is not set — using a random ephemeral dev secret. Sessions will not survive restarts.');
   }
-  const effectiveSecret = secret || require('crypto').randomBytes(32).toString('hex');
+  const effectiveSecret = secret || crypto.randomBytes(32).toString('hex');
   return session({
+    name: 'expense.sid',
     secret: effectiveSecret,
     store,
     resave: false,
     saveUninitialized: false,
-    cookie: { httpOnly: true, secure: true, maxAge: ttl, sameSite: 'lax' },
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: ttl,
+      sameSite: 'lax',
+    },
+    proxy: true,
   });
 }
 
-function updateUserSession(user, tokens) {
-  user.claims = tokens.claims();
-  user.access_token = tokens.access_token;
-  user.refresh_token = tokens.refresh_token;
-  user.expires_at = user.claims?.exp;
+function serializeUser(user) {
+  return {
+    id: user.id,
+    email: user.email,
+    firstName: user.first_name || null,
+    lastName: user.last_name || null,
+    profileImageUrl: user.profile_image_url || null,
+    isOwner: (user.email || '').toLowerCase() === OWNER_EMAIL,
+  };
+}
+
+function validEmail(email) {
+  return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 async function setupAuth(app, sqliteDb) {
-  openidClient = await import('openid-client');
-  const passportMod = await import('openid-client/passport');
-  OpenidStrategy = passportMod.Strategy;
-
   await ensureAuthTables();
-
   app.set('trust proxy', 1);
   app.use(buildSessionMiddleware());
-  app.use(passport.initialize());
-  app.use(passport.session());
 
-  const config = await getOidcConfig();
-
-  const verify = async (tokens, verified) => {
+  app.post('/api/auth/register', async (req, res) => {
     try {
-      const user = {};
-      updateUserSession(user, tokens);
-      const claims = tokens.claims();
-      await upsertUser({
-        id: claims.sub,
-        email: claims.email,
-        firstName: claims.first_name,
-        lastName: claims.last_name,
-        profileImageUrl: claims.profile_image_url,
-      });
-      claimOwnerRowsIfNeeded(sqliteDb, claims.sub, claims.email);
-      verified(null, user);
-    } catch (e) {
-      verified(e);
-    }
-  };
-
-  const registered = new Set();
-  const ensureStrategy = (domain) => {
-    const name = `replitauth:${domain}`;
-    if (registered.has(name)) return;
-    const strategy = new OpenidStrategy(
-      {
-        name,
-        config,
-        scope: 'openid email profile offline_access',
-        callbackURL: `https://${domain}/api/callback`,
-      },
-      verify
-    );
-    passport.use(strategy);
-    registered.add(name);
-  };
-
-  passport.serializeUser((user, cb) => cb(null, user));
-  passport.deserializeUser((user, cb) => cb(null, user));
-
-  app.get('/api/login', (req, res, next) => {
-    ensureStrategy(req.hostname);
-    passport.authenticate(`replitauth:${req.hostname}`, {
-      prompt: 'login consent',
-      scope: ['openid', 'email', 'profile', 'offline_access'],
-    })(req, res, next);
-  });
-
-  app.get('/api/callback', (req, res, next) => {
-    ensureStrategy(req.hostname);
-    passport.authenticate(`replitauth:${req.hostname}`, {
-      successReturnToOrRedirect: '/',
-      failureRedirect: '/api/login',
-    })(req, res, next);
-  });
-
-  app.get('/api/logout', (req, res) => {
-    req.logout(() => {
-      try {
-        res.redirect(
-          openidClient.buildEndSessionUrl(config, {
-            client_id: process.env.REPL_ID,
-            post_logout_redirect_uri: `${req.protocol}://${req.hostname}`,
-          }).href
-        );
-      } catch (e) {
-        res.redirect('/');
+      const { email, password, firstName, lastName } = req.body || {};
+      if (!validEmail(email)) return res.status(400).json({ error: 'A valid email is required' });
+      if (typeof password !== 'string' || password.length < 8) {
+        return res.status(400).json({ error: 'Password must be at least 8 characters' });
       }
+      const existing = await getUserByEmail(email);
+      if (existing) return res.status(409).json({ error: 'An account with that email already exists' });
+
+      const user = await createUser({ email: email.trim(), password, firstName, lastName });
+      claimOwnerRowsIfNeeded(sqliteDb, user.id, user.email);
+      req.session.userId = user.id;
+      const fresh = await getUserById(user.id);
+      res.json(serializeUser(fresh));
+    } catch (e) {
+      console.error('Register error:', e);
+      res.status(500).json({ error: 'Failed to create account' });
+    }
+  });
+
+  app.post('/api/auth/login', async (req, res) => {
+    try {
+      const { email, password } = req.body || {};
+      if (!validEmail(email) || typeof password !== 'string' || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+      }
+      const user = await getUserByEmail(email);
+      // Always run bcrypt.compare against either the real hash or a dummy hash
+      // so the response time does not reveal whether the account exists.
+      const hashToCheck = user?.password_hash || DUMMY_HASH;
+      const passwordOk = await bcrypt.compare(password, hashToCheck);
+      if (!user || !user.password_hash || !passwordOk) {
+        return res.status(401).json({ error: 'Incorrect email or password' });
+      }
+
+      claimOwnerRowsIfNeeded(sqliteDb, user.id, user.email);
+      req.session.userId = user.id;
+      res.json(serializeUser(user));
+    } catch (e) {
+      console.error('Login error:', e);
+      res.status(500).json({ error: 'Login failed' });
+    }
+  });
+
+  app.post('/api/auth/logout', (req, res) => {
+    req.session.destroy(() => {
+      res.clearCookie('expense.sid');
+      res.json({ ok: true });
     });
   });
 
   app.get('/api/auth/user', async (req, res) => {
-    if (!req.isAuthenticated || !req.isAuthenticated() || !req.user?.claims) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
+    if (!req.session?.userId) return res.status(401).json({ message: 'Unauthorized' });
     try {
-      const user = await getUser(req.user.claims.sub);
-      if (!user) return res.status(404).json({ message: 'User not found' });
-      res.json({
-        id: user.id,
-        email: user.email,
-        firstName: user.first_name,
-        lastName: user.last_name,
-        profileImageUrl: user.profile_image_url,
-        isOwner: (user.email || '').toLowerCase() === OWNER_EMAIL,
-      });
+      const user = await getUserById(req.session.userId);
+      if (!user) {
+        req.session.destroy(() => {});
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      res.json(serializeUser(user));
     } catch (e) {
       res.status(500).json({ message: 'Failed to fetch user' });
     }
   });
 }
 
-const requireAuth = async (req, res, next) => {
-  const user = req.user;
-  if (!req.isAuthenticated || !req.isAuthenticated() || !user?.expires_at) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  const now = Math.floor(Date.now() / 1000);
-  if (now <= user.expires_at) {
-    req.userId = user.claims.sub;
-    req.userEmail = user.claims.email;
-    req.isOwner = (user.claims.email || '').toLowerCase() === OWNER_EMAIL;
+const requireAuth = (req, res, next) => {
+  if (!req.session?.userId) return res.status(401).json({ error: 'Unauthorized' });
+  req.userId = req.session.userId;
+  // We populate email/owner from the session lazily — but the rest of the app
+  // only really needs it for the owner check, which is cheap to fetch.
+  if (req.session.userEmail) {
+    req.userEmail = req.session.userEmail;
+    req.isOwner = (req.userEmail || '').toLowerCase() === OWNER_EMAIL;
     return next();
   }
-  const refreshToken = user.refresh_token;
-  if (!refreshToken) return res.status(401).json({ error: 'Unauthorized' });
-  try {
-    const config = await getOidcConfig();
-    const tokenResponse = await openidClient.refreshTokenGrant(config, refreshToken);
-    updateUserSession(user, tokenResponse);
-    req.userId = user.claims.sub;
-    req.userEmail = user.claims.email;
-    req.isOwner = (user.claims.email || '').toLowerCase() === OWNER_EMAIL;
-    return next();
-  } catch (e) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  getUserById(req.userId)
+    .then((u) => {
+      if (!u) return res.status(401).json({ error: 'Unauthorized' });
+      req.userEmail = u.email;
+      req.isOwner = (u.email || '').toLowerCase() === OWNER_EMAIL;
+      req.session.userEmail = u.email;
+      next();
+    })
+    .catch(() => res.status(500).json({ error: 'Auth lookup failed' }));
 };
 
 const requireOwner = (req, res, next) => {

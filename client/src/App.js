@@ -12,19 +12,12 @@ import LandingPage from './components/LandingPage';
 import './index.css';
 
 const ProtectedRoute = ({ children, ownerOnly = false }) => {
-  const { isAuthenticated, isLoading, isOwner, login } = useAuth();
+  const { isAuthenticated, isLoading, isOwner } = useAuth();
   if (isLoading) {
     return <div className="text-center text-sm text-gray-400 py-16">Loading…</div>;
   }
   if (!isAuthenticated) {
-    return (
-      <div className="text-center py-16">
-        <p className="text-gray-300 mb-4">Please sign in to use this page.</p>
-        <button onClick={login} className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium">
-          Sign in
-        </button>
-      </div>
-    );
+    return <LandingPage />;
   }
   if (ownerOnly && !isOwner) {
     return (

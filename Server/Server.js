@@ -35,7 +35,10 @@ function childEnvForUser(userId) {
 process.env.SQLITE_PATH = dbPath;
 ensureSqliteDirectory(dbPath);
 
-app.use(cors());
+app.use(cors({
+  origin: (origin, cb) => cb(null, origin || true),
+  credentials: true,
+}));
 app.use(express.json({ limit: '10mb' }));
 
 const db = new sqlite3.Database(dbPath, (err) => {

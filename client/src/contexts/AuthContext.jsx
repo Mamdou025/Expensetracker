@@ -17,6 +17,22 @@ const API_BASE = (() => {
   return '';
 })();
 
+const apiCall = async (path, options = {}) => {
+  const res = await fetch(`${API_BASE}${path}`, {
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+    ...options,
+  });
+  let data = {};
+  try { data = await res.json(); } catch (_) { data = {}; }
+  if (!res.ok) {
+    const err = new Error(data.error || data.message || `Request failed (${res.status})`);
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,13 +40,8 @@ export const AuthProvider = ({ children }) => {
   const refresh = useCallback(async () => {
     try {
       const res = await fetch(`${API_BASE}/api/auth/user`, { credentials: 'include' });
-      if (res.status === 401) {
-        setUser(null);
-      } else if (res.ok) {
-        setUser(await res.json());
-      } else {
-        setUser(null);
-      }
+      if (res.ok) setUser(await res.json());
+      else setUser(null);
     } catch (e) {
       setUser(null);
     } finally {
@@ -46,6 +57,26 @@ export const AuthProvider = ({ children }) => {
     return () => window.removeEventListener('app:unauthorized', onUnauth);
   }, []);
 
+  const login = useCallback(async (email, password) => {
+    const u = await apiCall('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+    setUser(u);
+    return u;
+  }, []);
+
+  const register = useCallback(async ({ email, password, firstName, lastName }) => {
+    const u = await apiCall('/api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ email, password, firstName, lastName }),
+    });
+    setUser(u);
+    return u;
+  }, []);
+
+  const logout = useCallback(async () => {
+    try { await apiCall('/api/auth/logout', { method: 'POST' }); } catch (_) {}
+    setUser(null);
+  }, []);
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -53,8 +84,9 @@ export const AuthProvider = ({ children }) => {
       isOwner: !!user?.isOwner,
       isLoading,
       refresh,
-      login: () => { window.location.href = `${API_BASE}/api/login`; },
-      logout: () => { window.location.href = `${API_BASE}/api/logout`; },
+      login,
+      register,
+      logout,
     }}>
       {children}
     </AuthContext.Provider>
