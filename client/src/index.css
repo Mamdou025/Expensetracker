@@ -56,16 +56,19 @@ code {
 .light .bg-gray-950 { background-color: #f9fafb !important; }
 .light .bg-gray-900 { background-color: #ffffff !important; }
 .light .bg-gray-800 { background-color: #f3f4f6 !important; }
-.light .bg-gray-800\/50 { background-color: rgba(243, 244, 246, 0.5) !important; }
-.light .bg-gray-800\/80 { background-color: rgba(243, 244, 246, 0.8) !important; }
+.light .bg-gray-800\/30 { background-color: rgba(243, 244, 246, 0.6) !important; }
+.light .bg-gray-800\/40 { background-color: rgba(243, 244, 246, 0.7) !important; }
+.light .bg-gray-800\/50 { background-color: rgba(243, 244, 246, 0.7) !important; }
+.light .bg-gray-800\/60 { background-color: rgba(243, 244, 246, 0.8) !important; }
+.light .bg-gray-800\/80 { background-color: rgba(243, 244, 246, 0.9) !important; }
 .light .bg-gray-700 { background-color: #e5e7eb !important; }
 .light .bg-gray-100 { background-color: #f3f4f6 !important; }
 
-.light .text-gray-100 { color: #111827 !important; }
+.light .text-gray-100 { color: #0f172a !important; }
 .light .text-gray-200 { color: #1f2937 !important; }
 .light .text-gray-300 { color: #374151 !important; }
-.light .text-gray-400 { color: #6b7280 !important; }
-.light .text-gray-500 { color: #9ca3af !important; }
+.light .text-gray-400 { color: #4b5563 !important; }
+.light .text-gray-500 { color: #6b7280 !important; }
 .light .text-gray-600 { color: #4b5563 !important; }
 .light .text-gray-900 { color: #111827 !important; }
 
