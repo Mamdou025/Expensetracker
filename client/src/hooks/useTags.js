@@ -2,14 +2,16 @@
 import { useState, useEffect } from 'react';
 import { tagService } from '../Services/tagService';
 
-export const useTags = () => {
+export const useTags = ({ enabled = true } = {}) => {
   const [tags, setTags] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!enabled) { setLoading(false); return; }
     loadTags();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled]);
 
   const loadTags = async () => {
     try {

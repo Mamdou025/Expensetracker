@@ -1,20 +1,27 @@
 import logging
+import os
 
 try:
     from db_config import connect_db
 except ImportError:
     from Database.db_config import connect_db
 
-# Configure logging if not already done
 if not logging.getLogger().handlers:
     logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
+def _resolve_user_id(ordered_data):
+    return (
+        ordered_data.get("user_id")
+        or os.environ.get("APP_USER_ID")
+        or None
+    )
+
+
 def normalize_tags(tags):
-    """Normalize tags to a de-duplicated list of strings."""
     if tags is None:
         return []
-
     if isinstance(tags, str):
         values = tags.split(",")
     elif isinstance(tags, list):
@@ -24,7 +31,6 @@ def normalize_tags(tags):
                 values.extend(item.split(","))
     else:
         return []
-
     normalized = []
     seen = set()
     for tag in values:
@@ -34,14 +40,16 @@ def normalize_tags(tags):
             normalized.append(cleaned)
     return normalized
 
-def apply_keyword_rules(cursor, description, category, tags):
-    """Apply keyword-based rules to set category and tags and return matched rules."""
+
+def apply_keyword_rules(cursor, description, category, tags, user_id):
+    """Apply user's keyword rules (scoped to user_id) to determine category/tags."""
     cursor.execute(
         """
         SELECT keyword, category, tags FROM keyword_rules
-        WHERE ? LIKE '%' || keyword || '%' COLLATE NOCASE
+        WHERE user_id IS ?
+          AND ? LIKE '%' || keyword || '%' COLLATE NOCASE
         """,
-        (description,),
+        (user_id, description),
     )
 
     tag_set = set(tags)
@@ -65,25 +73,20 @@ def apply_keyword_rules(cursor, description, category, tags):
 
     return final_category, list(tag_set), matched_rules
 
+
 def insert_transaction(ordered_data):
-    """
-    Inserts a transaction into the database and associates it with relevant tags.
-    """
     conn = connect_db()
     cursor = conn.cursor()
 
     try:
-        # ✅ Convert amount to float before inserting
         amount = float(ordered_data["amount"])
-
-        # ✅ Assign a category (if not provided, default to 'Uncategorized')
         category = ordered_data.get("category", "Uncategorized")
-
-        # ✅ Apply keyword rules for automatic category and tags
         card_type = ordered_data.get("card_type") or ordered_data.get("card type")
         tags = normalize_tags(ordered_data.get("tags", []))
+        user_id = _resolve_user_id(ordered_data)
+
         category, tags, matched_rules = apply_keyword_rules(
-            cursor, ordered_data["description"], category, tags
+            cursor, ordered_data["description"], category, tags, user_id
         )
         source_type = ordered_data.get("source_type", "manual")
         source_ref = ordered_data.get("source_ref")
@@ -99,9 +102,9 @@ def insert_transaction(ordered_data):
             INSERT INTO transactions (
                 amount, description, card_type, date, time, bank, full_email, category,
                 source_type, source_ref, raw_description, normalized_merchant,
-                duplicate_status, duplicate_group_id, transaction_type
+                duplicate_status, duplicate_group_id, transaction_type, user_id
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             amount,
             raw_desc,
@@ -118,21 +121,19 @@ def insert_transaction(ordered_data):
             duplicate_status,
             duplicate_group_id,
             transaction_type,
+            user_id,
         ))
 
-        # ✅ Get the inserted transaction ID
         transaction_id = cursor.lastrowid
 
-        # ✅ Insert tags and associate them with the transaction
         for tag in tags:
-            cursor.execute("INSERT OR IGNORE INTO tags (tag_name) VALUES (?)", (tag,))  # Ensure tag exists
-
-            # Retrieve tag ID
+            cursor.execute("INSERT OR IGNORE INTO tags (tag_name) VALUES (?)", (tag,))
             cursor.execute("SELECT id FROM tags WHERE tag_name = ?", (tag,))
             tag_id = cursor.fetchone()[0]
-
-            # Link transaction to tag
-            cursor.execute("INSERT INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)", (transaction_id, tag_id))
+            cursor.execute(
+                "INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)",
+                (transaction_id, tag_id),
+            )
 
         conn.commit()
         logger.info("Transaction saved: %s", ordered_data)
@@ -144,18 +145,17 @@ def insert_transaction(ordered_data):
             "applied_rules": matched_rules,
             "source_type": source_type,
             "source_ref": source_ref,
+            "user_id": user_id,
         }
 
     except ValueError:
         logger.error("Amount '%s' is not a valid number.", ordered_data['amount'])
-        return {
-            "error": f"Invalid amount: {ordered_data['amount']}"
-        }
+        return {"error": f"Invalid amount: {ordered_data['amount']}"}
 
     finally:
         conn.close()
 
-# ✅ Example usage:
+
 if __name__ == "__main__":
     sample_transaction = {
         "amount": 74.99,
@@ -166,7 +166,6 @@ if __name__ == "__main__":
         "bank": "MBNA",
         "full_email": None,
         "category": "Food",
-        "tags": ["Food", "Food Ordering"]
+        "tags": ["Food", "Food Ordering"],
     }
-
     insert_transaction(sample_transaction)
