@@ -531,6 +531,95 @@ async function startServer() {
         });
     });
 
+    // ---------- Email samples (forwarded bank emails awaiting a parser) ----------
+    app.get('/api/email-samples', (req, res) => {
+        db.all(
+            `SELECT id, bank_name, sender, subject, received_at, status,
+                    LENGTH(body_text) AS body_text_length,
+                    LENGTH(body_html) AS body_html_length,
+                    created_at
+             FROM email_samples WHERE user_id = ?
+             ORDER BY datetime(COALESCE(received_at, created_at)) DESC`,
+            [req.userId],
+            (err, rows) => {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({ samples: rows });
+            }
+        );
+    });
+
+    app.get('/api/email-samples/:id', (req, res) => {
+        db.get(
+            `SELECT * FROM email_samples WHERE id = ? AND user_id = ?`,
+            [req.params.id, req.userId],
+            (err, row) => {
+                if (err) return res.status(500).json({ error: err.message });
+                if (!row) return res.status(404).json({ error: 'Sample not found' });
+                res.json(row);
+            }
+        );
+    });
+
+    app.post('/api/email-samples', (req, res) => {
+        const { bank_name, sender, subject, received_at, body_text, body_html, notes } = req.body || {};
+        if (!body_text && !body_html) {
+            return res.status(400).json({ error: 'Provide at least body_text or body_html' });
+        }
+        db.run(
+            `INSERT INTO email_samples
+                (user_id, bank_name, sender, subject, received_at, body_text, body_html, notes)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+                req.userId,
+                bank_name || null,
+                sender || null,
+                subject || null,
+                received_at || null,
+                body_text || null,
+                body_html || null,
+                notes || null,
+            ],
+            function (err) {
+                if (err) return res.status(500).json({ error: err.message });
+                res.json({ id: this.lastID });
+            }
+        );
+    });
+
+    app.patch('/api/email-samples/:id', (req, res) => {
+        const allowed = ['bank_name', 'sender', 'subject', 'received_at', 'status', 'notes'];
+        const updates = [], values = [];
+        for (const k of allowed) {
+            if (k in (req.body || {})) {
+                updates.push(`${k} = ?`);
+                values.push(req.body[k]);
+            }
+        }
+        if (!updates.length) return res.status(400).json({ error: 'No fields to update' });
+        values.push(req.params.id, req.userId);
+        db.run(
+            `UPDATE email_samples SET ${updates.join(', ')} WHERE id = ? AND user_id = ?`,
+            values,
+            function (err) {
+                if (err) return res.status(500).json({ error: err.message });
+                if (!this.changes) return res.status(404).json({ error: 'Sample not found' });
+                res.json({ ok: true });
+            }
+        );
+    });
+
+    app.delete('/api/email-samples/:id', (req, res) => {
+        db.run(
+            `DELETE FROM email_samples WHERE id = ? AND user_id = ?`,
+            [req.params.id, req.userId],
+            function (err) {
+                if (err) return res.status(500).json({ error: err.message });
+                if (!this.changes) return res.status(404).json({ error: 'Sample not found' });
+                res.json({ ok: true });
+            }
+        );
+    });
+
     app.get('/api/pdf-templates', (req, res) => {
         const script = path.join(__dirname, '../Application/api_scripts/list_pdf_templates.py');
         const py = spawn(pythonCmd, [script], { env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });

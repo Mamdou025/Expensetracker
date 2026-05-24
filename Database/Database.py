@@ -159,6 +159,26 @@ def create_database():
 
     _ensure_chat_usage_user_id(cursor)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS email_samples (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT NOT NULL,
+            bank_name TEXT,
+            sender TEXT,
+            subject TEXT,
+            received_at TEXT,
+            body_text TEXT,
+            body_html TEXT,
+            status TEXT DEFAULT 'pending',
+            notes TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_email_samples_user_id
+        ON email_samples(user_id);
+    """)
+
     conn.commit()
     conn.close()
     print(f"✅ SQLite database and tables created/migrated successfully at {db_path}!")
