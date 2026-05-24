@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Mail, FileUp, Building2, MessageCircle, Sun, Moon, LogOut } from 'lucide-react';
@@ -25,6 +25,23 @@ const Header = () => {
 
   const displayName = user?.firstName || user?.email || '';
   const initial = (displayName || '?').trim().charAt(0).toUpperCase();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const onClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+    };
+    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
+    document.addEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
 
   return (
     <header className="mb-6 border-b border-gray-800 pb-4">
@@ -58,21 +75,45 @@ const Header = () => {
           </button>
 
           {!isLoading && isAuthenticated && (
-            <div className="flex items-center gap-2 pl-2 ml-1 border-l border-gray-800">
-              {user?.profileImageUrl ? (
-                <img src={user.profileImageUrl} alt="" className="w-7 h-7 rounded-full" />
-              ) : (
-                <div className="w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-semibold flex items-center justify-center">
-                  {initial}
+            <div ref={menuRef} className="relative pl-2 ml-1 border-l border-gray-800">
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                title={user?.email || ''}
+                aria-haspopup="menu"
+                aria-expanded={menuOpen}
+              >
+                {user?.profileImageUrl ? (
+                  <img src={user.profileImageUrl} alt="" className="w-7 h-7 rounded-full" />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-semibold flex items-center justify-center">
+                    {initial}
+                  </div>
+                )}
+              </button>
+
+              {menuOpen && (
+                <div
+                  role="menu"
+                  className="absolute right-0 mt-2 w-56 rounded-lg border border-gray-800 bg-gray-900 shadow-lg py-1 z-50"
+                >
+                  {user?.email && (
+                    <div className="px-3 py-2 border-b border-gray-800">
+                      <div className="text-xs text-gray-500">Signed in as</div>
+                      <div className="text-sm text-gray-200 truncate" title={user.email}>{user.email}</div>
+                    </div>
+                  )}
+                  <button
+                    role="menuitem"
+                    onClick={() => { setMenuOpen(false); logout(); }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-gray-100 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign out
+                  </button>
                 </div>
               )}
-              <button
-                onClick={logout}
-                className="p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors"
-                title="Sign out"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
             </div>
           )}
         </div>
