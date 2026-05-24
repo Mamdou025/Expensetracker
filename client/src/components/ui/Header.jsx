@@ -66,9 +66,6 @@ const Header = () => {
                   {initial}
                 </div>
               )}
-              <span className="hidden md:inline text-xs text-gray-400 max-w-[140px] truncate" title={user?.email}>
-                {displayName}
-              </span>
               <button
                 onClick={logout}
                 className="p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors"
