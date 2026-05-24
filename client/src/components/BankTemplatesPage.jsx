@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { apiClient } from '../Services/api';
 import { useAuth } from '../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 import {
   Building2, Mail, Copy, Check, Loader2, AlertCircle, Plus, Inbox,
-  ChevronRight, X, Trash2, Wand2,
+  ChevronRight, X, Trash2, Wand2, ArrowRight,
 } from 'lucide-react';
 
 const BANK_DOMAINS = {
@@ -353,38 +354,21 @@ const BankTemplatesPage = () => {
             ))}
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-lg p-5 mb-6">
-            <div className="flex items-start gap-3 mb-4">
-              <div className="rounded-lg bg-blue-600/20 text-blue-300 p-2 border border-blue-800"><Plus size={18} /></div>
-              <div>
-                <h3 className="text-base font-semibold text-gray-100">Add a new bank</h3>
+          <Link to="/accounts"
+            className="block bg-gray-900 border border-gray-800 hover:border-blue-600 hover:bg-gray-900/80 rounded-lg p-5 mb-6 transition-colors group">
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-blue-600/20 text-blue-300 p-2 border border-blue-800 shrink-0"><Plus size={18} /></div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-base font-semibold text-gray-100 flex items-center gap-2">
+                  Add a new bank
+                  <ArrowRight size={14} className="text-gray-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
+                </h3>
                 <p className="text-sm text-gray-400 mt-0.5">
-                  Forward a single transaction email from the bank to the address below. It'll show up in the samples list and you can build a parser from it.
+                  Connect a bank or credit card from the <span className="text-blue-300">My banks</span> page. Choose to upload PDF statements or forward transaction emails to your private address.
                 </p>
               </div>
             </div>
-
-            {isOwner ? (
-              inbox?.address ? (
-                <div className="flex items-center gap-2 bg-gray-800 border border-gray-700 rounded-md px-3 py-2">
-                  <Mail size={16} className="text-gray-400 shrink-0" />
-                  <code className="flex-1 text-sm text-gray-100 font-mono truncate">{inbox.address}</code>
-                  <button onClick={copyAddress}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-gray-700 hover:bg-gray-600 text-gray-100 transition-colors">
-                    {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}
-                  </button>
-                </div>
-              ) : (
-                <div className="text-sm text-amber-300 bg-amber-900/20 border border-amber-800 rounded-md px-3 py-2">
-                  No inbox address is configured yet. Set the <code className="font-mono">EMAIL_USER</code> secret to enable email forwarding.
-                </div>
-              )
-            ) : (
-              <div className="text-sm text-gray-400 bg-gray-800/50 border border-gray-800 rounded-md px-3 py-2">
-                Ask the workspace owner for the forwarding address.
-              </div>
-            )}
-          </div>
+          </Link>
 
           <div className="bg-gray-900 border border-gray-800 rounded-lg p-5">
             <div className="flex items-center justify-between mb-3">
