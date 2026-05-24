@@ -55,14 +55,14 @@ const EditableTransactionRow = ({
             <button
               onClick={() => onSaveEdit(transaction, 'description')}
               className="px-2 py-1 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-900/30 rounded"
-              title="Save"
+              title="Enregistrer"
             >
               ✓
             </button>
             <button
               onClick={onCancelEdit}
               className="px-2 py-1 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded"
-              title="Cancel"
+              title="Annuler"
             >
               ✕
             </button>
@@ -92,14 +92,14 @@ const EditableTransactionRow = ({
             <button
               onClick={() => onSaveEdit(transaction, 'amount')}
               className="px-2 py-1 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-900/30 rounded"
-              title="Save"
+              title="Enregistrer"
             >
               ✓
             </button>
             <button
               onClick={onCancelEdit}
               className="px-2 py-1 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded"
-              title="Cancel"
+              title="Annuler"
             >
               ✕
             </button>
@@ -126,11 +126,11 @@ const EditableTransactionRow = ({
               className="border border-gray-600 rounded-md px-3 py-2 text-sm bg-gray-800 text-gray-200 focus:ring-1 focus:ring-gray-500"
               autoFocus={!editValues.isAddingNew}
             >
-              <option value="">Select category</option>
+              <option value="">Choisir une catégorie</option>
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
-              <option value="__ADD_NEW__">+ Add New Category</option>
+              <option value="__ADD_NEW__">+ Nouvelle catégorie</option>
             </select>
 
             {editValues.isAddingNew && (
@@ -138,7 +138,7 @@ const EditableTransactionRow = ({
                 type="text"
                 value={editValues.category || ''}
                 onChange={(e) => setEditValues(prev => ({ ...prev, category: e.target.value }))}
-                placeholder="Enter new category name"
+                placeholder="Nom de la nouvelle catégorie"
                 className="border border-gray-600 rounded-md px-3 py-2 text-sm bg-gray-800 text-gray-200 focus:ring-1 focus:ring-gray-500"
                 autoFocus
                 onKeyDown={(e) => {
@@ -154,14 +154,14 @@ const EditableTransactionRow = ({
               onClick={() => onSaveEdit(transaction, 'category')}
               disabled={editValues.isAddingNew && !editValues.category?.trim()}
               className="px-2 py-1 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-900/30 rounded disabled:opacity-50"
-              title="Save"
+              title="Enregistrer"
             >
               ✓
             </button>
             <button
               onClick={onCancelEdit}
               className="px-2 py-1 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded"
-              title="Cancel"
+              title="Annuler"
             >
               ✕
             </button>
@@ -179,7 +179,7 @@ const EditableTransactionRow = ({
               };
             })() : { backgroundColor: 'rgba(239,68,68,0.15)', color: '#f87171' }}
           >
-            {transaction.category || 'No Category'}
+            {transaction.category || 'Sans catégorie'}
           </span>
         )}
       </td>
@@ -200,7 +200,7 @@ const EditableTransactionRow = ({
           ))}
           {(!Array.isArray(transaction.tags) || transaction.tags.length === 0) && (
             <span className="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-600">
-              No tags
+              Aucun tag
             </span>
           )}
         </div>
@@ -273,7 +273,7 @@ const TransactionTable = ({
             {t('transactionTable.transactions')} ({filteredTransactions.length})
             {editingTransaction && (
               <span className="ml-2 text-sm text-blue-400 bg-blue-900/30 px-2 py-1 rounded">
-                Editing
+                Modification
               </span>
             )}
           </h3>
@@ -356,8 +356,8 @@ const TransactionTable = ({
 
       <div className="px-4 py-3 border-t border-gray-800 flex justify-between items-center">
         <div className="text-sm text-gray-500">
-          Showing {Math.min((currentPage - 1) * itemsPerPage + 1, filteredTransactions.length)} to{' '}
-          {Math.min(currentPage * itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} results
+          Affichage de {Math.min((currentPage - 1) * itemsPerPage + 1, filteredTransactions.length)} à{' '}
+          {Math.min(currentPage * itemsPerPage, filteredTransactions.length)} sur {filteredTransactions.length} résultats
         </div>
         <div className="flex gap-3">
           <button
@@ -365,14 +365,14 @@ const TransactionTable = ({
             disabled={currentPage === 1}
             className="px-3 py-1.5 border border-gray-700 rounded-md text-sm text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-800 transition-colors"
           >
-            Previous
+            Précédent
           </button>
           <button
             onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage >= totalPages}
             className="px-3 py-1.5 border border-gray-700 rounded-md text-sm text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-800 transition-colors"
           >
-            Next
+            Suivant
           </button>
         </div>
       </div>

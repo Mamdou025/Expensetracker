@@ -28,6 +28,7 @@ const CATEGORY_COLORS = {
   'Home Improvement':    '#FBBF24',
   'Miscellaneous':       '#94A3B8',
   'Uncategorized':       '#64748B',
+  'Sans catégorie':      '#64748B',
 };
 
 const FALLBACK_COLORS = [

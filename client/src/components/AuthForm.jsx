@@ -25,7 +25,7 @@ const AuthForm = ({ initialMode = 'login', onSuccess }) => {
       }
       if (onSuccess) onSuccess();
     } catch (err) {
-      setError(err.message || 'Something went wrong');
+      setError(err.message || "Une erreur s'est produite");
     } finally {
       setSubmitting(false);
     }
@@ -41,7 +41,7 @@ const AuthForm = ({ initialMode = 'login', onSuccess }) => {
             !isRegister ? 'nav-active' : 'text-gray-400 hover:text-gray-200'
           }`}
         >
-          Sign in
+          Se connecter
         </button>
         <button
           type="button"
@@ -50,27 +50,27 @@ const AuthForm = ({ initialMode = 'login', onSuccess }) => {
             isRegister ? 'nav-active' : 'text-gray-400 hover:text-gray-200'
           }`}
         >
-          Create account
+          Créer un compte
         </button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
         {isRegister && (
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1">Name (optional)</label>
+            <label className="block text-xs font-medium text-gray-400 mb-1">Nom (facultatif)</label>
             <input
               type="text"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               autoComplete="given-name"
               className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Your name"
+              placeholder="Votre nom"
             />
           </div>
         )}
 
         <div>
-          <label className="block text-xs font-medium text-gray-400 mb-1">Email</label>
+          <label className="block text-xs font-medium text-gray-400 mb-1">Courriel</label>
           <input
             type="email"
             value={email}
@@ -78,13 +78,13 @@ const AuthForm = ({ initialMode = 'login', onSuccess }) => {
             required
             autoComplete="email"
             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="you@example.com"
+            placeholder="vous@exemple.com"
           />
         </div>
 
         <div>
           <label className="block text-xs font-medium text-gray-400 mb-1">
-            Password {isRegister && <span className="text-gray-500 font-normal">(min 8 characters)</span>}
+            Mot de passe {isRegister && <span className="text-gray-500 font-normal">(min. 8 caractères)</span>}
           </label>
           <input
             type="password"
@@ -117,8 +117,8 @@ const AuthForm = ({ initialMode = 'login', onSuccess }) => {
             <LogIn className="w-4 h-4" />
           )}
           {submitting
-            ? (isRegister ? 'Creating account…' : 'Signing in…')
-            : (isRegister ? 'Create account' : 'Sign in')}
+            ? (isRegister ? 'Création du compte…' : 'Connexion…')
+            : (isRegister ? 'Créer un compte' : 'Se connecter')}
         </button>
       </form>
     </div>

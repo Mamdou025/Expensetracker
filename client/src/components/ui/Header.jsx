@@ -14,7 +14,7 @@ const Header = () => {
 
   const navItems = [
     { path: '/', label: t('navigation.dashboard'), icon: LayoutDashboard, requiresAuth: false },
-    { path: '/accounts', label: 'My banks', icon: Wallet, requiresAuth: true },
+    { path: '/accounts', label: 'Mes banques', icon: Wallet, requiresAuth: true },
     { path: '/pdf-import', label: t('navigation.pdfImport'), icon: FileUp, requiresAuth: true },
     { path: '/email-extraction', label: t('navigation.emailExtraction'), icon: Mail, requiresAuth: true, ownerOnly: true },
     { path: '/chat', label: t('navigation.chat'), icon: MessageCircle, requiresAuth: true },
@@ -49,7 +49,7 @@ const Header = () => {
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <Link
           to="/"
-          aria-label="exptrackr — home"
+          aria-label="exptrackr — accueil"
           className="flex items-baseline gap-3 hover:opacity-90 transition-opacity"
         >
           <Logo size="lg" />
@@ -76,7 +76,7 @@ const Header = () => {
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors"
-            title={theme === 'dark' ? t('header.lightMode', 'Light mode') : t('header.darkMode', 'Dark mode')}
+            title={theme === 'dark' ? t('header.lightMode', 'Mode clair') : t('header.darkMode', 'Mode sombre')}
           >
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
@@ -107,7 +107,7 @@ const Header = () => {
                 >
                   {user?.email && (
                     <div className="px-3 py-2 border-b border-gray-800">
-                      <div className="text-xs text-gray-500">Signed in as</div>
+                      <div className="text-xs text-gray-500">Connecté en tant que</div>
                       <div className="text-sm text-gray-200 truncate" title={user.email}>{user.email}</div>
                     </div>
                   )}
@@ -117,7 +117,7 @@ const Header = () => {
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-gray-100 transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
-                    Sign out
+                    Se déconnecter
                   </button>
                 </div>
               )}
