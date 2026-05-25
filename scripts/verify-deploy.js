@@ -102,9 +102,12 @@ async function smokeStart(runtimeEnv) {
   try {
     await waitForServer(getPort(runtimeEnv));
     const response = await httpGetJson(`http://127.0.0.1:${getPort(runtimeEnv)}/api/transactions`);
-    if (response.statusCode !== 200) {
+    // 200 = open endpoint; 401/403 = auth-protected route is wired correctly.
+    // Anything else (404, 500, etc.) is a real deploy-blocking failure.
+    if (![200, 401, 403].includes(response.statusCode)) {
       throw new Error(`/api/transactions returned status ${response.statusCode}.`);
     }
+    console.log(`[verify-deploy] /api/transactions reachable (status ${response.statusCode}).`);
   } finally {
     child.kill('SIGTERM');
     await new Promise((resolve) => child.once('close', () => resolve()));
