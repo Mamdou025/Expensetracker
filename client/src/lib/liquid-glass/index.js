@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useId, useRef, useState } fr
 import { ShaderDisplacementGenerator, fragmentShaders } from "./shader-utils"
 import { displacementMap, polarDisplacementMap, prominentDisplacementMap } from "./utils"
 
-const _jsxFileName = "/tmp/lg-out/index.tsx"; function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+const _jsxFileName = "/tmp/lg-src/index.tsx"; function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
 
 // Generate shader-based displacement map using shaderUtils
 const generateShaderDisplacementMap = (width, height) => {
@@ -267,7 +267,6 @@ GlassContainer.displayName = "GlassContainer"
 
 
 
-
 export default function LiquidGlass({
   children,
   displacementScale = 70,
@@ -459,110 +458,26 @@ export default function LiquidGlass({
     left: baseStyle.left || "50%",
   }
 
-  const borderGradient1 = `linear-gradient(
-    ${135 + mouseOffset.x * 1.2}deg,
-    rgba(255, 255, 255, 0.0) 0%,
-    rgba(255, 255, 255, ${0.12 + Math.abs(mouseOffset.x) * 0.008}) ${Math.max(10, 33 + mouseOffset.y * 0.3)}%,
-    rgba(255, 255, 255, ${0.4 + Math.abs(mouseOffset.x) * 0.012}) ${Math.min(90, 66 + mouseOffset.y * 0.4)}%,
-    rgba(255, 255, 255, 0.0) 100%
-  )`
-
-  const borderGradient2 = `linear-gradient(
-    ${135 + mouseOffset.x * 1.2}deg,
-    rgba(255, 255, 255, 0.0) 0%,
-    rgba(255, 255, 255, ${0.32 + Math.abs(mouseOffset.x) * 0.008}) ${Math.max(10, 33 + mouseOffset.y * 0.3)}%,
-    rgba(255, 255, 255, ${0.6 + Math.abs(mouseOffset.x) * 0.012}) ${Math.min(90, 66 + mouseOffset.y * 0.4)}%,
-    rgba(255, 255, 255, 0.0) 100%
-  )`
-
-  const sharedBorderStyles = {
-    pointerEvents: "none",
-    padding: "1.5px",
-    borderRadius: `${cornerRadius}px`,
-    WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-    WebkitMaskComposite: "xor",
-    maskComposite: "exclude",
-    boxShadow: "0 0 0 0.5px rgba(255, 255, 255, 0.5) inset, 0 1px 3px rgba(255, 255, 255, 0.25) inset, 0 1px 4px rgba(0, 0, 0, 0.35)",
-    transition: "all ease-out 0.2s",
-  }
-
   if (noFloat) {
-    return (
-      React.createElement('div', {
-        className: className,
-        style: { position: "relative", display: "inline-block", ...style },
-        onClick: onClick, __self: this, __source: {fileName: _jsxFileName, lineNumber: 489}}
-
-        , React.createElement(GlassContainer, {
-          ref: glassRef,
-          style: { width: "100%", transition: "all ease-out 0.2s", cursor: onClick ? "pointer" : undefined },
-          cornerRadius: cornerRadius,
-          displacementScale: overLight ? displacementScale * 0.5 : displacementScale,
-          blurAmount: blurAmount,
-          saturation: saturation,
-          aberrationIntensity: aberrationIntensity,
-          glassSize: glassSize,
-          padding: padding,
-          mouseOffset: mouseOffset,
-          onMouseEnter: () => setIsHovered(true),
-          onMouseLeave: () => setIsHovered(false),
-          onMouseDown: () => setIsActive(true),
-          onMouseUp: () => setIsActive(false),
-          active: isActive,
-          overLight: overLight,
-          mode: mode, __self: this, __source: {fileName: _jsxFileName, lineNumber: 494}}
-
-          , children
-        )
-        , React.createElement('span', {
-          style: {
-            ...sharedBorderStyles,
-            position: "absolute",
-            inset: 0,
-            mixBlendMode: "screen",
-            opacity: 0.2,
-            background: borderGradient1,
-          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 515}}
-        )
-        , React.createElement('span', {
-          style: {
-            ...sharedBorderStyles,
-            position: "absolute",
-            inset: 0,
-            mixBlendMode: "overlay",
-            background: borderGradient2,
-          }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 525}}
-        )
-        , Boolean(onClick) && (
-          React.createElement(React.Fragment, null
-            , React.createElement('div', {
-              style: {
-                position: "absolute",
-                inset: 0,
-                borderRadius: `${cornerRadius}px`,
-                pointerEvents: "none",
-                transition: "all 0.2s ease-out",
-                opacity: isHovered || isActive ? 0.5 : 0,
-                backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%)",
-                mixBlendMode: "overlay",
-              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 536}}
-            )
-            , React.createElement('div', {
-              style: {
-                position: "absolute",
-                inset: 0,
-                borderRadius: `${cornerRadius}px`,
-                pointerEvents: "none",
-                transition: "all 0.2s ease-out",
-                opacity: isActive ? 0.5 : 0,
-                backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 80%)",
-                mixBlendMode: "overlay",
-              }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 548}}
-            )
-          )
-        )
-      )
-    )
+    const isBlock = style && (style.display === 'block' || style.width === '100%');
+    const bg1 = 'linear-gradient(' + (135 + mouseOffset.x * 1.2) + 'deg, rgba(255,255,255,0) 0%, rgba(255,255,255,' + (0.12 + Math.abs(mouseOffset.x) * 0.008) + ') ' + Math.max(10, 33 + mouseOffset.y * 0.3) + '%, rgba(255,255,255,' + (0.4 + Math.abs(mouseOffset.x) * 0.012) + ') ' + Math.min(90, 66 + mouseOffset.y * 0.4) + '%, rgba(255,255,255,0) 100%)';
+    const bg2 = 'linear-gradient(' + (135 + mouseOffset.x * 1.2) + 'deg, rgba(255,255,255,0) 0%, rgba(255,255,255,' + (0.32 + Math.abs(mouseOffset.x) * 0.008) + ') ' + Math.max(10, 33 + mouseOffset.y * 0.3) + '%, rgba(255,255,255,' + (0.6 + Math.abs(mouseOffset.x) * 0.012) + ') ' + Math.min(90, 66 + mouseOffset.y * 0.4) + '%, rgba(255,255,255,0) 100%)';
+    const borderBase = { pointerEvents: 'none', padding: '1.5px', borderRadius: cornerRadius + 'px', WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', boxShadow: '0 0 0 0.5px rgba(255,255,255,0.5) inset, 0 1px 3px rgba(255,255,255,0.25) inset, 0 1px 4px rgba(0,0,0,0.35)', position: 'absolute', inset: 0 };
+    return React.createElement('div', {
+      className,
+      onClick,
+      style: { position: 'relative', display: isBlock ? 'block' : 'inline-block', verticalAlign: isBlock ? undefined : 'middle', ...(style && style.width ? { width: style.width } : {}), ...(style && style.height ? { height: style.height } : {}), ...(style && style.outline ? { outline: style.outline } : {}) },
+    },
+      isBlock && React.createElement('div', { 'aria-hidden': 'true', style: { visibility: 'hidden', pointerEvents: 'none', padding, boxSizing: 'border-box', width: '100%' } }, children),
+      React.createElement(GlassContainer, {
+        ref: glassRef, className: '', style: isBlock ? { position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '100%', transition: 'all ease-out 0.2s', cursor: onClick ? 'pointer' : undefined } : { transition: 'all ease-out 0.2s', cursor: onClick ? 'pointer' : undefined },
+        cornerRadius, displacementScale: overLight ? displacementScale * 0.5 : displacementScale, blurAmount, saturation, aberrationIntensity, glassSize, padding, mouseOffset,
+        onMouseEnter: () => setIsHovered(true), onMouseLeave: () => setIsHovered(false), onMouseDown: () => setIsActive(true), onMouseUp: () => setIsActive(false),
+        active: isActive, overLight, mode,
+      }, children),
+      React.createElement('span', { style: { ...borderBase, mixBlendMode: 'screen', opacity: 0.2, background: bg1 } }),
+      React.createElement('span', { style: { ...borderBase, mixBlendMode: 'overlay', background: bg2 } }),
+    );
   }
 
   return (
@@ -577,7 +492,7 @@ export default function LiquidGlass({
           borderRadius: `${cornerRadius}px`,
           transform: baseStyle.transform,
           transition: baseStyle.transition,
-        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 569}}
+        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 461}}
       )
       , React.createElement('div', {
         className: `bg-black transition-all duration-150 ease-in-out pointer-events-none mix-blend-overlay ${overLight ? "opacity-100" : "opacity-0"}`,
@@ -588,7 +503,7 @@ export default function LiquidGlass({
           borderRadius: `${cornerRadius}px`,
           transform: baseStyle.transform,
           transition: baseStyle.transition,
-        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 580}}
+        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 472}}
       )
 
       , React.createElement(GlassContainer, {
@@ -610,7 +525,7 @@ export default function LiquidGlass({
         active: isActive,
         overLight: overLight,
         onClick: onClick,
-        mode: mode, __self: this, __source: {fileName: _jsxFileName, lineNumber: 592}}
+        mode: mode, __self: this, __source: {fileName: _jsxFileName, lineNumber: 484}}
 
         , children
       )
@@ -639,7 +554,7 @@ export default function LiquidGlass({
           rgba(255, 255, 255, ${0.4 + Math.abs(mouseOffset.x) * 0.012}) ${Math.min(90, 66 + mouseOffset.y * 0.4)}%,
           rgba(255, 255, 255, 0.0) 100%
         )`,
-        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 617}}
+        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 509}}
       )
 
       /* Border layer 2 - duplicate with mix-blend-overlay */
@@ -665,7 +580,7 @@ export default function LiquidGlass({
           rgba(255, 255, 255, ${0.6 + Math.abs(mouseOffset.x) * 0.012}) ${Math.min(90, 66 + mouseOffset.y * 0.4)}%,
           rgba(255, 255, 255, 0.0) 100%
         )`,
-        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 644}}
+        }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 536}}
       )
 
       /* Hover effects */
@@ -683,7 +598,7 @@ export default function LiquidGlass({
               opacity: isHovered || isActive ? 0.5 : 0,
               backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%)",
               mixBlendMode: "overlay",
-            }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 672}}
+            }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 564}}
           )
           , React.createElement('div', {
             style: {
@@ -697,7 +612,7 @@ export default function LiquidGlass({
               opacity: isActive ? 0.5 : 0,
               backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 80%)",
               mixBlendMode: "overlay",
-            }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 686}}
+            }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 578}}
           )
           , React.createElement('div', {
             style: {
@@ -713,7 +628,7 @@ export default function LiquidGlass({
               opacity: isHovered ? 0.4 : isActive ? 0.8 : 0,
               backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)",
               mixBlendMode: "overlay",
-            }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 700}}
+            }, __self: this, __source: {fileName: _jsxFileName, lineNumber: 592}}
           )
         )
       )
