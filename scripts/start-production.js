@@ -48,11 +48,13 @@ async function main() {
 
   validateRuntimeConfig(runtimeEnv, {
     requireClientBuild: true,
-    requireProductionEmailCredentials: isProduction,
+    requireProductionEmailCredentials: false,
   });
 
-  if (!isProduction && (!runtimeEnv.EMAIL_USER || !runtimeEnv.EMAIL_PASS)) {
-    console.log('[startup] Running without email credentials (development mode — email features disabled)');
+  if (!runtimeEnv.EMAIL_USER || !runtimeEnv.EMAIL_PASS) {
+    console.log(
+      `[startup] Running without email credentials (${nodeEnv} mode — email extraction features disabled).`
+    );
   }
 
   ensureSqliteDirectory(runtimeEnv.SQLITE_PATH);
