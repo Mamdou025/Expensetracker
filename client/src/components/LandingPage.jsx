@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, BarChart3, Upload } from 'lucide-react';
+import { Brand, I } from '../ui/BrandIcon';
 import TransactionDashboard from './TransactionDashboard';
 import AuthForm from './AuthForm';
 import Logo from './ui/Logo';
@@ -26,12 +26,12 @@ const LandingPage = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { icon: Upload, title: 'Importer des relevés', body: 'Relevés PDF de CIBC, RBC, MBNA, Capital One, Neo et plus encore.' },
-                { icon: BarChart3, title: 'Voir les tendances', body: 'Graphiques temporels, répartition par catégorie et assistant conversationnel.' },
-                { icon: ShieldCheck, title: 'Vos données, votre compte', body: 'Chaque transaction est rattachée à votre compte personnel.' },
-              ].map(({ icon: Icon, title, body }) => (
+                { iconName: I.upload, title: 'Importer des relevés', body: 'Relevés PDF de CIBC, RBC, MBNA, Capital One, Neo et plus encore.' },
+                { iconName: I.chart, title: 'Voir les tendances', body: 'Graphiques temporels, répartition par catégorie et assistant conversationnel.' },
+                { iconName: I.shieldCheck, title: 'Vos données, votre compte', body: 'Chaque transaction est rattachée à votre compte personnel.' },
+              ].map(({ iconName, title, body }) => (
                 <div key={title} className="rounded-lg border border-gray-800 bg-gray-800/50 p-3">
-                  <Icon className="w-4 h-4 text-blue-400 mb-1.5" />
+                  <Brand name={iconName} size={16} className="text-blue-400 mb-1.5" />
                   <div className="text-xs font-semibold text-gray-200 mb-0.5">{title}</div>
                   <div className="text-xs text-gray-500 leading-snug">{body}</div>
                 </div>

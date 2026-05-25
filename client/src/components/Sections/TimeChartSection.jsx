@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { BarChart3 } from 'lucide-react';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTheme } from '../../contexts/ThemeContext';
 import { getCategoryColor } from '../../utils/categoryColors';
+import { I } from '../../ui/BrandIcon';
 
 const TimeChartSection = ({ 
   isExpanded, 
@@ -260,7 +260,7 @@ const formatDateLabel = (dateStr) => {
   return (
     <ExpandableSection
       title={getChartTitle()}
-      icon={BarChart3}
+      iconName={I.chart}
       isExpanded={isExpanded}
       onToggle={onToggle}
       className="mb-4"

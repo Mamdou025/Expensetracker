@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trash2, AlertTriangle, Plus } from 'lucide-react';
+import { Brand, BrandLine, I } from '../../ui/BrandIcon';
 
 const TagManager = ({
   tags,
@@ -57,7 +57,7 @@ const TagManager = ({
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
           disabled={isLoading}
         >
-          <Plus className="w-4 h-4" />
+          <BrandLine name={I.plus} size={16} style={{ color: '#fff' }} />
           Ajouter un nouveau Tag
         </button>
       </div>
@@ -122,7 +122,7 @@ const TagManager = ({
                   disabled={isLoading}
                   title="Delete tag from all transactions"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Brand name={I.trash} size={16} accent="#f87171" />
                 </button>
               </div>
             </div>
@@ -140,7 +140,7 @@ const TagManager = ({
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-gray-900 rounded-lg shadow-2xl p-6 max-w-md w-full mx-4 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <AlertTriangle className="w-6 h-6 text-red-400" />
+              <Brand name={I.alert} size={24} className="text-red-400" accent="#f87171" />
               <h3 className="text-lg font-semibold text-gray-200">Supprimer le Tag</h3>
             </div>
             <p className="text-gray-400 mb-6">
@@ -166,7 +166,7 @@ const TagManager = ({
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                 ) : (
-                  <Trash2 className="w-4 h-4" />
+                  <Brand name={I.trash} size={16} accent="#f87171" />
                 )}
                 Supprimer
               </button>

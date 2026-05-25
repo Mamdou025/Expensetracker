@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { PieChart as PieChartIcon } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import ExpandableSection from '../common/ExpandableSection';
 import { useTranslation } from 'react-i18next';
 import { getCategoryColor } from '../../utils/categoryColors';
+import { I } from '../../ui/BrandIcon';
 
 const CategoryChartSection = ({ 
   isExpanded, 
@@ -36,7 +36,7 @@ const CategoryChartSection = ({
   return (
     <ExpandableSection
       title={t('categoryChart.title')}
-      icon={PieChartIcon}
+      iconName={I.pie}
       isExpanded={isExpanded}
       onToggle={onToggle}
       className="mb-4"

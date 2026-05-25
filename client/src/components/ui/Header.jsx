@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Mail, FileUp, Wallet, MessageCircle, Sun, Moon, LogOut } from 'lucide-react';
+import { Brand, I } from '../../ui/BrandIcon';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import Logo from './Logo';
@@ -13,11 +13,11 @@ const Header = () => {
   const { user, isAuthenticated, isOwner, isLoading, logout } = useAuth();
 
   const navItems = [
-    { path: '/', label: t('navigation.dashboard'), icon: LayoutDashboard, requiresAuth: false },
-    { path: '/accounts', label: 'Mes banques', icon: Wallet, requiresAuth: true },
-    { path: '/pdf-import', label: t('navigation.pdfImport'), icon: FileUp, requiresAuth: true },
-    { path: '/email-extraction', label: t('navigation.emailExtraction'), icon: Mail, requiresAuth: true, ownerOnly: true },
-    { path: '/chat', label: t('navigation.chat'), icon: MessageCircle, requiresAuth: true },
+    { path: '/', label: t('navigation.dashboard'), iconName: I.dashboard, requiresAuth: false },
+    { path: '/accounts', label: 'Mes banques', iconName: I.wallet, requiresAuth: true },
+    { path: '/pdf-import', label: t('navigation.pdfImport'), iconName: I.upload, requiresAuth: true },
+    { path: '/email-extraction', label: t('navigation.emailExtraction'), iconName: I.mail, requiresAuth: true, ownerOnly: true },
+    { path: '/chat', label: t('navigation.chat'), iconName: I.message, requiresAuth: true },
   ].filter(item => {
     if (item.ownerOnly) return isOwner;
     if (item.requiresAuth) return isAuthenticated;
@@ -56,7 +56,7 @@ const Header = () => {
         </Link>
         <div className="flex items-center gap-2 flex-wrap">
           <nav className="flex gap-1 flex-wrap">
-            {navItems.map(({ path, label, icon: Icon }) => {
+            {navItems.map(({ path, label, iconName }) => {
               const isActive = location.pathname === path;
               return (
                 <Link
@@ -66,7 +66,7 @@ const Header = () => {
                     isActive ? 'nav-active' : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Brand name={iconName} size={16} />
                   <span className="hidden sm:inline">{label}</span>
                 </Link>
               );
@@ -78,7 +78,7 @@ const Header = () => {
             className="p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors"
             title={theme === 'dark' ? t('header.lightMode', 'Mode clair') : t('header.darkMode', 'Mode sombre')}
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            <Brand name={theme === 'dark' ? I.sun : I.moon} size={16} />
           </button>
 
           {!isLoading && isAuthenticated && (
@@ -116,7 +116,7 @@ const Header = () => {
                     onClick={() => { setMenuOpen(false); logout(); }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-gray-100 transition-colors"
                   >
-                    <LogOut className="w-4 h-4" />
+                    <Brand name={I.logout} size={16} />
                     Se déconnecter
                   </button>
                 </div>

@@ -1,5 +1,5 @@
-import { Settings } from 'lucide-react';
 import React from 'react';
+import { I } from '../../ui/BrandIcon';
 import { useTranslation } from 'react-i18next';
 import ExpandableSection from '../common/ExpandableSection';
 import DisplaySettings from '../Settings/DisplaySettings';
@@ -117,7 +117,7 @@ const SettingsSection = ({
   return (
     <ExpandableSection
       title={t('settings.title')}
-      icon={Settings}
+      iconName={I.settings}
       isExpanded={isExpanded}
       onToggle={onToggle}
       headerContent={settingsTabs}

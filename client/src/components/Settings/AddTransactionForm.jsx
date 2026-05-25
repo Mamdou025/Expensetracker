@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus } from 'lucide-react';
+import { BrandLine, I } from '../../ui/BrandIcon';
 import { useTranslation } from 'react-i18next';
 
 const AddTransactionForm = ({
@@ -21,7 +21,7 @@ const AddTransactionForm = ({
           onClick={() => setShowAddTransaction(!showAddTransaction)}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
         >
-          <Plus className="w-4 h-4" />
+          <BrandLine name={I.plus} size={16} style={{ color: '#fff' }} />
         </button>
       </div>
 

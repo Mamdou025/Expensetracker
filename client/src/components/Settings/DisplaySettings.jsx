@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart3, TrendingUp, Calendar, Layers } from 'lucide-react';
+import { Brand, I } from '../../ui/BrandIcon';
 
 const DisplaySettings = ({
   itemsPerPage,
@@ -30,7 +30,7 @@ const DisplaySettings = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-400 mb-1 flex items-center gap-1.5">
-            <TrendingUp className="w-3.5 h-3.5 text-gray-500" />
+            <Brand name={I.trendUp} size={14} className="text-gray-500" />
             Type de graphique
           </label>
           <select
@@ -46,7 +46,7 @@ const DisplaySettings = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-400 mb-1 flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-gray-500" />
+            <Brand name={I.calendar} size={14} className="text-gray-500" />
             Regroupement par periode
           </label>
           <select
@@ -63,7 +63,7 @@ const DisplaySettings = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-400 mb-1 flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5 text-gray-500" />
+            <Brand name={I.layers} size={14} className="text-gray-500" />
             Repartition des categories
           </label>
           <div className="space-y-2 mt-1">

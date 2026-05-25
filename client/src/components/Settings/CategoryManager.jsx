@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trash2, AlertTriangle } from 'lucide-react';
+import { Brand, BrandLine, I } from '../../ui/BrandIcon';
 
 const CategoryManager = ({
   categories,
@@ -52,7 +52,7 @@ const CategoryManager = ({
                   disabled={isLoading}
                   title="Delete category from all transactions"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Brand name={I.trash} size={16} accent="#f87171" />
                 </button>
               </div>
             </div>
@@ -70,7 +70,7 @@ const CategoryManager = ({
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-gray-900 rounded-lg shadow-2xl p-6 max-w-md w-full mx-4 border border-gray-700">
             <div className="flex items-center gap-3 mb-4">
-              <AlertTriangle className="w-6 h-6 text-red-400" />
+              <Brand name={I.alert} size={24} className="text-red-400" accent="#f87171" />
               <h3 className="text-lg font-semibold text-gray-200">Supprimer la catégorie</h3>
             </div>
             <p className="text-gray-400 mb-6">
@@ -96,7 +96,7 @@ const CategoryManager = ({
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                 ) : (
-                  <Trash2 className="w-4 h-4" />
+                  <Brand name={I.trash} size={16} accent="#f87171" />
                 )}
                 Supprimer
               </button>

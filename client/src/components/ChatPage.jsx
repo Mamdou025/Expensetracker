@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Send, Loader2, Trash2, MessageCircle, BarChart3 } from 'lucide-react';
+import { Brand, BrandLine, I } from '../ui/BrandIcon';
 import ChatUsagePanel from './ChatUsagePanel';
 
 const SUGGESTED_QUESTIONS = [
@@ -133,7 +133,7 @@ const ChatPage = () => {
     <div className="flex flex-col" style={{ height: 'calc(100vh - 120px)' }}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <MessageCircle className="w-5 h-5 text-blue-400" />
+          <Brand name={I.message} size={20} className="text-blue-400" />
           <h2 className="text-lg font-semibold text-gray-100">
             {t('chat.title', 'Assistant financier')}
           </h2>
@@ -144,7 +144,7 @@ const ChatPage = () => {
             className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-gray-800 rounded-lg transition-colors"
             title={t('chatUsage.title', "Suivi de l'utilisation IA")}
           >
-            <BarChart3 className="w-3.5 h-3.5" />
+            <Brand name={I.chart} size={14} />
             {sessionTokens > 0 && (
               <span className="text-xs tabular-nums">{sessionTokens.toLocaleString()} jet.</span>
             )}
@@ -154,7 +154,7 @@ const ChatPage = () => {
               onClick={clearChat}
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-lg transition-colors"
             >
-              <Trash2 className="w-3.5 h-3.5" />
+              <Brand name={I.trash} size={14} />
               {t('chat.clear', 'Effacer')}
             </button>
           )}
@@ -164,7 +164,7 @@ const ChatPage = () => {
       <div className="flex-1 overflow-y-auto rounded-xl border border-gray-800 bg-gray-900/50 p-4 space-y-4 mb-4">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <MessageCircle className="w-12 h-12 text-gray-700 mb-4" />
+            <Brand name={I.message} size={48} className="text-gray-700 mb-4" />
             <h3 className="text-lg font-medium text-gray-300 mb-2">
               {t('chat.welcome', 'Posez-moi n\'importe quelle question sur vos finances')}
             </h3>
@@ -196,7 +196,7 @@ const ChatPage = () => {
                 >
                   {msg.role === 'assistant' && msg.content === '' && isLoading ? (
                     <div className="flex items-center gap-2 text-gray-400">
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Brand name={I.loading} size={16} className="animate-spin" />
                       <span>{t('chat.thinking', 'Analyse en cours…')}</span>
                     </div>
                   ) : (
@@ -234,9 +234,9 @@ const ChatPage = () => {
           className="px-4 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <BrandLine name={I.loading} size={16} className="animate-spin" style={{ color: '#fff' }} />
           ) : (
-            <Send className="w-4 h-4" />
+            <BrandLine name={I.send} size={16} style={{ color: '#fff' }} />
           )}
         </button>
       </div>

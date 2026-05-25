@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Plus, Loader2, Trash2, X, Search, ArrowLeft, FileUp, Mail, Lock, Check,
-  Building2, Copy, Shield, Inbox, ChevronRight, Wand2,
-} from 'lucide-react';
+import { Brand, BrandLine, I } from '../ui/BrandIcon';
 import { apiClient } from '../Services/api';
 import { CANADIAN_BANKS, PRODUCT_LABELS, findBank, logoUrl } from '../data/banks';
 
@@ -90,7 +87,7 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
             </div>
           </div>
           <button onClick={onClose} className="p-1.5 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
-            <X size={16} />
+            <Brand name={I.x} size={16} />
           </button>
         </div>
         <div className="flex items-center gap-2 px-4 pt-3">
@@ -100,7 +97,7 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
             className={`px-3 py-1 text-xs rounded-md ${tab === 'html' ? 'nav-active' : 'text-gray-400 hover:text-gray-200'} disabled:opacity-40`}>HTML rendu</button>
         </div>
         <div className="flex-1 overflow-auto p-4">
-          {loading && <div className="flex justify-center py-10"><Loader2 className="animate-spin text-blue-500" size={20} /></div>}
+          {loading && <div className="flex justify-center py-10"><Brand name={I.loading} className="animate-spin text-blue-500" size={20} /></div>}
           {error && <div className="text-red-400 text-sm">{error}</div>}
           {full && tab === 'text' && (
             <pre className="text-xs text-gray-300 whitespace-pre-wrap font-mono bg-gray-950 border border-gray-800 rounded-md p-3">
@@ -116,11 +113,11 @@ const SampleViewer = ({ sample, onClose, onDeleted }) => {
         <div className="flex items-center justify-between gap-2 p-3 border-t border-gray-800">
           <button onClick={handleDelete}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md text-red-300 hover:bg-red-900/30 border border-red-900/50">
-            <Trash2 size={13} /> Supprimer
+            <Brand name={I.trash} size={13} accent="#fca5a5" /> Supprimer
           </button>
           <button disabled title="Bientôt disponible"
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md bg-blue-600/50 text-white cursor-not-allowed">
-            <Wand2 size={13} /> Créer un modèle à partir de ce courriel (bientôt)
+            <BrandLine name={I.wand} size={13} style={{ color: '#fff' }} /> Créer un modèle à partir de ce courriel (bientôt)
           </button>
         </div>
       </div>
@@ -154,7 +151,7 @@ const SampleUploadModal = ({ onClose, onSaved }) => {
         <div className="flex items-center justify-between p-4 border-b border-gray-800">
           <div className="text-sm font-semibold text-gray-100">Ajouter un exemple de courriel</div>
           <button type="button" onClick={onClose} className="p-1.5 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
-            <X size={16} />
+            <Brand name={I.x} size={16} />
           </button>
         </div>
         <div className="flex-1 overflow-auto p-4 space-y-3">
@@ -196,7 +193,7 @@ const SampleUploadModal = ({ onClose, onSaved }) => {
           <button type="button" onClick={onClose} className="px-3 py-1.5 text-xs rounded-md text-gray-300 hover:bg-gray-800">Annuler</button>
           <button type="submit" disabled={saving}
             className="px-3 py-1.5 text-xs rounded-md bg-blue-600 hover:bg-blue-500 text-white font-medium flex items-center gap-1.5 disabled:opacity-60">
-            {saving && <Loader2 size={12} className="animate-spin" />}
+            {saving && <BrandLine name={I.loading} size={12} className="animate-spin" style={{ color: '#fff' }} />}
             Enregistrer l'exemple
           </button>
         </div>
@@ -224,13 +221,13 @@ const BankIcon = ({ bank, size = 'md' }) => {
 };
 
 const buildIngestMethods = (forwardingAddress) => [
-  { id: 'pdf', label: 'Importer des relevés PDF', icon: FileUp, available: true,
+  { id: 'pdf', label: 'Importer des relevés PDF', iconName: I.upload, available: true,
     desc: 'Glissez-déposez vos relevés mensuels de cette banque pour importer les transactions.' },
-  { id: 'email_forward', label: 'Faire suivre les courriels de transactions', icon: Mail,
+  { id: 'email_forward', label: 'Faire suivre les courriels de transactions', iconName: I.mail,
     available: !!forwardingAddress,
     unavailableReason: "Adresse de réacheminement indisponible pour l'instant.",
     desc: 'Obtenez une adresse de réacheminement personnelle — créez un filtre Gmail pour y envoyer les notifications bancaires.' },
-  { id: 'gmail_oauth', label: 'Connecter Gmail directement', icon: Lock, available: false,
+  { id: 'gmail_oauth', label: 'Connecter Gmail directement', iconName: I.lock, available: false,
     unavailableReason: 'Bientôt disponible',
     desc: 'Connectez-vous avec Google pour que nous puissions consulter votre boîte de réception. (Disponible une fois Google activé.)' },
 ];
@@ -243,13 +240,13 @@ const ForwardingAddressBox = ({ address }) => {
   return (
     <div className="mt-3 rounded-lg border border-blue-900/60 bg-blue-950/30 p-3 space-y-2">
       <div className="text-xs text-blue-200 font-medium flex items-center gap-1.5">
-        <Shield size={12} /> Votre adresse de réacheminement privée
+        <Brand name={I.shieldCheck} size={12} /> Votre adresse de réacheminement privée
       </div>
       <div className="flex items-center gap-2">
         <code className="flex-1 text-xs bg-gray-900 border border-gray-800 rounded px-2 py-1.5 text-gray-100 truncate">{address}</code>
         <button type="button" onClick={copy}
           className="text-xs px-2 py-1.5 rounded bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-1">
-          <Copy size={12} /> {copied ? 'Copié' : 'Copier'}
+          <BrandLine name={I.copy} size={12} style={{ color: '#fff' }} /> {copied ? 'Copié' : 'Copier'}
         </button>
       </div>
       <div className="text-[11px] text-gray-400 leading-relaxed">
@@ -309,7 +306,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
           <div className="flex items-center gap-2">
             {step > 1 && (
               <button onClick={() => setStep(step - 1)} className="p-1 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
-                <ArrowLeft size={16} />
+                <Brand name={I.arrowLeft} size={16} />
               </button>
             )}
             <div className="text-sm font-semibold text-gray-100">
@@ -318,7 +315,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
             </div>
           </div>
           <button onClick={onClose} className="p-1.5 rounded-md text-gray-400 hover:text-gray-100 hover:bg-gray-800">
-            <X size={16} />
+            <Brand name={I.x} size={16} />
           </button>
         </div>
 
@@ -326,7 +323,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
           <>
             <div className="p-4 border-b border-gray-800">
               <div className="relative">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                <Brand name={I.search} size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                 <input
                   autoFocus
                   type="text"
@@ -355,7 +352,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
                           {b.products.length} produit{b.products.length !== 1 ? 's' : ''}
                         </div>
                       </div>
-                      {already && <Check size={14} className="text-emerald-400 shrink-0" />}
+                      {already && <Brand name={I.check} size={14} className="text-emerald-400 shrink-0" />}
                     </button>
                   );
                 })}
@@ -401,7 +398,6 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
               <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Comment récupérer les transactions ?</label>
               <div className="space-y-2">
                 {buildIngestMethods(forwardingAddress).map((m) => {
-                  const Icon = m.icon;
                   const disabled = !m.available;
                   const active = method === m.id && !disabled;
                   return (
@@ -414,7 +410,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
                             ? 'border-blue-500 bg-blue-600/10'
                             : 'border-gray-800 hover:border-gray-700'
                         } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                        <Icon size={16} className="text-gray-400 mt-0.5" />
+                        <Brand name={m.iconName} size={16} className="text-gray-400 mt-0.5" />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm text-gray-100 flex items-center gap-2">
                             {m.label}
@@ -443,7 +439,7 @@ const AddBankWizard = ({ onClose, onSaved, existingBankIds, forwardingAddress })
                 className="px-3 py-1.5 text-xs rounded-md text-gray-300 hover:bg-gray-800">Annuler</button>
               <button onClick={submit} disabled={saving || !product}
                 className="px-3 py-1.5 text-xs rounded-md bg-blue-600 hover:bg-blue-500 text-white font-medium flex items-center gap-1.5 disabled:opacity-60">
-                {saving && <Loader2 size={12} className="animate-spin" />}
+                {saving && <BrandLine name={I.loading} size={12} className="animate-spin" style={{ color: '#fff' }} />}
                 Connecter le compte
               </button>
             </div>
@@ -521,7 +517,7 @@ const ConnectedAccountsPage = () => {
       <div className="mb-6 flex items-start justify-between gap-3">
         <div>
           <h2 className="text-2xl font-bold text-gray-100 flex items-center gap-2">
-            <Building2 size={24} className="text-gray-400" />
+            <Brand name={I.building} size={24} className="text-gray-400" />
             Mes comptes connectés
           </h2>
           <p className="text-gray-500 mt-1 text-sm">
@@ -531,13 +527,13 @@ const ConnectedAccountsPage = () => {
         <button onClick={() => setAdding(true)}
           aria-label="Ajouter une banque"
           className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium">
-          <Plus size={14} /> Ajouter une banque
+          <BrandLine name={I.plus} size={14} style={{ color: '#fff' }} /> Ajouter une banque
         </button>
       </div>
 
       <div className="mb-6 rounded-xl border border-gray-800 bg-gray-900 p-5">
         <div className="flex items-center gap-2 mb-3">
-          <Wand2 size={16} className="text-blue-400" />
+          <Brand name={I.wand} size={16} className="text-blue-400" />
           <h3 className="text-sm font-semibold text-gray-200 uppercase tracking-wide">
             Deux façons d'alimenter vos transactions
           </h3>
@@ -549,7 +545,7 @@ const ConnectedAccountsPage = () => {
           <div className="rounded-lg border border-gray-800 bg-gray-800/40 p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 rounded-md bg-blue-600/20 text-blue-300 flex items-center justify-center">
-                <FileUp size={16} />
+                <Brand name={I.upload} size={16} />
               </div>
               <div className="text-sm font-semibold text-gray-100">1. Importer des relevés PDF</div>
             </div>
@@ -558,13 +554,13 @@ const ConnectedAccountsPage = () => {
             </p>
             <Link to="/pdf-import"
               className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md bg-blue-600 hover:bg-blue-500 text-white">
-              <FileUp size={12} /> Aller à l'import PDF
+              <Brand name={I.upload} size={12} /> Aller à l'import PDF
             </Link>
           </div>
           <div className="rounded-lg border border-gray-800 bg-gray-800/40 p-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 rounded-md bg-emerald-600/20 text-emerald-300 flex items-center justify-center">
-                <Mail size={16} />
+                <Brand name={I.mail} size={16} />
               </div>
               <div className="text-sm font-semibold text-gray-100">2. Faire suivre vos courriels</div>
             </div>
@@ -582,19 +578,19 @@ const ConnectedAccountsPage = () => {
         </div>
       </div>
 
-      {loading && <div className="flex justify-center py-16"><Loader2 className="animate-spin text-blue-500" size={28} /></div>}
+      {loading && <div className="flex justify-center py-16"><Brand name={I.loading} className="animate-spin text-blue-500" size={28} /></div>}
       {error && !loading && (
         <div className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-300 text-sm">{error}</div>
       )}
 
       {!loading && !error && accounts.length === 0 && (
         <div className="bg-gray-900 border border-gray-800 border-dashed rounded-xl p-10 text-center">
-          <Building2 size={36} className="mx-auto text-gray-600 mb-3" />
+          <Brand name={I.building} size={36} className="mx-auto text-gray-600 mb-3" />
           <h3 className="text-base font-semibold text-gray-200">Aucun compte connecté pour l'instant</h3>
           <p className="text-sm text-gray-500 mt-1 mb-4">Commencez par ajouter une banque ou une carte de crédit à suivre.</p>
           <button onClick={() => setAdding(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium">
-            <Plus size={14} /> Ajouter ma première banque
+            <BrandLine name={I.plus} size={14} style={{ color: '#fff' }} /> Ajouter ma première banque
           </button>
         </div>
       )}
@@ -618,14 +614,14 @@ const ConnectedAccountsPage = () => {
                   </div>
                   <button onClick={() => handleDelete(a.id)}
                     className="p-1.5 rounded-md text-gray-500 hover:text-red-400 hover:bg-red-900/20">
-                    <Trash2 size={14} />
+                    <Brand name={I.trash} size={14} accent="#fca5a5" />
                   </button>
                 </div>
                 <div className="flex items-center justify-between pt-2 border-t border-gray-800">
                   <span className="text-xs text-gray-500 flex items-center gap-1.5">
-                    {a.ingest_method === 'pdf' && <><FileUp size={12} /> Relevés PDF</>}
-                    {a.ingest_method === 'email_forward' && <><Mail size={12} /> Courriels réacheminés</>}
-                    {a.ingest_method === 'gmail_oauth' && <><Lock size={12} /> Gmail</>}
+                    {a.ingest_method === 'pdf' && <><Brand name={I.upload} size={12} /> Relevés PDF</>}
+                    {a.ingest_method === 'email_forward' && <><Brand name={I.mail} size={12} /> Courriels réacheminés</>}
+                    {a.ingest_method === 'gmail_oauth' && <><Brand name={I.lock} size={12} /> Gmail</>}
                   </span>
                   {a.ingest_method === 'pdf' && (
                     <Link to="/pdf-import"
@@ -647,7 +643,7 @@ const ConnectedAccountsPage = () => {
         <div className="mt-10">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide flex items-center gap-2">
-              <Building2 size={16} className="text-gray-500" />
+              <Brand name={I.building} size={16} className="text-gray-500" />
               Banques et analyseurs pris en charge
             </h3>
             <span className="text-xs text-gray-500">{supportedBanks.length} banques</span>
@@ -675,13 +671,13 @@ const ConnectedAccountsPage = () => {
           <div className="bg-gray-900 border border-gray-800 rounded-lg p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Inbox size={18} className="text-gray-400" />
+                <Brand name={I.inbox} size={18} className="text-gray-400" />
                 <h3 className="text-base font-semibold text-gray-100">Exemples de courriels réacheminés</h3>
                 <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full">{samples.length}</span>
               </div>
               <button onClick={() => setUploadingSample(true)}
                 className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md bg-blue-600 hover:bg-blue-500 text-white">
-                <Plus size={12} /> Coller un exemple
+                <BrandLine name={I.plus} size={12} style={{ color: '#fff' }} /> Coller un exemple
               </button>
             </div>
             {samples.length === 0 ? (
@@ -705,7 +701,7 @@ const ConnectedAccountsPage = () => {
                       <span className={`text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded ${
                         s.status === 'modeled' ? 'bg-emerald-900/40 text-emerald-300' : 'bg-amber-900/30 text-amber-300'
                       }`}>{s.status === 'modeled' ? 'modélisé' : 'en attente'}</span>
-                      <ChevronRight size={14} className="text-gray-600" />
+                      <Brand name={I.chevronRight} size={14} className="text-gray-600" />
                     </button>
                   </li>
                 ))}

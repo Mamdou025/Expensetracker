@@ -1,20 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import {
-  Mail, Calendar, Search, Inbox, AlertTriangle, CheckSquare, Square,
-  Trash2, X, Eye, Play, Loader2, Info, ArrowRight,
-} from 'lucide-react';
+import { Brand, BrandLine, I } from '../ui/BrandIcon';
 import { emailService } from '../Services/emailService';
 import { useTransactions } from '../hooks/useTransactions';
 import EmailViewerModal from './common/EmailViewerModal';
 import { transformQueueItemFromApi } from '../Services/transformers';
 
-const SectionHeader = ({ icon: Icon, title, subtitle, right }) => (
+const SectionHeader = ({ iconName, title, subtitle, right }) => (
   <div className="flex items-start justify-between gap-3 mb-3">
     <div>
       <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide flex items-center gap-2">
-        {Icon && <Icon className="w-4 h-4 text-gray-400" />}
+        {iconName && <Brand name={iconName} size={16} className="text-gray-400" />}
         {title}
       </h3>
       {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
@@ -177,7 +174,7 @@ const EmailExtractionPage = () => {
       <div className="bg-gray-900 rounded-lg border border-gray-800 p-5 mb-4">
         <div className="flex items-start gap-3">
           <div className="shrink-0 w-10 h-10 rounded-md bg-gray-800 flex items-center justify-center">
-            <Mail className="w-5 h-5 text-emerald-400" />
+            <Brand name={I.mail} size={20} className="text-emerald-400" />
           </div>
           <div className="flex-1 min-w-0">
             <h2 className="text-lg font-semibold text-gray-100">{t('emailExtraction.pageTitle')}</h2>
@@ -190,7 +187,7 @@ const EmailExtractionPage = () => {
             className="hidden sm:inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 px-2 py-1 rounded"
           >
             {t('emailExtraction.linkToForwarding')}
-            <ArrowRight className="w-3.5 h-3.5" />
+            <Brand name={I.arrowRight} size={14} />
           </Link>
         </div>
       </div>
@@ -198,7 +195,7 @@ const EmailExtractionPage = () => {
       {/* Date range / extract */}
       <div className="bg-gray-900 rounded-lg border border-gray-800 p-5 mb-4">
         <SectionHeader
-          icon={Calendar}
+          iconName={I.calendar}
           title={t('emailExtraction.rangeTitle')}
           subtitle={t('emailExtraction.rangeSubtitle')}
           right={
@@ -248,12 +245,12 @@ const EmailExtractionPage = () => {
           >
             {loading ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <BrandLine name={I.loading} size={16} className="animate-spin" style={{ color: '#fff' }} />
                 {t('emailExtraction.extracting')}
               </>
             ) : (
               <>
-                <Search className="w-4 h-4" />
+                <BrandLine name={I.search} size={16} style={{ color: '#fff' }} />
                 {t('emailExtraction.extract')}
               </>
             )}
@@ -262,7 +259,7 @@ const EmailExtractionPage = () => {
 
         {error && (
           <div className="mt-3 flex items-start gap-2 text-xs text-red-300 bg-red-900/20 border border-red-800/60 rounded-md px-3 py-2">
-            <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+            <Brand name={I.alert} size={16} className="shrink-0 mt-0.5" accent="#fca5a5" />
             <span>{error}</span>
           </div>
         )}
@@ -272,7 +269,7 @@ const EmailExtractionPage = () => {
       {queue.length === 0 ? (
         <div className="bg-gray-900 rounded-lg border border-dashed border-gray-800 p-10 text-center">
           <div className="inline-flex w-12 h-12 rounded-full bg-gray-800 items-center justify-center mb-3">
-            <Inbox className="w-6 h-6 text-gray-500" />
+            <Brand name={I.inbox} size={24} className="text-gray-500" />
           </div>
           <p className="text-sm text-gray-400">
             {loading
@@ -280,7 +277,7 @@ const EmailExtractionPage = () => {
               : t('emailExtraction.emptyHint')}
           </p>
           <p className="text-xs text-gray-600 mt-2 flex items-center justify-center gap-1.5">
-            <Info className="w-3.5 h-3.5" />
+            <Brand name={I.info} size={14} />
             {t('emailExtraction.imapRequirementHint')}
           </p>
         </div>
@@ -300,7 +297,9 @@ const EmailExtractionPage = () => {
                 onClick={allSelected ? clearSelection : selectAll}
                 className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md border border-gray-700 text-gray-300 hover:bg-gray-800"
               >
-                {allSelected ? <Square className="w-3.5 h-3.5" /> : <CheckSquare className="w-3.5 h-3.5" />}
+                {allSelected
+                  ? <span className="inline-block w-3.5 h-3.5 border border-current rounded-sm" />
+                  : <Brand name={I.checkSquare} size={14} />}
                 {allSelected ? t('queue.clear') : t('queue.selectAll')}
               </button>
               <button
@@ -308,14 +307,14 @@ const EmailExtractionPage = () => {
                 disabled={selectedCount === 0}
                 className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md border border-gray-700 text-gray-300 hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <Brand name={I.trash} size={14} />
                 {t('queue.remove')}
               </button>
               <button
                 onClick={clearQueue}
                 className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md border border-gray-700 text-gray-300 hover:bg-gray-800"
               >
-                <X className="w-3.5 h-3.5" />
+                <Brand name={I.x} size={14} />
                 {t('emailExtraction.clearQueue')}
               </button>
               <div className="w-px h-5 bg-gray-800 mx-1" />
@@ -324,7 +323,9 @@ const EmailExtractionPage = () => {
                 disabled={selectedCount === 0 || processing}
                 className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed"
               >
-                {processing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3.5 h-3.5" />}
+                {processing
+                  ? <BrandLine name={I.loading} size={14} className="animate-spin" style={{ color: '#fff' }} />
+                  : <BrandLine name={I.play} size={14} style={{ color: '#fff' }} />}
                 {t('queue.processSelected')}
               </button>
               <button
@@ -394,7 +395,7 @@ const EmailExtractionPage = () => {
                           </span>
                           {isDuplicate && (
                             <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide bg-amber-900/40 text-amber-300 border border-amber-800/60 px-1.5 py-0.5 rounded shrink-0">
-                              <AlertTriangle className="w-3 h-3" />
+                              <Brand name={I.alert} size={12} accent="#fcd34d" />
                               {t('emailExtraction.duplicateBadge')}
                             </span>
                           )}
@@ -408,7 +409,7 @@ const EmailExtractionPage = () => {
                           title={t('queue.table.viewEmail')}
                           aria-label={t('queue.table.viewEmail')}
                         >
-                          <Eye className="w-4 h-4" />
+                          <Brand name={I.eye} size={16} />
                         </button>
                       </td>
                       <td className="px-4 py-3 text-center">
@@ -418,7 +419,7 @@ const EmailExtractionPage = () => {
                           title={t('queue.table.remove')}
                           aria-label={t('queue.table.remove')}
                         >
-                          <X className="w-4 h-4" />
+                          <Brand name={I.x} size={16} />
                         </button>
                       </td>
                     </tr>
@@ -430,7 +431,7 @@ const EmailExtractionPage = () => {
 
           {processing && (
             <div className="border-t border-gray-800 px-4 py-3 text-xs text-gray-400 flex items-center gap-2">
-              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              <Brand name={I.loading} size={14} className="animate-spin" />
               {t('queue.processing', { current: progress, total: queue.length })}
             </div>
           )}

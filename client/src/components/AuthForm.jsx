@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LogIn, UserPlus, Loader2 } from 'lucide-react';
+import { Brand, BrandLine, I } from '../ui/BrandIcon';
 import { useAuth } from '../contexts/AuthContext';
 
 const AuthForm = ({ initialMode = 'login', onSuccess }) => {
@@ -110,11 +110,11 @@ const AuthForm = ({ initialMode = 'login', onSuccess }) => {
           className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-blue-600 hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
         >
           {submitting ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <BrandLine name={I.loading} size={16} className="animate-spin" style={{ color: '#fff' }} />
           ) : isRegister ? (
-            <UserPlus className="w-4 h-4" />
+            <BrandLine name={I.userPlus} size={16} style={{ color: '#fff' }} />
           ) : (
-            <LogIn className="w-4 h-4" />
+            <BrandLine name={I.login} size={16} style={{ color: '#fff' }} />
           )}
           {submitting
             ? (isRegister ? 'Création du compte…' : 'Connexion…')

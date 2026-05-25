@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { Filter } from 'lucide-react';
 import ExpandableSection from '../common/ExpandableSection';
+import { I } from '../../ui/BrandIcon';
 import { useTranslation } from 'react-i18next';
 import { getCategoryColor } from '../../utils/categoryColors';
 
@@ -67,7 +67,7 @@ const FiltersSection = ({
   return (
     <ExpandableSection
       title={t('filters.title')}
-      icon={Filter}
+      iconName={I.filter}
       isExpanded={isExpanded}
       onToggle={onToggle}
       className="mb-4"

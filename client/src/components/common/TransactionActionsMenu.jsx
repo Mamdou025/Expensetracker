@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical, Tag, Trash2, DollarSign, FileText, Folder, Mail } from 'lucide-react';
+import { Brand, I } from '../../ui/BrandIcon';
 
 const TransactionActionsMenu = ({
   transaction,
@@ -59,7 +59,7 @@ const TransactionActionsMenu = ({
         className="p-2 text-gray-500 hover:text-gray-300 hover:bg-gray-800 rounded-full transition-colors duration-200"
         title="Actions sur la transaction"
       >
-        <MoreVertical className="w-4 h-4" />
+        <Brand name={I.moreV} size={16} />
       </button>
 
       {isOpen && (
@@ -74,7 +74,7 @@ const TransactionActionsMenu = ({
             onClick={() => handleAction('edit-amount')}
             className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <DollarSign className="w-4 h-4 text-gray-400" />
+            <Brand name={I.dollar} size={16} className="text-gray-400" />
             <span className="font-medium text-gray-200">Modifier Montant</span>
           </button>
 
@@ -82,7 +82,7 @@ const TransactionActionsMenu = ({
             onClick={() => handleAction('edit-description')}
             className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <FileText className="w-4 h-4 text-gray-400" />
+            <Brand name={I.fileText} size={16} className="text-gray-400" />
             <span className="font-medium text-gray-200">Modifier Description</span>
           </button>
 
@@ -90,7 +90,7 @@ const TransactionActionsMenu = ({
             onClick={() => handleAction('edit-category')}
             className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Folder className="w-4 h-4 text-gray-400" />
+            <Brand name={I.folder} size={16} className="text-gray-400" />
             <span className="font-medium text-gray-200">Modifier Categorie</span>
           </button>
 
@@ -98,7 +98,7 @@ const TransactionActionsMenu = ({
             onClick={() => handleAction('edit-tags')}
             className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Tag className="w-4 h-4 text-gray-400" />
+            <Brand name={I.tag} size={16} className="text-gray-400" />
             <span className="font-medium text-gray-200">Gérer les Tags</span>
           </button>
 
@@ -106,7 +106,7 @@ const TransactionActionsMenu = ({
             onClick={() => handleAction('view-email')}
             className="w-full px-4 py-3 text-left hover:bg-gray-700 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Mail className="w-4 h-4 text-gray-400" />
+            <Brand name={I.mail} size={16} className="text-gray-400" />
             <span className="font-medium text-gray-200">Voir le courriel</span>
           </button>
 
@@ -116,7 +116,7 @@ const TransactionActionsMenu = ({
             onClick={() => handleAction('delete')}
             className="w-full px-4 py-3 text-left hover:bg-red-900/30 flex items-center gap-3 text-sm transition-colors duration-200"
           >
-            <Trash2 className="w-4 h-4 text-red-400" />
+            <Brand name={I.trash} size={16} accent="#f87171" className="text-red-400" />
             <span className="font-medium text-red-400">Supprimer </span>
           </button>
         </div>
