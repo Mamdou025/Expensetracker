@@ -161,7 +161,7 @@ const ChatPage = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto rounded-xl border border-gray-800 bg-gray-900/50 p-4 space-y-4 mb-4">
+      <div className="flex-1 overflow-y-auto rounded-xl border border-emerald-900/40 bg-emerald-950/20 p-4 space-y-4 mb-4">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <Brand name={I.message} size={48} className="text-gray-700 mb-4" />
