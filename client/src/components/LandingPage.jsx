@@ -84,137 +84,16 @@ const BankChip = ({ name }) => (
   </div>
 );
 
-/* ----- Decorative mock dashboard preview (pure SVG/divs, theme-aware) ----- */
-const MockDashboardPreview = () => (
+/* ----- Real product screenshots in a window-chrome frame ----- */
+const ScreenshotFrame = ({ src, alt, label }) => (
   <div className="rounded-xl border border-gray-800 bg-gray-950 overflow-hidden shadow-2xl">
-    {/* Window chrome */}
     <div className="flex items-center gap-1.5 px-3 py-2 border-b border-gray-800 bg-gray-900">
       <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
       <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
       <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-      <span className="ml-3 text-[10px] font-mono text-gray-500">exptrackr / tableau de bord</span>
+      <span className="ml-3 text-[10px] font-mono text-gray-500 truncate">{label}</span>
     </div>
-
-    {/* Stat row */}
-    <div className="grid grid-cols-3 gap-2 p-3">
-      {[
-        { label: 'Dépenses', value: '4 218 $', tone: 'text-gray-100' },
-        { label: 'Revenus', value: '+ 5 600 $', tone: 'text-emerald-400' },
-        { label: 'Net', value: '+ 1 382 $', tone: 'text-gray-100' },
-      ].map((s) => (
-        <div key={s.label} className="rounded-lg border border-gray-800 bg-gray-900 p-3">
-          <div className="text-[10px] uppercase tracking-widest text-gray-500">{s.label}</div>
-          <div className={`text-lg font-semibold ${s.tone}`}>{s.value}</div>
-        </div>
-      ))}
-    </div>
-
-    {/* Chart area */}
-    <div className="px-3 pb-3">
-      <div className="rounded-lg border border-gray-800 bg-gray-900 p-3">
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-xs text-gray-400">Dépenses par mois</div>
-          <div className="text-[10px] font-mono text-gray-600">6 derniers mois</div>
-        </div>
-        <svg viewBox="0 0 300 100" className="w-full h-24">
-          <defs>
-            <linearGradient id="lpGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <polyline
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="2"
-            points="0,70 50,55 100,62 150,40 200,48 250,28 300,35"
-          />
-          <polygon
-            fill="url(#lpGrad)"
-            points="0,70 50,55 100,62 150,40 200,48 250,28 300,35 300,100 0,100"
-          />
-        </svg>
-      </div>
-    </div>
-
-    {/* Transaction rows */}
-    <div className="px-3 pb-3 space-y-1.5">
-      {[
-        { date: '24 mai', name: 'Loblaws', cat: 'Épicerie', amt: '- 87,42 $' },
-        { date: '23 mai', name: 'Petro-Canada', cat: 'Transport', amt: '- 52,10 $' },
-        { date: '22 mai', name: 'Dépôt salaire', cat: 'Revenu', amt: '+ 2 800,00 $', pos: true },
-        { date: '21 mai', name: 'Tim Hortons', cat: 'Restaurants', amt: '- 6,75 $' },
-      ].map((t, i) => (
-        <div key={i} className="flex items-center justify-between rounded-md border border-gray-800 bg-gray-900 px-3 py-2 text-xs">
-          <div className="flex items-center gap-3">
-            <span className="text-gray-500 font-mono w-12">{t.date}</span>
-            <span className="text-gray-200 font-medium">{t.name}</span>
-            <span className="text-[10px] uppercase tracking-wider text-gray-500 border border-gray-800 rounded px-1.5 py-0.5">{t.cat}</span>
-          </div>
-          <span className={`font-mono ${t.pos ? 'text-emerald-400' : 'text-gray-300'}`}>{t.amt}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-const MockChatPreview = () => (
-  <div className="rounded-xl border border-gray-800 bg-gray-950 overflow-hidden shadow-2xl">
-    <div className="flex items-center gap-2 px-3 py-2 border-b border-gray-800 bg-gray-900">
-      <Brand name={I.message} size={14} />
-      <span className="text-[10px] font-mono text-gray-500">assistant exptrackr</span>
-    </div>
-    <div className="p-3 space-y-2 text-xs">
-      <div className="inline-block max-w-[85%] rounded-lg bg-gray-800 text-gray-200 px-3 py-2">
-        Combien j'ai dépensé en restaurants ce mois-ci ?
-      </div>
-      <div className="ml-auto inline-block max-w-[90%] rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-gray-100 px-3 py-2">
-        En mai 2026, vous avez dépensé <strong className="text-emerald-400">312,48 $</strong> en
-        restaurants sur 14 transactions — soit 18 % de plus qu'en avril.
-        <div className="mt-1 text-[10px] text-gray-500 font-mono">CIBC Visa · MBNA Mastercard</div>
-      </div>
-      <div className="inline-block max-w-[85%] rounded-lg bg-gray-800 text-gray-200 px-3 py-2">
-        Et mon top 3 marchands ?
-      </div>
-    </div>
-  </div>
-);
-
-const MockImportPreview = () => (
-  <div className="rounded-xl border border-gray-800 bg-gray-950 overflow-hidden shadow-2xl">
-    <div className="flex items-center gap-2 px-3 py-2 border-b border-gray-800 bg-gray-900">
-      <Brand name={I.pdf} size={14} />
-      <span className="text-[10px] font-mono text-gray-500">import pdf · cibc_visa_mai_2026.pdf</span>
-    </div>
-    <div className="p-4 space-y-3">
-      <div className="rounded-lg border-2 border-dashed border-gray-800 bg-gray-900 p-4 text-center">
-        <Brand name={I.uploadCloud} size={28} className="mx-auto mb-2" />
-        <div className="text-xs text-gray-400">Glissez votre relevé PDF</div>
-        <div className="text-[10px] text-gray-600 mt-1">CIBC · RBC · MBNA · Capital One · Neo</div>
-      </div>
-      <div className="space-y-1.5">
-        {[
-          { d: '02/05', m: 'Metro', a: '64,12 $', ok: true },
-          { d: '04/05', m: 'STM', a: '94,00 $', ok: true },
-          { d: '07/05', m: 'Amazon.ca', a: '129,99 $', dup: true },
-          { d: '11/05', m: 'Hydro-Québec', a: '142,30 $', ok: true },
-        ].map((r, i) => (
-          <div key={i} className="flex items-center justify-between rounded-md bg-gray-900 border border-gray-800 px-3 py-1.5 text-xs">
-            <div className="flex items-center gap-2">
-              <input type="checkbox" defaultChecked={r.ok} readOnly className="accent-emerald-500" />
-              <span className="text-gray-500 font-mono">{r.d}</span>
-              <span className="text-gray-200">{r.m}</span>
-              {r.dup && (
-                <span className="text-[10px] text-yellow-400 border border-yellow-400/40 rounded px-1">
-                  Doublon
-                </span>
-              )}
-            </div>
-            <span className="font-mono text-gray-300">{r.a}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <img src={src} alt={alt} loading="lazy" className="block w-full h-auto" />
   </div>
 );
 
@@ -385,28 +264,47 @@ const LandingPage = () => {
         title="Une interface pensée pour vos finances"
         subtitle="Trois écrans clés : le tableau de bord, l'import PDF, et l'assistant conversationnel."
       >
-        <div className="grid lg:grid-cols-3 gap-5">
+        <div className="space-y-8">
+          {/* Hero screenshot: dashboard */}
           <div className="space-y-3">
-            <MockDashboardPreview />
-            <div className="text-xs text-gray-400 px-1">
-              <span className="text-gray-100 font-semibold">Tableau de bord.</span> Statistiques,
-              graphiques temporels et fil de transactions sur la même page.
+            <ScreenshotFrame
+              src="/landing/dashboard.jpg"
+              alt="Tableau de bord exptrackr — statistiques, filtres et catégories"
+              label="exptrackr / tableau de bord"
+            />
+            <div className="text-sm text-gray-400 px-1 max-w-3xl">
+              <span className="text-gray-100 font-semibold">Tableau de bord.</span> Vos statistiques en
+              haut, filtres rapides par période, recherche par mot-clé, catégories et étiquettes — tout
+              sur la même page.
             </div>
           </div>
-          <div className="space-y-3">
-            <MockImportPreview />
-            <div className="text-xs text-gray-400 px-1">
-              <span className="text-gray-100 font-semibold">Import PDF.</span> Aperçu avant insertion,
-              doublons détectés, sélection ligne par ligne.
+
+          {/* Two-up: PDF import + Chat */}
+          <div className="grid lg:grid-cols-2 gap-5">
+            <div className="space-y-3">
+              <ScreenshotFrame
+                src="/landing/pdf-import.jpg"
+                alt="Page d'import PDF — glissez-déposez vos relevés bancaires"
+                label="exptrackr / import pdf"
+              />
+              <div className="text-sm text-gray-400 px-1">
+                <span className="text-gray-100 font-semibold">Import PDF.</span> Glissez-déposez vos
+                relevés, exptrackr détecte la banque, extrait les transactions et signale les doublons.
+              </div>
+            </div>
+            <div className="space-y-3">
+              <ScreenshotFrame
+                src="/landing/chat.jpg"
+                alt="Assistant financier — posez vos questions en langage naturel"
+                label="exptrackr / assistant"
+              />
+              <div className="text-sm text-gray-400 px-1">
+                <span className="text-gray-100 font-semibold">Assistant.</span> Posez vos questions en
+                langage naturel et obtenez des réponses à partir de vos vraies transactions.
+              </div>
             </div>
           </div>
-          <div className="space-y-3">
-            <MockChatPreview />
-            <div className="text-xs text-gray-400 px-1">
-              <span className="text-gray-100 font-semibold">Assistant.</span> Posez vos questions, obtenez
-              des réponses chiffrées à partir de vos vraies transactions.
-            </div>
-          </div>
+
         </div>
       </Section>
 
