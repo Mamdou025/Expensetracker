@@ -207,31 +207,21 @@ const CardC_Workspace = () => (
 
 /* ---------- "Everything you need" 3 image-like cards ---------- */
 
-const BigCard = ({ accent, eyebrow, value, title, body, children }) => (
-  <div className="rounded-2xl border border-gray-800 bg-gray-900 overflow-hidden flex flex-col">
-    <div
-      className="relative h-52 flex items-end p-5"
-      style={{
-        background: accent,
-      }}
-    >
-      <div className="absolute inset-0 opacity-30" style={{
-        background: 'radial-gradient(closest-side, rgba(255,255,255,0.4), transparent 70%)',
-      }} />
-      <div className="relative w-full">
-        {eyebrow && (
-          <div className="inline-flex items-center gap-1 mb-2 rounded-full bg-white/85 text-gray-900 text-[10px] font-semibold uppercase tracking-widest px-2 py-1">
-            {eyebrow}
-          </div>
-        )}
-        {value && (
-          <div className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">{value}</div>
-        )}
-        {children}
+const BigCard = ({ eyebrow, value, title, body }) => (
+  <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-6 sm:p-7 flex flex-col h-full">
+    {eyebrow && (
+      <div className="inline-flex items-center gap-1.5 mb-5 self-start rounded-full border border-gray-800 bg-gray-900/60 text-gray-400 text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1">
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        {eyebrow}
       </div>
-    </div>
-    <div className="p-5">
-      <div className="text-sm font-semibold text-gray-100 mb-1">{title}</div>
+    )}
+    {value && (
+      <div className="text-5xl sm:text-6xl font-semibold text-emerald-400 tracking-tight mb-6 leading-none">
+        {value}
+      </div>
+    )}
+    <div className="mt-auto pt-5 border-t border-gray-800">
+      <div className="text-sm font-semibold text-gray-100 mb-1.5">{title}</div>
       <div className="text-xs text-gray-400 leading-relaxed">{body}</div>
     </div>
   </div>
@@ -379,22 +369,19 @@ const LandingPage = () => {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <BigCard
-            accent="linear-gradient(135deg, #d9f99d, #a3e635)"
             eyebrow="Multi-banques"
             value="7+"
             title="Banques canadiennes"
             body="Analyseurs sur mesure pour CIBC, RBC, MBNA, Capital One, Neo et plus — en français comme en anglais."
           />
           <BigCard
-            accent="linear-gradient(135deg, #fde68a, #f59e0b)"
             eyebrow="Anti-doublons"
             value="100%"
             title="Aucune transaction en double"
             body="Empreinte SHA-256 par document et vérification ligne par ligne avant l'insertion en base."
           />
           <BigCard
-            accent="linear-gradient(135deg, #c7d2fe, #818cf8)"
-            eyebrow="Assistant IA"
+            eyebrow="Assistant"
             value="24/7"
             title="Réponses instantanées"
             body="Posez vos questions en langage naturel et obtenez des réponses tirées de vos vraies transactions."
