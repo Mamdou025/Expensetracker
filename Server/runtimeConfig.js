@@ -65,7 +65,9 @@ function buildRuntimeEnv(baseEnv = process.env) {
 function validateRuntimeConfig(env = process.env, options = {}) {
   const {
     requireClientBuild = false,
-    requireProductionEmailCredentials = isProductionEnv(env),
+    // Email credentials are now optional in every environment. Email-based
+    // features simply stay disabled if they aren't provided.
+    requireProductionEmailCredentials = false,
   } = options;
 
   const hasEmailUser = Boolean(env.EMAIL_USER);
