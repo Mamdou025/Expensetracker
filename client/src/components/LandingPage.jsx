@@ -48,49 +48,35 @@ const Stars = ({ rating = 4.9, label }) => (
   </div>
 );
 
-/* ---------- Lime-glow screenshot frame (Finns-style hero shot) ---------- */
+/* ---------- Lime mat screenshot frame (Finns-style hero shot) ---------- */
 
-const LimeFrame = ({ src, alt, label }) => (
-  <div className="relative mx-auto w-full max-w-5xl">
-    {/* Outer lime glow */}
+const LimeFrame = ({ src, alt }) => (
+  <div className="relative mx-auto w-full max-w-6xl">
+    {/* Soft outer halo */}
     <div
       aria-hidden="true"
-      className="absolute -inset-2 sm:-inset-3 rounded-3xl"
+      className="absolute -inset-12 rounded-[48px] pointer-events-none"
       style={{
-        background: 'linear-gradient(135deg, #d9f99d 0%, #a3e635 50%, #84cc16 100%)',
-        filter: 'blur(2px)',
-        opacity: 0.95,
+        background: 'radial-gradient(closest-side, rgba(52,211,153,0.28), transparent 70%)',
+        filter: 'blur(24px)',
       }}
     />
-    {/* Soft external halo */}
+    {/* Generous lime mat — pure soft padding, no browser chrome */}
     <div
-      aria-hidden="true"
-      className="absolute -inset-10 rounded-[40px] pointer-events-none"
-      style={{
-        background: 'radial-gradient(closest-side, rgba(163,230,53,0.35), transparent 70%)',
-        filter: 'blur(20px)',
-      }}
-    />
-    <div className="relative rounded-2xl overflow-hidden border border-gray-800 bg-gray-950 shadow-2xl">
-      <div className="flex items-center gap-1.5 px-3 py-2 border-b border-gray-800 bg-gray-900">
-        <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-        <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-        <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-        <span className="ml-3 text-[10px] font-mono text-gray-500 truncate">{label}</span>
-      </div>
-      <img src={src} alt={alt} className="block w-full h-auto" />
+      className="relative rounded-3xl p-3 sm:p-6"
+      style={{ backgroundColor: '#bbf7d0' }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="block w-full h-auto rounded-2xl shadow-xl"
+      />
     </div>
   </div>
 );
 
-const ScreenshotFrame = ({ src, alt, label, className = '' }) => (
-  <div className={`rounded-xl border border-gray-800 bg-gray-950 overflow-hidden shadow-xl ${className}`}>
-    <div className="flex items-center gap-1.5 px-3 py-2 border-b border-gray-800 bg-gray-900">
-      <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-      <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-      <span className="w-2.5 h-2.5 rounded-full bg-gray-700" />
-      <span className="ml-3 text-[10px] font-mono text-gray-500 truncate">{label}</span>
-    </div>
+const ScreenshotFrame = ({ src, alt, className = '' }) => (
+  <div className={`rounded-2xl border border-gray-800 overflow-hidden shadow-xl ${className}`}>
     <img src={src} alt={alt} loading="lazy" className="block w-full h-auto" />
   </div>
 );
@@ -255,49 +241,55 @@ const LandingPage = () => {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-8">
-      {/* ============ HERO ============ */}
-      <Section className="pt-6 sm:pt-12 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900 px-3 py-1.5 mb-6 text-xs text-gray-300">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-lime-400" />
-          Annonce — connexion bancaire via Plaid en route
-          <Brand name={I.arrowRight} size={12} />
+      {/* ============ HERO — split (left text, right CTAs) ============ */}
+      <Section className="pt-6 sm:pt-12">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+          {/* LEFT — announcement, headline, subtitle, stars */}
+          <div className="lg:col-span-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900 px-3 py-1.5 mb-7 text-xs text-gray-300">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              Annonce — connexion bancaire via Plaid en route
+              <Brand name={I.arrowRight} size={12} />
+            </div>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold text-gray-100 tracking-tight leading-[1.02]">
+              Reprenez le contrôle<br />de vos finances canadiennes.
+            </h1>
+
+            <p className="text-gray-400 text-base sm:text-lg mt-6 max-w-xl">
+              La plateforme tout-en-un qui lit vos relevés PDF, vos courriels bancaires et bientôt
+              vos comptes en direct — pour les particuliers et petites équipes au Canada.
+            </p>
+
+            <div className="mt-6">
+              <Stars rating="4.9/5" label="par les utilisateurs en bêta privée" />
+            </div>
+          </div>
+
+          {/* RIGHT — CTAs (stack on mobile, right-aligned on desktop) */}
+          <div className="lg:col-span-4 flex flex-wrap items-center gap-3 lg:justify-end lg:pb-2">
+            <a
+              href="#cta"
+              className="inline-flex items-center gap-2 rounded-lg bg-gray-100 hover:bg-white text-gray-950 font-semibold px-5 py-2.5 text-sm transition-colors"
+            >
+              Commencer gratuitement
+              <Brand name={I.arrowRight} size={14} accent="#0a0a0a" />
+            </a>
+            <a
+              href="#demo"
+              className="inline-flex items-center gap-2 rounded-lg text-gray-200 hover:text-gray-100 font-medium px-3 py-2.5 text-sm"
+            >
+              <Brand name={I.play} size={16} />
+              Voir exptrackr en action
+            </a>
+          </div>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-semibold text-gray-100 tracking-tight leading-[1.05] max-w-3xl mx-auto">
-          Reprenez le contrôle de vos finances canadiennes.
-        </h1>
-        <p className="text-gray-400 text-base sm:text-lg mt-5 max-w-xl mx-auto">
-          La plateforme tout-en-un qui lit vos relevés PDF, vos courriels bancaires et bientôt vos
-          comptes en direct — pour les particuliers et petites équipes au Canada.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
-          <a
-            href="#cta"
-            className="inline-flex items-center gap-2 rounded-lg bg-gray-100 hover:bg-white text-gray-950 font-semibold px-5 py-2.5 text-sm transition-colors"
-          >
-            Commencer gratuitement
-            <Brand name={I.arrowRight} size={14} accent="#0a0a0a" />
-          </a>
-          <a
-            href="#demo"
-            className="inline-flex items-center gap-2 rounded-lg text-gray-200 hover:text-gray-100 font-medium px-3 py-2.5 text-sm"
-          >
-            <Brand name={I.play} size={16} />
-            Voir exptrackr en action
-          </a>
-        </div>
-
-        <div className="mt-5">
-          <Stars rating="4.9/5" label="par les utilisateurs en bêta privée" />
-        </div>
-
-        {/* Hero screenshot in lime frame */}
-        <div className="mt-12 sm:mt-16 px-2 sm:px-4">
+        {/* Hero screenshot in lime mat */}
+        <div className="mt-12 sm:mt-16">
           <LimeFrame
             src="/landing/dashboard.jpg"
             alt="Tableau de bord exptrackr — vue d'ensemble des dépenses"
-            label="exptrackr / tableau de bord"
           />
         </div>
       </Section>
@@ -354,7 +346,6 @@ const LandingPage = () => {
             <ScreenshotFrame
               src="/landing/pdf-import.jpg"
               alt="Page d'import PDF d'exptrackr"
-              label="exptrackr / import pdf"
             />
           </div>
         </div>
@@ -423,7 +414,6 @@ const LandingPage = () => {
           <ScreenshotFrame
             src="/landing/chat.jpg"
             alt="Assistant financier exptrackr"
-            label="exptrackr / assistant"
             className="lg:self-stretch"
           />
         </div>
