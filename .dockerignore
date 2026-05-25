@@ -1,0 +1,42 @@
+## Git
+.git
+.gitignore
+
+## Node
+node_modules
+Server/node_modules
+client/node_modules
+npm-debug.log*
+
+## Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pythonlibs
+python_vendor
+
+## Build outputs (rebuilt inside Docker)
+client/build
+
+## Data & secrets
+.env
+Database/transactions.db
+uploads/*
+!uploads/.gitkeep
+credentials.yml
+
+## Replit-specific
+.replit
+replit.nix
+.cache
+.config
+.local
+.upm
+.replit_integration_files
+attached_assets
+
+## Misc
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,59 @@
+version: "3.9"
+
+# ──────────────────────────────────────────────────────────────
+#  exptrackr — docker-compose for local development
+#
+#  Quick start:
+#    cp .env.example .env          # fill in SESSION_SECRET at minimum
+#    docker compose up --build
+#    open http://localhost:5000
+# ──────────────────────────────────────────────────────────────
+
+services:
+
+  # ── PostgreSQL — user auth & sessions ───────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: exptrackr
+      POSTGRES_USER: exptrackr
+      POSTGRES_PASSWORD: exptrackr
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U exptrackr -d exptrackr"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── App — Express API + pre-built React frontend ─────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      # Override DATABASE_URL so it always points to the compose postgres service.
+      # This takes precedence over whatever is in .env.
+      DATABASE_URL: postgresql://exptrackr:exptrackr@postgres:5432/exptrackr
+      NODE_ENV: development
+    volumes:
+      # Persist the SQLite transactions database across container restarts
+      - sqlite_data:/app/Database
+      # Persist uploaded PDF files
+      - uploads_data:/app/uploads
+
+volumes:
+  postgres_data:
+  sqlite_data:
+  uploads_data:
