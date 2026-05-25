@@ -76,7 +76,7 @@ const LimeFrame = ({ src, alt }) => (
 );
 
 const ScreenshotFrame = ({ src, alt, className = '' }) => (
-  <div className={`rounded-2xl border border-gray-800 overflow-hidden shadow-xl ${className}`}>
+  <div className={`rounded-2xl border border-white/10 overflow-hidden shadow-xl ${className}`}>
     <img src={src} alt={alt} loading="lazy" className="block w-full h-auto" />
   </div>
 );
@@ -100,14 +100,14 @@ const SectionHeading = ({ eyebrow, title, subtitle, align = 'center' }) => (
 /* ---------- Card components inspired by Finns trio ---------- */
 
 const CardA_Currencies = () => (
-  <div className="rounded-2xl border border-gray-800 bg-gray-900 p-5 sm:p-6 flex flex-col">
+  <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 flex flex-col">
     <div className="mb-4">
       <div className="text-base font-semibold text-gray-100">Catégorisation automatique</div>
       <div className="text-xs text-gray-400 mt-1">
         Des règles intelligentes appliquent vos catégories à chaque transaction.
       </div>
     </div>
-    <div className="rounded-lg border border-gray-800 bg-gray-800/50 px-3 py-2 mb-2 flex items-center gap-2 text-xs text-gray-500">
+    <div className="rounded-lg border border-white/10 bg-white/[0.05] px-3 py-2 mb-2 flex items-center gap-2 text-xs text-gray-500">
       <Brand name={I.search} size={14} />
       Rechercher une catégorie…
     </div>
@@ -118,7 +118,7 @@ const CardA_Currencies = () => (
         { e: '🍽️', name: 'Restaurants', sub: 'Tim Hortons, A&W' },
         { e: '📺', name: 'Abonnements', sub: 'Bell, Netflix, Spotify' },
       ].map((c) => (
-        <div key={c.name} className="flex items-center justify-between rounded-md border border-gray-800 bg-gray-800/30 px-3 py-2">
+        <div key={c.name} className="flex items-center justify-between rounded-md border border-white/10 bg-white/[0.03] px-3 py-2">
           <div className="flex items-center gap-2">
             <span className="text-base leading-none">{c.e}</span>
             <span className="text-gray-200 font-medium">{c.name}</span>
@@ -131,7 +131,7 @@ const CardA_Currencies = () => (
 );
 
 const CardB_Upload = () => (
-  <div className="rounded-2xl border border-gray-800 bg-gray-900 p-5 sm:p-6 flex flex-col">
+  <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 flex flex-col">
     <div className="mb-4">
       <div className="text-base font-semibold text-gray-100">Glissez vos relevés</div>
       <div className="text-xs text-gray-400 mt-1">
@@ -153,7 +153,7 @@ const CardB_Upload = () => (
 );
 
 const CardC_Workspace = () => (
-  <div className="rounded-2xl border border-gray-800 bg-gray-900 p-5 sm:p-6 flex flex-col">
+  <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 flex flex-col">
     <div className="mb-4">
       <div className="text-base font-semibold text-gray-100">Plusieurs comptes, une vue</div>
       <div className="text-xs text-gray-400 mt-1">
@@ -177,7 +177,7 @@ const CardC_Workspace = () => (
         <div
           key={a.name}
           className={`flex items-center justify-between rounded-md border px-3 py-2 ${
-            a.active ? 'border-lime-400/60 bg-lime-400/10' : 'border-gray-800 bg-gray-800/30'
+            a.active ? 'border-emerald-400/60 bg-emerald-400/10' : 'border-white/10 bg-white/[0.03]'
           }`}
         >
           <div className="flex items-center gap-2">
@@ -194,9 +194,9 @@ const CardC_Workspace = () => (
 /* ---------- "Everything you need" 3 image-like cards ---------- */
 
 const BigCard = ({ eyebrow, value, title, body }) => (
-  <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-6 sm:p-7 flex flex-col h-full">
+  <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 sm:p-7 flex flex-col h-full">
     {eyebrow && (
-      <div className="inline-flex items-center gap-1.5 mb-5 self-start rounded-full border border-gray-800 bg-gray-900/60 text-gray-400 text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1">
+      <div className="inline-flex items-center gap-1.5 mb-5 self-start rounded-full border border-white/10 bg-white/[0.06] backdrop-blur-md text-gray-400 text-[10px] font-semibold uppercase tracking-widest px-2.5 py-1">
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
         {eyebrow}
       </div>
@@ -206,7 +206,7 @@ const BigCard = ({ eyebrow, value, title, body }) => (
         {value}
       </div>
     )}
-    <div className="mt-auto pt-5 border-t border-gray-800">
+    <div className="mt-auto pt-5 border-t border-white/10">
       <div className="text-sm font-semibold text-gray-100 mb-1.5">{title}</div>
       <div className="text-xs text-gray-400 leading-relaxed">{body}</div>
     </div>
@@ -216,7 +216,7 @@ const BigCard = ({ eyebrow, value, title, body }) => (
 /* ---------- Small feature tile (2x2 grid alongside the photo) ---------- */
 
 const Tile = ({ icon, title, body }) => (
-  <div className="rounded-xl border border-gray-800 bg-gray-900 p-5 hover:border-gray-700 transition-colors">
+  <div className="rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 hover:border-white/20 transition-colors">
     <Brand name={icon} size={22} className="mb-3" />
     <div className="text-sm font-semibold text-gray-100 mb-1">{title}</div>
     <div className="text-xs text-gray-400 leading-relaxed">{body}</div>
@@ -226,7 +226,7 @@ const Tile = ({ icon, title, body }) => (
 /* ---------- Bank chip ---------- */
 
 const BankChip = ({ name }) => (
-  <div className="inline-flex items-center gap-2 rounded-lg border border-gray-800 bg-gray-800/50 px-3 py-2 text-xs text-gray-300">
+  <div className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.05] backdrop-blur-md px-3 py-2 text-xs text-gray-300">
     <Brand name={I.bank} size={14} />
     <span className="font-medium">{name}</span>
   </div>
@@ -240,13 +240,45 @@ const LandingPage = () => {
   const banks = ['CIBC', 'RBC', 'MBNA', 'Capital One', 'Neo', 'Neo World Elite', 'Triangle'];
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-8">
+    <div className="relative space-y-16 sm:space-y-24 pb-8">
+      {/* ============ AMBIENT BACKDROP (gives glass something to refract) ============ */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="absolute -top-20 -left-32 w-[70vw] h-[70vw] rounded-full"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(52,211,153,0.6), transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+        />
+        <div
+          className="absolute top-[20%] -right-40 w-[70vw] h-[70vw] rounded-full"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(132,204,22,0.5), transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
+        <div
+          className="absolute top-[55%] left-[10%] w-[60vw] h-[60vw] rounded-full"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(16,185,129,0.45), transparent 70%)',
+            filter: 'blur(50px)',
+          }}
+        />
+        <div
+          className="absolute bottom-[10%] right-[10%] w-[55vw] h-[55vw] rounded-full"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(132,204,22,0.4), transparent 70%)',
+            filter: 'blur(50px)',
+          }}
+        />
+      </div>
+
       {/* ============ HERO — split (left text, right CTAs) ============ */}
       <Section className="pt-6 sm:pt-12">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           {/* LEFT — announcement, headline, subtitle, stars */}
           <div className="lg:col-span-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900 px-3 py-1.5 mb-7 text-xs text-gray-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] backdrop-blur-xl px-3 py-1.5 mb-7 text-xs text-gray-300">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
               Annonce — connexion bancaire via Plaid en route
               <Brand name={I.arrowRight} size={12} />
@@ -304,7 +336,7 @@ const LandingPage = () => {
             {banks.map((b) => (
               <BankChip key={b} name={b} />
             ))}
-            <span className="inline-flex items-center gap-2 rounded-lg border border-dashed border-gray-700 bg-gray-800/30 px-3 py-2 text-xs text-gray-500">
+            <span className="inline-flex items-center gap-2 rounded-lg border border-dashed border-white/15 bg-white/[0.03] backdrop-blur-md px-3 py-2 text-xs text-gray-500">
               <Brand name={I.plus} size={14} /> Demandez la vôtre
             </span>
           </div>
@@ -331,7 +363,7 @@ const LandingPage = () => {
 
       {/* ============ WIDE PRODUCT SHOT — PDF import + insight cards ============ */}
       <Section>
-        <div className="rounded-3xl border border-gray-800 bg-gray-900 p-6 sm:p-10">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 sm:p-10">
           <div className="max-w-2xl">
             <Eyebrow>Import en temps réel</Eyebrow>
             <h3 className="text-2xl sm:text-3xl font-semibold text-gray-100 tracking-tight mb-2">
@@ -440,7 +472,7 @@ const LandingPage = () => {
 
       {/* ============ PLAID COMING SOON ============ */}
       <Section>
-        <div className="rounded-3xl border border-lime-400/30 bg-gray-900 px-6 py-10 sm:px-10 sm:py-12 relative overflow-hidden">
+        <div className="rounded-3xl border border-emerald-400/30 bg-white/[0.04] backdrop-blur-xl px-6 py-10 sm:px-10 sm:py-12 relative overflow-hidden">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-60"
@@ -465,7 +497,7 @@ const LandingPage = () => {
                   (b) => (
                     <span
                       key={b}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-gray-700 bg-gray-800/60 px-3 py-1 text-xs text-gray-300"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.06] backdrop-blur-md px-3 py-1 text-xs text-gray-300"
                     >
                       <Brand name={I.bank} size={12} />
                       {b}
@@ -475,7 +507,7 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-44 h-44 rounded-full border-2 border-lime-400/40 flex items-center justify-center bg-gray-900">
+              <div className="relative w-44 h-44 rounded-full border-2 border-emerald-400/40 flex items-center justify-center bg-white/[0.05] backdrop-blur-xl">
                 <div className="absolute inset-2 rounded-full border border-lime-400/30 animate-pulse" />
                 <Brand name={I.bank} size={72} />
               </div>
@@ -543,7 +575,7 @@ const LandingPage = () => {
 
       {/* ============ FOOTER STRIP ============ */}
       <Section>
-        <div className="rounded-2xl border border-gray-800 bg-gray-900 px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
           <div className="flex items-center gap-3">
             <Logo variant="full" size="sm" />
             <span>© {new Date().getFullYear()} exptrackr — fait au Canada</span>
