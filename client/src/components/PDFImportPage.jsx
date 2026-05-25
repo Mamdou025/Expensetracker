@@ -3,21 +3,41 @@ import { useTranslation } from 'react-i18next';
 import { pdfImportService } from '../Services/pdfImportService';
 import { apiClient } from '../Services/api';
 import { useTransactions } from '../hooks/useTransactions';
+import { useTheme } from '../contexts/ThemeContext';
 import {
-  FileArrowUp, FilePdf, CheckCircle, XCircle, Trash, PencilSimple, X,
-  CaretDown, CaretUp, Warning, CircleNotch, UploadSimple, CursorClick,
-  ShieldCheck, Buildings, Info,
-} from '@phosphor-icons/react';
+  Upload, FilePdf, CheckOne, CloseOne, Delete, EditTwo, Close,
+  Down, Up, Caution, Loading, HandUp, Protection,
+  Bank, Info,
+} from '@icon-park/react';
 
-/* Brand palette for icons:
-   - emerald accent layer (duotone primary)  → #10b981
-   - in light mode we still want strong contrast, so we pass a fixed color
-   Phosphor's duotone weight renders the secondary layer at 20% opacity of `color`,
-   giving an automatic two-tone green+green-tint look that pairs well with the
-   black/white card backgrounds. */
-const ACCENT = '#10b981';        // emerald-500
-const ACCENT_STRONG = '#059669'; // emerald-600 (used over light bgs)
-const ICON_W = { duotone: 'duotone', bold: 'bold', regular: 'regular', fill: 'fill' };
+/* Brand palette — true two-color icons via IconPark theme="two-tone":
+   primary  = outline / dominant strokes (black in light, white in dark)
+   accent   = emerald-500 fill (matches the [xt] logo)
+   The two layers are explicit colors, NOT opacity-faded duplicates, so
+   the icons read as branded illustrations instead of generic UI glyphs. */
+const ACCENT = '#10b981';        // emerald-500 (brand green)
+const ACCENT_STRONG = '#059669'; // emerald-600
+
+/** Theme-aware two-tone icon wrapper.
+ *  Usage: <Brand icon={Bank} size={20} />
+ *         <Brand icon={Delete} accent="#ef4444" /> (override accent for destructive)
+ */
+const Brand = ({ icon: I, size = 20, accent = ACCENT, primary, className = '', ...rest }) => {
+  const { theme } = useTheme();
+  const fg = primary || (theme === 'dark' ? '#f3f4f6' : '#0f172a');
+  return (
+    <I
+      theme="two-tone"
+      size={size}
+      fill={[fg, accent]}
+      strokeWidth={3}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...rest}
+    />
+  );
+};
 
 const PARSER_BANK_DOMAINS = {
   'CIBC': 'cibc.com',
@@ -68,7 +88,7 @@ const BankChip = ({ name, sub }) => {
 const HelpStep = ({ icon: Icon, num, title, desc }) => (
   <div className="flex gap-3">
     <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-      <Icon size={20} weight="duotone" color={ACCENT} />
+      <Brand icon={Icon} size={22} />
     </div>
     <div className="min-w-0">
       <div className="text-xs font-semibold text-gray-200 flex items-center gap-1.5">
@@ -298,7 +318,7 @@ const PDFImportPage = () => {
       {/* Page header */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-gray-100 flex items-center gap-2">
-          <FileArrowUp size={28} weight="duotone" color={ACCENT} />
+          <Brand icon={Upload} size={30} />
           Importer des relevés PDF
         </h1>
         <p className="text-sm text-gray-400 mt-1">
@@ -314,28 +334,28 @@ const PDFImportPage = () => {
           className="w-full flex items-center justify-between px-5 py-3 border-b border-gray-800 hover:bg-gray-800/40"
         >
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
-            <Info size={14} weight="duotone" color={ACCENT} />
+            <Brand icon={Info} size={16} />
             Comment ça fonctionne
           </div>
-          {helpOpen ? <CaretUp size={16} weight="bold" className="text-gray-500" /> : <CaretDown size={16} weight="bold" className="text-gray-500" />}
+          {helpOpen ? <Up theme="outline" size={16} fill="#9ca3af" /> : <Down theme="outline" size={16} fill="#9ca3af" />}
         </button>
         {helpOpen && (
           <div className="p-5 grid gap-4 md:grid-cols-3">
             <HelpStep
               num="1"
-              icon={UploadSimple}
+              icon={Upload}
               title="Déposez vos PDFs"
               desc="Un ou plusieurs relevés mensuels. Aucun fichier n'est conservé — seules les transactions extraites le sont."
             />
             <HelpStep
               num="2"
-              icon={CursorClick}
+              icon={HandUp}
               title="Vérifiez les transactions"
               desc="Nous détectons la banque, le type de carte et les éventuels doublons. Modifiez ou décochez ce qui ne devrait pas être importé."
             />
             <HelpStep
               num="3"
-              icon={ShieldCheck}
+              icon={Protection}
               title="Importez en un clic"
               desc="Les transactions choisies rejoignent votre tableau de bord avec catégorisation automatique."
             />
@@ -346,7 +366,7 @@ const PDFImportPage = () => {
       {/* Upload card */}
       <div className="bg-gray-900 rounded-xl border border-gray-800 mb-6">
         <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800">
-          <FilePdf size={18} weight="duotone" color={ACCENT} />
+          <Brand icon={FilePdf} size={18} />
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
             Téléverser des relevés
           </span>
@@ -364,7 +384,9 @@ const PDFImportPage = () => {
             onDragLeave={() => setIsDragging(false)}
             onClick={() => fileInputRef.current?.click()}
           >
-            <UploadSimple size={48} weight="duotone" color={isDragging ? ACCENT : '#9ca3af'} className="mx-auto mb-3" />
+            <div className="mx-auto mb-3 w-fit">
+              <Brand icon={Upload} size={52} accent={isDragging ? ACCENT : '#9ca3af'} primary={isDragging ? ACCENT_STRONG : undefined} />
+            </div>
             <p className="text-gray-300 mb-1 font-medium">
               {files.length > 0
                 ? `${files.length} fichier(s) sélectionné(s)`
@@ -375,7 +397,7 @@ const PDFImportPage = () => {
               <div className="mt-4 max-h-28 overflow-y-auto text-left max-w-md mx-auto space-y-1">
                 {files.map((f, i) => (
                   <div key={i} className="text-xs text-gray-400 bg-gray-800/60 border border-gray-800 rounded px-2 py-1 flex items-center gap-2">
-                    <FilePdf size={14} weight="duotone" color={ACCENT} className="shrink-0" />
+                    <span className="shrink-0"><Brand icon={FilePdf} size={14} /></span>
                     <span className="truncate flex-1">{f.name}</span>
                     <span className="text-gray-500 shrink-0">{(f.size / 1024).toFixed(0)} Ko</span>
                   </div>
@@ -398,7 +420,7 @@ const PDFImportPage = () => {
               disabled={files.length === 0 || parsing}
               className="px-5 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium shadow-lg shadow-emerald-900/20"
             >
-              {parsing ? <CircleNotch size={16} weight="bold" className="animate-spin" /> : <FilePdf size={16} weight="bold" />}
+              {parsing ? <Loading theme="outline" size={16} fill="#ffffff" className="animate-spin" /> : <FilePdf theme="outline" size={16} fill="#ffffff" />}
               {parsing
                 ? `Analyse ${progress.current}/${progress.total}…`
                 : files.length > 1
@@ -418,7 +440,7 @@ const PDFImportPage = () => {
           {parsing && progress.currentFile && (
             <div className="mt-4">
               <div className="flex items-center gap-3 text-sm text-gray-400">
-                <CircleNotch size={16} weight="bold" className="animate-spin" color={ACCENT} />
+                <Loading theme="outline" size={16} fill={ACCENT} className="animate-spin" />
                 <span>Analyse de <span className="text-gray-200">{progress.currentFile}</span>…</span>
               </div>
               <div className="mt-2 w-full bg-gray-800 rounded-full h-2 overflow-hidden">
@@ -455,7 +477,7 @@ const PDFImportPage = () => {
                 <div className="mt-3 space-y-1">
                   {parseResults.map((r, i) => (
                     <div key={i} className={`text-xs px-3 py-2 rounded-lg flex items-center gap-2 border ${r.error ? 'bg-red-900/15 text-red-300 border-red-900/40' : 'bg-gray-800/60 text-gray-300 border-gray-800'}`}>
-                      {r.error ? <XCircle size={14} weight="duotone" color="#ef4444" /> : <CheckCircle size={14} weight="duotone" color={ACCENT} />}
+                      {r.error ? <Brand icon={CloseOne} size={14} accent="#ef4444" /> : <Brand icon={CheckOne} size={14} />}
                       <span className="font-medium truncate">{r._fileName}</span>
                       {r.error ? (
                         <span className="text-red-400">— {r.error}</span>
@@ -475,7 +497,7 @@ const PDFImportPage = () => {
       {parseResults.length === 0 && supportedBanks.length > 0 && (
         <div className="bg-gray-900 rounded-xl border border-gray-800 mb-6">
           <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800">
-            <Buildings size={18} weight="duotone" color={ACCENT} />
+            <Brand icon={Bank} size={18} />
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
               Banques prises en charge
             </span>
@@ -496,7 +518,7 @@ const PDFImportPage = () => {
       {transactions.length > 0 && (
         <div className="bg-gray-900 rounded-xl border border-gray-800 mb-6">
           <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800">
-            <CheckCircle size={18} weight="duotone" color={ACCENT} />
+            <Brand icon={CheckOne} size={18} />
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
               Vérifier et importer
             </span>
@@ -510,13 +532,13 @@ const PDFImportPage = () => {
             <div className="flex gap-2 flex-wrap mb-4">
               {transactions.some(r => r.direction === 'deposit' || r.direction === 'payment') && (
                 <span className="text-xs text-emerald-300 bg-emerald-900/20 border border-emerald-900/40 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                  <Info size={12} weight="bold" />
+                  <Info theme="outline" size={12} fill="currentColor" />
                   Les dépôts sont importés mais exclus des totaux de dépenses
                 </span>
               )}
               {totalDups > 0 && (
                 <span className="text-xs text-amber-300 bg-amber-900/20 border border-amber-900/40 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                  <Warning size={12} weight="bold" />
+                  <Caution theme="outline" size={12} fill="currentColor" />
                   Doublons décochés — dépliez la ligne pour comparer
                 </span>
               )}
@@ -542,7 +564,7 @@ const PDFImportPage = () => {
                 disabled={selectedCount === 0 || confirming}
                 className="px-5 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium shadow-lg shadow-emerald-900/20"
               >
-                {confirming ? <CircleNotch size={16} weight="bold" className="animate-spin" /> : <CheckCircle size={16} weight="bold" />}
+                {confirming ? <Loading theme="outline" size={16} fill="#ffffff" className="animate-spin" /> : <CheckOne theme="outline" size={16} fill="#ffffff" />}
                 {confirming ? 'Importation…' : `Importer ${selectedCount} sélectionnée(s)`}
               </button>
             </div>
@@ -648,14 +670,14 @@ const PDFImportPage = () => {
                                   onClick={() => toggleDupExpand(row._idx)}
                                   className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-900/30 text-amber-300 border border-amber-900/50 whitespace-nowrap hover:bg-amber-900/50 transition-colors cursor-pointer"
                                 >
-                                  <Warning size={12} weight="bold" />
+                                  <Caution theme="outline" size={12} fill="currentColor" />
                                   Doublon
-                                  {isExpanded ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
+                                  {isExpanded ? <Up theme="outline" size={12} fill="currentColor" /> : <Down theme="outline" size={12} fill="currentColor" />}
                                 </button>
                               )}
                               {isDup && !hasMatch && (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-900/30 text-amber-300 border border-amber-900/50 whitespace-nowrap">
-                                  <Warning size={12} weight="bold" />
+                                  <Caution theme="outline" size={12} fill="currentColor" />
                                   Doublon
                                 </span>
                               )}
@@ -687,14 +709,14 @@ const PDFImportPage = () => {
                                     className="p-1 text-emerald-400 hover:text-emerald-300"
                                     title="Enregistrer"
                                   >
-                                    <CheckCircle size={16} weight="bold" />
+                                    <CheckOne theme="outline" size={16} fill="currentColor" />
                                   </button>
                                   <button
                                     onClick={cancelEdit}
                                     className="p-1 text-gray-400 hover:text-gray-300"
                                     title="Annuler"
                                   >
-                                    <X size={16} weight="bold" />
+                                    <Close theme="outline" size={16} fill="currentColor" />
                                   </button>
                                 </>
                               ) : (
@@ -704,14 +726,14 @@ const PDFImportPage = () => {
                                     className="p-1 text-emerald-400 hover:text-emerald-300"
                                     title="Modifier"
                                   >
-                                    <PencilSimple size={16} weight="bold" />
+                                    <EditTwo theme="outline" size={16} fill="currentColor" />
                                   </button>
                                   <button
                                     onClick={() => removeRow(row._idx)}
                                     className="p-1 text-red-400 hover:text-red-300"
                                     title="Retirer"
                                   >
-                                    <Trash size={16} weight="bold" />
+                                    <Delete theme="outline" size={16} fill="currentColor" />
                                   </button>
                                 </>
                               )}
@@ -723,7 +745,7 @@ const PDFImportPage = () => {
                             <td colSpan={colCount} className="px-3 py-3">
                               <div className="ml-8 border border-amber-900/40 rounded-lg p-4 bg-gray-800/80">
                                 <p className="text-xs font-semibold text-amber-300 mb-2 flex items-center gap-1.5">
-                                  <Warning size={14} weight="duotone" />
+                                  <Caution theme="outline" size={14} fill="currentColor" />
                                   Transaction existante dans la base
                                 </p>
                                 <div className="grid grid-cols-2 gap-4 text-sm">
@@ -774,9 +796,9 @@ const PDFImportPage = () => {
         <div className="bg-gray-900 rounded-xl border border-gray-800 mb-6">
           <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800">
             {importResult.errors === 0 ? (
-              <CheckCircle size={18} weight="duotone" color={ACCENT} />
+              <Brand icon={CheckOne} size={18} />
             ) : (
-              <XCircle size={18} weight="duotone" color="#f59e0b" />
+              <Brand icon={CloseOne} size={18} accent="#f59e0b" />
             )}
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
               Importation terminée
