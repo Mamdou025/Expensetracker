@@ -1,7 +1,33 @@
-@import '@icon-park/react/styles/index.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---- Brand icons (Solar line-duotone via Iconify) -----------------------
+   Solar duotone SVGs render the secondary layer with opacity="0.5".
+   We promote that layer to a full-opacity emerald (or per-instance override
+   via the --brand-accent CSS variable) so icons render in two distinct
+   colors instead of an opacity-faded duplicate of currentColor.
+------------------------------------------------------------------------- */
+.brand-icon {
+  --brand-accent: #10b981; /* emerald-500 */
+  display: inline-block;
+  vertical-align: -0.125em;
+}
+.brand-icon [opacity="0.5"],
+.brand-icon g[opacity="0.5"] {
+  opacity: 1 !important;
+  color: var(--brand-accent);
+}
+.brand-icon [opacity="0.5"] path,
+.brand-icon g[opacity="0.5"] path {
+  stroke: var(--brand-accent) !important;
+  fill: var(--brand-accent);
+}
+/* When the secondary path itself carries opacity, recolor its stroke/fill */
+.brand-icon path[opacity="0.5"] {
+  stroke: var(--brand-accent) !important;
+  fill: var(--brand-accent);
+}
 
 html {
   scrollbar-gutter: stable;
