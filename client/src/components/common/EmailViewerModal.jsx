@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { Brand, I } from '../../ui/BrandIcon';
 import { apiClient } from '../../Services/api';
 
 const EmailViewerModal = ({ isOpen, onClose, transaction, html }) => {
@@ -43,7 +43,7 @@ const EmailViewerModal = ({ isOpen, onClose, transaction, html }) => {
             title="Fermer"
             className="p-2 hover:bg-gray-800 rounded-full transition-colors duration-200 text-gray-400"
           >
-            <X className="w-5 h-5" />
+            <Brand name={I.x} size={20} />
           </button>
         </div>
         <div className="p-6 overflow-auto flex-1 bg-gray-800">

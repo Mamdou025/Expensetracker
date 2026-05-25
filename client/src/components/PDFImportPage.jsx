@@ -3,52 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { pdfImportService } from '../Services/pdfImportService';
 import { apiClient } from '../Services/api';
 import { useTransactions } from '../hooks/useTransactions';
-import { Icon, addCollection } from '@iconify/react';
-import solarIcons from '@iconify-json/solar/icons.json';
-
-/* Preload Solar icon set so icons render offline without hitting api.iconify.design. */
-addCollection(solarIcons);
-
-/* Brand palette — Solar "line-duotone" thin two-color icons via Iconify.
-   - primary layer  : currentColor (inherits text color, theme-aware)
-   - secondary layer: emerald-500 via a CSS override on [opacity] paths
-   See `.brand-icon` rule in index.css for the two-color magic. */
-const ACCENT = '#10b981';        // emerald-500 (brand green)
-const ACCENT_STRONG = '#059669'; // emerald-600
-
-/** Thin duotone icon wrapper backed by Solar via Iconify.
- *  `name` is the Solar icon's base name, e.g. "upload" → solar:upload-line-duotone.
- *  Pass `accent` to override the secondary color (e.g. red for destructive).
- */
-const Brand = ({ name, size = 20, accent, className = '', style, ...rest }) => (
-  <Icon
-    icon={`solar:${name}-line-duotone`}
-    width={size}
-    height={size}
-    className={`brand-icon ${className}`}
-    style={{ ...(accent ? { '--brand-accent': accent } : null), ...style }}
-    {...rest}
-  />
-);
-
-// Icon name aliases so the JSX stays readable and locations are easy to remap.
-const I = {
-  upload: 'upload',
-  pdf: 'file-text',
-  check: 'check-circle',
-  close: 'close-circle',
-  delete: 'trash-bin-trash',
-  edit: 'pen-new-square',
-  x: 'close-square',
-  down: 'alt-arrow-down',
-  up: 'alt-arrow-up',
-  warn: 'danger-triangle',
-  loading: 'refresh',
-  hand: 'hand-pills',
-  shield: 'shield-check',
-  bank: 'buildings-2',
-  info: 'info-circle',
-};
+import { Brand, BrandLine, I, ACCENT, ACCENT_STRONG } from '../ui/BrandIcon';
 
 const PARSER_BANK_DOMAINS = {
   'CIBC': 'cibc.com',
@@ -349,8 +304,8 @@ const PDFImportPage = () => {
             Comment ça fonctionne
           </div>
           {helpOpen
-            ? <Icon icon={`solar:${I.up}-linear`} width={16} height={16} style={{ color: '#9ca3af' }} />
-            : <Icon icon={`solar:${I.down}-linear`} width={16} height={16} style={{ color: '#9ca3af' }} />}
+            ? <BrandLine name={I.up}  size={16} style={{ color: '#9ca3af' }} />
+            : <BrandLine name={I.down}  size={16} style={{ color: '#9ca3af' }} />}
         </button>
         {helpOpen && (
           <div className="p-5 grid gap-4 md:grid-cols-3">
@@ -434,8 +389,8 @@ const PDFImportPage = () => {
               className="px-5 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium shadow-lg shadow-emerald-900/20"
             >
               {parsing
-                ? <Icon icon={`solar:${I.loading}-linear`} width={16} height={16} className="animate-spin" style={{ color: '#fff' }} />
-                : <Icon icon={`solar:${I.pdf}-linear`} width={16} height={16} style={{ color: '#fff' }} />}
+                ? <BrandLine name={I.loading}  size={16} className="animate-spin" style={{ color: '#fff' }} />
+                : <BrandLine name={I.pdf}  size={16} style={{ color: '#fff' }} />}
               {parsing
                 ? `Analyse ${progress.current}/${progress.total}…`
                 : files.length > 1
@@ -455,7 +410,7 @@ const PDFImportPage = () => {
           {parsing && progress.currentFile && (
             <div className="mt-4">
               <div className="flex items-center gap-3 text-sm text-gray-400">
-                <Icon icon={`solar:${I.loading}-linear`} width={16} height={16} className="animate-spin" style={{ color: ACCENT }} />
+                <BrandLine name={I.loading}  size={16} className="animate-spin" style={{ color: ACCENT }} />
                 <span>Analyse de <span className="text-gray-200">{progress.currentFile}</span>…</span>
               </div>
               <div className="mt-2 w-full bg-gray-800 rounded-full h-2 overflow-hidden">
@@ -547,13 +502,13 @@ const PDFImportPage = () => {
             <div className="flex gap-2 flex-wrap mb-4">
               {transactions.some(r => r.direction === 'deposit' || r.direction === 'payment') && (
                 <span className="text-xs text-emerald-300 bg-emerald-900/20 border border-emerald-900/40 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                  <Icon icon={`solar:${I.info}-linear`} width={12} height={12} />
+                  <BrandLine name={I.info}  size={12} />
                   Les dépôts sont importés mais exclus des totaux de dépenses
                 </span>
               )}
               {totalDups > 0 && (
                 <span className="text-xs text-amber-300 bg-amber-900/20 border border-amber-900/40 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                  <Icon icon={`solar:${I.warn}-linear`} width={12} height={12} />
+                  <BrandLine name={I.warn}  size={12} />
                   Doublons décochés — dépliez la ligne pour comparer
                 </span>
               )}
@@ -580,8 +535,8 @@ const PDFImportPage = () => {
                 className="px-5 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm font-medium shadow-lg shadow-emerald-900/20"
               >
                 {confirming
-                  ? <Icon icon={`solar:${I.loading}-linear`} width={16} height={16} className="animate-spin" style={{ color: '#fff' }} />
-                  : <Icon icon={`solar:${I.check}-linear`} width={16} height={16} style={{ color: '#fff' }} />}
+                  ? <BrandLine name={I.loading}  size={16} className="animate-spin" style={{ color: '#fff' }} />
+                  : <BrandLine name={I.check}  size={16} style={{ color: '#fff' }} />}
                 {confirming ? 'Importation…' : `Importer ${selectedCount} sélectionnée(s)`}
               </button>
             </div>
@@ -687,16 +642,16 @@ const PDFImportPage = () => {
                                   onClick={() => toggleDupExpand(row._idx)}
                                   className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-900/30 text-amber-300 border border-amber-900/50 whitespace-nowrap hover:bg-amber-900/50 transition-colors cursor-pointer"
                                 >
-                                  <Icon icon={`solar:${I.warn}-linear`} width={12} height={12} />
+                                  <BrandLine name={I.warn}  size={12} />
                                   Doublon
                                   {isExpanded
-                                    ? <Icon icon={`solar:${I.up}-linear`} width={12} height={12} />
-                                    : <Icon icon={`solar:${I.down}-linear`} width={12} height={12} />}
+                                    ? <BrandLine name={I.up}  size={12} />
+                                    : <BrandLine name={I.down}  size={12} />}
                                 </button>
                               )}
                               {isDup && !hasMatch && (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-900/30 text-amber-300 border border-amber-900/50 whitespace-nowrap">
-                                  <Icon icon={`solar:${I.warn}-linear`} width={12} height={12} />
+                                  <BrandLine name={I.warn}  size={12} />
                                   Doublon
                                 </span>
                               )}
@@ -728,14 +683,14 @@ const PDFImportPage = () => {
                                     className="p-1 text-emerald-400 hover:text-emerald-300"
                                     title="Enregistrer"
                                   >
-                                    <Icon icon={`solar:${I.check}-linear`} width={16} height={16} />
+                                    <BrandLine name={I.check}  size={16} />
                                   </button>
                                   <button
                                     onClick={cancelEdit}
                                     className="p-1 text-gray-400 hover:text-gray-300"
                                     title="Annuler"
                                   >
-                                    <Icon icon={`solar:${I.x}-linear`} width={16} height={16} />
+                                    <BrandLine name={I.x}  size={16} />
                                   </button>
                                 </>
                               ) : (
@@ -745,14 +700,14 @@ const PDFImportPage = () => {
                                     className="p-1 text-emerald-400 hover:text-emerald-300"
                                     title="Modifier"
                                   >
-                                    <Icon icon={`solar:${I.edit}-linear`} width={16} height={16} />
+                                    <BrandLine name={I.edit}  size={16} />
                                   </button>
                                   <button
                                     onClick={() => removeRow(row._idx)}
                                     className="p-1 text-red-400 hover:text-red-300"
                                     title="Retirer"
                                   >
-                                    <Icon icon={`solar:${I.delete}-linear`} width={16} height={16} />
+                                    <BrandLine name={I.delete}  size={16} />
                                   </button>
                                 </>
                               )}
@@ -764,7 +719,7 @@ const PDFImportPage = () => {
                             <td colSpan={colCount} className="px-3 py-3">
                               <div className="ml-8 border border-amber-900/40 rounded-lg p-4 bg-gray-800/80">
                                 <p className="text-xs font-semibold text-amber-300 mb-2 flex items-center gap-1.5">
-                                  <Icon icon={`solar:${I.warn}-linear`} width={14} height={14} />
+                                  <BrandLine name={I.warn}  size={14} />
                                   Transaction existante dans la base
                                 </p>
                                 <div className="grid grid-cols-2 gap-4 text-sm">

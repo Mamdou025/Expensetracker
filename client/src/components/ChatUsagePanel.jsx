@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  BarChart3, Clock, Zap, DollarSign, MessageSquare,
-  ChevronDown, ChevronUp, RefreshCw, Trash2, Activity,
-  TrendingUp, Hash, FileText, Timer, Database, X
-} from 'lucide-react';
+import { Brand, I } from '../ui/BrandIcon';
 
 const formatNumber = (n) => {
   if (n == null) return '0';
@@ -28,7 +24,7 @@ const formatDate = (d) => {
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 };
 
-const StatCard = ({ icon: Icon, label, value, sub, color = 'blue' }) => {
+const StatCard = ({ iconName, label, value, sub, color = 'blue' }) => {
   const colors = {
     blue: 'text-blue-400 bg-blue-500/10',
     green: 'text-green-400 bg-green-500/10',
@@ -40,7 +36,7 @@ const StatCard = ({ icon: Icon, label, value, sub, color = 'blue' }) => {
   return (
     <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-4 flex items-start gap-3">
       <div className={`p-2 rounded-lg ${colors[color]}`}>
-        <Icon className="w-4 h-4" />
+        <Brand name={iconName} size={16} />
       </div>
       <div className="min-w-0">
         <p className="text-xs text-gray-500 uppercase tracking-wider">{label}</p>
@@ -51,16 +47,16 @@ const StatCard = ({ icon: Icon, label, value, sub, color = 'blue' }) => {
   );
 };
 
-const SectionHeader = ({ icon: Icon, title, expanded, onToggle }) => (
+const SectionHeader = ({ iconName, title, expanded, onToggle }) => (
   <button
     onClick={onToggle}
     className="w-full flex items-center justify-between py-2 text-sm font-medium text-gray-300 hover:text-gray-100 transition-colors"
   >
     <div className="flex items-center gap-2">
-      <Icon className="w-4 h-4 text-gray-500" />
+      <Brand name={iconName} size={16} className="text-gray-500" />
       <span>{title}</span>
     </div>
-    {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+    <Brand name={expanded ? I.up : I.down} size={16} />
   </button>
 );
 
@@ -137,7 +133,7 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
       <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800">
           <div className="flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-blue-400" />
+            <Brand name={I.chart} size={20} className="text-blue-400" />
             <h2 className="text-lg font-semibold text-gray-100">
               {t('chatUsage.title', 'AI Usage Tracking')}
             </h2>
@@ -148,20 +144,20 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
               disabled={loading}
               className="p-2 text-gray-400 hover:text-gray-200 hover:bg-gray-800 rounded-lg transition-colors"
             >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              <Brand name={I.refreshCircle} size={16} className={loading ? 'animate-spin' : ''} />
             </button>
             <button
               onClick={clearHistory}
               disabled={clearing}
               className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-lg transition-colors"
             >
-              <Trash2 className="w-4 h-4" />
+              <Brand name={I.trash} size={16} />
             </button>
             <button
               onClick={onClose}
               className="p-2 text-gray-400 hover:text-gray-200 hover:bg-gray-800 rounded-lg transition-colors"
             >
-              <X className="w-4 h-4" />
+              <Brand name={I.x} size={16} />
             </button>
           </div>
         </div>
@@ -174,20 +170,20 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
             </div>
           ) : loading && !usage ? (
             <div className="flex items-center justify-center py-12 text-gray-500">
-              <RefreshCw className="w-5 h-5 animate-spin mr-2" /> Loading...
+              <Brand name={I.refreshCircle} size={20} className="animate-spin mr-2" /> Loading...
             </div>
           ) : (
             <>
               <div>
-                <SectionHeader icon={Activity} title={t('chatUsage.allTime', 'All-Time Overview')} expanded={sections.overview} onToggle={() => toggleSection('overview')} />
+                <SectionHeader iconName={I.pulse} title={t('chatUsage.allTime', 'All-Time Overview')} expanded={sections.overview} onToggle={() => toggleSection('overview')} />
                 {sections.overview && (
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
-                    <StatCard icon={MessageSquare} label={t('chatUsage.totalRequests', 'Requests')} value={formatNumber(s.total_requests)} color="blue" />
-                    <StatCard icon={Hash} label={t('chatUsage.totalTokens', 'Total Tokens')} value={formatNumber(s.total_tokens)} sub={`${formatNumber(s.total_prompt_tokens)} in / ${formatNumber(s.total_completion_tokens)} out`} color="purple" />
-                    <StatCard icon={DollarSign} label={t('chatUsage.estCost', 'Est. Cost')} value={formatCost(s.total_estimated_cost)} color="green" />
-                    <StatCard icon={Timer} label={t('chatUsage.avgDuration', 'Avg Duration')} value={formatDuration(s.avg_duration_ms)} color="amber" />
-                    <StatCard icon={Zap} label={t('chatUsage.avgTokens', 'Avg Tokens/Req')} value={formatNumber(s.avg_tokens_per_request)} color="cyan" />
-                    <StatCard icon={FileText} label={t('chatUsage.totalChars', 'Response Chars')} value={formatNumber(s.total_response_chars)} color="rose" />
+                    <StatCard iconName={I.chatSquare} label={t('chatUsage.totalRequests', 'Requests')} value={formatNumber(s.total_requests)} color="blue" />
+                    <StatCard iconName={I.hash} label={t('chatUsage.totalTokens', 'Total Tokens')} value={formatNumber(s.total_tokens)} sub={`${formatNumber(s.total_prompt_tokens)} in / ${formatNumber(s.total_completion_tokens)} out`} color="purple" />
+                    <StatCard iconName={I.dollar} label={t('chatUsage.estCost', 'Est. Cost')} value={formatCost(s.total_estimated_cost)} color="green" />
+                    <StatCard iconName={I.stopwatch} label={t('chatUsage.avgDuration', 'Avg Duration')} value={formatDuration(s.avg_duration_ms)} color="amber" />
+                    <StatCard iconName={I.bolt} label={t('chatUsage.avgTokens', 'Avg Tokens/Req')} value={formatNumber(s.avg_tokens_per_request)} color="cyan" />
+                    <StatCard iconName={I.fileText} label={t('chatUsage.totalChars', 'Response Chars')} value={formatNumber(s.total_response_chars)} color="rose" />
                   </div>
                 )}
               </div>
@@ -207,7 +203,7 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
 
               {sessionUsage.length > 0 && (
                 <div>
-                  <SectionHeader icon={Zap} title={t('chatUsage.currentSession', 'Current Session')} expanded={sections.session} onToggle={() => toggleSection('session')} />
+                  <SectionHeader iconName={I.bolt} title={t('chatUsage.currentSession', 'Current Session')} expanded={sections.session} onToggle={() => toggleSection('session')} />
                   {sections.session && (
                     <div className="mt-2 space-y-2">
                       <div className="flex items-center justify-between text-sm">
@@ -236,7 +232,7 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
               )}
 
               <div>
-                <SectionHeader icon={TrendingUp} title={t('chatUsage.dailyBreakdown', 'Daily Breakdown')} expanded={sections.daily} onToggle={() => toggleSection('daily')} />
+                <SectionHeader iconName={I.graphUp} title={t('chatUsage.dailyBreakdown', 'Daily Breakdown')} expanded={sections.daily} onToggle={() => toggleSection('daily')} />
                 {sections.daily && (
                   <div className="mt-2 space-y-1">
                     {(usage?.daily || []).length === 0 ? (
@@ -262,7 +258,7 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
               </div>
 
               <div>
-                <SectionHeader icon={Clock} title={t('chatUsage.peakHours', 'Usage by Hour')} expanded={sections.hourly} onToggle={() => toggleSection('hourly')} />
+                <SectionHeader iconName={I.clock} title={t('chatUsage.peakHours', 'Usage by Hour')} expanded={sections.hourly} onToggle={() => toggleSection('hourly')} />
                 {sections.hourly && (
                   <div className="mt-2">
                     {(usage?.hourly || []).length === 0 ? (
@@ -293,7 +289,7 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
               </div>
 
               <div>
-                <SectionHeader icon={Database} title={t('chatUsage.contextEnrichment', 'Context Enrichment')} expanded={sections.context} onToggle={() => toggleSection('context')} />
+                <SectionHeader iconName={I.database} title={t('chatUsage.contextEnrichment', 'Context Enrichment')} expanded={sections.context} onToggle={() => toggleSection('context')} />
                 {sections.context && (
                   <div className="mt-2 space-y-1">
                     {(usage?.contextStats || []).length === 0 ? (
@@ -311,7 +307,7 @@ const ChatUsagePanel = ({ visible, onClose, sessionUsage = [] }) => {
               </div>
 
               <div>
-                <SectionHeader icon={MessageSquare} title={t('chatUsage.recentHistory', 'Recent Messages')} expanded={sections.history} onToggle={() => toggleSection('history')} />
+                <SectionHeader iconName={I.chatSquare} title={t('chatUsage.recentHistory', 'Recent Messages')} expanded={sections.history} onToggle={() => toggleSection('history')} />
                 {sections.history && (
                   <div className="mt-2 space-y-1.5 max-h-64 overflow-y-auto">
                     {(usage?.recentSessions || []).length === 0 ? (

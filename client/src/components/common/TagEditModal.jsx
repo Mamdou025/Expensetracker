@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Plus, Trash2 } from 'lucide-react';
+import { Brand, BrandLine, I } from '../../ui/BrandIcon';
 import { useTranslation } from 'react-i18next';
 import { keywordMappingService } from '../../Services/keywordMappingService';
 
@@ -111,7 +111,7 @@ const TagEditModal = ({
               className="p-2 hover:bg-gray-800 rounded-full transition-colors duration-200 text-gray-400"
               disabled={isLoading}
             >
-              <X className="w-5 h-5" />
+              <Brand name={I.x} size={20} />
             </button>
           </div>
         </div>
@@ -138,7 +138,7 @@ const TagEditModal = ({
                       disabled={isLoading}
                       title="Remove tag"
                     >
-                      <Trash2 className="w-3 h-3" />
+                      <Brand name={I.trash} size={12} />
                     </button>
                   </div>
                 ))}
@@ -165,7 +165,7 @@ const TagEditModal = ({
                 disabled={!newTagName.trim() || isLoading}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
               >
-                <Plus className="w-4 h-4" />
+                <BrandLine name={I.plus} size={16} style={{ color: '#fff' }} />
                 Ajouter
               </button>
             </div>

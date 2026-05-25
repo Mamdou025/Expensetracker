@@ -1,9 +1,10 @@
 import React from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Brand, I } from '../../ui/BrandIcon';
 
 const ExpandableSection = ({
   title,
   icon: Icon,
+  iconName,
   isExpanded,
   onToggle,
   children,
@@ -20,7 +21,9 @@ const ExpandableSection = ({
         headerContent ? 'border-b border-gray-800' : ''
       }`}>
         <h3 className="font-medium text-sm text-gray-400 flex items-center gap-2 uppercase tracking-wide">
-          {Icon && <Icon className="w-4 h-4 text-gray-500" />}
+          {iconName
+            ? <Brand name={iconName} size={16} className="text-gray-500" />
+            : Icon && <Icon className="w-4 h-4 text-gray-500" />}
           {title}
         </h3>
         {showToggle && (
@@ -28,11 +31,7 @@ const ExpandableSection = ({
             onClick={onToggle}
             className="p-1 text-gray-500 hover:text-gray-300 transition-colors"
           >
-            {isExpanded ? (
-              <ChevronUp className="w-4 h-4" />
-            ) : (
-              <ChevronDown className="w-4 h-4" />
-            )}
+            <Brand name={isExpanded ? I.up : I.down} size={16} />
           </button>
         )}
       </div>
