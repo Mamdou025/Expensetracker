@@ -392,8 +392,8 @@ const EmailExtractionPage = () => {
                             {transaction.description || item.subject || '—'}
                           </span>
                           {isDuplicate && (
-                            <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide bg-amber-900/40 text-amber-300 border border-amber-800/60 px-1.5 py-0.5 rounded shrink-0">
-                              <Brand name={I.alert} size={12} accent="#fcd34d" />
+                            <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide bg-orange-900/30 text-orange-400 border border-orange-700/50 px-1.5 py-0.5 rounded shrink-0">
+                              <Brand name={I.alert} size={12} accent="#fb923c" />
                               {t('emailExtraction.duplicateBadge')}
                             </span>
                           )}
