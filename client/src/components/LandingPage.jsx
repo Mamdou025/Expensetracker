@@ -159,7 +159,7 @@ export default function LandingPage() {
   const [activeNavIndex, setActiveNavIndex] = useState(-1);
 
   return (
-    <div style={{ background: '#f0f4f8', color: '#0f172a', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif', overflowX: 'hidden' }}>
+    <div style={{ background: '#f0f4f8', color: '#0f172a', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
 
       {/* ── Background layers ───────────────────────────────────── */}
       <div aria-hidden style={{
