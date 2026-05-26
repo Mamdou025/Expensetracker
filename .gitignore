@@ -16,3 +16,6 @@ client/src/project_structure.txt
 credentials.yml
 
 Database/transactions.db
+
+# Build output — always regenerate after pulling, never commit
+client/build/

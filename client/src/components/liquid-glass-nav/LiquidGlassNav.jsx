@@ -3,7 +3,6 @@ import React, {
   useRef,
   useState,
   useCallback,
-  useId,
 } from 'react';
 import './liquid-glass-nav.css';
 
@@ -17,10 +16,7 @@ import './liquid-glass-nav.css';
  *   linkAs       – component used to render links (default: 'a')
  *                  pass Link from react-router-dom for SPA routing
  */
-const LiquidGlassNav = ({ items = [], activeIndex = 0, onSelect, linkAs: LinkAs = 'a' }) => {
-  const uid = useId().replace(/:/g, '');
-  const filterId = `lgn-filter-${uid}`;
-
+const LiquidGlassNav = ({ items = [], activeIndex = 0, onSelect, linkAs: LinkAs = 'a', className = '' }) => {
   const shellRef = useRef(null);
   const blobRef  = useRef(null);
   const itemRefs = useRef([]);
@@ -97,30 +93,7 @@ const LiquidGlassNav = ({ items = [], activeIndex = 0, onSelect, linkAs: LinkAs 
 
   return (
     <>
-      {/* Hidden SVG filter — displacement map for the refraction wobble */}
-      <svg className="lgn-svg-filters" aria-hidden="true">
-        <defs>
-          <filter id={filterId} x="-20%" y="-20%" width="140%" height="140%"
-                  colorInterpolationFilters="sRGB">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.018 0.025"
-              numOctaves="2"
-              seed="2"
-              result="noise"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale="7"
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
-        </defs>
-      </svg>
-
-      <div className="lgn-shell" ref={shellRef} role="navigation">
+      <div className={`lgn-shell${className ? ` ${className}` : ''}`} ref={shellRef} role="navigation">
         {/* Moving blob */}
         <div
           ref={blobRef}
@@ -129,7 +102,6 @@ const LiquidGlassNav = ({ items = [], activeIndex = 0, onSelect, linkAs: LinkAs 
             left:   blobStyle.left,
             width:  blobStyle.width,
             opacity: blobStyle.opacity,
-            filter: `url(#${filterId})`,
             transition: 'left 0.32s cubic-bezier(0.34,1.06,0.64,1), width 0.32s cubic-bezier(0.34,1.06,0.64,1)',
           }}
         />
