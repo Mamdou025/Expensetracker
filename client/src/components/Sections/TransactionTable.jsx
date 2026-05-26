@@ -33,7 +33,7 @@ const EditableTransactionRow = ({
   const isEditing = (field) => editingTransaction === `${transaction.id}-${field}`;
 
   return (
-    <tr className="hover:bg-gray-800/50 transition-colors duration-200">
+    <tr className="hover:bg-gray-700/20 transition-colors duration-200">
       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-300">
         {transaction.date}
       </td>

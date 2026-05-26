@@ -288,6 +288,15 @@ async function startServer() {
         });
     });
 
+    app.get('/api/transactions/:id/email', (req, res) => {
+        const { id } = req.params;
+        db.get('SELECT full_email FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], (err, row) => {
+            if (err) return res.status(500).json({ error: err.message });
+            if (!row) return res.status(404).json({ error: 'Transaction not found' });
+            res.json({ full_email: row.full_email || '' });
+        });
+    });
+
     app.get('/api/transactions/:id/tags', (req, res) => {
         const { id } = req.params;
         // Verify ownership of the transaction first
