@@ -369,9 +369,7 @@ const EmailExtractionPage = () => {
                   return (
                     <tr
                       key={item.queueId}
-                      className={`text-gray-300 hover:bg-gray-800/40 ${
-                        isDuplicate ? 'bg-amber-900/10' : ''
-                      } ${isSelected ? 'bg-blue-900/10' : ''}`}
+                      className={`text-gray-300 hover:bg-gray-800/40 ${isSelected ? 'bg-blue-900/10' : ''}`}
                     >
                       <td className="px-4 py-3">
                         <input
