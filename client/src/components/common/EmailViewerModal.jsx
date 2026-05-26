@@ -46,11 +46,19 @@ const EmailViewerModal = ({ isOpen, onClose, transaction, html }) => {
             <Brand name={I.x} size={20} />
           </button>
         </div>
-        <div className="p-6 overflow-auto flex-1 bg-gray-800">
+        <div className="flex-1 overflow-hidden">
           {loading ? (
-            <div className="text-center text-sm text-gray-500">Chargement…</div>
+            <div className="text-center text-sm text-gray-500 p-6">Chargement…</div>
+          ) : emailHtml ? (
+            <iframe
+              srcDoc={emailHtml}
+              title="Email preview"
+              sandbox="allow-same-origin"
+              className="w-full h-full border-0"
+              style={{ minHeight: '500px' }}
+            />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: emailHtml }} />
+            <div className="text-center text-sm text-gray-500 p-6">Aucun contenu disponible.</div>
           )}
         </div>
         <div className="p-6 border-t border-gray-800 flex justify-end">

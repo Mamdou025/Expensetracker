@@ -404,7 +404,7 @@ const EmailExtractionPage = () => {
                       <td className="px-4 py-3 text-gray-400">{transaction.bank || '—'}</td>
                       <td className="px-4 py-3 text-center">
                         <button
-                          onClick={() => viewEmail(transaction.full_email || item.email || '')}
+                          onClick={() => viewEmail(transaction.full_email || item.email?.full_email_html || '')}
                           className="inline-flex items-center justify-center w-7 h-7 rounded text-gray-400 hover:text-blue-400 hover:bg-gray-800"
                           title={t('queue.table.viewEmail')}
                           aria-label={t('queue.table.viewEmail')}
