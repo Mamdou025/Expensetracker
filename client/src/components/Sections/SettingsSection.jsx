@@ -7,6 +7,7 @@ import CategoryManager from '../Settings/CategoryManager';
 import TagManager from '../Settings/TagManager';
 import MappingsSettings from '../Settings/MappingsSettings';
 import AddTransactionForm from '../Settings/AddTransactionForm';
+import AiCategorization from '../Settings/AiCategorization';
 
 const SettingsSection = ({
   isExpanded,
@@ -39,7 +40,7 @@ const SettingsSection = ({
 
   const settingsTabs = isExpanded ? (
     <div className="flex gap-1">
-      {['display', 'categories', 'tags', 'mappings', 'transactions'].map((tab) => (
+      {['display', 'categories', 'tags', 'mappings', 'transactions', 'ai'].map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveTab(tab)}
@@ -90,6 +91,8 @@ const SettingsSection = ({
         );
       case 'mappings':
         return <MappingsSettings />;
+      case 'ai':
+        return <AiCategorization />;
       case 'transactions':
         return (
           <AddTransactionForm

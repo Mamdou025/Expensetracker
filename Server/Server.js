@@ -1166,6 +1166,145 @@ Important: All amounts are in Canadian dollars (CAD). When showing amounts, use 
         });
     });
 
+    // ===== AI Categorization =====
+    app.post('/api/ai-categorize', async (req, res) => {
+        if (!openaiClient) return res.status(503).json({ error: 'AI not configured (no API key)' });
+        try {
+            const { mode = 'uncategorized' } = req.body;
+
+            const txQuery = mode === 'uncategorized'
+                ? `SELECT id, description, bank, amount, category FROM transactions
+                   WHERE user_id = ? AND (category IS NULL OR category = '' OR LOWER(category) IN ('uncategorized','miscellaneous'))
+                   ORDER BY date DESC LIMIT 150`
+                : `SELECT id, description, bank, amount, category FROM transactions
+                   WHERE user_id = ? ORDER BY date DESC LIMIT 200`;
+
+            const [transactions, catRows, tagRows] = await Promise.all([
+                queryDb(txQuery, [req.userId]),
+                queryDb(`SELECT DISTINCT category FROM transactions WHERE user_id = ? AND category IS NOT NULL AND category != '' ORDER BY category`, [req.userId]),
+                queryDb(`SELECT DISTINCT g.tag_name FROM tags g JOIN transaction_tags tt ON g.id = tt.tag_id JOIN transactions t ON tt.transaction_id = t.id WHERE t.user_id = ? ORDER BY g.tag_name`, [req.userId]),
+            ]);
+
+            if (transactions.length === 0) return res.json({ suggestions: [], total: 0 });
+
+            const categories = [...new Set(catRows.map(r => r.category))].filter(Boolean);
+            const existingTags = tagRows.map(r => r.tag_name).filter(Boolean);
+
+            const BATCH = 30;
+            const suggestions = [];
+            const modelName = 'gpt-4o-mini';
+
+            for (let i = 0; i < transactions.length; i += BATCH) {
+                const batch = transactions.slice(i, i + BATCH);
+                const txList = batch.map(t => ({
+                    id: t.id,
+                    description: t.description,
+                    bank: t.bank,
+                    amount: t.amount,
+                    current_category: t.category || null,
+                }));
+
+                const systemPrompt = `You are a personal finance transaction categorizer. Assign each transaction a category and relevant tags.
+
+Available categories (use ONLY these): ${categories.join(', ')}
+
+Common existing tags (prefer these when relevant, but you may create new ones): ${existingTags.slice(0, 40).join(', ')}
+
+Rules:
+- Pick the single best matching category from the list
+- Add 0–3 tags only if clearly relevant
+- confidence: "high" if obvious, "medium" if reasonable, "low" if uncertain
+- reason: 5 words max explaining the choice
+
+Return ONLY a JSON array, no markdown, no extra text:
+[{"id": <number>, "category": "<string>", "tags": ["<string>"], "confidence": "high|medium|low", "reason": "<string>"}]`;
+
+                const resp = await openaiClient.chat.completions.create({
+                    model: modelName,
+                    temperature: 0.1,
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: JSON.stringify(txList) },
+                    ],
+                });
+
+                let parsed = [];
+                try {
+                    const raw = resp.choices[0].message.content.trim();
+                    parsed = JSON.parse(raw.replace(/^```json\s*/,'').replace(/\s*```$/,''));
+                } catch (e) {
+                    console.error('AI categorize parse error:', e.message);
+                }
+
+                for (const suggestion of parsed) {
+                    const original = batch.find(t => t.id === suggestion.id);
+                    if (original) {
+                        suggestions.push({
+                            id: suggestion.id,
+                            description: original.description,
+                            bank: original.bank,
+                            amount: original.amount,
+                            current_category: original.category || null,
+                            suggested_category: suggestion.category,
+                            suggested_tags: Array.isArray(suggestion.tags) ? suggestion.tags : [],
+                            confidence: suggestion.confidence || 'medium',
+                            reason: suggestion.reason || '',
+                        });
+                    }
+                }
+            }
+
+            res.json({ suggestions, total: transactions.length });
+        } catch (err) {
+            console.error('AI categorize error:', err);
+            res.status(500).json({ error: err.message || 'AI categorization failed' });
+        }
+    });
+
+    app.post('/api/ai-categorize/apply', async (req, res) => {
+        try {
+            const { updates } = req.body;
+            if (!Array.isArray(updates) || updates.length === 0) {
+                return res.status(400).json({ error: 'updates array required' });
+            }
+
+            let applied = 0;
+            for (const u of updates) {
+                const { id, category, tags = [] } = u;
+                if (!id || !category) continue;
+
+                const owns = await new Promise((resolve, reject) => {
+                    db.get('SELECT id FROM transactions WHERE id = ? AND user_id = ?', [id, req.userId], (e, r) => e ? reject(e) : resolve(!!r));
+                });
+                if (!owns) continue;
+
+                await new Promise((resolve, reject) => {
+                    db.run('UPDATE transactions SET category = ? WHERE id = ? AND user_id = ?', [category, id, req.userId], (e) => e ? reject(e) : resolve());
+                });
+
+                for (const tag of tags) {
+                    await new Promise((resolve, reject) => {
+                        db.run('INSERT OR IGNORE INTO tags (tag_name) VALUES (?)', [tag], (e) => e ? reject(e) : resolve());
+                    });
+                    const tagId = await new Promise((resolve, reject) => {
+                        db.get('SELECT id FROM tags WHERE tag_name = ?', [tag], (e, row) => e ? reject(e) : resolve(row?.id));
+                    });
+                    if (tagId) {
+                        await new Promise((resolve, reject) => {
+                            db.run('INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) VALUES (?, ?)', [id, tagId], (e) => e ? reject(e) : resolve());
+                        });
+                    }
+                }
+                applied++;
+            }
+
+            res.json({ applied });
+        } catch (err) {
+            console.error('AI categorize apply error:', err);
+            res.status(500).json({ error: err.message || 'Failed to apply suggestions' });
+        }
+    });
+
     // ===== Static React build (must be last) =====
     const clientBuildPath = getClientBuildPath();
     const clientIndexPath = path.join(clientBuildPath, 'index.html');
