@@ -940,10 +940,12 @@ async function startServer() {
 
     // ===== Chat (uses authenticated user's data context) =====
     const OpenAI = require('openai');
-    const openaiClient = new OpenAI({
-        apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
-        baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-    });
+    const openaiClient = process.env.AI_INTEGRATIONS_OPENAI_API_KEY
+        ? new OpenAI({
+            apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+            baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+          })
+        : null;
 
     async function gatherFinancialContext(userId) {
         const [summary, categories, banks, tags, recentTxns, monthlySpending] = await Promise.all([
@@ -990,6 +992,7 @@ ${JSON.stringify(recentTxns)}`;
     }
 
     app.post('/api/chat', async (req, res) => {
+        if (!openaiClient) return res.status(503).json({ error: 'AI chat is not configured (no API key)' });
         try {
             const { message, history = [] } = req.body;
             if (!message) return res.status(400).json({ error: 'Message is required' });
@@ -1159,7 +1162,8 @@ Important: All amounts are in Canadian dollars (CAD). When showing amounts, use 
     const clientIndexPath = path.join(clientBuildPath, 'index.html');
     if (fs.existsSync(clientIndexPath)) {
         app.use(express.static(clientBuildPath));
-        app.get('*', (req, res, next) => {
+        app.use((req, res, next) => {
+            if (req.method !== 'GET') return next();
             if (req.path.startsWith('/api/')) return next();
             return res.sendFile(clientIndexPath);
         });

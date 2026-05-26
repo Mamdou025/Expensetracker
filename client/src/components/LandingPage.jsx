@@ -1,427 +1,491 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import TransactionDashboard from './TransactionDashboard';
 import AuthForm from './AuthForm';
 import { Brand, I } from '../ui/BrandIcon';
-import LiquidGlass from '../lib/liquid-glass';
 
-/* Lime-mat hero frame */
-const LimeFrame = ({ src, alt }) => (
-  <div className="relative mx-auto w-full max-w-5xl">
-    <div
-      aria-hidden="true"
-      className="absolute -inset-8 rounded-[48px] pointer-events-none"
-      style={{
-        background: 'radial-gradient(closest-side, rgba(52,211,153,0.45), transparent 70%)',
-        filter: 'blur(32px)',
-      }}
-    />
-    <div
-      className="relative rounded-3xl p-3 sm:p-5"
-      style={{ backgroundColor: '#bbf7d0' }}
-    >
-      <img
-        src={src}
-        alt={alt}
-        className="block w-full h-auto rounded-2xl shadow-2xl"
-      />
-    </div>
+/* ── Brand ─────────────────────────────────────────────────────── */
+const EM = '#34d399';
+
+/* ── Logo ──────────────────────────────────────────────────────── */
+const Logo = ({ size = 'sm' }) => (
+  <span style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontWeight: 800, fontSize: size === 'lg' ? 22 : 15, letterSpacing: '-0.5px' }}>
+    <span style={{ color: EM }}>[</span>
+    <span style={{ color: '#f3f4f6' }}>xt</span>
+    <span style={{ color: EM }}>]</span>
+  </span>
+);
+
+/* ── Section label ──────────────────────────────────────────────── */
+const Label = ({ children }) => (
+  <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#64748b', marginBottom: 12 }}>
+    {children}
+  </p>
+);
+
+/* ── Feature chip (bank badge) ──────────────────────────────────── */
+const Chip = ({ children }) => (
+  <span style={{
+    display: 'inline-flex', alignItems: 'center', gap: 6,
+    padding: '5px 12px', borderRadius: 999,
+    background: 'rgba(255,255,255,0.04)',
+    border: '1px solid rgba(255,255,255,0.09)',
+    fontSize: 12, color: '#94a3b8', whiteSpace: 'nowrap',
+  }}>
+    {children}
+  </span>
+);
+
+/* ── Card ───────────────────────────────────────────────────────── */
+const Card = ({ children, style = {}, accent = false }) => (
+  <div style={{
+    background: accent ? 'rgba(52,211,153,0.05)' : 'rgba(255,255,255,0.03)',
+    border: `1px solid ${accent ? 'rgba(52,211,153,0.22)' : 'rgba(255,255,255,0.07)'}`,
+    borderRadius: 20,
+    padding: 28,
+    ...style,
+  }}>
+    {children}
   </div>
 );
 
-/* Feature card using real LiquidGlass */
-const GlassCard = ({ icon, title, body, accent = false }) => (
-  <LiquidGlass
-    noFloat
-    cornerRadius={20}
-    padding="24px"
-    displacementScale={80}
-    blurAmount={0.3}
-    saturation={160}
-    aberrationIntensity={3}
-    style={{
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      ...(accent ? { outline: '1px solid rgba(52,211,153,0.3)' } : {}),
-    }}
-  >
-    <div className="flex flex-col gap-3">
-      <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center"
-        style={{ background: 'rgba(52,211,153,0.15)', border: '1px solid rgba(52,211,153,0.25)' }}
-      >
-        <Brand name={icon} size={22} />
-      </div>
-      <div className="text-sm font-semibold text-gray-100">{title}</div>
-      <div className="text-xs text-gray-400 leading-relaxed">{body}</div>
-    </div>
-  </LiquidGlass>
-);
-
-/* Ambient color blobs */
-const Ambient = () => (
-  <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-    <div
-      className="absolute -top-24 -left-24 w-[65vw] h-[65vw] rounded-full"
-      style={{
-        background: 'radial-gradient(closest-side, rgba(52,211,153,0.55), transparent 70%)',
-        filter: 'blur(40px)',
-      }}
-    />
-    <div
-      className="absolute top-[15%] -right-32 w-[60vw] h-[60vw] rounded-full"
-      style={{
-        background: 'radial-gradient(closest-side, rgba(132,204,22,0.45), transparent 70%)',
-        filter: 'blur(55px)',
-      }}
-    />
-    <div
-      className="absolute top-[52%] -left-20 w-[55vw] h-[55vw] rounded-full"
-      style={{
-        background: 'radial-gradient(closest-side, rgba(16,185,129,0.50), transparent 70%)',
-        filter: 'blur(45px)',
-      }}
-    />
-    <div
-      className="absolute bottom-[8%] right-[5%] w-[50vw] h-[50vw] rounded-full"
-      style={{
-        background: 'radial-gradient(closest-side, rgba(52,211,153,0.40), transparent 70%)',
-        filter: 'blur(50px)',
-      }}
-    />
+/* ── Icon box ───────────────────────────────────────────────────── */
+const IconBox = ({ name, color = EM, bg = 'rgba(52,211,153,0.10)', border = 'rgba(52,211,153,0.20)' }) => (
+  <div style={{
+    width: 40, height: 40, borderRadius: 12, flexShrink: 0,
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    background: bg, border: `1px solid ${border}`,
+  }}>
+    <Brand name={name} size={20} accent={color} />
   </div>
 );
 
-const LandingPage = () => {
-  const pageRef = useRef(null);
+/* ── Step number ────────────────────────────────────────────────── */
+const StepNum = ({ n }) => (
+  <div style={{
+    width: 32, height: 32, borderRadius: 999, flexShrink: 0,
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    background: 'rgba(52,211,153,0.10)', border: '1px solid rgba(52,211,153,0.25)',
+    fontSize: 13, fontWeight: 700, color: EM,
+  }}>
+    {n}
+  </div>
+);
+
+/* ── Screenshot frame ───────────────────────────────────────────── */
+const Shot = ({ src, alt }) => (
+  <div style={{
+    borderRadius: 16, overflow: 'hidden',
+    border: '1px solid rgba(255,255,255,0.07)',
+    boxShadow: '0 24px 64px rgba(0,0,0,0.55)',
+    background: '#0a0f18',
+  }}>
+    <img src={src} alt={alt} style={{ display: 'block', width: '100%', height: 'auto' }} loading="lazy" />
+  </div>
+);
+
+const BANKS     = ['CIBC', 'RBC', 'MBNA', 'Capital One', 'Neo', 'Neo World Elite', 'Triangle'];
+const COMING    = ['TD', 'BMO', 'Scotiabank', 'Desjardins', 'Tangerine', 'Simplii', 'EQ Bank'];
+
+/* ════════════════════════════════════════════════════════════════════
+   LANDING PAGE
+════════════════════════════════════════════════════════════════════ */
+export default function LandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div ref={pageRef} className="relative min-h-screen pb-16">
-      <Ambient />
+    <div style={{ background: '#050a10', color: '#e2e8f0', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
 
-      {/* ══════ HERO ══════ */}
-      <section className="relative pt-10 sm:pt-16 px-4 max-w-6xl mx-auto">
+      {/* subtle grid texture */}
+      <div aria-hidden style={{
+        position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0,
+        backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)',
+        backgroundSize: '48px 48px',
+      }} />
 
-        {/* Announcement chip */}
-        <div className="mb-8">
-          <LiquidGlass
-            noFloat
-            cornerRadius={999}
-            padding="6px 16px"
-            displacementScale={60}
-            blurAmount={0.15}
-            saturation={150}
-            aberrationIntensity={2}
-          >
-            <div className="inline-flex items-center gap-2 text-xs text-gray-200 cursor-default">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Plaid en route — connexion bancaire directe bientôt disponible
-              <Brand name={I.arrowRight} size={12} />
+      {/* top glow */}
+      <div aria-hidden style={{
+        position: 'fixed', top: -200, left: '30%', width: 600, height: 600,
+        borderRadius: '50%', pointerEvents: 'none', zIndex: 0,
+        background: 'radial-gradient(closest-side, rgba(52,211,153,0.12), transparent)',
+        filter: 'blur(40px)',
+      }} />
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
+
+        {/* ═══ NAV ═════════════════════════════════════════════ */}
+        <header style={{
+          position: 'sticky', top: 0, zIndex: 50,
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(5,10,16,0.85)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+        }}>
+          <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <Logo />
+              <span style={{ fontSize: 13, fontWeight: 600, color: '#94a3b8' }}>exptrackr</span>
             </div>
-          </LiquidGlass>
-        </div>
-
-        {/* Headline + CTAs split */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-7xl font-semibold text-white tracking-tight leading-[1.02]">
-              Reprenez le contrôle<br />
-              <span className="text-emerald-400">de vos finances</span><br />
-              canadiennes.
-            </h1>
-            <p className="text-gray-400 text-lg mt-6 max-w-xl">
-              Lisez vos relevés PDF, courriels bancaires et bientôt vos comptes en direct.
-              CIBC, RBC, MBNA, Capital One, Neo et plus.
-            </p>
-            <div className="mt-5 flex items-center gap-2 text-sm text-gray-400">
-              <span className="text-emerald-400 tracking-widest">★★★★★</span>
-              <span>4.9 / 5 — utilisateurs en bêta privée</span>
-            </div>
+            <nav style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+              <div style={{ display: 'flex', gap: 24, fontSize: 13, color: '#64748b' }} className="hidden md:flex">
+                {[['#features','Fonctionnalités'],['#banks','Banques'],['#demo','Démo']].map(([href,label]) => (
+                  <a key={href} href={href} style={{ color: '#64748b', textDecoration: 'none', transition: 'color .15s' }}
+                    onMouseEnter={e=>e.target.style.color='#e2e8f0'} onMouseLeave={e=>e.target.style.color='#64748b'}>{label}</a>
+                ))}
+              </div>
+              <a href="#cta" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                padding: '7px 18px', borderRadius: 10,
+                background: EM, color: '#050a10',
+                fontSize: 13, fontWeight: 700, textDecoration: 'none',
+                transition: 'background .15s',
+              }}
+                onMouseEnter={e=>e.currentTarget.style.background='#6ee7b7'}
+                onMouseLeave={e=>e.currentTarget.style.background=EM}
+              >
+                Commencer <Brand name={I.arrowRight} size={13} accent="#050a10" />
+              </a>
+            </nav>
           </div>
+        </header>
+
+        {/* ═══ HERO ════════════════════════════════════════════ */}
+        <section style={{ maxWidth: 1120, margin: '0 auto', padding: '80px 24px 0' }}>
+
+          {/* badge */}
+          <div style={{ marginBottom: 24 }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '5px 14px', borderRadius: 999,
+              background: 'rgba(52,211,153,0.08)',
+              border: '1px solid rgba(52,211,153,0.20)',
+              fontSize: 12, fontWeight: 600, color: EM,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: EM, animation: 'pulse 2s infinite' }} />
+              Connexion bancaire directe avec Plaid — bientôt disponible
+            </span>
+          </div>
+
+          {/* headline */}
+          <h1 style={{ fontSize: 'clamp(38px, 6vw, 72px)', fontWeight: 700, lineHeight: 1.07, letterSpacing: '-0.03em', color: '#f8fafc', marginBottom: 24, maxWidth: 800 }}>
+            Vos finances canadiennes,<br />
+            <span style={{ color: EM }}>enfin sous contrôle.</span>
+          </h1>
+
+          <p style={{ fontSize: 18, color: '#64748b', maxWidth: 520, lineHeight: 1.65, marginBottom: 36 }}>
+            Importez vos relevés PDF, vos courriels bancaires, catégorisez automatiquement et analysez vos dépenses — le tout en privé.
+          </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 lg:items-end">
-            <a
-              href="#cta"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-gray-950 bg-emerald-400 hover:bg-emerald-300 transition-colors shadow-lg shadow-emerald-400/20"
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', marginBottom: 72 }}>
+            <a href="#cta" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '13px 28px', borderRadius: 12,
+              background: EM, color: '#050a10',
+              fontSize: 15, fontWeight: 700, textDecoration: 'none',
+              boxShadow: '0 0 32px rgba(52,211,153,0.25)',
+            }}
+              onMouseEnter={e=>e.currentTarget.style.background='#6ee7b7'}
+              onMouseLeave={e=>e.currentTarget.style.background=EM}
             >
               Commencer gratuitement
-              <Brand name={I.arrowRight} size={14} accent="#0a0a0a" />
+              <Brand name={I.arrowRight} size={16} accent="#050a10" />
             </a>
-            <LiquidGlass
-              noFloat
-              cornerRadius={12}
-              padding="12px 24px"
-              displacementScale={55}
-              blurAmount={0.1}
-              saturation={140}
-              aberrationIntensity={2}
-              onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
+            <a href="#demo" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '13px 24px', borderRadius: 12,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              fontSize: 15, fontWeight: 600, color: '#94a3b8', textDecoration: 'none',
+            }}
+              onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,255,255,0.08)';e.currentTarget.style.color='#e2e8f0'}}
+              onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,0.05)';e.currentTarget.style.color='#94a3b8'}}
             >
-              <span className="inline-flex items-center gap-2 text-sm font-medium text-gray-300">
-                <Brand name={I.play} size={15} />
-                Voir la démo
-              </span>
-            </LiquidGlass>
+              <Brand name={I.play} size={16} />
+              Voir la démo
+            </a>
+            <span style={{ fontSize: 13, color: '#64748b', paddingLeft: 4 }}>
+              <span style={{ color: EM }}>★★★★★</span>  Bêta privée
+            </span>
           </div>
-        </div>
 
-        {/* Hero screenshot in lime mat */}
-        <LimeFrame
-          src="/landing/dashboard.jpg"
-          alt="Tableau de bord exptrackr"
-        />
-      </section>
+          {/* hero screenshot */}
+          <Shot src="/landing/dashboard.jpg" alt="Tableau de bord exptrackr" />
+        </section>
 
-      {/* ══════ BANKS STRIP ══════ */}
-      <section className="relative mt-20 px-4 text-center">
-        <p className="text-xs text-gray-500 uppercase tracking-widest mb-5">
-          Relevés pris en charge
-        </p>
-        <div className="flex flex-wrap justify-center gap-2">
-          {['CIBC', 'RBC', 'MBNA', 'Capital One', 'Neo', 'Neo World Elite', 'Triangle'].map(b => (
-            <LiquidGlass
-              key={b}
-              noFloat
-              cornerRadius={999}
-              padding="8px 16px"
-              displacementScale={55}
-              blurAmount={0.1}
-              saturation={140}
-              aberrationIntensity={2}
-            >
-              <span className="inline-flex items-center gap-2 text-xs text-gray-200 font-medium">
-                <Brand name={I.bank} size={13} />
-                {b}
-              </span>
-            </LiquidGlass>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════ 3 GLASS CARDS ══════ */}
-      <section className="relative mt-20 px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <p className="text-xs text-gray-500 uppercase tracking-widest mb-3">Fonctionnalités</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
-            Vos finances, enfin claires.
-          </h2>
-        </div>
-
-        <div className="grid sm:grid-cols-3 gap-5">
-          <GlassCard
-            accent
-            icon={I.uploadCloud}
-            title="Import PDF en secondes"
-            body="Glissez votre relevé — exptrackr détecte la banque, extrait les transactions et signale les doublons automatiquement."
-          />
-          <GlassCard
-            icon={I.tag}
-            title="Catégorisation intelligente"
-            body="Vos règles s'appliquent à chaque transaction : épicerie, transport, restaurants, abonnements — tout est trié."
-          />
-          <GlassCard
-            icon={I.message}
-            title="Assistant IA 24/7"
-            body="Posez vos questions en langage naturel et obtenez des réponses tirées de vos vraies données financières."
-          />
-        </div>
-      </section>
-
-      {/* ══════ PDF SCREENSHOT ══════ */}
-      <section className="relative mt-24 px-4 max-w-6xl mx-auto">
-        <LiquidGlass
-          noFloat
-          cornerRadius={24}
-          padding="40px"
-          displacementScale={90}
-          blurAmount={0.35}
-          saturation={160}
-          aberrationIntensity={3}
-          style={{ display: 'block', width: '100%' }}
-        >
-          <div className="mb-6 max-w-xl">
-            <p className="text-xs text-gray-500 uppercase tracking-widest mb-3">Import en temps réel</p>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-2">
-              Vos relevés, prêts en quelques secondes.
-            </h3>
-            <p className="text-gray-400 text-sm">
-              Formats CIBC Visa, RBC, MBNA, Capital One, Neo reconnus automatiquement —
-              en français comme en anglais. Aucun fichier conservé sur nos serveurs.
-            </p>
+        {/* ═══ METRICS ════════════════════════════════════════ */}
+        <section style={{ maxWidth: 1120, margin: '64px auto 0', padding: '0 24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+            {[
+              { val: '7',    sub: 'banques canadiennes',  icon: I.bank,    color: EM,        bg: 'rgba(52,211,153,0.08)',   bd: 'rgba(52,211,153,0.18)' },
+              { val: '100%', sub: 'données privées',      icon: I.shield,  color: '#22d3ee', bg: 'rgba(6,182,212,0.08)',   bd: 'rgba(6,182,212,0.18)' },
+              { val: 'Free', sub: 'open source',          icon: I.bolt,    color: '#a78bfa', bg: 'rgba(139,92,246,0.08)',  bd: 'rgba(139,92,246,0.18)' },
+            ].map(({ val, sub, icon, color, bg, bd }) => (
+              <Card key={sub}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <IconBox name={icon} color={color} bg={bg} border={bd} />
+                  <div>
+                    <div style={{ fontSize: 22, fontWeight: 800, color: '#f8fafc', lineHeight: 1 }}>{val}</div>
+                    <div style={{ fontSize: 12, color: '#64748b', marginTop: 3 }}>{sub}</div>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
-          <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-            <img
-              src="/landing/pdf-import.jpg"
-              alt="Import PDF exptrackr"
-              className="block w-full h-auto"
-              loading="lazy"
-            />
+        </section>
+
+        {/* ═══ BANKS ══════════════════════════════════════════ */}
+        <section id="banks" style={{ maxWidth: 1120, margin: '64px auto 0', padding: '0 24px', textAlign: 'center' }}>
+          <Label>Relevés pris en charge dès maintenant</Label>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8 }}>
+            {BANKS.map(b => (
+              <Chip key={b}><Brand name={I.bank} size={12} accent={EM} />{b}</Chip>
+            ))}
           </div>
-        </LiquidGlass>
-      </section>
+        </section>
 
-      {/* ══════ QUOTE ══════ */}
-      <section className="relative mt-24 px-4 max-w-3xl mx-auto text-center">
-        <p className="text-2xl sm:text-3xl text-white font-medium leading-snug">
-          « En un après-midi j'ai importé deux ans de relevés CIBC et MBNA.
-          Pour la première fois, je sais vraiment où passe mon argent. »
-        </p>
-        <div className="mt-6 inline-flex items-center gap-3 text-sm text-gray-400">
-          <LiquidGlass
-            noFloat
-            cornerRadius={999}
-            padding="10px 14px"
-            displacementScale={50}
-            blurAmount={0.1}
-            saturation={140}
-            aberrationIntensity={2}
-          >
-            <span className="text-xs font-bold text-emerald-400">MJ</span>
-          </LiquidGlass>
-          <span>Marc J. — Bêta-testeur, Montréal</span>
-        </div>
-      </section>
-
-      {/* ══════ PLAID COMING SOON ══════ */}
-      <section className="relative mt-24 px-4 max-w-6xl mx-auto">
-        <LiquidGlass
-          noFloat
-          cornerRadius={24}
-          padding="48px 48px"
-          displacementScale={90}
-          blurAmount={0.35}
-          saturation={160}
-          aberrationIntensity={3}
-          style={{ display: 'block', width: '100%', outline: '1px solid rgba(52,211,153,0.2)' }}
-        >
-          <div className="max-w-xl">
-            <p className="text-xs text-emerald-400 uppercase tracking-widest font-semibold mb-3">Bientôt</p>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-3">
-              Connexion bancaire directe avec Plaid.
-            </h3>
-            <p className="text-gray-400 text-sm mb-6">
-              Fini les imports manuels — connectez CIBC, RBC, TD, BMO, Scotiabank,
-              Desjardins, Tangerine, Simplii et plus. Vos transactions arrivent automatiquement.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {['TD', 'BMO', 'Scotiabank', 'Desjardins', 'Tangerine', 'Simplii', 'EQ Bank'].map(b => (
-                <LiquidGlass
-                  key={b}
-                  noFloat
-                  cornerRadius={999}
-                  padding="4px 12px"
-                  displacementScale={45}
-                  blurAmount={0.08}
-                  saturation={130}
-                  aberrationIntensity={1.5}
-                >
-                  <span className="inline-flex items-center gap-1.5 text-[11px] text-gray-300">
-                    <Brand name={I.bank} size={11} />{b}
-                  </span>
-                </LiquidGlass>
-              ))}
-            </div>
+        {/* ═══ FEATURES ═══════════════════════════════════════ */}
+        <section id="features" style={{ maxWidth: 1120, margin: '80px auto 0', padding: '0 24px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <Label>Fonctionnalités</Label>
+            <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 700, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+              Tout ce qu'il faut.<br />
+              <span style={{ color: EM }}>Rien de superflu.</span>
+            </h2>
           </div>
-        </LiquidGlass>
-      </section>
 
-      {/* ══════ CTA + AUTH ══════ */}
-      <section id="cta" className="relative mt-24 px-4 max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-5">
-          {/* Left — CTA card */}
-          <LiquidGlass
-            noFloat
-            cornerRadius={24}
-            padding="48px 32px"
-            displacementScale={90}
-            blurAmount={0.35}
-            saturation={160}
-            aberrationIntensity={3}
-            style={{ display: 'block', width: '100%', height: '100%' }}
-          >
-            <div className="flex flex-col justify-between h-full">
+          {/* 2+1 bento */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto', gap: 16 }}>
+
+            {/* Large — PDF import with screenshot */}
+            <Card accent style={{ gridRow: '1 / 3', display: 'flex', flexDirection: 'column', gap: 20 }}>
               <div>
-                <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-4">
-                  Commencez à reprendre le contrôle.
-                </h2>
-                <p className="text-gray-400 text-sm">
-                  Créez votre compte en moins d'une minute. Aucune carte de crédit requise.
+                <IconBox name={I.uploadCloud} />
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: '#f8fafc', margin: '16px 0 8px' }}>Import PDF en quelques secondes</h3>
+                <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6 }}>
+                  Glissez votre relevé — exptrackr détecte la banque, extrait les transactions et propose les catégories automatiquement. Aucun fichier conservé sur nos serveurs.
                 </p>
               </div>
-              <div className="mt-8 flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs text-gray-400">
-                  <span className="w-5 h-5 rounded-full bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">✓</span>
-                  Données 100 % privées
+              <Shot src="/landing/pdf-import.jpg" alt="Import PDF" />
+            </Card>
+
+            {/* Catégorisation */}
+            <Card style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <IconBox name={I.tag} />
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#f8fafc', margin: '4px 0 4px' }}>Catégorisation automatique</h3>
+              <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6 }}>
+                Créez des règles par mot-clé. Épicerie, transport, restaurants — tout est trié à l'import, sans effort.
+              </p>
+            </Card>
+
+            {/* AI chat */}
+            <Card style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <IconBox name={I.message} color="#a78bfa" bg="rgba(139,92,246,0.10)" border="rgba(139,92,246,0.22)" />
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#f8fafc', margin: '4px 0 4px' }}>Assistant IA 24/7</h3>
+              <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6 }}>
+                Posez vos questions en français. Obtenez des réponses basées sur vos vraies données financières.
+              </p>
+            </Card>
+
+          </div>
+        </section>
+
+        {/* ═══ SCREENSHOT: AI CHAT ════════════════════════════ */}
+        <section style={{ maxWidth: 1120, margin: '64px auto 0', padding: '0 24px' }}>
+          <Card style={{ padding: 40 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 12px', borderRadius: 999, background: 'rgba(139,92,246,0.10)', border: '1px solid rgba(139,92,246,0.22)', marginBottom: 16 }}>
+                  <Brand name={I.message} size={13} accent="#a78bfa" />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', letterSpacing: '0.08em', textTransform: 'uppercase' }}>IA Financière</span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-gray-400">
-                  <span className="w-5 h-5 rounded-full bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">✓</span>
-                  7 banques canadiennes prises en charge
+                <h3 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, color: '#f8fafc', letterSpacing: '-0.02em', marginBottom: 14, lineHeight: 1.2 }}>
+                  Posez vos questions,<br />obtenez des réponses.
+                </h3>
+                <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.7, marginBottom: 20 }}>
+                  L'assistant connaît vos vraies données. Analysez vos habitudes, identifiez les dépenses inutiles, planifiez mieux.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {[
+                    'Combien ai-je dépensé en restaurants en mars ?',
+                    'Quelle est ma banque avec le plus de frais ?',
+                    'Montre-moi mes dépenses fixes ce mois-ci.',
+                  ].map(q => (
+                    <div key={q} style={{ display: 'flex', gap: 8, fontSize: 13, color: '#64748b' }}>
+                      <span style={{ color: EM, flexShrink: 0 }}>›</span>{q}
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center gap-3 text-xs text-gray-400">
-                  <span className="w-5 h-5 rounded-full bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">✓</span>
-                  Aucun abonnement — open source
+              </div>
+              <Shot src="/landing/chat.jpg" alt="Assistant IA exptrackr" />
+            </div>
+          </Card>
+        </section>
+
+        {/* ═══ HOW IT WORKS ════════════════════════════════════ */}
+        <section style={{ maxWidth: 1120, margin: '80px auto 0', padding: '0 24px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <Label>Comment ça marche</Label>
+            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 36px)', fontWeight: 700, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+              Opérationnel en 3 minutes.
+            </h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+            {[
+              { n: '01', icon: I.uploadCloud, title: 'Importez vos relevés', body: 'Glissez vos PDF bancaires ou connectez votre Gmail. exptrackr extrait tout automatiquement.', color: EM, bg: 'rgba(52,211,153,0.08)', bd: 'rgba(52,211,153,0.18)' },
+              { n: '02', icon: I.tag,         title: 'Catégorisez',          body: 'Définissez vos règles une fois. Chaque transaction future est triée sans effort de votre part.', color: '#22d3ee', bg: 'rgba(6,182,212,0.08)',   bd: 'rgba(6,182,212,0.18)' },
+              { n: '03', icon: I.chartBar,    title: 'Analysez',             body: 'Visualisez vos dépenses par catégorie, tendances mensuelles, banques — et interrogez l\'IA.', color: '#a78bfa', bg: 'rgba(139,92,246,0.08)',  bd: 'rgba(139,92,246,0.18)' },
+            ].map(({ n, icon, title, body, color, bg, bd }) => (
+              <Card key={n}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                  <StepNum n={n} />
+                  <IconBox name={icon} color={color} bg={bg} border={bd} />
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#f8fafc', marginBottom: 8 }}>{title}</h3>
+                <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.6 }}>{body}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* ═══ TESTIMONIAL ════════════════════════════════════ */}
+        <section style={{ maxWidth: 640, margin: '80px auto 0', padding: '0 24px', textAlign: 'center' }}>
+          <div style={{ fontSize: 36, color: EM, marginBottom: 16, lineHeight: 1 }}>"</div>
+          <p style={{ fontSize: 20, color: '#cbd5e1', lineHeight: 1.6, marginBottom: 24, fontStyle: 'italic' }}>
+            En un après-midi j'ai importé deux ans de relevés CIBC et MBNA.
+            Pour la première fois, je sais vraiment où passe mon argent.
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+            <div style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: 'rgba(52,211,153,0.12)', border: '1px solid rgba(52,211,153,0.25)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 13, fontWeight: 700, color: EM,
+            }}>MJ</div>
+            <span style={{ fontSize: 13, color: '#64748b' }}>Marc J. — Bêta-testeur, Montréal</span>
+          </div>
+        </section>
+
+        {/* ═══ PLAID COMING SOON ══════════════════════════════ */}
+        <section style={{ maxWidth: 1120, margin: '80px auto 0', padding: '0 24px' }}>
+          <Card style={{ padding: 48, background: 'rgba(52,211,153,0.04)', border: '1px solid rgba(52,211,153,0.14)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+              <div>
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '4px 12px', borderRadius: 999,
+                  background: 'rgba(52,211,153,0.10)', border: `1px solid rgba(52,211,153,0.22)`,
+                  marginBottom: 16,
+                }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: EM, animation: 'pulse 2s infinite' }} />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: EM, letterSpacing: '0.08em', textTransform: 'uppercase' }}>En développement</span>
+                </div>
+                <h3 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, color: '#f8fafc', letterSpacing: '-0.02em', marginBottom: 14, lineHeight: 1.2 }}>
+                  Connexion bancaire directe<br />avec Plaid.
+                </h3>
+                <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.7 }}>
+                  Fini les imports manuels. Connectez CIBC, RBC, TD, BMO, Scotiabank, Desjardins,
+                  Tangerine, Simplii et plus — vos transactions arrivent automatiquement.
+                </p>
+              </div>
+              <div>
+                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#64748b', marginBottom: 14 }}>Bientôt disponible</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {COMING.map(b => (
+                    <Chip key={b}><Brand name={I.bank} size={11} accent={EM} />{b}</Chip>
+                  ))}
                 </div>
               </div>
             </div>
-          </LiquidGlass>
+          </Card>
+        </section>
 
-          {/* Right — Auth form */}
-          <div>
-            <AuthForm initialMode="register" />
-          </div>
-        </div>
-      </section>
+        {/* ═══ CTA + AUTH ═════════════════════════════════════ */}
+        <section id="cta" style={{ maxWidth: 1120, margin: '80px auto 0', padding: '0 24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
 
-      {/* ══════ DEMO ══════ */}
-      <section id="demo" className="relative mt-24 px-4 max-w-6xl mx-auto space-y-4">
-        <LiquidGlass
-          noFloat
-          cornerRadius={12}
-          padding="12px 16px"
-          displacementScale={60}
-          blurAmount={0.15}
-          saturation={140}
-          aberrationIntensity={2}
-          style={{ display: 'block', width: '100%' }}
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
-            <div className="flex items-center gap-2 text-gray-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span><strong className="text-white">Mode aperçu</strong> — données fictives pour explorer l'interface.</span>
-            </div>
-            <span className="text-[11px] text-gray-500 font-mono uppercase tracking-widest">sécurisé · aucune donnée réelle</span>
-          </div>
-        </LiquidGlass>
-        <TransactionDashboard demoMode={true} />
-      </section>
+            {/* Left */}
+            <Card accent style={{ padding: 48, display: 'flex', flexDirection: 'column' }}>
+              <Logo size="lg" />
+              <h2 style={{ fontSize: 'clamp(26px, 3vw, 36px)', fontWeight: 700, color: '#f8fafc', letterSpacing: '-0.02em', margin: '20px 0 12px', lineHeight: 1.2 }}>
+                Reprenez le contrôle<br />de vos finances.
+              </h2>
+              <p style={{ fontSize: 14, color: '#64748b', marginBottom: 32, lineHeight: 1.6 }}>
+                Créez votre compte en moins d'une minute.<br />Aucune carte de crédit. Aucun abonnement.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 'auto' }}>
+                {[
+                  [I.shield,  'Données 100 % privées — hébergées chez vous'],
+                  [I.bank,    '7 banques canadiennes prises en charge'],
+                  [I.bolt,    'Open source — aucun abonnement'],
+                  [I.wand,    'Catégorisation automatique par règles'],
+                ].map(([icon, text]) => (
+                  <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#94a3b8' }}>
+                    <div style={{ width: 24, height: 24, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(52,211,153,0.10)', border: '1px solid rgba(52,211,153,0.18)', flexShrink: 0 }}>
+                      <Brand name={icon} size={13} accent={EM} />
+                    </div>
+                    {text}
+                  </div>
+                ))}
+              </div>
+            </Card>
 
-      {/* ══════ FOOTER ══════ */}
-      <footer className="relative mt-16 px-4 max-w-6xl mx-auto">
-        <LiquidGlass
-          noFloat
-          cornerRadius={16}
-          padding="20px 24px"
-          displacementScale={55}
-          blurAmount={0.1}
-          saturation={130}
-          aberrationIntensity={2}
-          style={{ display: 'block', width: '100%' }}
-        >
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">[xt]</span>
-              <span>exptrackr — fait au Canada © {new Date().getFullYear()}</span>
-            </div>
-            <div className="flex items-center gap-5">
-              <a href="#cta" className="hover:text-gray-300 transition-colors">Commencer</a>
-              <a href="#demo" className="hover:text-gray-300 transition-colors">Démo</a>
+            {/* Right — auth form */}
+            <div>
+              <AuthForm initialMode="register" />
             </div>
           </div>
-        </LiquidGlass>
-      </footer>
+        </section>
+
+        {/* ═══ DEMO ════════════════════════════════════════════ */}
+        <section id="demo" style={{ maxWidth: 1120, margin: '80px auto 0', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
+            <div>
+              <Label>Démo interactive</Label>
+              <h2 style={{ fontSize: 22, fontWeight: 700, color: '#f8fafc', margin: 0, letterSpacing: '-0.02em' }}>Explorez l'interface — données fictives</h2>
+            </div>
+            <span style={{
+              fontSize: 11, color: '#475569', fontFamily: 'ui-monospace, monospace',
+              letterSpacing: '0.1em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: 6,
+              background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)',
+            }}>
+              sécurisé · aucune donnée réelle
+            </span>
+          </div>
+          <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)' }}>
+            <TransactionDashboard demoMode={true} />
+          </div>
+        </section>
+
+        {/* ═══ FOOTER ══════════════════════════════════════════ */}
+        <footer style={{
+          maxWidth: 1120, margin: '64px auto 0', padding: '24px',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16,
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <Logo />
+            <span style={{ fontSize: 12, color: '#475569' }}>exptrackr — fait au Canada © {new Date().getFullYear()}</span>
+          </div>
+          <div style={{ display: 'flex', gap: 24, fontSize: 12, color: '#475569' }}>
+            {[['#features','Fonctionnalités'],['#banks','Banques'],['#cta','Commencer'],['#demo','Démo']].map(([href,label]) => (
+              <a key={href} href={href} style={{ color: '#475569', textDecoration: 'none', transition: 'color .15s' }}
+                onMouseEnter={e=>e.target.style.color='#94a3b8'} onMouseLeave={e=>e.target.style.color='#475569'}>{label}</a>
+            ))}
+          </div>
+        </footer>
+
+      </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0.4; }
+        }
+        @media (max-width: 768px) {
+          .landing-grid-2 { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
-};
-
-export default LandingPage;
+}

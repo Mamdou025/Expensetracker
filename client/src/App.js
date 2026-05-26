@@ -13,12 +13,8 @@ import './index.css';
 
 const ProtectedRoute = ({ children, ownerOnly = false }) => {
   const { isAuthenticated, isLoading, isOwner } = useAuth();
-  if (isLoading) {
-    return <div className="text-center text-sm text-gray-400 py-16">Loading…</div>;
-  }
-  if (!isAuthenticated) {
-    return <LandingPage />;
-  }
+  if (isLoading) return null;
+  if (!isAuthenticated) return <Navigate to="/" replace />;
   if (ownerOnly && !isOwner) {
     return (
       <div className="text-center py-16 text-gray-400 text-sm">
@@ -29,45 +25,40 @@ const ProtectedRoute = ({ children, ownerOnly = false }) => {
   return children;
 };
 
-const HomeRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth();
-  if (isLoading) {
-    return <div className="text-center text-sm text-gray-400 py-16">Loading…</div>;
-  }
-  return isAuthenticated ? <TransactionDashboard /> : <LandingPage />;
-};
-
+/* Full app shell — shown only when authenticated */
 const AppShell = () => (
   <div className="min-h-screen bg-gray-950">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
       <Header />
       <Routes>
-        <Route path="/" element={<HomeRoute />} />
+        <Route path="/" element={<TransactionDashboard />} />
         <Route path="/me" element={<Navigate to="/" replace />} />
         <Route path="/email-extraction" element={
           <ProtectedRoute ownerOnly><EmailExtractionPage /></ProtectedRoute>
         } />
-        <Route path="/pdf-import" element={
-          <ProtectedRoute><PDFImportPage /></ProtectedRoute>
-        } />
+        <Route path="/pdf-import" element={<PDFImportPage />} />
         <Route path="/bank-templates" element={<Navigate to="/accounts" replace />} />
-        <Route path="/accounts" element={
-          <ProtectedRoute><ConnectedAccountsPage /></ProtectedRoute>
-        } />
-        <Route path="/chat" element={
-          <ProtectedRoute><ChatPage /></ProtectedRoute>
-        } />
+        <Route path="/accounts" element={<ConnectedAccountsPage />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Routes>
     </div>
   </div>
 );
+
+/* Root — landing (no app chrome) or app shell */
+const Root = () => {
+  const { isAuthenticated, isLoading } = useAuth();
+  if (isLoading) return null;
+  if (!isAuthenticated) return <LandingPage />;
+  return <AppShell />;
+};
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <Router>
-          <AppShell />
+          <Root />
         </Router>
       </AuthProvider>
     </ThemeProvider>
