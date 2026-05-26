@@ -2,10 +2,8 @@
 .git
 .gitignore
 
-## Node
-node_modules
-Server/node_modules
-client/node_modules
+## Node — match at any depth so Windows Docker picks them all up
+**/node_modules
 npm-debug.log*
 
 ## Python

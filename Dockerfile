@@ -18,8 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # ── Install Node dependencies (three separate trees) ──────────
 
 # 1. Root (auth, session, openai, …)
+# --ignore-scripts skips the postinstall that would try to install Server/ and client/
+# before those package.json files have been copied into the image.
 COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps
+RUN npm ci --legacy-peer-deps --ignore-scripts
 
 # 2. Server (express, sqlite3, multer, …)
 COPY Server/package.json Server/package-lock.json ./Server/

@@ -33,6 +33,7 @@
 html {
   scrollbar-gutter: stable;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 /* ---- Brand button palette --------------------------------------------------
@@ -171,6 +172,17 @@ code {
 .light .border-emerald-800 { border-color: #6ee7b7 !important; }
 .light .border-blue-400 { border-color: #60a5fa !important; }
 
+/* ── Landing page light-mode text overrides ─────────────────────────────── */
+/* The landing page uses dark-targeted text classes. Scope overrides with
+   .landing-page so they don't bleed into other components. */
+.light .landing-page .text-white        { color: #0f172a !important; }
+.light .landing-page .text-gray-100     { color: #1e293b !important; }
+.light .landing-page .text-gray-200     { color: #334155 !important; }
+.light .landing-page .text-gray-300     { color: #475569 !important; }
+.light .landing-page .text-gray-400     { color: #64748b !important; }
+.light .landing-page .text-gray-500     { color: #94a3b8 !important; }
+.light .landing-page strong.text-white  { color: #0f172a !important; }
+
 .light .hover\:bg-gray-800:hover { background-color: #f3f4f6 !important; }
 .light .hover\:bg-gray-700:hover { background-color: #e5e7eb !important; }
 .light .hover\:text-gray-200:hover { color: #111827 !important; }
@@ -205,4 +217,26 @@ input[type="number"],
 select,
 textarea {
   color-scheme: dark;
+}
+
+/* ── Page transition ──────────────────────────────────────────────────── */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: page-enter 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
 }

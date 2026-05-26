@@ -1,0 +1,91 @@
+/* ── Landing page: sections scroll clear of the sticky header ──── */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* ── Animated background orbs ───────────────────────────────────── */
+@keyframes lp-orb-1 {
+  0%,  100% { transform: translate(0,     0)   scale(1);    }
+  33%        { transform: translate(70px, -50px) scale(1.07); }
+  66%        { transform: translate(-35px, 35px) scale(0.93); }
+}
+@keyframes lp-orb-2 {
+  0%,  100% { transform: translate(0,      0)   scale(1);    }
+  40%        { transform: translate(-90px, 60px) scale(1.09); }
+  70%        { transform: translate(50px, -40px) scale(0.91); }
+}
+@keyframes lp-orb-3 {
+  0%,  100% { transform: translate(0,     0)    scale(1);    }
+  50%        { transform: translate(60px, -70px) scale(1.12); }
+}
+
+.lp-orb-1 { animation: lp-orb-1 22s ease-in-out infinite; }
+.lp-orb-2 { animation: lp-orb-2 28s ease-in-out infinite; }
+.lp-orb-3 { animation: lp-orb-3 19s ease-in-out infinite; }
+
+/* ── Pulsing status dot ─────────────────────────────────────────── */
+@keyframes lp-pulse {
+  0%,  100% { opacity: 1;    }
+  50%        { opacity: 0.35; }
+}
+.lp-pulse { animation: lp-pulse 2s infinite; }
+
+/* ── Hero headline gradient text ───────────────────────────────── */
+@keyframes lp-gradient-shift {
+  0%,  100% { background-position: 0%   50%; }
+  50%        { background-position: 100% 50%; }
+}
+
+.hero-gradient-text {
+  background: linear-gradient(125deg, #10b981 0%, #34d399 30%, #22d3ee 60%, #10b981 100%);
+  background-size: 260% 260%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: lp-gradient-shift 5s ease infinite;
+  display: inline;
+}
+
+/* ── Primary CTA shimmer sweep ──────────────────────────────────── */
+@keyframes lp-shimmer {
+  0%   { left: -80%;  }
+  100% { left:  150%; }
+}
+
+.hero-cta-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -80%;
+  width: 60%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.24), transparent);
+  transform: skewX(-18deg);
+  animation: lp-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Scroll fade-in ─────────────────────────────────────────────── */
+.lp-fade {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.lp-fade.lp-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced-motion overrides ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .lp-orb-1, .lp-orb-2, .lp-orb-3 { animation: none; }
+  .lp-pulse  { animation: none; }
+  .hero-gradient-text { animation: none; }
+  .hero-cta-primary::before { animation: none; display: none; }
+  .lp-fade   { opacity: 1; transform: none; transition: none; }
+}
